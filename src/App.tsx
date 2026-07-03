@@ -977,26 +977,42 @@ function ProtectedApp() {
             {/* Content wrapper */}
             <div className="relative z-10 flex flex-col h-full justify-between gap-8 md:gap-10">
               {/* Top Section: Logo row */}
-              <div className="flex items-center gap-3">
-                {!logoFailed ? (
-                  <img 
-                    src={sabushLogo || "/sabush-logo.png"} 
-                    alt="Sabush Logo" 
-                    style={{ height: '44px', width: 'auto', objectFit: 'contain' }}
-                    className="shrink-0 rounded-full border border-[#F2C46B]/30 shadow-md"
-                    onError={() => setLogoFailed(true)}
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div 
-                    className="w-[44px] h-[44px] flex items-center justify-center text-[#0B1B33] text-[20px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A]"
+              <div className="flex items-center gap-4">
+                <div className="relative shrink-0">
+                  <div className="absolute inset-0 rounded-full bg-[#F2C46B] blur-[18px] opacity-30 pointer-events-none" />
+                  {!logoFailed ? (
+                    <img 
+                      src={sabushLogo || "/sabush-logo.png"} 
+                      alt="Sabush Logo" 
+                      style={{ height: '60px', width: 'auto', objectFit: 'contain' }}
+                      className="relative shrink-0 drop-shadow-[0_4px_16px_rgba(0,0,0,0.35)]"
+                      onError={() => setLogoFailed(true)}
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <div 
+                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0B1B33] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A] shadow-lg"
+                    >
+                      S
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-col select-none leading-none">
+                  <span 
+                    className="font-display font-black text-[28px] md:text-[32px] tracking-[0.12em] text-white leading-none"
+                    style={{ textShadow: '0 2px 20px rgba(242,196,107,0.35), 0 1px 0 rgba(0,0,0,0.2)' }}
                   >
-                    S
+                    SABUSH
+                  </span>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-r from-transparent to-[#F2C46B]" />
+                    <span 
+                      className="font-display font-extrabold text-[13px] tracking-[0.5em] bg-gradient-to-r from-[#FFF2D6] via-[#F2C46B] to-[#B8791A] bg-clip-text text-transparent"
+                    >
+                      TECH
+                    </span>
+                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-l from-transparent to-[#B8791A]" />
                   </div>
-                )}
-                <div className="flex flex-col select-none">
-                  <span className="text-white font-black tracking-widest text-xs leading-none">SABUSH</span>
-                  <span className="text-[#F2C46B] font-extrabold tracking-widest text-[9px] leading-none mt-1">TECH</span>
                 </div>
               </div>
 
