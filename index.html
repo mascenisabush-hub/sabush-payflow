@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // Clear Service Worker and Cache Storage instantly in dev/preview/iframe environment
+      const isDevOrIframeEnv = window.location.hostname.includes('localhost') ||
+                               window.location.hostname.includes('run.app') ||
+                               window.location.hostname.includes('aistudio') ||
+                               window.self !== window.top;
+      if (isDevOrIframeEnv) {
+        console.log('[PWA Inline Bypass] Development/iframe detected. Clearing caches and unregistering SW...');
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for (var i = 0; i < registrations.length; i++) {
+              registrations[i].unregister().then(function(success) {
+                if (success) {
+                  console.log('[PWA Inline Bypass] Unregistered Service Worker successfully.');
+                  window.location.reload();
+                }
+              });
+            }
+          });
+        }
+        if ('caches' in window) {
+          caches.keys().then(function(keys) {
+            keys.forEach(function(key) {
+              caches.delete(key).then(function() {
+                console.log('[PWA Inline Bypass] Deleted cache key:', key);
+              });
+            });
+          });
+        }
+      }
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#0F172A" />
+    
+    <!-- PWA Manifest & App Enhancements -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Sabush ERP" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    
+    <!-- Primary SEO Metadata -->
+    <title>Sabush System ERP - O ERP Moderno para PMEs Africanas</title>
+    <meta name="description" content="Gestão comercial, faturação Certificada, inventário em tempo real e automação com inteligência artificial para PMEs Africanas. Otimize o seu negócio hoje." />
+    <meta name="keywords" content="ERP, Sabush System, Gestão PMEs, Faturação Moçambique, Faturação Angola, Software de Gestão África, Inventário Inteligente, ERP Africano" />
+    <meta name="author" content="Sabush System" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sabush-system.web.app/" />
+    <meta property="og:title" content="Sabush System ERP - O ERP Moderno para PMEs" />
+    <meta property="og:description" content="Otimize a sua empresa com gestão integrada de vendas, POS, inventário e relatórios analíticos com Inteligência Artificial." />
+    <meta property="og:image" content="https://sabush-system.web.app/og-image.jpeg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://sabush-system.web.app/" />
+    <meta property="twitter:title" content="Sabush System ERP" />
+    <meta property="twitter:description" content="O ERP moderno focado em PMEs Africanas. Vendas, faturas e controle de estoque de forma simples." />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

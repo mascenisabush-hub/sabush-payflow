@@ -1,0 +1,10 @@
+{
+  "name": "Sabush System ERP",
+  "description": "A modern SaaS ERP platform designed for African SMEs, featuring invoicing, inventory management, and automated WhatsApp notifications.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin-panel/
+Disallow: /api/
+
+Sitemap: https://sabush-system.web.app/sitemap.xml

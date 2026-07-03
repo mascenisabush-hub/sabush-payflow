@@ -1,0 +1,366 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // 0. Default Deny (Global Safety Net)
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /test/connection {
+      allow get: if true;
+    }
+
+    // --- Helpers ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return request.auth.token.email_verified == true;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isSuperAdmin() {
+      return isSignedIn() && (
+               (request.auth.token.email == 'mascenisabush@gmail.com') ||
+               (request.auth.token.email == 'sabushagency@gmail.com') ||
+               (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+                get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') == 'super_admin')
+             );
+    }
+
+    function getBusiness(businessId) {
+      return get(/databases/$(database)/documents/businesses/$(businessId)).data;
+    }
+
+    function isSubscriptionActive(businessId) {
+      return businessId == 'demo_business_123' || (
+        isSignedIn() && (
+          isSuperAdmin() || (
+            exists(/databases/$(database)/documents/businesses/$(businessId)) && (
+              getBusiness(businessId).get('subscriptionStatus', '') in ['active', 'trial', 'unlimited', 'free', '']
+            )
+          )
+        )
+      );
+    }
+
+    function isOwnerOfBusiness(businessId) {
+      return businessId == 'demo_business_123' || (
+        isSignedIn() && (
+          isSuperAdmin() || (
+            (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('businessId', '') == businessId && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') in ['owner', 'business_owner']) ||
+            (exists(/databases/$(database)/documents/businesses/$(businessId)) && 
+             get(/databases/$(database)/documents/businesses/$(businessId)).data.get('ownerId', '') == request.auth.uid)
+          )
+        )
+      );
+    }
+
+    function isStaffOfBusiness(businessId) {
+      return businessId == 'demo_business_123' || (
+        isSignedIn() && (
+          isSuperAdmin() || (
+            (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('businessId', '') == businessId && 
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('role', '') in ['owner', 'business_owner', 'staff', 'manager', 'cashier', 'accountant']) ||
+            (exists(/databases/$(database)/documents/businesses/$(businessId)) && 
+             get(/databases/$(database)/documents/businesses/$(businessId)).data.get('ownerId', '') == request.auth.uid)
+          )
+        )
+      );
+    }
+
+    function canWrite(businessId) {
+      return businessId == 'demo_business_123' || isSuperAdmin() || isStaffOfBusiness(businessId);
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Entity Validations ---
+
+    function isValidUser(data) {
+      return data.uid == request.auth.uid 
+          && (data.email == null || data.email == "" || request.auth.token.email == null || data.email == request.auth.token.email)
+          && (data.role in ['owner', 'business_owner', 'staff', 'manager', 'cashier', 'accountant'] || (data.role == 'super_admin' && isSuperAdmin()))
+          && data.preferredLanguage in ['en', 'pt', 'fr']
+          && data.keys().hasAll(['uid', 'role', 'preferredLanguage'])
+          && data.keys().size() >= 3;
+    }
+
+    function isValidCreatedUser(data) {
+      return data.uid is string
+          && data.role in ['owner', 'business_owner', 'staff', 'manager', 'cashier', 'accountant']
+          && data.preferredLanguage in ['en', 'pt', 'fr']
+          && data.keys().hasAll(['uid', 'role', 'preferredLanguage'])
+          && data.keys().size() >= 3;
+    }
+
+    function isValidBusiness(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 100
+          && data.ownerId == request.auth.uid
+          && data.keys().hasAll(['name', 'ownerId']);
+    }
+
+    function isValidInvoice(data) {
+      return data.businessId is string && isValidId(data.businessId)
+          && (data.total is number || data.totalDue is number)
+          && data.status in ['draft', 'sent', 'paid', 'unpaid', 'partially_paid', 'overdue', 'cancelled']
+          && data.keys().hasAll(['businessId', 'status']);
+    }
+
+    function isValidPayment(data) {
+      return data.businessId is string && isValidId(data.businessId)
+          && data.customerId is string
+          && data.amount is number
+          && data.keys().hasAll(['businessId', 'customerId', 'amount']);
+    }
+
+    function isValidPurchaseOrder(data) {
+      return data.supplierId is string && isValidId(data.supplierId)
+          && data.status in ['pending', 'received', 'cancelled']
+          && data.items is list
+          && data.keys().hasAll(['supplierId', 'status', 'items']);
+    }
+
+    // --- Matches ---
+
+    match /users/{userId} {
+      allow get: if userId == 'demo_user_123' || (isSignedIn() && (isSuperAdmin() || request.auth.uid == userId || (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.businessId == existing().businessId)));
+      allow list: if isSuperAdmin() || (isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && resource.data.businessId == get(/databases/$(database)/documents/users/$(request.auth.uid)).data.businessId);
+      allow create: if userId == 'demo_user_123' || (isSignedIn() && (
+        (userId == request.auth.uid && isValidUser(incoming())) ||
+        (isOwnerOfBusiness(incoming().businessId) && isValidCreatedUser(incoming()) && userId == incoming().uid)
+      ));
+      allow update: if userId == 'demo_user_123' || (isSignedIn() && (
+        (request.auth.uid == userId && isValidUser(incoming()) && (isSuperAdmin() || incoming().role == existing().role || (existing().role == 'business_owner' && incoming().role == 'owner') || (existing().role == 'owner' && incoming().role == 'business_owner'))) ||
+        (isSuperAdmin() || (isOwnerOfBusiness(existing().businessId) && isOwnerOfBusiness(incoming().businessId) && isValidCreatedUser(incoming())))
+      ));
+      allow delete: if isSuperAdmin();
+    }
+
+    match /businesses/{businessId} {
+      allow get: if true; // Public access for storefront viewing and dynamic payment resolution
+      allow list: if isSuperAdmin(); // Restrict general listing to high-privilege administrators
+      allow create: if businessId == 'demo_business_123' || (isSignedIn() && isValidBusiness(incoming()));
+      allow update: if businessId == 'demo_business_123' || (isSuperAdmin() || (isSignedIn() && isOwnerOfBusiness(businessId))) && isValidBusiness(incoming());
+      allow delete: if isSuperAdmin();
+    }
+
+    match /businesses/{businessId}/customers/{customerId} {
+      allow list: if isStaffOfBusiness(businessId) || (isSignedIn() && (
+        (request.auth.token.keys().hasAll(['email']) && resource != null && resource.data.get('email', null) == request.auth.token.email) ||
+        (request.auth.token.keys().hasAll(['phone_number']) && resource != null && resource.data.get('phone', null) == request.auth.token.phone_number)
+      ));
+      allow get: if isStaffOfBusiness(businessId) || (isSignedIn() && (
+        (request.auth.token.keys().hasAll(['email']) && resource != null && resource.data.get('email', null) == request.auth.token.email) ||
+        (request.auth.token.keys().hasAll(['phone_number']) && resource != null && resource.data.get('phone', null) == request.auth.token.phone_number)
+      ));
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/inventory/{itemId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update, delete: if canWrite(businessId);
+    }
+
+    match /businesses/{businessId}/products/{productId} {
+      allow list: if isStaffOfBusiness(businessId) || (resource != null && resource.data != null && resource.data.get('availableOnline', false) == true);
+      allow get: if isStaffOfBusiness(businessId) || (resource != null && resource.data != null && resource.data.get('availableOnline', false) == true);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/quebras/{quebraId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/invoices/{invoiceId} {
+      allow get: if true; // Public access for payment links
+      allow list: if isStaffOfBusiness(businessId) || (
+        isSignedIn() && resource != null && resource.data.get('customerId', '') != '' &&
+        exists(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)) && (
+          (request.auth.token.keys().hasAll(['email']) && 
+           get(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)).data.get('email', null) == request.auth.token.email) ||
+          (request.auth.token.keys().hasAll(['phone_number']) && 
+           get(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)).data.get('phone', null) == request.auth.token.phone_number)
+        )
+      );
+      allow create: if canWrite(businessId) && isValidInvoice(incoming());
+      allow update: if (canWrite(businessId) && isValidInvoice(incoming()) 
+                     && (
+                       isSuperAdmin() ||
+                       isOwnerOfBusiness(businessId) ||
+                       (existing() != null && existing().get('status', '') != 'paid' && incoming().diff(existing()).affectedKeys().hasAny(['status', 'total', 'items', 'dueDate', 'paymentStatus', 'totalDue', 'paymentType', 'previousBalance']))
+                       || (existing() != null && existing().get('status', '') == 'paid' && incoming().get('status', '') == 'paid' && (incoming().diff(existing()).affectedKeys().size() == 0 || incoming().diff(existing()).affectedKeys().hasOnly(['pdfUrl', 'updatedAt'])))
+                     )) || (
+                       // Allow customer to update status and amountPaid via public link
+                       incoming().diff(existing()).affectedKeys().hasOnly(['amountPaid', 'status', 'paymentStatus', 'lastPaymentDate', 'updatedAt'])
+                     );
+      allow delete: if isOwnerOfBusiness(businessId) && existing() != null && existing().get('status', '') == 'draft';
+    }
+
+    match /businesses/{businessId}/online_orders/{orderId} {
+      allow get: if isStaffOfBusiness(businessId);
+      allow list: if isStaffOfBusiness(businessId);
+      allow create: if isSubscriptionActive(businessId); 
+      allow update: if canWrite(businessId);
+    }
+
+    match /businesses/{businessId}/payment_links/{linkId} {
+      allow get: if true; // Public can view via token
+      allow list, create, update, delete: if isStaffOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/quotations/{quotationId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/suppliers/{supplierId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/branches/{branchId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/branches/{branchId}/products/{productId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/expenses/{expenseId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update, delete: if canWrite(businessId);
+    }
+
+    match /businesses/{businessId}/supplier_payments/{paymentId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/expense_categories/{catId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update, delete: if canWrite(businessId);
+    }
+
+    match /businesses/{businessId}/payments/{paymentId} {
+      allow list, get: if isStaffOfBusiness(businessId) || (
+        isSignedIn() && resource != null && resource.data.get('customerId', '') != '' &&
+        exists(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)) && (
+          (request.auth.token.keys().hasAll(['email']) && 
+           get(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)).data.get('email', null) == request.auth.token.email) ||
+          (request.auth.token.keys().hasAll(['phone_number']) && 
+           get(/databases/$(database)/documents/businesses/$(businessId)/customers/$(resource.data.customerId)).data.get('phone', null) == request.auth.token.phone_number)
+        )
+      );
+      allow create: if (canWrite(businessId) && isValidPayment(incoming())) || (
+        // Allow public link to create online payment records
+        incoming().get('type', '') == 'online' && isValidPayment(incoming())
+      );
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/pos_shifts/{shiftId} {
+      allow list, get: if isStaffOfBusiness(businessId) || (isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('businessId', '') == businessId);
+      allow create, update: if canWrite(businessId) || (isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.get('businessId', '') == businessId) || (isSignedIn() && exists(/databases/$(database)/documents/businesses/$(businessId)) && get(/databases/$(database)/documents/businesses/$(businessId)).data.get('ownerId', '') == request.auth.uid);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/heldOrders/{heldOrderId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update, delete: if canWrite(businessId);
+    }
+
+    // --- User-specific notification sub-collection ---
+    match /users/{userId}/notifications/{notifId} {
+      allow list, get: if userId == 'demo_user_123' || (isSignedIn() && (request.auth.uid == userId || isSuperAdmin()));
+      allow create: if isSuperAdmin() || userId == 'demo_user_123';
+      allow update: if userId == 'demo_user_123' || (isSignedIn() && (request.auth.uid == userId || isSuperAdmin()));
+      allow delete: if isSuperAdmin();
+    }
+
+    // --- Strictly hardened activity logs ---
+    match /activity_logs/{logId} {
+      allow list, get: if isSuperAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid) || (resource.data.uid == 'demo_user_123');
+      allow create: if (isSignedIn() && incoming().uid == request.auth.uid) || (incoming().uid == 'demo_user_123');
+      allow update: if isSuperAdmin();
+      allow delete: if isSuperAdmin();
+    }
+
+    match /businesses/{businessId}/purchase_orders/{orderId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId) && isValidPurchaseOrder(incoming());
+      allow update: if canWrite(businessId) && isValidPurchaseOrder(incoming());
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/backups/{backupId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/preferences/{prefId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if isStaffOfBusiness(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/settings/{settingsId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update: if canWrite(businessId);
+      allow delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/auth_requests/{requestId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create, update, delete: if isStaffOfBusiness(businessId);
+    }
+
+    match /feedbacks/{feedbackId} {
+      allow create: if isSignedIn();
+      allow list, get: if isSignedIn() && (isSuperAdmin() || resource.data.userId == request.auth.uid);
+      allow update: if isSuperAdmin();
+      allow delete: if isSuperAdmin();
+    }
+
+    match /subscription_proofs/{proofId} {
+      allow create: if isSignedIn();
+      allow read: if isSuperAdmin() || (isSignedIn() && (resource == null || resource.data.ownerId == request.auth.uid));
+      allow update, delete: if isSuperAdmin();
+    }
+
+    match /platform/{document=**} {
+      allow read: if true;
+      allow write: if isSuperAdmin();
+    }
+  }
+}

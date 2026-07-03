@@ -1,0 +1,369 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Information about a platform user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["super_admin", "owner", "business_owner", "staff", "manager", "cashier", "accountant"] },
+        "businessId": { "type": "string" },
+        "preferredLanguage": { "type": "string", "enum": ["en", "pt", "fr"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "role"]
+    },
+    "Business": {
+      "title": "Business",
+      "description": "Details about a business/company using the platform.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "currency": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "subscriptionStatus": { "type": "string", "enum": ["trial", "active", "expired", "suspended"] },
+        "trialEndsAt": { "type": "string", "format": "date-time" },
+        "subscriptionEndsAt": { "type": "string", "format": "date-time" },
+        "planId": { "type": "string" },
+        "whatsappConfig": {
+          "type": "object",
+          "properties": {
+            "apiKey": { "type": "string" },
+            "phoneNumberId": { "type": "string" }
+          }
+        },
+        "subscriptionPlan": { "type": "string", "enum": ["starter", "business", "enterprise"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "ownerId"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "A client or buyer.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "totalSpent": { "type": "number" },
+        "outstandingBalance": { "type": "number" },
+        "creditLimit": { "type": "number" },
+        "loyaltyPoints": { "type": "number" },
+        "lastPaymentDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["businessId", "name"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "A record of money received.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "amount": { "type": "number" },
+        "method": { "type": "string", "enum": ["cash", "card", "mpesa", "bank_transfer"] },
+        "date": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    },
+    "PosShift": {
+      "title": "POS Shift",
+      "description": "A cashier's working period.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "cashierId": { "type": "string" },
+        "openedAt": { "type": "string", "format": "date-time" },
+        "closedAt": { "type": "string", "format": "date-time" },
+        "openingCash": { "type": "number" },
+        "closingCash": { "type": "number" },
+        "totalSales": { "type": "number" },
+        "reconciled": { "type": "boolean" }
+      }
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Inventory item.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "name": { "type": "string" },
+        "sku": { "type": "string" },
+        "barcode": { "type": "string" },
+        "price": { "type": "number" },
+        "onlinePrice": { "type": "number" },
+        "description": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "availableOnline": { "type": "boolean" },
+        "stockLevel": { "type": "number" },
+        "reservedStock": { "type": "number" },
+        "lowStockThreshold": { "type": "number" },
+        "category": { "type": "string" },
+        "supplier": { "type": "string" },
+        "batchNumber": { "type": "string" },
+        "expiryDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["businessId", "name", "price"]
+    },
+    "OnlineOrder": {
+      "title": "Online Order",
+      "description": "An order placed through the storefront.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "items": { "type": "array", "items": { "type": "object" } },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "accepted", "rejected", "delivered", "cancelled"] },
+        "paymentStatus": { "type": "string", "enum": ["unpaid", "partially_paid", "paid"] },
+        "paymentLinkId": { "type": "string" },
+        "deliveryAddress": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "PaymentLink": {
+      "title": "Payment Link",
+      "description": "A secure link for online payments.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "orderId": { "type": "string" },
+        "token": { "type": "string" },
+        "amount": { "type": "number" },
+        "expiryDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["active", "used", "expired"] }
+      }
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "A bill for products or services.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "invoiceNumber": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["draft", "sent", "paid", "overdue", "cancelled"] },
+        "items": { "type": "array", "items": { "type": "object" } },
+        "subtotal": { "type": "number" },
+        "tax": { "type": "number" },
+        "total": { "type": "number" },
+        "currency": { "type": "string" },
+        "qrCodeData": { "type": "string" }
+      },
+      "required": ["businessId", "customerId", "invoiceNumber", "total", "status"]
+    },
+    "Quotation": {
+      "title": "Quotation",
+      "description": "A price estimate or proposal.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "customerId": { "type": "string" },
+        "quotationNumber": { "type": "string" },
+        "expiryDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["draft", "sent", "accepted", "expired"] },
+        "items": { "type": "array", "items": { "type": "object" } },
+        "total": { "type": "number" }
+      }
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "A vendor providing stock or services.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "name": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "balance": { "type": "number" }
+      }
+    },
+    "Branch": {
+      "title": "Branch",
+      "description": "A physical location of the business.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "type": "string" }
+      }
+    },
+    "Quebra": {
+      "title": "Quebra",
+      "description": "Record of a spoiled or damaged product.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "productId": { "type": "string" },
+        "productName": { "type": "string" },
+        "qty": { "type": "number" },
+        "unit": { "type": "string", "enum": ["cx", "emb", "un"] },
+        "reason": { "type": "string", "enum": ["expired", "broken", "uncaped", "half-filled", "defective", "other"] },
+        "reportedBy": { "type": "string" },
+        "reportedByEmail": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["businessId", "productId", "productName", "qty", "unit", "reason"]
+    },
+    "SubscriptionProof": {
+      "title": "Subscription Proof",
+      "description": "Payment proof submitted by a business owner to renew subscription.",
+      "type": "object",
+      "properties": {
+        "businessId": { "type": "string" },
+        "businessName": { "type": "string" },
+        "ownerId": { "type": "string" },
+        "ownerEmail": { "type": "string" },
+        "amount": { "type": "number" },
+        "planType": { "type": "string", "enum": ["monthly", "yearly"] },
+        "method": { "type": "string", "enum": ["mpesa", "emola", "bank_transfer"] },
+        "screenshot": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "notes": { "type": "string" },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "resolvedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["businessId", "amount", "planType", "screenshot", "status"]
+    },
+    "Backup": {
+      "title": "Database Backup",
+      "description": "Metadata for automated or manual database backup stored in Firebase Storage.",
+      "type": "object",
+      "properties": {
+        "filename": { "type": "string" },
+        "path": { "type": "string" },
+        "downloadUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "sizeBytes": { "type": "number" },
+        "collections": { "type": "array", "items": { "type": "string" } },
+        "status": { "type": "string", "enum": ["completed", "failed"] },
+        "triggerType": { "type": "string", "enum": ["manual", "scheduled"] }
+      },
+      "required": ["filename", "downloadUrl", "createdAt", "sizeBytes", "status"]
+    },
+    "DashboardLayout": {
+      "title": "Dashboard Layout",
+      "description": "Preferences for the dashboard layout widgets order.",
+      "type": "object",
+      "properties": {
+        "widgetOrder": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["widgetOrder"]
+    },
+    "HeldOrder": {
+      "title": "Held Order",
+      "description": "A temporarily suspended cart/order.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "cartSnapshot": { "type": "array", "items": { "type": "object" } },
+        "heldBy": { "type": "string" },
+        "heldAt": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["held", "recalled"] },
+        "selectedCustomerId": { "type": "string" },
+        "saleType": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "taxRate": { "type": "number" },
+        "saleMode": { "type": "string" },
+        "partialAmountPaid": { "type": "string" }
+      },
+      "required": ["label", "cartSnapshot", "heldBy", "heldAt", "status"]
+    }
+  },
+  "firestore": {
+    "/subscription_proofs/{proofId}": {
+      "schema": "SubscriptionProof",
+      "description": "Subscription payment proofs for superadmin review."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/businesses/{businessId}": {
+      "schema": "Business",
+      "description": "Business settings."
+    },
+    "/businesses/{businessId}/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "Customers belonging to a business."
+    },
+    "/businesses/{businessId}/products/{productId}": {
+      "schema": "Product",
+      "description": "Inventory items belonging to a business."
+    },
+    "/businesses/{businessId}/invoices/{invoiceId}": {
+      "schema": "Invoice",
+      "description": "Invoices belonging to a business."
+    },
+    "/businesses/{businessId}/quotations/{quotationId}": {
+      "schema": "Quotation",
+      "description": "Quotations belonging to a business."
+    },
+    "/businesses/{businessId}/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Suppliers belonging to a business."
+    },
+    "/businesses/{businessId}/branches/{branchId}": {
+      "schema": "Branch",
+      "description": "Branches belonging to a business."
+    },
+    "/businesses/{businessId}/expenses/{expenseId}": {
+      "schema": "object",
+      "description": "Expenses belonging to a business."
+    },
+    "/businesses/{businessId}/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payment records."
+    },
+    "/businesses/{businessId}/pos_shifts/{shiftId}": {
+      "schema": "PosShift",
+      "description": "POS session records."
+    },
+    "/businesses/{businessId}/online_orders/{orderId}": {
+      "schema": "OnlineOrder",
+      "description": "Orders from the online storefront."
+    },
+    "/businesses/{businessId}/payment_links/{linkId}": {
+      "schema": "PaymentLink",
+      "description": "Secure payment link records."
+    },
+    "/businesses/{businessId}/quebras/{quebraId}": {
+      "schema": "Quebra",
+      "description": "Spoiled or damaged product records belonging to a business."
+    },
+    "/businesses/{businessId}/backups/{backupId}": {
+      "schema": "Backup",
+      "description": "Historical records of database backups stored in Firebase Storage."
+    },
+    "/businesses/{businessId}/preferences/{prefId}": {
+      "schema": "DashboardLayout",
+      "description": "Preference documents for the business, e.g. dashboardLayout."
+    },
+    "/businesses/{businessId}/settings/{settingsId}": {
+      "schema": "object",
+      "description": "General settings and quick configuration documents for the business."
+    },
+    "/businesses/{businessId}/heldOrders/{heldOrderId}": {
+      "schema": "HeldOrder",
+      "description": "Temporarily suspended orders for a business."
+    }
+  }
+}
