@@ -213,7 +213,7 @@ export default function Onboarding() {
 
   return (
     <div 
-      style={{ background: 'linear-gradient(135deg, #EA580C 0%, #3B6D11 100%)', minHeight: '100vh' }}
+      style={{ background: 'linear-gradient(135deg, #B8791A 0%, #3B6D11 100%)', minHeight: '100vh' }}
       className="w-full text-slate-100 flex items-center justify-center p-4 md:p-8 font-sans overflow-y-auto relative antialiased selection:bg-orange-500 selection:text-white"
     >
       {/* Background overlay shapes */}

@@ -28,28 +28,28 @@ const data = [
 
 export const schemaColors = {
   classic: {
-    primary: '#1A73C4', // Brand Blue
+    primary: '#0B1B33', // Brand Blue
     secondary: '#10b981', // Semantic Green
     warning: '#f59e0b', // Semantic Amber
     danger: '#ef4444', // Semantic Red
     glow: 'rgba(26, 115, 196, 0.1)',
   },
   neon: {
-    primary: '#1A73C4', // Brand Blue (redirected for safe fallback)
+    primary: '#0B1B33', // Brand Blue (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
     warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
     glow: 'rgba(26, 115, 196, 0.1)',
   },
   cyberpunk: {
-    primary: '#D85A30', // Brand Orange (redirected for safe fallback)
+    primary: '#B8791A', // Brand Orange (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
     warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
     glow: 'rgba(216, 90, 48, 0.15)',
   },
   vibrant: {
-    primary: '#D85A30', // Brand Orange
+    primary: '#B8791A', // Brand Orange
     secondary: '#10b981', // Semantic Green
     warning: '#f59e0b', // Semantic Amber
     danger: '#ef4444', // Semantic Red
@@ -2827,7 +2827,7 @@ Sabush System ERP`;
         </div>
 
         {/* Card 2: Vendas por Grosso */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#1A73C4] via-[#2069CE] to-[#2563EB] text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#0B1B33] via-[#2069CE] to-[#2563EB] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest opacity-100">

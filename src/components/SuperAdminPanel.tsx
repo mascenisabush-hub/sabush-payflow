@@ -3167,7 +3167,7 @@ Equipa Técnica Sabush System`;
                             <span className="text-[7.5px] text-slate-400 font-bold leading-none mt-1">Azul Escuro dominante, detalhes Amber</span>
                             <div className="flex gap-1 mt-1.5">
                               <span className="w-4 h-1.5 rounded-sm bg-[#042C53]" />
-                              <span className="w-4 h-1.5 rounded-sm bg-[#D85A30]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#B8791A]" />
                             </div>
                           </button>
 

@@ -83,7 +83,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
           {/* Active Schema indicator */}
           <div className="flex items-center gap-2 self-start lg:self-center">
             <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700">
-              Esquema Ativo: <span className="text-[#D85A30] font-extrabold">{chartSchema === 'classic' ? 'CLÁSSICO' : chartSchema === 'vibrant' ? 'VIBRANTE' : chartSchema.toUpperCase()}</span>
+              Esquema Ativo: <span className="text-[#B8791A] font-extrabold">{chartSchema === 'classic' ? 'CLÁSSICO' : chartSchema === 'vibrant' ? 'VIBRANTE' : chartSchema.toUpperCase()}</span>
             </span>
           </div>
         </div>

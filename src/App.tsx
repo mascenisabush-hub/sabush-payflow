@@ -1647,8 +1647,8 @@ function ProtectedApp() {
                   }}
                   className="compact-logo"
                 />
-                <h3 className="text-[#EA580C] font-black text-2xl sm:text-3xl tracking-tight font-sans compact-title">
-                  Sabush System <span className="text-[#EA580C]">ERP</span><span className="text-[#EA580C] font-black">•</span>
+                <h3 className="text-[#B8791A] font-black text-2xl sm:text-3xl tracking-tight font-sans compact-title">
+                  Sabush System <span className="text-[#B8791A]">ERP</span><span className="text-[#B8791A] font-black">•</span>
                 </h3>
                 <p className="text-[9.5px] text-slate-500 font-extrabold uppercase tracking-wider compact-subtitle">The Modern ERP for African SMEs</p>
               </div>
@@ -1682,8 +1682,8 @@ function ProtectedApp() {
                 href={typeof window !== 'undefined' ? window.location.href : '#'}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#EA580C' }}
-                className="text-center text-[11px] hover:text-[#9A3412] font-bold shrink-0 mt-1 select-none underline"
+                style={{ color: '#B8791A' }}
+                className="text-center text-[11px] hover:text-[#8B6914] font-bold shrink-0 mt-1 select-none underline"
               >
                 Problemas ao entrar? Clique aqui para abrir em nova aba 🌐
               </a>
@@ -1702,12 +1702,12 @@ function ProtectedApp() {
                 <div
                   style={{
                     background: '#FFF7ED',
-                    color: '#EA580C',
+                    color: '#B8791A',
                     border: '1px solid rgba(234, 88, 12, 0.1)'
                   }}
                   className="w-full py-2.5 px-3.5 rounded-xl flex items-center justify-center gap-2 mb-0.5 font-bold text-xs sm:text-sm compact-button"
                 >
-                  <Mail size={14} className="text-[#EA580C]" />
+                  <Mail size={14} className="text-[#B8791A]" />
                   <span>Entrar com E-mail & Senha</span>
                 </div>
 
@@ -1724,11 +1724,11 @@ function ProtectedApp() {
                     }}
                     className={`py-1.5 text-[10.5px] font-black rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 select-none ${
                       !isRegistering
-                        ? 'bg-[#EA580C] text-white shadow-sm'
-                        : 'bg-transparent text-slate-500 hover:text-[#EA580C]'
+                        ? 'bg-[#B8791A] text-white shadow-sm'
+                        : 'bg-transparent text-slate-500 hover:text-[#B8791A]'
                     }`}
                   >
-                    <svg className={`w-3 h-3 shrink-0 ${!isRegistering ? 'text-white' : 'text-[#EA580C]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className={`w-3 h-3 shrink-0 ${!isRegistering ? 'text-white' : 'text-[#B8791A]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                     </svg>
                     <span>Iniciar Sessão</span>
@@ -1741,11 +1741,11 @@ function ProtectedApp() {
                     }}
                     className={`py-1.5 text-[10.5px] font-black rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 select-none ${
                       isRegistering
-                        ? 'bg-[#EA580C] text-white shadow-sm'
-                        : 'bg-transparent text-slate-500 hover:text-[#EA580C]'
+                        ? 'bg-[#B8791A] text-white shadow-sm'
+                        : 'bg-transparent text-slate-500 hover:text-[#B8791A]'
                     }`}
                   >
-                    <svg className={`w-3 h-3 shrink-0 ${isRegistering ? 'text-white' : 'text-[#EA580C]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className={`w-3 h-3 shrink-0 ${isRegistering ? 'text-white' : 'text-[#B8791A]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
                     <span>Criar Conta</span>
@@ -1831,7 +1831,7 @@ function ProtectedApp() {
                     }}
                     onFocus={(e) => {
                       e.target.style.outline = 'none';
-                      e.target.style.borderColor = '#EA580C';
+                      e.target.style.borderColor = '#B8791A';
                       e.target.style.boxShadow = '0 0 0 2.5px rgba(234, 88, 12, 0.2)';
                     }}
                     onBlur={(e) => {
@@ -1859,7 +1859,7 @@ function ProtectedApp() {
                     }}
                     onFocus={(e) => {
                       e.target.style.outline = 'none';
-                      e.target.style.borderColor = '#EA580C';
+                      e.target.style.borderColor = '#B8791A';
                       e.target.style.boxShadow = '0 0 0 2.5px rgba(234, 88, 12, 0.2)';
                     }}
                     onBlur={(e) => {
@@ -1885,14 +1885,14 @@ function ProtectedApp() {
                     <input
                       type="checkbox"
                       defaultChecked
-                      className="w-3.5 h-3.5 text-[#EA580C] border-slate-300 rounded focus:ring-transparent bg-white select-none checkbox-blue"
+                      className="w-3.5 h-3.5 text-[#B8791A] border-slate-300 rounded focus:ring-transparent bg-white select-none checkbox-blue"
                     />
                     <span>Lembrar-me</span>
                   </label>
                   <button
                     type="button"
                     onClick={handleForgotPassword}
-                    className="font-extrabold text-[#EA580C] hover:text-[#9A3412] cursor-pointer underline select-none"
+                    className="font-extrabold text-[#B8791A] hover:text-[#8B6914] cursor-pointer underline select-none"
                   >
                     Esqueceu a senha?
                   </button>
@@ -1902,8 +1902,8 @@ function ProtectedApp() {
                 <button
                   type="submit"
                   disabled={isAuthenticating}
-                  style={{ backgroundColor: '#EA580C', color: '#FFFFFF' }}
-                  className="w-full py-2.5 rounded-xl font-extrabold shadow-lg shadow-[#EA580C]/15 transition-all flex items-center justify-center gap-2 active:scale-[0.98] hover:bg-[#7C2D12] cursor-pointer compact-button text-white"
+                  style={{ backgroundColor: '#B8791A', color: '#FFFFFF' }}
+                  className="w-full py-2.5 rounded-xl font-extrabold shadow-lg shadow-[#B8791A]/15 transition-all flex items-center justify-center gap-2 active:scale-[0.98] hover:bg-[#6B4E0F] cursor-pointer compact-button text-white"
                 >
                   {isAuthenticating && loginMethod === 'email' ? (
                     <Loader2 className="w-4 h-4 animate-spin text-white font-sans" />

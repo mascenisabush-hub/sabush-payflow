@@ -102,7 +102,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
           <div className="max-w-[280px] mx-auto bg-slate-950/90 rounded-2xl border border-blue-500/15 p-4 shadow-xl space-y-3.5 relative">
             <div className="text-center">
-              <div className="w-8 h-8 rounded-full bg-[#D85A30] text-white flex items-center justify-center mx-auto text-sm font-black border border-[#D85A30]/50">S</div>
+              <div className="w-8 h-8 rounded-full bg-[#B8791A] text-white flex items-center justify-center mx-auto text-sm font-black border border-[#B8791A]/50">S</div>
               <h4 className="text-xs font-black text-white mt-1.5">Sabush ERP Login</h4>
               <p className="text-[9px] text-slate-400 mt-0.5">Introduza as credenciais seguras</p>
             </div>
@@ -110,10 +110,10 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700">admin@empresa.co.mz</div>
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700 flex justify-between">
                 <span>••••••••••••</span>
-                <span className="text-[8px] text-[#1A73C4] font-bold">Ver</span>
+                <span className="text-[8px] text-[#0B1B33] font-bold">Ver</span>
               </div>
             </div>
-            <button className="w-full py-1.5 bg-[#1A73C4] text-white rounded-lg text-[9px] font-black hover:bg-[#1A73C4]/90">ENTRAR</button>
+            <button className="w-full py-1.5 bg-[#0B1B33] text-white rounded-lg text-[9px] font-black hover:bg-[#0B1B33]/90">ENTRAR</button>
             <div className="flex items-center justify-center gap-1 border-t border-slate-800 pt-2 pb-0.5 text-[8px] text-slate-400">
               <span className="px-2 py-1 bg-slate-900 border border-slate-800 rounded flex items-center gap-1 hover:bg-slate-850 w-full justify-center cursor-pointer">
                 <span className="text-[#EA4335] font-bold">G</span> Google Workspace
@@ -122,8 +122,8 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           {/* Arrows pointing details */}
-          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#1A73C4] text-white bg-[#1A73C4]" />
-          <AnnotationArrow startX={82} startY={60} endX={195} endY={182} label="Acesso por E-mail Validado" accentColor="border-[#D85A30] text-white bg-[#D85A30]" />
+          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#0B1B33] text-white bg-[#0B1B33]" />
+          <AnnotationArrow startX={82} startY={60} endX={195} endY={182} label="Acesso por E-mail Validado" accentColor="border-[#B8791A] text-white bg-[#B8791A]" />
         </div>
       );
 

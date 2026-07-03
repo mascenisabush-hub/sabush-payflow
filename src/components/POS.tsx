@@ -114,7 +114,7 @@ const CartQuantityInput: React.FC<CartQuantityInputProps> = ({ item, updateCartQ
       onBlur={handleCommit}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
-      className="w-[44px] h-[24px] text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#D85A30] focus:ring-1 focus:ring-[#D85A30]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      className="w-[44px] h-[24px] text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#B8791A] focus:ring-1 focus:ring-[#B8791A]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
     />
   );
 };
@@ -172,7 +172,7 @@ const CartItemRow = React.memo<CartItemRowProps>(({
         className="col-span-2 text-right hover:bg-blue-50 p-1 rounded transition-all cursor-pointer group flex flex-col items-end border-none bg-transparent"
         title="Substituir Preço Unitário (Teclado Rápido)"
       >
-        <span className="font-mono text-[10.5px] text-blue-900 group-hover:text-[#D85A30] font-extrabold">
+        <span className="font-mono text-[10.5px] text-blue-900 group-hover:text-[#B8791A] font-extrabold">
           {(prices.finalUnitPrice).toLocaleString()}
         </span>
         {(item.overridePrice !== undefined || (item.manualDiscountValue && item.manualDiscountValue > 0)) && (
@@ -424,7 +424,7 @@ export default function POS() {
 
         <div className="flex items-center justify-between pt-1.5 border-t border-[#E9E1D2]">
           <div className="text-[10px] font-bold text-[#8B735F]">Total Calculado:</div>
-          <div className="text-xs font-black text-[#D85A30] font-mono">{total.toFixed(1)} MT</div>
+          <div className="text-xs font-black text-[#B8791A] font-mono">{total.toFixed(1)} MT</div>
         </div>
 
         <button
@@ -3216,7 +3216,7 @@ export default function POS() {
                 <button
                   type="button"
                   onClick={() => setIsOpeningCalculatorOpen(!isOpeningCalculatorOpen)}
-                  className="text-[9px] text-[#D85A30] font-black uppercase tracking-wider hover:underline cursor-pointer"
+                  className="text-[9px] text-[#B8791A] font-black uppercase tracking-wider hover:underline cursor-pointer"
                 >
                   {isOpeningCalculatorOpen ? "Fechar Calculadora ✖" : "Contar Notas/Moedas 🪙"}
                 </button>
@@ -3227,7 +3227,7 @@ export default function POS() {
                 <input 
                   type="number" 
                   placeholder="Ex: 500.0" 
-                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#E9E1D2] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#D85A30] transition-all text-[#1D1510]"
+                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#E9E1D2] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#B8791A] transition-all text-[#1D1510]"
                   value={openingFloat}
                   onChange={e => setOpeningFloat(e.target.value)}
                 />
@@ -3266,13 +3266,13 @@ export default function POS() {
       {/* Quick Sale Keyboard Status & Buffer Bar */}
       <div className="bg-[#1D1510] border border-orange-900/35 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
         <div className="flex items-center gap-2">
-          <span className="bg-[#D85A30] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
+          <span className="bg-[#B8791A] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
             <span className="shrink-0">⚡</span> QUICK
           </span>
           {inputBuffer ? (
             <div className="flex items-center gap-2">
               <span className="text-blue-300 font-medium">Comando:</span>
-              <span className="font-mono bg-[#4A1B0C] text-[#FAECE7] px-2 py-0.5 rounded text-xs font-black border border-[#D85A30]/30 select-all tracking-wider">
+              <span className="font-mono bg-[#4A1B0C] text-[#FAECE7] px-2 py-0.5 rounded text-xs font-black border border-[#B8791A]/30 select-all tracking-wider">
                 {inputBuffer}
               </span>
               <span className="text-[10px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
@@ -3295,7 +3295,7 @@ export default function POS() {
         <button
           type="button"
           onClick={() => setIsCheatSheetOpen(true)}
-          className="flex items-center gap-1 px-2 py-0.5 bg-[#4A1B0C] hover:bg-[#5C2310] text-[#FAECE7] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#D85A30]/20 cursor-pointer h-6"
+          className="flex items-center gap-1 px-2 py-0.5 bg-[#4A1B0C] hover:bg-[#5C2310] text-[#FAECE7] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#B8791A]/20 cursor-pointer h-6"
         >
           <span>⌨️ Atalhos [?]</span>
         </button>
@@ -3314,7 +3314,7 @@ export default function POS() {
               onChange={e => setSearchTerm(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
-              className="w-full h-6 pl-3 pr-7 bg-white border border-blue-200 rounded-md text-blue-900 placeholder-blue-400 text-[11px] outline-none focus:border-[#D85A30]/50 transition-all font-sans"
+              className="w-full h-6 pl-3 pr-7 bg-white border border-blue-200 rounded-md text-blue-900 placeholder-blue-400 text-[11px] outline-none focus:border-[#B8791A]/50 transition-all font-sans"
             />
             {searchTerm && (
               <button
@@ -3556,8 +3556,8 @@ export default function POS() {
               WALK-IN
             </span>
           ) : (
-            <div className="flex items-center gap-1 bg-[#D85A30]/10 border border-[#D85A30]/20 px-2 py-0.5 rounded-md shadow-xs leading-none shrink-0 max-w-[180px] min-w-0">
-              <span className="text-[#D85A30] font-extrabold text-[11px] truncate">{selectedCust?.name}</span>
+            <div className="flex items-center gap-1 bg-[#B8791A]/10 border border-[#B8791A]/20 px-2 py-0.5 rounded-md shadow-xs leading-none shrink-0 max-w-[180px] min-w-0">
+              <span className="text-[#B8791A] font-extrabold text-[11px] truncate">{selectedCust?.name}</span>
               {selectedCust?.phone && (
                 <span className="text-[9px] text-blue-600 font-medium hidden sm:inline">({selectedCust?.phone})</span>
               )}
@@ -3571,7 +3571,7 @@ export default function POS() {
                   setSelectedCustomerId('Walk-in');
                   setSaleMode('dinheiro');
                 }}
-                className="text-blue-400 hover:text-[#D85A30] transition-all p-0.5 rounded-full hover:bg-blue-50 shrink-0"
+                className="text-blue-400 hover:text-[#B8791A] transition-all p-0.5 rounded-full hover:bg-blue-50 shrink-0"
                 title="Desvincular Cliente"
               >
                 <X size={10} />
@@ -3632,7 +3632,7 @@ export default function POS() {
                   onClick={() => setSaleMode('credito')}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'credito' ? "bg-[#D85A30] text-[#FAECE7]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'credito' ? "bg-[#B8791A] text-[#FAECE7]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Fiado
@@ -3715,7 +3715,7 @@ export default function POS() {
             >
               Artigos
               {activeCartTab === 'items' && (
-                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D85A30]" />
+                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B8791A]" />
               )}
             </button>
             <button
@@ -3735,7 +3735,7 @@ export default function POS() {
             >
               Pagamento
               {activeCartTab === 'payment' && (
-                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D85A30]" />
+                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B8791A]" />
               )}
             </button>
           </div>
@@ -3813,7 +3813,7 @@ export default function POS() {
                   <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
                     {cart.length === 0 ? (
                       <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
-                        <ShoppingCart size={32} className="text-[#D85A30] mb-2 opacity-80" />
+                        <ShoppingCart size={32} className="text-[#B8791A] mb-2 opacity-80" />
                         <span className="text-xs font-black tracking-widest text-blue-700 uppercase">CARRINHO VAZIO</span>
                         <span className="text-[10px] text-blue-600 mt-1 max-w-[220px] text-center leading-normal font-medium">
                           Pesquise um produto no campo de pesquisa superior para começar a compor a venda.
@@ -3843,7 +3843,7 @@ export default function POS() {
                       <button
                         type="button"
                         onClick={() => setActiveCartTab('payment')}
-                        className="w-full py-1.5 bg-[#D85A30] hover:bg-[#E8500A] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
+                        className="w-full py-1.5 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
                       >
                         <span>Prosseguir para Pagamento</span>
                         <span>➡️</span>
@@ -3977,7 +3977,7 @@ export default function POS() {
 
                           <div className="flex justify-between items-center text-[10px] font-mono bg-blue-100/30 border border-blue-200 p-1.5 rounded-lg text-blue-800 leading-none">
                             <div>Pago (Entrada): <span className="font-extrabold text-blue-950">{(Number(partialAmountPaid) || 0).toLocaleString()} MT</span></div>
-                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#D85A30]">{creditFired.toLocaleString()} MT</div></div>
+                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#B8791A]">{creditFired.toLocaleString()} MT</div></div>
                           </div>
                         </div>
                       )}
@@ -4079,7 +4079,7 @@ export default function POS() {
                               className={cn(
                                 "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
                                 isSelected 
-                                  ? "border-[#D85A30] text-[#D85A30] font-black shadow-xs bg-orange-50/25" 
+                                  ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
                                   : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                               )}
                             >
@@ -4095,7 +4095,7 @@ export default function POS() {
                           className={cn(
                             "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
                             paymentMethod === 'card'
-                              ? "border-[#D85A30] text-[#D85A30] font-black shadow-xs bg-orange-50/25" 
+                              ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
                               : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                           )}
                         >
@@ -4111,7 +4111,7 @@ export default function POS() {
                     <button
                       onClick={checkOutTransaction}
                       disabled={isProcessing || cart.length === 0}
-                      className="w-full py-2 bg-[#D85A30] hover:bg-[#E8500A] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                      className="w-full py-2 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
                     >
                       {isProcessing ? (
                         <Loader2 size={13} className="animate-spin text-white" />
@@ -4210,7 +4210,7 @@ export default function POS() {
                         <button
                           type="button"
                           onClick={() => setIsClosingCalculatorOpen(!isClosingCalculatorOpen)}
-                          className="text-[9px] text-[#D85A30] font-black uppercase tracking-wider hover:underline"
+                          className="text-[9px] text-[#B8791A] font-black uppercase tracking-wider hover:underline"
                         >
                           {isClosingCalculatorOpen ? "Fechar Calculadora ✖" : "Contar Notas 🪙"}
                         </button>
@@ -4781,7 +4781,7 @@ export default function POS() {
                   autoFocus
                   required
                   placeholder={`Ex: Cliente #${suspendedCarts.length + 1}`}
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D85A30] outline-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
                   value={suspenseCartLabel}
                   onChange={e => setSuspenseCartLabel(e.target.value)}
                 />
@@ -5011,7 +5011,7 @@ export default function POS() {
               </div>
               <div className="flex justify-between pt-1 border-t border-slate-850 text-sm">
                 <span className="text-slate-450 font-medium">Valor Total:</span>
-                <span className="font-mono font-black text-[#D85A30]">
+                <span className="font-mono font-black text-[#B8791A]">
                   {(getCartItemPricing(voidItem).total).toLocaleString()} MT
                 </span>
               </div>
@@ -5040,7 +5040,7 @@ export default function POS() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Código de Motivo</label>
                 <select 
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D85A30] outline-none cursor-pointer animate-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
                   value={voidReason}
                   onChange={(e) => setVoidReason(e.target.value)}
                 >
@@ -5058,7 +5058,7 @@ export default function POS() {
                     type="text"
                     required
                     placeholder="Ex: Embalagem danificada pelo cliente"
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D85A30] outline-none"
+                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
                     value={customVoidReason}
                     onChange={(e) => setCustomVoidReason(e.target.value)}
                   />
@@ -5129,7 +5129,7 @@ export default function POS() {
                       <input 
                         type="text"
                         placeholder="ID Fatura, Cliente..."
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D85A30] outline-none"
+                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
                         value={searchInvoiceTerm}
                         onChange={(e) => setSearchInvoiceTerm(e.target.value)}
                         onKeyDown={(e) => {
@@ -5184,7 +5184,7 @@ export default function POS() {
                           className={cn(
                             "p-3.5 rounded-xl text-left border cursor-pointer transition-all flex flex-col space-y-1.5",
                             isActive 
-                              ? "bg-[#D85A30]/10 border-[#D85A30] shadow-sm" 
+                              ? "bg-[#B8791A]/10 border-[#B8791A] shadow-sm" 
                               : "bg-slate-900/60 border-slate-850 hover:border-slate-800"
                           )}
                         >
@@ -5327,7 +5327,7 @@ export default function POS() {
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Motivo da Devolução</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D85A30] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
                           value={returnReason}
                           onChange={(e) => setReturnReason(e.target.value)}
                         >
@@ -5342,7 +5342,7 @@ export default function POS() {
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D85A30] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
                           value={refundMethod}
                           onChange={(e) => setRefundMethod(e.target.value)}
                         >
@@ -5362,7 +5362,7 @@ export default function POS() {
                             type="text"
                             required
                             placeholder="Descreva detalhadamente o motivo da devolução..."
-                            className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D85A30] outline-none"
+                            className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
                             value={customReturnReason}
                             onChange={(e) => setCustomReturnReason(e.target.value)}
                           />

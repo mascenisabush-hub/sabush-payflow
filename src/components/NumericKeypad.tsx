@@ -127,7 +127,7 @@ export default function NumericKeypad({
 
         {/* Header */}
         <div className="space-y-1 text-left">
-          <span className="text-[9px] font-black uppercase tracking-widest text-[#D85A30] leading-none">Teclado Numérico</span>
+          <span className="text-[9px] font-black uppercase tracking-widest text-[#B8791A] leading-none">Teclado Numérico</span>
           <h3 className="text-base font-black text-slate-900 leading-tight">{title}</h3>
           {subtitle && (
             <p className="text-[11px] text-slate-500 font-medium truncate">{subtitle}</p>
@@ -210,7 +210,7 @@ export default function NumericKeypad({
           <button
             type="button"
             onClick={handleConfirm}
-            className="flex-1 py-3.5 bg-[#D85A30] text-white rounded-2xl font-black text-xs hover:bg-[#E8500A] transition-all cursor-pointer border-none flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-md hover:shadow-lg"
+            className="flex-1 py-3.5 bg-[#B8791A] text-white rounded-2xl font-black text-xs hover:bg-[#E8500A] transition-all cursor-pointer border-none flex items-center justify-center gap-1.5 uppercase tracking-wider shadow-md hover:shadow-lg"
           >
             Confirmar <Check size={14} className="stroke-[2.5]" />
           </button>
