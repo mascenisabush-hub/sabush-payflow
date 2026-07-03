@@ -955,24 +955,15 @@ function ProtectedApp() {
           <div 
             className="w-full md:w-[45%] p-8 md:p-12 lg:p-14 flex flex-col justify-between shrink-0 relative min-h-[480px] md:min-h-0 bg-[#0B1B33] overflow-hidden"
           >
-            {/* Tech Background Circuit Pattern */}
-            <div className="absolute inset-0 pointer-events-none opacity-[0.035]" style={{ mixBlendMode: 'overlay' }}>
-              <svg width="100%" height="100%">
-                <pattern id="circuit" width="80" height="80" patternUnits="userSpaceOnUse">
-                  <path d="M 10 10 L 70 10 L 70 70 L 10 70 Z" fill="none" stroke="white" strokeWidth="1" strokeDasharray="2,4" />
-                  <circle cx="10" cy="10" r="2" fill="white" />
-                  <circle cx="70" cy="10" r="2" fill="white" />
-                  <circle cx="70" cy="70" r="2" fill="white" />
-                  <circle cx="10" cy="70" r="2" fill="white" />
-                  <path d="M 10 10 L 30 30 L 50 30 L 70 10" fill="none" stroke="white" strokeWidth="1" />
-                  <path d="M 10 70 L 30 50 L 50 50" fill="none" stroke="white" strokeWidth="1" />
-                </pattern>
-                <rect width="100%" height="100%" fill="url(#circuit)" />
-              </svg>
-            </div>
+            {/* Soft depth wash - clean, no texture noise */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{ background: 'radial-gradient(120% 90% at 15% 0%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 55%)' }}
+            />
 
-            {/* Soft golden ambient glows */}
-            <div className="absolute top-1/4 -left-12 w-[300px] h-[300px] rounded-full filter blur-[120px] pointer-events-none opacity-[0.12] bg-[#F2C46B]" />
+            {/* Golden ambient glows - two soft points for depth, no muddy texture */}
+            <div className="absolute top-[10%] -left-16 w-[340px] h-[340px] rounded-full filter blur-[130px] pointer-events-none opacity-[0.16] bg-[#F2C46B]" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[260px] h-[260px] rounded-full filter blur-[110px] pointer-events-none opacity-[0.08] bg-[#F2C46B]" />
             
             {/* Content wrapper */}
             <div className="relative z-10 flex flex-col h-full justify-between gap-8 md:gap-10">
@@ -1102,9 +1093,9 @@ function ProtectedApp() {
                   <stop offset="100%" stopColor="#B8791A" />
                 </linearGradient>
                 <linearGradient id="gold-grad-dark" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#9C6B1B" />
-                  <stop offset="50%" stopColor="#7E5212" />
-                  <stop offset="100%" stopColor="#513306" />
+                  <stop offset="0%" stopColor="#B8791A" />
+                  <stop offset="50%" stopColor="#8B6914" />
+                  <stop offset="100%" stopColor="#6B4E0F" />
                 </linearGradient>
                 <linearGradient id="gold-grad-light" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#FFF2D6" />
