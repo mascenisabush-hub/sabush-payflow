@@ -88,7 +88,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
   switch (sectionId) {
     case 'inicio-rapido':
       return (
-        <div className="relative w-full rounded-2xl bg-[#042C53] border border-blue-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0C3A42] border border-blue-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly strategic colors: Corporate Blue & Warm Orange Theme */}
           <div className="flex items-center justify-between border-b border-blue-500/10 pb-2 mb-4">
             <div className="flex items-center gap-1.5">
@@ -110,10 +110,10 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700">admin@empresa.co.mz</div>
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700 flex justify-between">
                 <span>••••••••••••</span>
-                <span className="text-[8px] text-[#0B1B33] font-bold">Ver</span>
+                <span className="text-[8px] text-[#0A3038] font-bold">Ver</span>
               </div>
             </div>
-            <button className="w-full py-1.5 bg-[#0B1B33] text-white rounded-lg text-[9px] font-black hover:bg-[#0B1B33]/90">ENTRAR</button>
+            <button className="w-full py-1.5 bg-[#0A3038] text-white rounded-lg text-[9px] font-black hover:bg-[#0A3038]/90">ENTRAR</button>
             <div className="flex items-center justify-center gap-1 border-t border-slate-800 pt-2 pb-0.5 text-[8px] text-slate-400">
               <span className="px-2 py-1 bg-slate-900 border border-slate-800 rounded flex items-center gap-1 hover:bg-slate-850 w-full justify-center cursor-pointer">
                 <span className="text-[#EA4335] font-bold">G</span> Google Workspace
@@ -122,7 +122,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           {/* Arrows pointing details */}
-          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#0B1B33] text-white bg-[#0B1B33]" />
+          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#0A3038] text-white bg-[#0A3038]" />
           <AnnotationArrow startX={82} startY={60} endX={195} endY={182} label="Acesso por E-mail Validado" accentColor="border-[#B8791A] text-white bg-[#B8791A]" />
         </div>
       );
@@ -177,7 +177,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <button className="w-full py-1 bg-emerald-600 text-white font-black text-[9px] rounded-lg shadow uppercase hover:bg-emerald-500 tracking-wide">PAGAR COM M-PESA</button>
               <div className="flex items-center gap-1">
                 <span className="text-[8px] text-slate-400">Fatura p/ WhatsApp:</span>
-                <input type="text" readOnly value="+258 84 123 4567" className="bg-[#121832] text-[8px] font-bold text-emerald-300 border border-emerald-500/10 rounded px-1 py-0.5 max-w-[90px]" />
+                <input type="text" readOnly value="+258 84 123 4567" className="bg-[#0C2624] text-[8px] font-bold text-emerald-300 border border-emerald-500/10 rounded px-1 py-0.5 max-w-[90px]" />
               </div>
             </div>
           </div>
@@ -343,7 +343,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
             <div className="space-y-1">
               <label className="text-slate-400 text-[8px] uppercase font-bold">Introduzir Amortização:</label>
-              <input type="text" readOnly value="1,000.00" className="w-full bg-[#121832] font-mono border border-yellow-500/20 text-yellow-300 p-2 rounded-lg text-right font-black" />
+              <input type="text" readOnly value="1,000.00" className="w-full bg-[#0C2624] font-mono border border-yellow-500/20 text-yellow-300 p-2 rounded-lg text-right font-black" />
             </div>
             <div className="flex items-center justify-between text-[8px] text-slate-400 font-bold bg-[#1C1808] p-1.5 rounded-md border border-yellow-500/10">
               <span>Tipo de Registo:</span>
@@ -577,7 +577,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
                 <span className="w-2 h-2 rounded-full bg-emerald-450 animate-pulse" />
                 <p className="font-black text-white">Sara Langa • Caixa Balcão</p>
               </div>
-              <span className="px-2 py-0.5 rounded bg-[#121832] border border-slate-800 text-[7px] text-teal-305 font-bold uppercase">Acesso Bloqueado a Preços</span>
+              <span className="px-2 py-0.5 rounded bg-[#0C2624] border border-slate-800 text-[7px] text-teal-305 font-bold uppercase">Acesso Bloqueado a Preços</span>
             </div>
             <div className="p-2 border border-slate-800 bg-slate-900 rounded font-mono text-[8px] text-slate-400 leading-normal">
               🔓 PIN De Gestor Exigido para Estornar Artigos No POS.
@@ -601,7 +601,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           <div className="max-w-[340px] mx-auto bg-slate-950 border border-[#2483D0]/15 rounded-xl p-4 shadow-xl space-y-3 text-[9px] text-white">
             <div className="space-y-1">
               <label className="text-slate-400 text-[8px] uppercase font-bold">Token de Comunicação WhatsApp da Meta:</label>
-              <input type="text" readOnly value="EAAG678aZBd90BAKlz8O6R..." className="w-full bg-[#121832] font-mono border border-[#2483D0]/20 text-sky-400 p-2 rounded-lg" />
+              <input type="text" readOnly value="EAAG678aZBd90BAKlz8O6R..." className="w-full bg-[#0C2624] font-mono border border-[#2483D0]/20 text-sky-400 p-2 rounded-lg" />
             </div>
             <div className="flex gap-2">
               <button className="flex-1 py-1.5 bg-[#2483D0] hover:bg-[#1C6BAA] text-slate-950 font-black rounded text-[8.5px] uppercase">Testar Envio</button>
@@ -1562,30 +1562,30 @@ export default function SystemManual() {
   const themeStyles = {
     slate: {
       outer: 'bg-[#0E132A] text-[#F1F5F9]', // A softer, beautiful Slate-900 canvas
-      progressBar: 'bg-[#121832] border-[#1D2744]',
+      progressBar: 'bg-[#0C2624] border-[#163B3A]',
       progressBarLeftText: 'text-white',
       progressBarSubText: 'text-slate-400',
       progressBg: 'bg-[#1B2349]',
-      controlBar: 'bg-[#0A0E1F]/95 border-[#1D2744]',
-      searchInputBg: 'bg-[#121832] border-[#1D2744] text-white',
-      sidebarBg: 'bg-[#0A0D1D] border-[#1D2744]',
-      sidebarHeaderBg: 'bg-[#080B16] border-[#1D2744]',
+      controlBar: 'bg-[#0A0E1F]/95 border-[#163B3A]',
+      searchInputBg: 'bg-[#0C2624] border-[#163B3A] text-white',
+      sidebarBg: 'bg-[#0A0D1D] border-[#163B3A]',
+      sidebarHeaderBg: 'bg-[#080B16] border-[#163B3A]',
       tabButtonActive: 'bg-[#121835] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
       tabButtonInactive: 'bg-transparent border-transparent text-slate-300 hover:bg-[#11162C]/50 hover:text-white',
       tabTextTitleActive: 'text-white',
       tabTextTitleInactive: 'text-slate-400',
       mainContentArea: 'bg-[#080B16]',
-      headerBlock: 'bg-gradient-to-br from-[#121832] to-[#0A0D1D] border-[#1D2744] shadow-xl',
+      headerBlock: 'bg-gradient-to-br from-[#0C2624] to-[#0A0D1D] border-[#163B3A] shadow-xl',
       headerTitle: 'text-white',
       headerDesc: 'text-slate-300',
       headerSummary: 'text-slate-400',
-      stepBlock: 'bg-[#0E1325]/50 border-[#1D2744] hover:bg-[#0E132D] hover:border-[#202E5C]',
+      stepBlock: 'bg-[#0E1325]/50 border-[#163B3A] hover:bg-[#0E132D] hover:border-[#202E5C]',
       stepTitle: 'text-white',
       stepDesc: 'text-slate-400',
       calloutTip: 'bg-sky-500/5 border border-sky-500/20 text-sky-300',
       calloutWarning: 'bg-amber-500/5 border border-amber-500/20 text-amber-300',
       calloutAlert: 'bg-rose-500/5 border border-rose-500/20 text-rose-300',
-      buttonSecondary: 'bg-[#121832] border-[#1D2744] hover:border-slate-400 hover:text-white hover:bg-[#1D2748] text-slate-300',
+      buttonSecondary: 'bg-[#0C2624] border-[#163B3A] hover:border-slate-400 hover:text-white hover:bg-[#1D2748] text-slate-300',
       readButtonSelected: 'bg-emerald-500/10 border-emerald-500/35 text-emerald-400 hover:bg-emerald-500/20',
       subHeaderTitle: 'text-slate-400'
     },
@@ -1773,7 +1773,7 @@ export default function SystemManual() {
           )}
 
           {/* Aesthetic Theme Switcher Group */}
-          <div className={`flex items-center gap-0.5 ${theme === 'slate' ? 'bg-[#121832] border-[#1D2744]' : theme === 'grey' ? 'bg-[#2A2E37] border-[#393E4A]' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#EAE1D1] border-[#C3B29D]'} border p-1 rounded-xl shrink-0`}>
+          <div className={`flex items-center gap-0.5 ${theme === 'slate' ? 'bg-[#0C2624] border-[#163B3A]' : theme === 'grey' ? 'bg-[#2A2E37] border-[#393E4A]' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#EAE1D1] border-[#C3B29D]'} border p-1 rounded-xl shrink-0`}>
             <button 
               onClick={() => changeTheme('slate')}
               className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${theme === 'slate' ? 'bg-sky-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'}`}
@@ -2026,7 +2026,7 @@ export default function SystemManual() {
                   </button>
                 </div>
  
-                <div className={`h-px ${theme === 'slate' ? 'bg-[#1D2744]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'}`} />
+                <div className={`h-px ${theme === 'slate' ? 'bg-[#163B3A]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'}`} />
  
                 <p className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-300' : theme === 'ivory' ? 'text-slate-700' : 'text-[#4A3E34]'} text-xs sm:text-sm leading-relaxed font-semibold`}>
                   {highlightWord(activeSection.description, searchTerm)}
@@ -2036,7 +2036,7 @@ export default function SystemManual() {
                   ✏️ {activeSection.summary}
                 </p>
  
-                <div className={`h-px ${theme === 'slate' ? 'bg-[#1D2744]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'} my-3`} />
+                <div className={`h-px ${theme === 'slate' ? 'bg-[#163B3A]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'} my-3`} />
  
                 {/* Interactive Feature Mockup Canvas */}
                 <div className="space-y-2 text-left">
@@ -2131,7 +2131,7 @@ export default function SystemManual() {
             </div>
 
             {/* Back to Top & Pagination helpers */}
-            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t ${theme === 'slate' ? 'border-[#1D2744]' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#D5C6AF]/35'} select-none`}>
+            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t ${theme === 'slate' ? 'border-[#163B3A]' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#D5C6AF]/35'} select-none`}>
               <div className="text-[10px] font-mono text-slate-500">
                 SABUSH MANUAL DE UTILIZADOR • LICENÇA OFICIAL
               </div>
