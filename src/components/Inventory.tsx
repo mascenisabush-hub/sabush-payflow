@@ -6508,7 +6508,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           className="space-y-6 animate-fade-in"
         >
           {/* Bento Header Callout */}
-          <div className="bg-[#0F1322] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#1D2744]">
+          <div className="bg-[#081F1E] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#163B3A]">
             <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 blur-3xl rounded-full translate-x-20 -translate-y-20" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1 text-left font-sans">
@@ -6734,7 +6734,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                         className={cn(
                           "p-3 rounded-2xl border text-left select-none cursor-pointer transition-all flex flex-col gap-1.5",
                           tagTemplate === 'modern' 
-                            ? "bg-[#0F1322] border-slate-800 text-white font-sans" 
+                            ? "bg-[#081F1E] border-slate-800 text-white font-sans" 
                             : "bg-white hover:bg-slate-50 border-slate-200"
                         )}
                       >
@@ -6908,7 +6908,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     {/* Badge template styled title */}
                     <div className="mb-2">
                       <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest inline-block mr-1 font-mono">TÍTULO:</span>
-                      <h5 className="text-sm font-extrabold text-[#0F1322] tracking-tight leading-snug line-clamp-1">Produto de Amostra Premium</h5>
+                      <h5 className="text-sm font-extrabold text-[#081F1E] tracking-tight leading-snug line-clamp-1">Produto de Amostra Premium</h5>
                       {showCategory && (
                         <span className="text-[8px] uppercase font-black font-mono tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 rounded mt-1 inline-block">
                           Bebidas / Mercearia
@@ -8448,7 +8448,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           .price {
                             font-size: 13px;
                             font-weight: 900;
-                            color: #2563eb;
+                            color: #178F82;
                             margin-bottom: 4px;
                           }
                           svg {
