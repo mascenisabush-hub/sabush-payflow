@@ -28,14 +28,14 @@ const data = [
 
 export const schemaColors = {
   classic: {
-    primary: '#0B1B33', // Brand Blue
+    primary: '#0A3038', // Brand Blue
     secondary: '#10b981', // Semantic Green
     warning: '#f59e0b', // Semantic Amber
     danger: '#ef4444', // Semantic Red
     glow: 'rgba(26, 115, 196, 0.1)',
   },
   neon: {
-    primary: '#0B1B33', // Brand Blue (redirected for safe fallback)
+    primary: '#0A3038', // Brand Blue (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
     warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
@@ -1871,10 +1871,10 @@ Sabush System ERP`;
       <div className="fixed inset-0 z-[100] bg-[#090C16] text-[#F3F4F6] flex flex-col lg:flex-row h-screen w-screen overflow-hidden font-sans select-none animate-in fade-in duration-300">
         
         {/* LEFT HUD SIDEBAR */}
-        <div className="w-full lg:w-72 bg-[#0F1322] border-r border-[#1D2744] p-6 flex flex-col justify-between shrink-0 h-auto lg:h-full overflow-y-auto">
+        <div className="w-full lg:w-72 bg-[#081F1E] border-r border-[#163B3A] p-6 flex flex-col justify-between shrink-0 h-auto lg:h-full overflow-y-auto">
           <div className="space-y-8">
             {/* Header / Logo */}
-            <div className="flex items-center gap-3 bg-[#171F38] p-3 rounded-2xl border border-[#232F54] shadow-sm">
+            <div className="flex items-center gap-3 bg-[#112E2B] p-3 rounded-2xl border border-[#1C4340] shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-black shrink-0 shadow-lg shadow-blue-500/20">
                 S
               </div>
@@ -1924,7 +1924,7 @@ Sabush System ERP`;
                       "w-full flex items-center gap-3.5 px-3 py-3 rounded-xl text-left text-xs font-bold tracking-tight transition-all active:scale-[0.98] cursor-pointer",
                       isActive 
                         ? "bg-blue-600 text-white shadow-lg shadow-blue-600/10 border border-blue-500"
-                        : "text-[#8C9BBF] hover:bg-[#161D33] hover:text-white"
+                        : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
                     )}
                   >
                     <f.icon size={16} className={isActive ? "text-white" : "text-[#566A96] group-hover:text-white"} />
@@ -1935,12 +1935,12 @@ Sabush System ERP`;
             </div>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-[#1D2744] flex flex-col gap-2">
+          <div className="mt-8 pt-4 border-t border-[#163B3A] flex flex-col gap-2">
             <div className="flex items-center gap-2 px-3 text-[9px] font-black text-[#566A96] tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block" />
               <span>TERMINAL TELEMETRIA</span>
             </div>
-            <p className="px-3 text-[10px] font-bold text-[#8C9BBF]">Sabush ERP Pro v3.1</p>
+            <p className="px-3 text-[10px] font-bold text-[#8FB0AC]">Sabush ERP Pro v3.1</p>
           </div>
         </div>
 
@@ -1948,7 +1948,7 @@ Sabush System ERP`;
         <div className="flex-1 overflow-y-auto p-6 lg:p-8 flex flex-col gap-6 custom-scrollbar bg-[#090D1A]">
           
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1D2744] pb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#163B3A] pb-6">
             <div className="space-y-1">
               <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-md inline-block mb-1">
                 Active Session Telemetry
@@ -1959,13 +1959,13 @@ Sabush System ERP`;
             </div>
 
             {/* Real-time Clock Card */}
-            <div className="flex items-center gap-4 bg-[#0F1322] border border-[#1D2744] p-3.5 rounded-2xl">
+            <div className="flex items-center gap-4 bg-[#081F1E] border border-[#163B3A] p-3.5 rounded-2xl">
               <div className="flex flex-col items-end leading-none text-right shrink-0">
                 <span className="text-xl font-mono font-black text-white flex items-center gap-2">
                   <Clock className="w-4 h-4 text-orange-400 animate-pulse" />
                   {currentTime.toLocaleTimeString('pt-PT', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
                 </span>
-                <span className="text-[10px] font-bold text-[#8C9BBF] tracking-tight uppercase mt-1">
+                <span className="text-[10px] font-bold text-[#8FB0AC] tracking-tight uppercase mt-1">
                   {currentTime.toLocaleDateString('pt-PT', { weekday: 'short', day: 'numeric', month: 'short' })}
                 </span>
               </div>
@@ -1982,15 +1982,15 @@ Sabush System ERP`;
           </div>
 
           {/* Filtro por Intervalo de Datas HUD */}
-          <div className="bg-[#0F1322] border border-[#1D2744] rounded-2xl p-5 space-y-4 animate-in fade-in duration-300">
+          <div className="bg-[#081F1E] border border-[#163B3A] rounded-2xl p-5 space-y-4 animate-in fade-in duration-300">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 bg-[#171F38] text-blue-400 rounded-xl border border-[#232F54]">
+                <div className="p-2 bg-[#112E2B] text-blue-400 rounded-xl border border-[#1C4340]">
                   <Clock size={16} />
                 </div>
                 <div>
                   <h4 className="text-xs font-black text-white uppercase tracking-wider">Filtro Temporal de Métricas</h4>
-                  <p className="text-[10px] text-[#8C9BBF] font-bold">Ajusta todas as estatísticas e gráficos de faturamento.</p>
+                  <p className="text-[10px] text-[#8FB0AC] font-bold">Ajusta todas as estatísticas e gráficos de faturamento.</p>
                 </div>
               </div>
               <div className="flex flex-wrap items-center gap-2">
@@ -2002,7 +2002,7 @@ Sabush System ERP`;
                     setStartDateStr(start.toISOString().split('T')[0]);
                     setEndDateStr(new Date(referenceToday).toISOString().split('T')[0]);
                   }}
-                  className="text-[9px] font-black tracking-widest text-[#8C9BBF] hover:text-white bg-[#1A223E] hover:bg-[#232F54] border border-[#232F54] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
+                  className="text-[9px] font-black tracking-widest text-[#8FB0AC] hover:text-white bg-[#14332F] hover:bg-[#1C4340] border border-[#1C4340] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
                 >
                   7 Dias
                 </button>
@@ -2014,7 +2014,7 @@ Sabush System ERP`;
                     setStartDateStr(start.toISOString().split('T')[0]);
                     setEndDateStr(new Date(referenceToday).toISOString().split('T')[0]);
                   }}
-                  className="text-[9px] font-black tracking-widest text-[#8C9BBF] hover:text-white bg-[#1A223E] hover:bg-[#232F54] border border-[#232F54] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
+                  className="text-[9px] font-black tracking-widest text-[#8FB0AC] hover:text-white bg-[#14332F] hover:bg-[#1C4340] border border-[#1C4340] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
                 >
                   30 Dias
                 </button>
@@ -2026,7 +2026,7 @@ Sabush System ERP`;
                     setStartDateStr(start.toISOString().split('T')[0]);
                     setEndDateStr(new Date(referenceToday).toISOString().split('T')[0]);
                   }}
-                  className="text-[9px] font-black tracking-widest text-[#8C9BBF] hover:text-white bg-[#1A223E] hover:bg-[#232F54] border border-[#232F54] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
+                  className="text-[9px] font-black tracking-widest text-[#8FB0AC] hover:text-white bg-[#14332F] hover:bg-[#1C4340] border border-[#1C4340] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
                 >
                   3 Meses
                 </button>
@@ -2037,7 +2037,7 @@ Sabush System ERP`;
                     setStartDateStr(start.toISOString().split('T')[0]);
                     setEndDateStr(new Date(referenceToday).toISOString().split('T')[0]);
                   }}
-                  className="text-[9px] font-black tracking-widest text-[#8C9BBF] hover:text-white bg-[#1A223E] hover:bg-[#232F54] border border-[#232F54] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
+                  className="text-[9px] font-black tracking-widest text-[#8FB0AC] hover:text-white bg-[#14332F] hover:bg-[#1C4340] border border-[#1C4340] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
                 >
                   Este Ano
                 </button>
@@ -2047,21 +2047,21 @@ Sabush System ERP`;
                     setStartDateStr("2020-01-01");
                     setEndDateStr(new Date(referenceToday).toISOString().split('T')[0]);
                   }}
-                  className="text-[9px] font-black tracking-widest text-[#8C9BBF] hover:text-white bg-[#1A223E] hover:bg-[#232F54] border border-[#232F54] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
+                  className="text-[9px] font-black tracking-widest text-[#8FB0AC] hover:text-white bg-[#14332F] hover:bg-[#1C4340] border border-[#1C4340] px-2.5 py-1.5 rounded-lg uppercase transition-all cursor-pointer"
                 >
                   Todo Período
                 </button>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2.5 border-t border-[#1D2744]/60">
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2.5 border-t border-[#163B3A]/60">
               <div className="w-full sm:w-auto flex items-center gap-2">
                 <span className="text-[10px] font-black text-[#566A96] tracking-wider uppercase">Início:</span>
                 <input
                   type="date"
                   value={startDateStr}
                   onChange={(e) => setStartDateStr(e.target.value)}
-                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#141A30] border border-[#1D2744] hover:bg-[#1A223E] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#163B3A] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
               <div className="w-full sm:w-auto flex items-center gap-2">
@@ -2070,7 +2070,7 @@ Sabush System ERP`;
                   type="date"
                   value={endDateStr}
                   onChange={(e) => setEndDateStr(e.target.value)}
-                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#141A30] border border-[#1D2744] hover:bg-[#1A223E] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#163B3A] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
               
@@ -2116,7 +2116,7 @@ Sabush System ERP`;
           )}
 
           {/* Core Metrics Widgets */}
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-b border-dashed border-[#1D2744] pb-4">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-b border-dashed border-[#163B3A] pb-4">
             {[
               { label: t('revenue'), value: `${currency} ${filteredChartAndMetricData.metrics.revenue.toLocaleString()}`, color: 'border-emerald-500/20 bg-emerald-500/5', labelColor: 'text-emerald-400', icon: TrendingUp },
               { label: t('total_debt'), value: `${currency} ${metrics.outstanding.toLocaleString()}`, color: 'border-rose-500/20 bg-rose-500/5', labelColor: 'text-rose-400', icon: AlertCircle },
@@ -2125,14 +2125,14 @@ Sabush System ERP`;
               { label: 'Lucro Estimado', value: `${currency} ${filteredChartAndMetricData.metrics.profit.toLocaleString()}`, color: 'border-teal-500/20 bg-teal-500/5', labelColor: 'text-teal-400', icon: Wallet },
               { label: 'Vendas a Crédito', value: `${currency} ${filteredChartAndMetricData.metrics.creditSales.toLocaleString()}`, color: 'border-amber-500/20 bg-amber-500/5', labelColor: 'text-amber-400', icon: CreditCard }
             ].map((stat, idx) => (
-              <div key={stat.label} className={cn("p-4 rounded-2xl border flex flex-col justify-between transition-transform hover:scale-[1.02] bg-[#0F1322]", stat.color, idx === 0 ? "highlighted-accent-card" : "")}>
+              <div key={stat.label} className={cn("p-4 rounded-2xl border flex flex-col justify-between transition-transform hover:scale-[1.02] bg-[#081F1E]", stat.color, idx === 0 ? "highlighted-accent-card" : "")}>
                 <div className="flex items-center justify-between mb-4">
                   <span className={cn("text-[9px] font-black uppercase tracking-widest", idx === 0 ? "accent-label" : stat.labelColor)}>{stat.label}</span>
                   <stat.icon className={cn("w-4 h-4 opacity-75", idx === 0 ? "accent-label" : stat.labelColor)} />
                 </div>
                 <div>
                   <h3 className={cn("text-xl font-black tracking-tight", idx === 0 ? "accent-value" : "text-white")}>{stat.value}</h3>
-                  <div className="flex items-center gap-1 mt-1 text-[8px] font-bold text-[#8C9BBF]">
+                  <div className="flex items-center gap-1 mt-1 text-[8px] font-bold text-[#8FB0AC]">
                     <span className="w-1 h-1 rounded-full bg-emerald-400 animate-ping inline-block" />
                     <span className={idx === 0 ? "accent-sub" : ""}>LIVE UPDATE</span>
                   </div>
@@ -2142,10 +2142,10 @@ Sabush System ERP`;
           </div>
 
           {/* Detailed Sales & Credit Control Panel (HUD Mode) */}
-          <div className="bg-[#111625] border border-[#1D2744] rounded-3xl p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#1D2744]/60 pb-3">
+          <div className="bg-[#111625] border border-[#163B3A] rounded-3xl p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#163B3A]/60 pb-3">
               <div className="space-y-1">
-                <span className="text-[9px] font-black tracking-widest text-[#8C9BBF] uppercase bg-[#1A223E] border border-[#232F54] px-2 py-0.5 rounded">
+                <span className="text-[9px] font-black tracking-widest text-[#8FB0AC] uppercase bg-[#14332F] border border-[#1C4340] px-2 py-0.5 rounded">
                   Relatório Analítico Consolidado
                 </span>
                 <h4 className="text-md font-black text-white flex items-center gap-2">
@@ -2153,7 +2153,7 @@ Sabush System ERP`;
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping inline-block" />
                 </h4>
               </div>
-              <p className="text-[10px] text-[#8C9BBF] font-semibold italic text-right">Dados em tempo real ({currency})</p>
+              <p className="text-[10px] text-[#8FB0AC] font-semibold italic text-right">Dados em tempo real ({currency})</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
@@ -2165,15 +2165,15 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF] accent-sub">Semanal:</span>
+                    <span className="text-[#8FB0AC] accent-sub">Semanal:</span>
                     <span className="font-bold text-white accent-value">{(metrics.retailWeekly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF] accent-sub">Mensal:</span>
+                    <span className="text-[#8FB0AC] accent-sub">Mensal:</span>
                     <span className="font-bold text-white accent-value">{(metrics.retailMonthly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold accent-label">Acumulado:</span>
+                    <span className="text-[#8FB0AC] font-semibold accent-label">Acumulado:</span>
                     <span className="font-extrabold text-sky-305 accent-value">{(metrics.retailSales || 0).toLocaleString()} {currency}</span>
                   </div>
                 </div>
@@ -2187,15 +2187,15 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Semanal:</span>
+                    <span className="text-[#8FB0AC]">Semanal:</span>
                     <span className="font-bold text-white">{(metrics.wholesaleWeekly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Mensal:</span>
+                    <span className="text-[#8FB0AC]">Mensal:</span>
                     <span className="font-bold text-white">{(metrics.wholesaleMonthly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold">Acumulado:</span>
+                    <span className="text-[#8FB0AC] font-semibold">Acumulado:</span>
                     <span className="font-extrabold text-amber-300">{(metrics.wholesaleSales || 0).toLocaleString()} {currency}</span>
                   </div>
                 </div>
@@ -2209,15 +2209,15 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Semanal:</span>
+                    <span className="text-[#8FB0AC]">Semanal:</span>
                     <span className="font-bold text-white">{(metrics.cashWeekly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Mensal:</span>
+                    <span className="text-[#8FB0AC]">Mensal:</span>
                     <span className="font-bold text-white">{(metrics.cashMonthly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold">Acumulado:</span>
+                    <span className="text-[#8FB0AC] font-semibold">Acumulado:</span>
                     <span className="font-extrabold text-emerald-300">{(metrics.cashSales || 0).toLocaleString()} {currency}</span>
                   </div>
                 </div>
@@ -2231,15 +2231,15 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Semanal Conc:</span>
+                    <span className="text-[#8FB0AC]">Semanal Conc:</span>
                     <span className="font-bold text-white">{(metrics.creditWeekly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Mensal Conc:</span>
+                    <span className="text-[#8FB0AC]">Mensal Conc:</span>
                     <span className="font-bold text-white">{(metrics.creditMonthly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold">Dívida Activa Geral:</span>
+                    <span className="text-[#8FB0AC] font-semibold">Dívida Activa Geral:</span>
                     <span className="font-extrabold text-rose-400 font-mono">{(metrics.outstanding || 0).toLocaleString()} {currency}</span>
                   </div>
                 </div>
@@ -2253,15 +2253,15 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Semanal:</span>
+                    <span className="text-[#8FB0AC]">Semanal:</span>
                     <span className="font-bold text-white">{(metrics.expensesWeekly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Mensal:</span>
+                    <span className="text-[#8FB0AC]">Mensal:</span>
                     <span className="font-bold text-white">{(metrics.expensesMonthly || 0).toLocaleString()} {currency}</span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold">Acumulado Total:</span>
+                    <span className="text-[#8FB0AC] font-semibold">Acumulado Total:</span>
                     <span className="font-extrabold text-fuchsia-300 font-mono">{(metrics.expensesTotal || 0).toLocaleString()} {currency}</span>
                   </div>
                 </div>
@@ -2275,19 +2275,19 @@ Sabush System ERP`;
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Semanal:</span>
+                    <span className="text-[#8FB0AC]">Semanal:</span>
                     <span className={cn("font-bold", metrics.profitWeekly >= 0 ? "text-emerald-400" : "text-rose-400")}>
                       {(metrics.profitWeekly || 0).toLocaleString()} {currency}
                     </span>
                   </div>
                   <div className="flex justify-between text-[11px] border-b border-white/[0.04] pb-1">
-                    <span className="text-[#8C9BBF]">Mensal:</span>
+                    <span className="text-[#8FB0AC]">Mensal:</span>
                     <span className={cn("font-bold", metrics.profitMonthly >= 0 ? "text-emerald-400" : "text-rose-400")}>
                       {(metrics.profitMonthly || 0).toLocaleString()} {currency}
                     </span>
                   </div>
                   <div className="flex justify-between text-[11px] pt-0.5">
-                    <span className="text-[#8C9BBF] font-semibold">Lucro Acumulado:</span>
+                    <span className="text-[#8FB0AC] font-semibold">Lucro Acumulado:</span>
                     <span className={cn("font-extrabold font-mono", metrics.profitTotal >= 0 ? "text-teal-300" : "text-rose-300")}>
                       {(metrics.profitTotal || 0).toLocaleString()} {currency}
                     </span>
@@ -2299,19 +2299,19 @@ Sabush System ERP`;
 
           <div className="grid gap-6 md:grid-cols-7">
             {/* AI Advisor Panel */}
-            <div className="md:col-span-7 bg-[#0F1322] border border-[#1D2744] rounded-3xl p-6 shadow-xl relative overflow-hidden">
+            <div className="md:col-span-7 bg-[#081F1E] border border-[#163B3A] rounded-3xl p-6 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-3xl rounded-full" />
               <AIAdvisor />
             </div>
 
             {/* Analytics with dark mode theme */}
             <div className="md:col-span-4 space-y-6">
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-black text-white pl-3 border-l-3 border-blue-500">
                     Growth Analytics
                   </h3>
-                  <span className="text-[9px] font-black bg-[#161D33] text-[#8C9BBF] px-2 py-0.5 rounded border border-[#232F54] uppercase tracking-widest font-mono">
+                  <span className="text-[9px] font-black bg-[#10302E] text-[#8FB0AC] px-2 py-0.5 rounded border border-[#1C4340] uppercase tracking-widest font-mono">
                     8-WEEK ROLLING TREND
                   </span>
                 </div>
@@ -2320,11 +2320,11 @@ Sabush System ERP`;
                   <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <LineChart data={weeklySalesTrends}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1C2541" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8C9BBF', fontSize: 11 }} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8FB0AC', fontSize: 11 }} />
                       <YAxis 
                         axisLine={false} 
                         tickLine={false} 
-                        tick={{ fill: '#8C9BBF', fontSize: 11 }} 
+                        tick={{ fill: '#8FB0AC', fontSize: 11 }} 
                         tickFormatter={(val) => val >= 1000 ? `${(val / 1000).toLocaleString()}k` : val}
                       />
                       <Tooltip 
@@ -2332,7 +2332,7 @@ Sabush System ERP`;
                           if (active && payload && payload.length) {
                             const pointData = payload[0].payload;
                             return (
-                              <div className="bg-[#090D1A] border border-[#1D2744] p-3 rounded-xl shadow-xl text-white">
+                              <div className="bg-[#090D1A] border border-[#163B3A] p-3 rounded-xl shadow-xl text-white">
                                 <p className="text-[10px] font-black tracking-wider text-blue-400 uppercase">{pointData.period}</p>
                                 <p className="text-sm font-black mt-1 font-mono">
                                   {Number(pointData.sales).toLocaleString()} {currency}
@@ -2348,8 +2348,8 @@ Sabush System ERP`;
                         dataKey="sales" 
                         stroke="#3b82f6" 
                         strokeWidth={3} 
-                        dot={{ r: 4, stroke: '#3b82f6', strokeWidth: 1.5, fill: '#0F1322' }} 
-                        activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2, fill: '#0F1322' }} 
+                        dot={{ r: 4, stroke: '#3b82f6', strokeWidth: 1.5, fill: '#081F1E' }} 
+                        activeDot={{ r: 6, stroke: '#3b82f6', strokeWidth: 2, fill: '#081F1E' }} 
                       />
                     </LineChart>
                   </ResponsiveContainer>
@@ -2357,10 +2357,10 @@ Sabush System ERP`;
               </div>
 
               {/* Cash Flow Insights (Dark HUD Mode) */}
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl space-y-6">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-black tracking-widest text-[#8C9BBF] uppercase">Análise de Liquidez</span>
+                    <span className="text-[10px] font-black tracking-widest text-[#8FB0AC] uppercase">Análise de Liquidez</span>
                     <h3 className="text-lg font-black text-white pl-3 border-l-3 border-[#10b981]">
                       Fluxo de Caixa (30 dias)
                     </h3>
@@ -2372,7 +2372,7 @@ Sabush System ERP`;
 
                 {/* Sub Metrics Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="p-4 rounded-2xl bg-[#141A30] border border-emerald-500/10 flex flex-col justify-between highlighted-accent-card">
+                  <div className="p-4 rounded-2xl bg-[#0F2B29] border border-emerald-500/10 flex flex-col justify-between highlighted-accent-card">
                     <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest accent-label">Total Entradas</span>
                     <div className="mt-2">
                       <span className="text-lg font-black text-white font-mono accent-value">
@@ -2382,7 +2382,7 @@ Sabush System ERP`;
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-[#141A30] border border-rose-500/10 flex flex-col justify-between">
+                  <div className="p-4 rounded-2xl bg-[#0F2B29] border border-rose-500/10 flex flex-col justify-between">
                     <span className="text-[9px] font-black text-rose-400 uppercase tracking-widest">Total Saídas</span>
                     <div className="mt-2">
                       <span className="text-lg font-black text-white font-mono">
@@ -2392,8 +2392,8 @@ Sabush System ERP`;
                     </div>
                   </div>
 
-                  <div className={`p-4 rounded-2xl bg-[#141A30] border flex flex-col justify-between ${cashFlowStats.netCashFlow >= 0 ? 'border-emerald-500/20' : 'border-rose-500/20'}`}>
-                    <span className="text-[9px] font-black text-[#8C9BBF] uppercase tracking-widest">Saldo Líquido</span>
+                  <div className={`p-4 rounded-2xl bg-[#0F2B29] border flex flex-col justify-between ${cashFlowStats.netCashFlow >= 0 ? 'border-emerald-500/20' : 'border-rose-500/20'}`}>
+                    <span className="text-[9px] font-black text-[#8FB0AC] uppercase tracking-widest">Saldo Líquido</span>
                     <div className="mt-2">
                       <span className={`text-lg font-black font-mono ${cashFlowStats.netCashFlow >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
                         {(cashFlowStats.netCashFlow).toLocaleString()} {currency}
@@ -2418,13 +2418,13 @@ Sabush System ERP`;
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#1C2541" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8C9BBF', fontSize: 10 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8C9BBF', fontSize: 10 }} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8FB0AC', fontSize: 10 }} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8FB0AC', fontSize: 10 }} />
                       <Tooltip 
-                        contentStyle={{ backgroundColor: '#090D1A', border: '1px solid #1D2744', borderRadius: '12px', color: '#fff' }}
+                        contentStyle={{ backgroundColor: '#090D1A', border: '1px solid #163B3A', borderRadius: '12px', color: '#fff' }}
                         itemStyle={{ color: '#fff' }}
                       />
-                      <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ fontSize: '11px', color: '#8C9BBF' }} />
+                      <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ fontSize: '11px', color: '#8FB0AC' }} />
                       <Area type="monotone" dataKey="Entradas (In)" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorHudIn)" />
                       <Area type="monotone" dataKey="Saídas (Out)" stroke="#ef4444" strokeWidth={2} fillOpacity={1} fill="url(#colorHudOut)" />
                     </AreaChart>
@@ -2433,7 +2433,7 @@ Sabush System ERP`;
               </div>
 
               {/* Transactions in HUD mode */}
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-black text-white pl-3 border-l-3 border-blue-500">
                     Live Ledger Log
@@ -2451,8 +2451,8 @@ Sabush System ERP`;
 
                 <div className="space-y-3.5">
                   {recentSales.map((sale) => (
-                    <div key={sale.id} className="flex items-center gap-4 p-4 rounded-2xl bg-[#141A30] hover:bg-[#1A223E] border border-[#1D2744]/40 transition-all group">
-                      <div className="w-10 h-10 rounded-xl bg-[#090D1A] flex items-center justify-center font-black text-[#8C9BBF] group-hover:scale-110 transition-transform">
+                    <div key={sale.id} className="flex items-center gap-4 p-4 rounded-2xl bg-[#0F2B29] hover:bg-[#14332F] border border-[#163B3A]/40 transition-all group">
+                      <div className="w-10 h-10 rounded-xl bg-[#090D1A] flex items-center justify-center font-black text-[#8FB0AC] group-hover:scale-110 transition-transform">
                         {sale.customerId?.[0]?.toUpperCase() || 'W'}
                       </div>
                       <div className="flex-1 min-w-0">
@@ -2467,7 +2467,7 @@ Sabush System ERP`;
                             {sale.status}
                           </span>
                         </div>
-                        <div className="flex items-center gap-2 text-[9px] text-[#8C9BBF] font-bold uppercase tracking-widest flex-wrap">
+                        <div className="flex items-center gap-2 text-[9px] text-[#8FB0AC] font-bold uppercase tracking-widest flex-wrap">
                           <History size={10} />
                           {new Date(sale.createdAt?.toDate?.() || sale.createdAt).toLocaleDateString()}
                           <span>|</span>
@@ -2483,8 +2483,8 @@ Sabush System ERP`;
                   ))}
                   {recentSales.length === 0 && (
                     <div className="py-10 text-center space-y-3">
-                      <ShoppingCart size={40} className="mx-auto text-[#1D2744]" />
-                      <p className="text-xs font-bold text-[#8C9BBF] uppercase tracking-widest">No recent transactions</p>
+                      <ShoppingCart size={40} className="mx-auto text-[#163B3A]" />
+                      <p className="text-xs font-bold text-[#8FB0AC] uppercase tracking-widest">No recent transactions</p>
                     </div>
                   )}
                 </div>
@@ -2493,38 +2493,38 @@ Sabush System ERP`;
 
             {/* Sidebar Column within HUD */}
             <div className="md:col-span-3 space-y-6">
-              <div className="bg-[#0F1322] border border-[#1D2744] rounded-3xl overflow-hidden shadow-xl">
+              <div className="bg-[#081F1E] border border-[#163B3A] rounded-3xl overflow-hidden shadow-xl">
                 <MarketRates />
               </div>
 
               {/* Action grid (Quick operations) */}
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
                 <h3 className="text-base font-black text-white mb-4">Operations Control</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <button 
                     onClick={() => { (window as any).toggleStorefront(true); }}
-                    className="p-4 bg-[#141A30] hover:bg-indigo-600/25 border border-[#1D2744] text-indigo-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-indigo-600/25 border border-[#163B3A] text-indigo-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <ShoppingBag size={20} />
                     Online Store
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('pos'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#141A30] hover:bg-emerald-600/25 border border-[#1D2744] text-emerald-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-emerald-600/25 border border-[#163B3A] text-emerald-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <ShoppingCart size={20} />
                     POS Billing
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('quotations'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#141A30] hover:bg-blue-600/25 border border-[#1D2744] text-blue-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-blue-600/25 border border-[#163B3A] text-blue-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <FileSearch size={20} />
                     New Quote
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('expenses'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#141A30] hover:bg-rose-600/25 border border-[#1D2744] text-rose-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-rose-600/25 border border-[#163B3A] text-rose-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <TrendingDown size={20} />
                     Log Expense
@@ -2533,38 +2533,38 @@ Sabush System ERP`;
               </div>
 
               {/* Stock Health */}
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-black text-white">{t('inventory_status')}</h3>
-                  <span className="text-[9px] font-semibold text-[#8C9BBF]">HEALTH INDEX</span>
+                  <span className="text-[9px] font-semibold text-[#8FB0AC]">HEALTH INDEX</span>
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-1">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-[#8C9BBF]">Em Stock / Healthy</span>
+                      <span className="text-[#8FB0AC]">Em Stock / Healthy</span>
                       <span className="font-extrabold text-emerald-400 font-mono">{metrics.inStockCount}</span>
                     </div>
-                    <div className="w-full bg-[#161D33] h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-[#10302E] h-2 rounded-full overflow-hidden">
                       <div className="bg-emerald-500 h-full transition-all duration-500" style={{ width: `${(metrics.inStockCount / (metrics.totalProducts || 1)) * 100}%` }} />
                     </div>
                   </div>
                   
                   <div className="space-y-1 pt-1">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-[#8C9BBF]">Stock Baixo / Critical</span>
+                      <span className="text-[#8FB0AC]">Stock Baixo / Critical</span>
                       <span className="font-extrabold text-amber-500 font-mono">{metrics.lowStockCount}</span>
                     </div>
-                    <div className="w-full bg-[#161D33] h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-[#10302E] h-2 rounded-full overflow-hidden">
                       <div className="bg-amber-500 h-full transition-all duration-500" style={{ width: `${(metrics.lowStockCount / (metrics.totalProducts || 1)) * 100}%` }} />
                     </div>
                   </div>
 
                   <div className="space-y-1 pt-1">
                     <div className="flex justify-between items-center text-xs">
-                      <span className="text-[#8C9BBF]">Sem Stock / Out</span>
+                      <span className="text-[#8FB0AC]">Sem Stock / Out</span>
                       <span className="font-extrabold text-rose-500 font-mono">{metrics.outOfStockCount}</span>
                     </div>
-                    <div className="w-full bg-[#161D33] h-2 rounded-full overflow-hidden">
+                    <div className="w-full bg-[#10302E] h-2 rounded-full overflow-hidden">
                       <div className="bg-rose-500 h-full transition-all duration-500" style={{ width: `${(metrics.outOfStockCount / (metrics.totalProducts || 1)) * 100}%` }} />
                     </div>
                   </div>
@@ -2572,15 +2572,15 @@ Sabush System ERP`;
               </div>
 
               {/* Gross Profit Margin (HUD edition) */}
-              <div className="p-6 bg-[#0F1322] border border-[#1D2744] rounded-3xl shadow-xl space-y-4 animate-in fade-in duration-300">
+              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl space-y-4 animate-in fade-in duration-300">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-black text-white">Gross Profit Margin %</h3>
-                  <span className="text-[9px] font-semibold text-[#8C9BBF]">CATEGORY METRICS</span>
+                  <span className="text-[9px] font-semibold text-[#8FB0AC]">CATEGORY METRICS</span>
                 </div>
 
-                <div className="p-4 bg-[#141A30] border border-[#1D2744]/60 rounded-2xl flex items-center justify-between">
+                <div className="p-4 bg-[#0F2B29] border border-[#163B3A]/60 rounded-2xl flex items-center justify-between">
                   <div>
-                    <p className="text-[9px] font-black text-[#8C9BBF] uppercase tracking-widest leading-none">Overall Weighted GM</p>
+                    <p className="text-[9px] font-black text-[#8FB0AC] uppercase tracking-widest leading-none">Overall Weighted GM</p>
                     <p className="text-xl font-black text-white mt-1.5 font-mono">
                       {overallMargin.toFixed(1)}%
                     </p>
@@ -2606,10 +2606,10 @@ Sabush System ERP`;
                     return (
                       <div key={idx} className="space-y-1">
                         <div className="flex items-center justify-between text-xs font-bold">
-                          <span className="text-[#8C9BBF] truncate max-w-[130px]" title={cat.name}>{cat.name}</span>
+                          <span className="text-[#8FB0AC] truncate max-w-[130px]" title={cat.name}>{cat.name}</span>
                           <span className={`${textClass} font-mono text-[11px]`}>{cat.margin}%</span>
                         </div>
-                        <div className="w-full bg-[#161D33] h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-[#10302E] h-1.5 rounded-full overflow-hidden">
                           <div className={`${barColor} h-full transition-all duration-500`} style={{ width: `${cat.margin}%` }} />
                         </div>
                       </div>
@@ -2827,7 +2827,7 @@ Sabush System ERP`;
         </div>
 
         {/* Card 2: Vendas por Grosso */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#0B1B33] via-[#2069CE] to-[#2563EB] text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#0A3038] via-[#0F5C56] to-[#178F82] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest opacity-100">
@@ -3441,8 +3441,8 @@ Sabush System ERP`;
             <AreaChart data={sixMonthSalesTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorVendas6m" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#2563eb" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#178F82" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="#178F82" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorFaturas6m" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#818cf8" stopOpacity={0.1}/>
@@ -3498,7 +3498,7 @@ Sabush System ERP`;
                 type="monotone" 
                 dataKey="vendas" 
                 name="vendas"
-                stroke="#2563eb" 
+                stroke="#178F82" 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorVendas6m)" 
@@ -3573,7 +3573,7 @@ Sabush System ERP`;
               <span 
                 className="w-2.5 h-2.5 rounded block shadow-sm"
                 style={{ 
-                  backgroundColor: schemaColors[chartSchema]?.primary || '#2563eb',
+                  backgroundColor: schemaColors[chartSchema]?.primary || '#178F82',
                   boxShadow: `0 2px 4px ${schemaColors[chartSchema]?.glow || 'rgba(37, 99, 235, 0.2)'}`
                 }}
               />
@@ -3597,8 +3597,8 @@ Sabush System ERP`;
             <AreaChart data={last7DaysInvoicingTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorFaturacao7d" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={schemaColors[chartSchema]?.primary || '#2563eb'} stopOpacity={0.25}/>
-                  <stop offset="95%" stopColor={schemaColors[chartSchema]?.primary || '#2563eb'} stopOpacity={0}/>
+                  <stop offset="5%" stopColor={schemaColors[chartSchema]?.primary || '#178F82'} stopOpacity={0.25}/>
+                  <stop offset="95%" stopColor={schemaColors[chartSchema]?.primary || '#178F82'} stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorCount7d" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor={schemaColors[chartSchema]?.secondary || '#10b981'} stopOpacity={0.15}/>
@@ -3655,7 +3655,7 @@ Sabush System ERP`;
                 type="monotone" 
                 dataKey="faturacao" 
                 name="faturacao"
-                stroke={schemaColors[chartSchema]?.primary || '#2563eb'} 
+                stroke={schemaColors[chartSchema]?.primary || '#178F82'} 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorFaturacao7d)" 
