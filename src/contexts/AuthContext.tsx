@@ -146,7 +146,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         name: 'Sabush SME Demo',
         address: 'Rua de Luanda, Zimbabwe',
         logoUrl: '',
-        brandColor: '#2563eb',
+        brandColor: '#178F82',
         paymentTerms: 'IMMEDIATE',
         paymentInstructions: 'Transferência Bancária Directa',
         currency: 'USD',
