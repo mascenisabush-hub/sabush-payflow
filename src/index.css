@@ -10,10 +10,10 @@
 }
 
 :root {
-  --brand-color: #0B1B33;
-  --brand-color-hover: #03213F;
-  --brand-color-light: #EDF1F6;
-  --brand-color-glow: rgba(11, 27, 51, 0.2);
+  --brand-color: #0A3038;
+  --brand-color-hover: #06222A;
+  --brand-color-light: #E4F0F0;
+  --brand-color-glow: rgba(10, 48, 56, 0.2);
   --brand-gold: #B8791A;
   --brand-gold-hover: #8B6914;
   --brand-gold-light: #FBF3E0;
@@ -257,13 +257,13 @@
   color: #f3f4f6 !important;
 }
 
-.dark .text-\[\#042C53\],
-.dark [class*="text-[#042C53]"] {
+.dark .text-\[\#0C3A42\],
+.dark [class*="text-[#0C3A42]"] {
   color: #a3cffa !important;
 }
 
-.dark .text-\[\#1B73E8\],
-.dark [class*="text-[#1B73E8]"] {
+.dark .text-\[\#17A398\],
+.dark [class*="text-[#17A398]"] {
   color: #60a5fa !important;
 }
 
@@ -274,8 +274,8 @@
   color: #a7f3d0 !important;
 }
 
-.dark .text-\[\#1D2744\],
-.dark [class*="text-[#1D2744]"] {
+.dark .text-\[\#163B3A\],
+.dark [class*="text-[#163B3A]"] {
   color: #cbd5e1 !important;
 }
 
@@ -289,8 +289,8 @@
   color: #e2e8f0 !important;
 }
 
-.dark .text-\[\#0F1322\],
-.dark [class*="text-[#0F1322]"] {
+.dark .text-\[\#081F1E\],
+.dark [class*="text-[#081F1E]"] {
   color: #f8fafc !important;
 }
 
@@ -321,10 +321,10 @@ html:not(.dark) main .bg-slate-50\/85,
 html:not(.dark) main .bg-neutral-50,
 html:not(.dark) main .bg-\[\#FAF7F2\],
 html:not(.dark) main .bg-zinc-50,
-html:not(.dark) main div.bg-\[\#0F1322\],
+html:not(.dark) main div.bg-\[\#081F1E\],
 html:not(.dark) main div.bg-\[\#111625\],
 html:not(.dark) main div.bg-\[\#090D1A\],
-html:not(.dark) main div.bg-\[\#141A30\] {
+html:not(.dark) main div.bg-\[\#0F2B29\] {
   background-color: #FFFFFF !important;
 }
 
@@ -340,9 +340,9 @@ html:not(.dark) main .border-slate-300:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .border-slate-305:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .border-gray-100:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .border-gray-200:not(.manual-root *):not(.pos-root *),
-html:not(.dark) main .border-\[\#1D2744\]:not(.manual-root *):not(.pos-root *),
-html:not(.dark) main .border-\[\#1D2744\]\/40:not(.manual-root *):not(.pos-root *),
-html:not(.dark) main .border-\[\#1D2744\]\/60:not(.manual-root *):not(.pos-root *) {
+html:not(.dark) main .border-\[\#163B3A\]:not(.manual-root *):not(.pos-root *),
+html:not(.dark) main .border-\[\#163B3A\]\/40:not(.manual-root *):not(.pos-root *),
+html:not(.dark) main .border-\[\#163B3A\]\/60:not(.manual-root *):not(.pos-root *) {
   border-color: #E2E8F0 !important;
 }
 
@@ -358,7 +358,7 @@ html:not(.dark) main thead:not(.manual-root *):not(.pos-root *) {
 html:not(.dark) main table thead th:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main table thead td:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main table thead span:not(.manual-root *):not(.pos-root *) {
-  color: #0B1B33 !important;
+  color: #0A3038 !important;
 }
 
 html:not(.dark) main tbody tr:not(.manual-root *):not(.pos-root *),
@@ -371,9 +371,9 @@ html:not(.dark) main .divide-y > :not([hidden]) ~ :not([hidden]):not(.manual-roo
 
 /* One Highlighted / Accent Card Per Stat Row */
 html:not(.dark) main .highlighted-accent-card {
-  background-color: #0B1B33 !important;
+  background-color: #0A3038 !important;
   background-image: none !important;
-  border-color: #0B1B33 !important;
+  border-color: #0A3038 !important;
 }
 
 html:not(.dark) main .highlighted-accent-card .accent-label,
@@ -432,7 +432,7 @@ html:not(.dark) main .text-fuchsia-400:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-teal-400:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-violet-600:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-pink-650:not(.manual-root *):not(.pos-root *) {
-  color: #0B1B33 !important;
+  color: #0A3038 !important;
 }
 
 /* Body / Table row cells */
@@ -449,7 +449,7 @@ html:not(.dark) main .text-slate-655:not(.manual-root *):not(.pos-root *) {
 html:not(.dark) main .text-slate-500:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-slate-450:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-slate-400:not(.manual-root *):not(.pos-root *),
-html:not(.dark) main .text-\[\#8C9BBF\]:not(.manual-root *):not(.pos-root *),
+html:not(.dark) main .text-\[\#8FB0AC\]:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-slate-300:not(.manual-root *):not(.pos-root *) {
   color: #435B71 !important;
 }
@@ -498,14 +498,14 @@ html:not(.dark) main .text-red-500 {
   color: #EF4444 !important;
 }
 
-/* Primary Button Override (Mapped to Brand Navy #0B1B33 as Primary Action) */
+/* Primary Button Override (Mapped to Brand Navy #0A3038 as Primary Action) */
 html:not(.dark) main button.bg-blue-600:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main button.bg-blue-500:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main button.bg-indigo-600:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main button.bg-indigo-700:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .btn-primary:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main button[type="submit"]:not(.shortcut-btn):not(.manual-root *):not(.pos-root *) {
-  background-color: #0B1B33 !important;
+  background-color: #0A3038 !important;
   color: #FFFFFF !important;
 }
 
@@ -515,7 +515,7 @@ html:not(.dark) main button.bg-indigo-600:hover:not(.manual-root *):not(.pos-roo
 html:not(.dark) main button.bg-indigo-700:hover:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .btn-primary:hover:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main button[type="submit"]:not(.shortcut-btn):not(.manual-root *):not(.pos-root *):hover {
-  background-color: #03213F !important;
+  background-color: #06222A !important;
 }
 
 /* ==========================================================================
@@ -539,7 +539,7 @@ html:not(.dark) main .text-cyan-700:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-teal-500:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-teal-600:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .text-teal-700:not(.manual-root *):not(.pos-root *) {
-  color: #0B1B33 !important;
+  color: #0A3038 !important;
 }
 
 html:not(.dark) main .text-purple-500:not(.manual-root *):not(.pos-root *),
@@ -568,7 +568,7 @@ html:not(.dark) main .bg-cyan-50:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .bg-teal-50:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .bg-teal-100:not(.manual-root *):not(.pos-root *) {
   background-color: #F0EBDA !important;
-  color: #0B1B33 !important;
+  color: #0A3038 !important;
 }
 
 html:not(.dark) main .bg-purple-50:not(.manual-root *):not(.pos-root *),
@@ -593,7 +593,7 @@ html:not(.dark) main .bg-cyan-500:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .bg-cyan-600:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .bg-teal-500:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main .bg-teal-600:not(.manual-root *):not(.pos-root *) {
-  background-color: #0B1B33 !important;
+  background-color: #0A3038 !important;
   color: #FFFFFF !important;
 }
 
@@ -674,7 +674,7 @@ html:not(.dark) main textarea:not(.manual-root *):not(.pos-root *)::placeholder 
 html:not(.dark) main input:focus:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main select:focus:not(.manual-root *):not(.pos-root *),
 html:not(.dark) main textarea:focus:not(.manual-root *):not(.pos-root *) {
-  border-color: #0B1B33 !important;
+  border-color: #0A3038 !important;
   outline: none !important;
 }
 
