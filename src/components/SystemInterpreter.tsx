@@ -759,7 +759,7 @@ export default function SystemInterpreter() {
                                 {aiGuide.vocabulary.map((vocab, i) => (
                                   <div key={i} className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs">
                                     <div className="flex items-center justify-between mb-1 gap-2 flex-wrap">
-                                      <span className="font-extrabold text-[#8C9BBF] line-through decoration-red-500/20">{vocab.original}</span>
+                                      <span className="font-extrabold text-[#8FB0AC] line-through decoration-red-500/20">{vocab.original}</span>
                                       <span className="font-black text-blue-400 bg-blue-600/10 px-2 py-0.5 rounded flex items-center gap-1.5">
                                         <Volume2 size={10} /> {vocab.translated}
                                       </span>
