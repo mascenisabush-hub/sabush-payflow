@@ -392,7 +392,7 @@ export default function Settings() {
     businessName: businessData?.name || profile?.name || '',
     businessAddress: businessData?.address || profile?.address || '',
     logoUrl: businessData?.logoUrl || profile?.logoUrl || '',
-    brandColor: businessData?.brandColor || profile?.brandColor || '#2563eb',
+    brandColor: businessData?.brandColor || profile?.brandColor || '#178F82',
     paymentTerms: businessData?.paymentTerms || profile?.paymentTerms || '',
     paymentInstructions: businessData?.paymentInstructions || profile?.paymentInstructions || '',
     currency: businessData?.currency || profile?.currency || 'USD',
@@ -1212,7 +1212,7 @@ export default function Settings() {
                   
                   <div className="flex flex-wrap gap-2 items-center">
                     {[
-                      { hex: '#2563eb', label: 'Sabush Blue' },
+                      { hex: '#178F82', label: 'Sabush Green' },
                       { hex: '#10b981', label: 'Emerald' },
                       { hex: '#06b6d4', label: 'Teal Dream' },
                       { hex: '#f97316', label: 'Ochre Orange' },
@@ -1247,7 +1247,7 @@ export default function Settings() {
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-100 bg-white">
                       <input 
                         type="color" 
-                        value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#2563eb'} 
+                        value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#178F82'} 
                         onChange={e => {
                           const hex = e.target.value;
                           setFormData(prev => ({ ...prev, brandColor: hex }));
@@ -1276,7 +1276,7 @@ export default function Settings() {
                           }
                         }}
                         className="w-16 text-[10px] font-mono font-bold uppercase outline-none rounded p-1 text-slate-800"
-                        placeholder="#2563eb"
+                        placeholder="#178F82"
                       />
                     </div>
                   </div>
@@ -1494,7 +1494,7 @@ export default function Settings() {
                       <label className="text-[10px] uppercase font-black text-slate-400 tracking-wider font-mono">Predefined Brand Palettes</label>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          { hex: '#2563eb', label: 'Sabush Blue' },
+                          { hex: '#178F82', label: 'Sabush Green' },
                           { hex: '#10b981', label: 'Emerald Green' },
                           { hex: '#06b6d4', label: 'Teal Dream' },
                           { hex: '#f97316', label: 'Ochre Orange' },
@@ -1541,7 +1541,7 @@ export default function Settings() {
                         <div className="relative">
                           <input 
                             type="color" 
-                            value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#2563eb'} 
+                            value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#178F82'} 
                             onChange={e => {
                               const hex = e.target.value;
                               setFormData(prev => ({ ...prev, brandColor: hex }));
@@ -1572,7 +1572,7 @@ export default function Settings() {
                               }
                             }}
                             className="w-full px-4 py-2.5 outline-none rounded-xl border border-slate-200 text-sm font-mono font-extrabold uppercase bg-white text-slate-800 focus:ring-2 focus:ring-blue-500"
-                            placeholder="#2563eb"
+                            placeholder="#178F82"
                           />
                         </div>
                       </div>
