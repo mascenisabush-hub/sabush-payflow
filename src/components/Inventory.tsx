@@ -7417,8 +7417,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Modal de Lançar Promoção */}
       {showPromoModal && promoProd && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in font-sans">
-          <div className="bg-white w-full max-w-sm rounded-[28px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200 text-left font-sans text-slate-950">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in font-sans overflow-y-auto">
+          <div className="bg-white w-full max-w-sm rounded-[28px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200 text-left font-sans text-slate-950 max-h-[90vh] overflow-y-auto my-auto">
             {/* Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">
@@ -7565,8 +7565,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Quick Adjust Stock Modal */}
       {quickAdjustProduct && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
-          <div className="bg-white w-full max-w-sm rounded-[24px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in overflow-y-auto">
+          <div className="bg-white w-full max-w-sm rounded-[24px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             {/* Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">

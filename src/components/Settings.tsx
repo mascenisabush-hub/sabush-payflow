@@ -1119,12 +1119,12 @@ export default function Settings() {
       )}
 
       <div className="flex flex-col md:flex-row gap-8">
-        <aside className="w-full md:w-64 space-y-1">
+        <aside className="w-full md:w-64 flex overflow-x-auto gap-1.5 pb-2 -mx-1 px-1 scrollbar-none md:flex-col md:space-y-1 md:gap-0 md:overflow-visible md:pb-0 md:mx-0 md:px-0">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all ${
+              className={`shrink-0 md:w-full flex items-center gap-3 px-4 py-2.5 md:p-3 rounded-xl whitespace-nowrap transition-all ${
                 activeTab === tab.id ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'hover:bg-white text-slate-500'
               }`}
             >

@@ -4132,8 +4132,8 @@ export default function POS() {
 
       {/* Turno Opening / Closing Modal */}
       {isShiftModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Controle do Turno de Caixa</h3>
               <button onClick={() => setIsShiftModalOpen(false)} className="text-slate-450 hover:text-slate-800">
@@ -4384,8 +4384,8 @@ export default function POS() {
 
       {/* POS Quick Customer Creation Modal */}
       {isQuickCustomerOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Registar Novo Cliente</h3>
               <button onClick={() => setIsQuickCustomerOpen(false)} className="text-slate-450 hover:text-slate-800">
@@ -5526,8 +5526,8 @@ export default function POS() {
 
       {/* ITEM OVERRIDE & MANUAL DISCOUNT MODAL */}
       {isItemOverrideModalOpen && overrideItem && (
-        <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <button 
               type="button"
               onClick={() => setIsItemOverrideModalOpen(false)}
@@ -5665,8 +5665,8 @@ export default function POS() {
 
       {/* GLOBAL CART DISCOUNT MODAL */}
       {isCartDiscountModalOpen && (
-        <div className="fixed inset-0 z-100 bg-[#02182E]/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 bg-[#02182E]/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <button 
               type="button"
               onClick={() => setIsCartDiscountModalOpen(false)}
