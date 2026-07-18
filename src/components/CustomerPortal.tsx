@@ -1853,7 +1853,7 @@ export default function CustomerPortal() {
                     {customerQuotations.length === 0 ? (
                       <p className="text-xs text-slate-500 italic py-4">Não possui nenhum pedido de faturação registado.</p>
                     ) : (
-                      <div className="overflow-x-auto w-full id-history-quotes">
+                      <div className="overflow-x-auto w-full" id="history-quotes-table-shell">
                         <table className="w-full text-left text-xs border-collapse min-w-[700px]">
                           <thead>
                             <tr className="border-b border-slate-800/80 text-[10px] font-black uppercase text-slate-400 tracking-wider">

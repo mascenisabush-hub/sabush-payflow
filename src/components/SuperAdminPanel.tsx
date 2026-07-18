@@ -1917,6 +1917,7 @@ Equipa Técnica Sabush System`;
                <History className="text-blue-600" /> Logs de Atividade Globais da Plataforma
              </h2>
              <div className="bg-white rounded-[40px] shadow-sm border border-slate-100 overflow-hidden">
+               <div className="overflow-x-auto">
                 <table className="w-full text-left min-w-[800px]">
                   <thead>
                     <tr className="bg-slate-50/50 border-b border-slate-100">
@@ -1960,6 +1961,7 @@ Equipa Técnica Sabush System`;
                     ))}
                   </tbody>
                 </table>
+               </div>
              </div>
           </motion.div>
         )}
@@ -3472,7 +3474,7 @@ Equipa Técnica Sabush System`;
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6"
+              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex items-start gap-4 text-rose-600">
                 <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center shrink-0">
@@ -3570,7 +3572,7 @@ Equipa Técnica Sabush System`;
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 text-slate-900"
+              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 text-slate-900 max-h-[90vh] overflow-y-auto"
             >
               <div className="flex items-start gap-4 text-orange-600">
                 <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
@@ -3664,7 +3666,7 @@ Equipa Técnica Sabush System`;
             <motion.div
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
-              className="w-full max-w-md bg-white rounded-[40px] shadow-2xl overflow-hidden"
+              className="w-full max-w-md bg-white rounded-[40px] shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
             >
               <form onSubmit={handleRejectProof}>
                 <div className="p-8 md:p-10 space-y-6">
