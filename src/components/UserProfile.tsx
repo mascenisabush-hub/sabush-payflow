@@ -45,7 +45,7 @@ const AVATAR_PRESETS = [
 ];
 
 const THEME_PRESETS = [
-  { id: 'blue', name: 'Sabush Blue', color: 'bg-blue-600', text: 'text-blue-600', ring: 'focus:ring-blue-500' },
+  { id: 'blue', name: 'Sabush Green', color: 'bg-teal-700', text: 'text-teal-700', ring: 'focus:ring-teal-600' },
   { id: 'emerald', name: 'Forest Emerald', color: 'bg-emerald-600', text: 'text-emerald-600', ring: 'focus:ring-emerald-500' },
   { id: 'indigo', name: 'Royal Indigo', color: 'bg-indigo-600', text: 'text-indigo-600', ring: 'focus:ring-indigo-500' },
   { id: 'amber', name: 'Safi Amber', color: 'bg-amber-600', text: 'text-amber-600', ring: 'focus:ring-amber-500' },
@@ -53,7 +53,7 @@ const THEME_PRESETS = [
 ];
 
 const THEME_HEX_COLORS: Record<string, string> = {
-  blue: '#2563eb',
+  blue: '#178F82',
   emerald: '#059669',
   indigo: '#4f46e5',
   amber: '#d97706',
