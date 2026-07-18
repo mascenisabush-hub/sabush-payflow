@@ -1153,7 +1153,7 @@ export default function Quotations() {
                      </button>
                      <button 
                        onClick={() => handleUpdateQuotationPrices(selectedQuotation)}
-                       className="flex-1 py-3 bg-blue-650 hover:bg-blue-600 bg-[#1B73E8] text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-1"
+                       className="flex-1 py-3 bg-blue-650 hover:bg-blue-600 bg-[#17A398] text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-1"
                      >
                         <Send size={16} /> Gravar Preços e Notificar
                      </button>
