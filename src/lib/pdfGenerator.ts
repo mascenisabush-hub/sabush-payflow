@@ -207,7 +207,7 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
   const pageWidth = 210;
   
   // Header background accent (Vyapar Classic Navy Blue)
-  doc.setFillColor(30, 58, 138); // Navy Blue / #1e3a8a
+  doc.setFillColor(10, 48, 56); // Forest Teal / #0A3038
   doc.rect(0, 0, pageWidth, 42, 'F');
   
   // Title
@@ -313,7 +313,7 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
     body: tableRows,
     startY: sectionY + boxHeight + 8,
     theme: 'grid',
-    headStyles: { fillColor: [30, 58, 138], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
+    headStyles: { fillColor: [10, 48, 56], textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
     bodyStyles: { fontSize: 8, cellPadding: 2.5 },
     columnStyles: {
       0: { cellWidth: 10, halign: 'center' },
@@ -368,7 +368,7 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
   
   // Highlight Box: Total Geral
   currentY += 4;
-  doc.setFillColor(30, 58, 138); // Navy box
+  doc.setFillColor(10, 48, 56); // Navy box
   doc.rect(pageWidth - margin - rightBlockWidth, currentY, rightBlockWidth, 8, 'F');
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(9);
@@ -403,12 +403,12 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
   
   // Words card
   doc.setFillColor(239, 246, 255); // Soft blue
-  doc.setDrawColor(30, 58, 138); // Navy
+  doc.setDrawColor(10, 48, 56); // Navy
   doc.rect(margin, leftY, leftBlockWidth, 11, 'FD');
   
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(7.5);
-  doc.setTextColor(30, 58, 138);
+  doc.setTextColor(10, 48, 56);
   doc.text('💳 TOTAL EM EXTENSO (AMOUNT IN WORDS):', margin + 3, leftY + 4);
   
   const wordString = convertNumberToWordsPt(total);
@@ -427,7 +427,7 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
   
   doc.setFont('Helvetica', 'bold');
   doc.setFontSize(7.5);
-  doc.setTextColor(30, 58, 138);
+  doc.setTextColor(10, 48, 56);
   doc.text('🏦 INFORMAÇÕES DE CONTA BANCÁRIA:', margin + 3, leftY + 4);
   
   doc.setFont('Helvetica', 'normal');
