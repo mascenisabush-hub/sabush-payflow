@@ -4046,7 +4046,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
           <div className="fixed inset-0 bg-[#090C16]/80 backdrop-blur-md z-[150] flex flex-col h-screen w-screen overflow-hidden select-none animate-in fade-in duration-200 block" id="invoice-preview-modal">
             
             {/* Control Bar Header */}
-            <div className="bg-[#0F1322] border-b border-[#1D2744] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+            <div className="bg-[#081F1E] border-b border-[#163B3A] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
                   <Eye size={18} />
@@ -4060,7 +4060,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                       </span>
                     )}
                   </h3>
-                  <p className="text-[10px] font-bold text-[#8C9BBF] tracking-tight uppercase">
+                  <p className="text-[10px] font-bold text-[#8FB0AC] tracking-tight uppercase">
                     Layout interactivo da factura em tempo real
                   </p>
                 </div>
@@ -4074,20 +4074,20 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     type="button"
                     onClick={() => setShowFormatConfig(!showFormatConfig)}
                     className={cn(
-                      "px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 bg-[#161D33] border border-[#232F54] text-white hover:bg-[#232F54]",
+                      "px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 bg-[#10302E] border border-[#1C4340] text-white hover:bg-[#1C4340]",
                       showFormatConfig && "border-blue-500 text-blue-400 bg-[#1D2748]"
                     )}
                     title="Configurar Formato de Impressão"
                   >
                     <span>⚙️ Configurar Formato de Impressão</span>
-                    <span className="text-[10px] bg-[#1F294D] text-[#8C9BBF] px-1.5 py-0.5 rounded font-mono font-bold lowercase">
+                    <span className="text-[10px] bg-[#163D3B] text-[#8FB0AC] px-1.5 py-0.5 rounded font-mono font-bold lowercase">
                       {previewFormat === 'A4' ? 'a4' : previewFormat === 'thermal_80mm' ? '80mm' : '58mm'}
                     </span>
                   </button>
 
                   {showFormatConfig && (
-                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#0F1322] border border-[#1D2744] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-[#8C9BBF]">Formato de Impressão</p>
+                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#081F1E] border border-[#163B3A] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#8FB0AC]">Formato de Impressão</p>
                       
                       <div className="flex flex-col gap-1.5">
                         <button
@@ -4099,7 +4099,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'A4' ? "bg-blue-600 text-white" : "text-[#8C9BBF] hover:bg-[#161D33] hover:text-white"
+                            previewFormat === 'A4' ? "bg-blue-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
                           )}
                         >
                           <span>📄 A4 Padrão (PDF)</span>
@@ -4115,7 +4115,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'thermal_80mm' ? "bg-emerald-600 text-white" : "text-[#8C9BBF] hover:bg-[#161D33] hover:text-white"
+                            previewFormat === 'thermal_80mm' ? "bg-emerald-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
                           )}
                         >
                           <span>📠 Rolo Térmico 80mm</span>
@@ -4131,7 +4131,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'thermal_58mm' ? "bg-emerald-600 text-white" : "text-[#8C9BBF] hover:bg-[#161D33] hover:text-white"
+                            previewFormat === 'thermal_58mm' ? "bg-emerald-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
                           )}
                         >
                           <span>📠 Rolo Térmico 58mm</span>
@@ -4139,7 +4139,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         </button>
                       </div>
 
-                      <div className="border-t border-[#1D2744] pt-2 mt-1 text-[9px] text-[#8C9BBF]/80 flex items-start gap-1 leading-snug">
+                      <div className="border-t border-[#163B3A] pt-2 mt-1 text-[9px] text-[#8FB0AC]/80 flex items-start gap-1 leading-snug">
                         <span>💡</span>
                         <p>Selecionar um formato guarda automaticamente a preferência nas configurações da empresa.</p>
                       </div>
@@ -4148,10 +4148,10 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 </div>
 
                 {/* Zoom Controls */}
-                <div className="flex items-center gap-2 bg-[#161D33] px-3 py-2 rounded-xl border border-[#232F54]">
+                <div className="flex items-center gap-2 bg-[#10302E] px-3 py-2 rounded-xl border border-[#1C4340]">
                   <button
                     onClick={() => setPreviewZoom(prev => Math.max(50, prev - 10))}
-                    className="p-1 hover:bg-[#232F54] rounded text-[#8C9BBF] hover:text-white cursor-pointer"
+                    className="p-1 hover:bg-[#1C4340] rounded text-[#8FB0AC] hover:text-white cursor-pointer"
                     title="Diminuir Zoom"
                   >
                     <ZoomOut size={16} />
@@ -4161,7 +4161,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </span>
                   <button
                     onClick={() => setPreviewZoom(prev => Math.min(150, prev + 10))}
-                    className="p-1 hover:bg-[#232F54] rounded text-[#8C9BBF] hover:text-white cursor-pointer"
+                    className="p-1 hover:bg-[#1C4340] rounded text-[#8FB0AC] hover:text-white cursor-pointer"
                     title="Aumentar Zoom"
                   >
                     <ZoomIn size={16} />
@@ -4194,7 +4194,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     setIsPreviewOpen(false);
                     setPreviewInvoiceData(null);
                   }}
-                  className="p-2.5 bg-[#1F294D] hover:bg-rose-600 text-[#8C9BBF] hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
+                  className="p-2.5 bg-[#163D3B] hover:bg-rose-600 text-[#8FB0AC] hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
                   title="Fechar Visualização"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -4208,7 +4208,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             <div className="flex-1 overflow-hidden flex flex-col md:flex-row bg-[#080B16]">
               
               {/* Left Side: Document Canvas (Interactive zoom & preview) */}
-              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#1D2744]">
+              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#163B3A]">
                 <div 
                   style={{ transform: `scale(${previewZoom / 100})`, transformOrigin: 'top center' }}
                   className="transition-transform duration-100 ease-out"
@@ -4470,18 +4470,18 @@ A equipa de ${businessData?.name || 'Sabush System'}
               </div>
 
               {/* Right Side: ERP Control Panel / Sidebar */}
-              <div className="w-full md:w-[380px] bg-[#0E1325] border-t md:border-t-0 md:border-l border-[#1D2744] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
+              <div className="w-full md:w-[380px] bg-[#0E1325] border-t md:border-t-0 md:border-l border-[#163B3A] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
                 
                 <div className="space-y-5 flex-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-black uppercase text-[#8C9BBF] tracking-widest flex items-center gap-1.5">
+                    <h4 className="text-xs font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>🛠️ Gestão de Fatura</span>
                     </h4>
                     {getStatusBadge(inv.status)}
                   </div>
 
                   {/* Summary Box */}
-                  <div className="bg-[#121832] rounded-xl p-4 border border-[#1D2744] space-y-2">
+                  <div className="bg-[#0C2624] rounded-xl p-4 border border-[#163B3A] space-y-2">
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-400">Total Fatura:</span>
                       <span className="font-mono font-black text-white">{grandTotalAmount.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
@@ -4529,7 +4529,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                   {/* ITEM REVERSAL (REVERTER ITEM) */}
                   <div className="space-y-2.5">
-                    <h5 className="text-[11px] font-black uppercase text-[#8C9BBF] tracking-widest flex items-center gap-1.5">
+                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>↩️ Reverter Artigos Individualmente</span>
                     </h5>
                     <p className="text-[10px] text-slate-400 font-medium">Devolve itens selecionados ao inventário, ajustando o valor total e o saldo.</p>
@@ -4578,8 +4578,8 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                   {/* ADD PRODUCT TO EXISTING INVOICE (ADICIONAR ITEM) */}
                   {inv.status !== 'paid' && inv.status !== 'cancelled' && (
-                    <div className="space-y-3 pt-2 border-t border-[#1D2744]">
-                      <h5 className="text-[11px] font-black uppercase text-[#8C9BBF] tracking-widest">
+                    <div className="space-y-3 pt-2 border-t border-[#163B3A]">
+                      <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest">
                         ➕ Adicionar Artigo à Fatura
                       </h5>
                       <p className="text-[10px] text-slate-400 font-medium leading-tight">Adicione produtos do inventário imediatamente, atualizando o stock e saldo devedor.</p>
@@ -4588,14 +4588,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         <input
                           type="text"
                           placeholder="Pesquise por nome do produto..."
-                          className="w-full px-3 py-2 bg-[#121832] border border-[#1D2744] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
+                          className="w-full px-3 py-2 bg-[#0C2624] border border-[#163B3A] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
                           value={invoiceItemSearch}
                           onChange={e => setInvoiceItemSearch(e.target.value)}
                         />
                       </div>
 
                       {invoiceItemSearch && (
-                        <div className="bg-[#121832] border border-[#1D2744] hover:shadow-2xl rounded-xl divide-y divide-[#1D2744]/60 max-h-40 overflow-y-auto custom-scrollbar">
+                        <div className="bg-[#0C2624] border border-[#163B3A] hover:shadow-2xl rounded-xl divide-y divide-[#163B3A]/60 max-h-40 overflow-y-auto custom-scrollbar">
                           {filteredInvoiceItemSearchProducts
                             .map((p, idx) => (
                               <button
@@ -4626,14 +4626,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   )}
 
                   {/* HISTÓRICO DE AMORTIZAÇÕES */}
-                  <div className="pt-4 border-t border-[#1D2744] space-y-3">
-                    <h5 className="text-[11px] font-black uppercase text-[#8C9BBF] tracking-widest flex items-center gap-1.5">
+                  <div className="pt-4 border-t border-[#163B3A] space-y-3">
+                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>💰 Histórico de Amortizações</span>
                     </h5>
                     <p className="text-[10px] text-slate-400 font-medium">Lista de pagamentos e amortizações efetuadas para esta fatura.</p>
                     
                     {invoicePayments.length === 0 ? (
-                      <div className="bg-[#121832] p-3 rounded-xl border border-[#1D2744]/60 text-center text-[10px] text-slate-400 font-bold">
+                      <div className="bg-[#0C2624] p-3 rounded-xl border border-[#163B3A]/60 text-center text-[10px] text-slate-400 font-bold">
                         Nenhuma amortização efetuada ainda.
                       </div>
                     ) : (
@@ -4641,7 +4641,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         {invoicePayments.map((pay: any, idx: number) => {
                           const payDate = pay.date ? formatDateInTimezone(new Date(pay.date), businessData?.timezone || profile?.timezone || 'Africa/Maputo') : 'N/A';
                           return (
-                            <div key={pay.id || idx} className="bg-[#121832] p-3 rounded-xl border border-[#1D2744]/60 space-y-2">
+                            <div key={pay.id || idx} className="bg-[#0C2624] p-3 rounded-xl border border-[#163B3A]/60 space-y-2">
                               <div className="flex justify-between items-center text-xs">
                                 <span className="font-extrabold text-white font-mono">
                                   #{pay.id ? pay.id.slice(-6).toUpperCase() : `PAG-${idx}`}
@@ -4690,12 +4690,12 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
 
                   {/* AUDIT TIMELINE (RASTO DE AUDITORIA) */}
-                  <div className="pt-4 border-t border-[#1D2744] space-y-3">
-                    <h5 className="text-[11px] font-black uppercase text-[#8C9BBF] tracking-widest flex items-center gap-1.5">
+                  <div className="pt-4 border-t border-[#163B3A] space-y-3">
+                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>📋 Rasto de Auditoria</span>
                     </h5>
                     
-                    <div className="border-l border-[#232F54] ml-2 pl-3.5 space-y-3 font-mono text-[9px] leading-relaxed max-h-44 overflow-y-auto custom-scrollbar">
+                    <div className="border-l border-[#1C4340] ml-2 pl-3.5 space-y-3 font-mono text-[9px] leading-relaxed max-h-44 overflow-y-auto custom-scrollbar">
                       {[
                         {
                           timestamp: inv.date || (inv.createdAt?.toDate ? inv.createdAt.toDate().toISOString() : new Date().toISOString()),
@@ -4723,7 +4723,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
                 </div>
 
-                <div className="text-[9px] text-[#8C9BBF]/40 font-mono text-center pt-4 select-none">
+                <div className="text-[9px] text-[#8FB0AC]/40 font-mono text-center pt-4 select-none">
                   SABUSH ERP PRO • VISUALIZADOR SEGURO
                 </div>
 
