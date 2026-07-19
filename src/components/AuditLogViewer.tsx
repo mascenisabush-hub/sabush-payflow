@@ -30,7 +30,8 @@ export interface AuditLog {
 }
 
 export default function AuditLogViewer() {
-  const { profile } = useAuth();
+  const { profile, businessData } = useAuth();
+  const currency = businessData?.currency || 'MZN';
   const { t } = useTranslation();
   const [logs, setLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(true);
@@ -210,8 +211,8 @@ export default function AuditLogViewer() {
         log.eventType,
         `${log.performedBy?.name} (${log.performedBy?.email})`,
         log.approvedBy || '',
-        log.originalValue !== undefined && log.originalValue !== null ? `${log.originalValue} MT` : '',
-        log.newValue !== undefined && log.newValue !== null ? `${log.newValue} MT` : '',
+        log.originalValue !== undefined && log.originalValue !== null ? `${log.originalValue} ${currency}` : '',
+        log.newValue !== undefined && log.newValue !== null ? `${log.newValue} ${currency}` : '',
         log.reason || '',
         log.relatedInvoiceId || '',
         log.cartSessionId || ''
@@ -421,10 +422,10 @@ export default function AuditLogViewer() {
                           {log.originalValue !== undefined && log.originalValue !== null ? (
                             <div className="flex flex-col text-left">
                               <span className="font-mono text-[10px] font-bold text-slate-700">
-                                {Number(log.newValue).toLocaleString()} MT
+                                {Number(log.newValue).toLocaleString()} {currency}
                               </span>
                               <span className="text-[8px] text-slate-400 font-mono line-through leading-none mt-0.5">
-                                Antes: {Number(log.originalValue).toLocaleString()} MT
+                                Antes: {Number(log.originalValue).toLocaleString()} {currency}
                               </span>
                             </div>
                           ) : (
@@ -469,9 +470,9 @@ export default function AuditLogViewer() {
                                 </div>
                                 <div className="space-y-1 bg-slate-950 p-3 rounded-xl border border-slate-800">
                                   <p className="text-[9px] font-black uppercase text-slate-500 tracking-wider">Valores da Transação</p>
-                                  <p><strong className="text-slate-400">Valor Inicial:</strong> {log.originalValue !== undefined && log.originalValue !== null ? `${log.originalValue} MT` : '---'}</p>
-                                  <p><strong className="text-slate-400">Valor Final:</strong> {log.newValue !== undefined && log.newValue !== null ? `${log.newValue} MT` : '---'}</p>
-                                  <p><strong className="text-slate-400">Diferença:</strong> {log.originalValue !== undefined && log.originalValue !== null && log.newValue !== undefined && log.newValue !== null ? `${Number(log.newValue) - Number(log.originalValue)} MT` : '---'}</p>
+                                  <p><strong className="text-slate-400">Valor Inicial:</strong> {log.originalValue !== undefined && log.originalValue !== null ? `${log.originalValue} ${currency}` : '---'}</p>
+                                  <p><strong className="text-slate-400">Valor Final:</strong> {log.newValue !== undefined && log.newValue !== null ? `${log.newValue} ${currency}` : '---'}</p>
+                                  <p><strong className="text-slate-400">Diferença:</strong> {log.originalValue !== undefined && log.originalValue !== null && log.newValue !== undefined && log.newValue !== null ? `${Number(log.newValue) - Number(log.originalValue)} ${currency}` : '---'}</p>
                                 </div>
                               </div>
                               

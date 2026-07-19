@@ -10,6 +10,7 @@ import Skeleton from './ui/Skeleton';
 
 export default function OrderManagement() {
   const { profile, businessData } = useAuth();
+  const currency = businessData?.currency || 'MZN';
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -203,13 +204,13 @@ export default function OrderManagement() {
     
     let text = "";
     if (order.status === 'pending') {
-      text = `Olá ${order.customerName},\n\nRecebemos o seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} MT. O pedido está pendente de aprovação.\n\nObrigado pela preferência!`;
+      text = `Olá ${order.customerName},\n\nRecebemos o seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} ${currency}. O pedido está pendente de aprovação.\n\nObrigado pela preferência!`;
     } else if (order.status === 'accepted') {
-      text = `Olá ${order.customerName},\n\nO seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} MT foi aceito e a fatura correspondente foi gerada com sucesso!\n\nObrigado pela preferência!`;
+      text = `Olá ${order.customerName},\n\nO seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} ${currency} foi aceito e a fatura correspondente foi gerada com sucesso!\n\nObrigado pela preferência!`;
     } else if (order.status === 'delivered') {
-      text = `Olá ${order.customerName},\n\nO seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} MT foi marcado como entregue. Esperamos que tenha corrido tudo bem!\n\nObrigado pela preferência!`;
+      text = `Olá ${order.customerName},\n\nO seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} ${currency} foi marcado como entregue. Esperamos que tenha corrido tudo bem!\n\nObrigado pela preferência!`;
     } else {
-      text = `Olá ${order.customerName},\n\nAqui estão as actualizações sobre o seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} MT (Estado actual: ${order.status}).\n\nObrigado!`;
+      text = `Olá ${order.customerName},\n\nAqui estão as actualizações sobre o seu pedido online no valor de ${Number(order.total).toLocaleString('pt-MZ')} ${currency} (Estado actual: ${order.status}).\n\nObrigado!`;
     }
     
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(text)}`;
@@ -335,13 +336,13 @@ export default function OrderManagement() {
                          {order.items.map((item: any, idx: number) => (
                            <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl">
                               <span className="font-bold text-slate-700">{item.name} <span className="text-slate-400 ml-1">x{item.quantity}</span></span>
-                              <span className="font-black text-slate-900">{(Number(item.onlinePrice || item.price || 0) * item.quantity).toLocaleString('pt-MZ')} MT</span>
+                              <span className="font-black text-slate-900">{(Number(item.onlinePrice || item.price || 0) * item.quantity).toLocaleString('pt-MZ')} {currency}</span>
                            </div>
                          ))}
                       </div>
                       <div className="mt-4 pt-4 border-t border-dashed flex justify-between items-center px-2">
                          <span className="text-lg font-black text-slate-900">Order Total</span>
-                         <span className="text-2xl font-black text-blue-600">{(order.total || 0).toLocaleString('pt-MZ')} MT</span>
+                         <span className="text-2xl font-black text-blue-600">{(order.total || 0).toLocaleString('pt-MZ')} {currency}</span>
                       </div>
                    </div>
                 </div>

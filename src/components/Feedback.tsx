@@ -691,7 +691,8 @@ export default function Feedback() {
                 <p className="text-xs text-slate-400">Tente ajustar os seletores acima.</p>
               </div>
             ) : (
-              <div className="bg-white rounded-[35px] border border-slate-100 shadow-sm overflow-hidden overflow-x-auto">
+              <div className="bg-white rounded-[35px] border border-slate-100 shadow-sm overflow-hidden">
+                <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
                     <tr className="bg-slate-50/50 border-b border-slate-100 select-none">
@@ -767,6 +768,7 @@ export default function Feedback() {
                     })}
                   </tbody>
                 </table>
+                </div>
               </div>
             )}
           </motion.div>
@@ -780,13 +782,13 @@ export default function Feedback() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans"
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] max-w-xl w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6"
+              className="bg-white rounded-[40px] max-w-xl w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 max-h-[90vh] overflow-y-auto my-auto"
             >
               <div className="flex justify-between items-start">
                 <div className="space-y-1">
