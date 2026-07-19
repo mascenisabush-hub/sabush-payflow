@@ -28,6 +28,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [checkoutMode, setCheckoutMode] = useState<'direct_order' | 'quotation'>('quotation');
+  const storeCurrency = businessData?.currency || 'MZN';
 
   useEffect(() => {
     if (!businessId) return;
@@ -221,7 +222,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
         await sendLiveNotification(
           businessId,
           `Nova Cotação Online: ${quotationNumber}`,
-          `Cliente ${orderData.name} solicitou um orçamento de ${total.toLocaleString('pt-MZ')} MT.`,
+          `Cliente ${orderData.name} solicitou um orçamento de ${total.toLocaleString('pt-MZ')} ${storeCurrency}.`,
           'info'
         );
 
@@ -285,7 +286,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
         await sendLiveNotification(
           businessId,
           `Nova Encomenda Direta`,
-          `Cliente ${orderData.name} colocou um pedido online no valor de ${total.toLocaleString('pt-MZ')} MT.`,
+          `Cliente ${orderData.name} colocou um pedido online no valor de ${total.toLocaleString('pt-MZ')} ${storeCurrency}.`,
           'success'
         );
 
@@ -556,7 +557,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
 
                     {/* Price Range Filter */}
                     <div className="space-y-1.5">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Faixa de Preço (MT)</label>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">Faixa de Preço ({storeCurrency})</label>
                       <div className="flex items-center gap-2">
                         <input
                           type="number"
@@ -660,7 +661,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                          <div className="flex items-center justify-between pt-2 mt-auto border-t border-slate-50">
                              <div>
                                <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Preço Un.</p>
-                               <p className="text-lg font-black text-slate-900">{Number(p.onlinePrice || p.price || 0).toLocaleString('pt-MZ')} MT</p>
+                               <p className="text-lg font-black text-slate-900">{Number(p.onlinePrice || p.price || 0).toLocaleString('pt-MZ')} {storeCurrency}</p>
                              </div>
                              <button 
                                onClick={() => addToCart(p)}
@@ -744,7 +745,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                    </div>
                    <div className="border-t pt-2 flex items-center justify-between">
                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">Valor total estimado</span>
-                      <span className="font-black text-sm text-slate-900">{generatedDoc.total?.toLocaleString('pt-MZ')} MT</span>
+                      <span className="font-black text-sm text-slate-900">{generatedDoc.total?.toLocaleString('pt-MZ')} {storeCurrency}</span>
                    </div>
                 </div>
 
@@ -760,7 +761,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                   )}
                   <a 
                     href={`https://wa.me/${(businessData?.phone || '258840000000').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-                      `Olá! Acabei de submeter um pedido na vossa montra digital.\n\n*Tipo:* ${generatedDoc.type === 'quotation' ? 'Cotação' : 'Encomenda Direta'}\n*ID do Pedido:* ${generatedDoc.id}\n*Cliente:* ${generatedDoc.customerName || 'Cliente Geral'}\n*Valor Total:* ${generatedDoc.total?.toLocaleString('pt-MZ')} MT\n\nPor favor, confirmem a recepção do pedido. Obrigado!`
+                      `Olá! Acabei de submeter um pedido na vossa montra digital.\n\n*Tipo:* ${generatedDoc.type === 'quotation' ? 'Cotação' : 'Encomenda Direta'}\n*ID do Pedido:* ${generatedDoc.id}\n*Cliente:* ${generatedDoc.customerName || 'Cliente Geral'}\n*Valor Total:* ${generatedDoc.total?.toLocaleString('pt-MZ')} ${storeCurrency}\n\nPor favor, confirmem a recepção do pedido. Obrigado!`
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -932,7 +933,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                              {trackedOrder.items?.map((it: any, i: number) => (
                                <div key={i} className="flex justify-between text-xs font-medium text-slate-600">
                                  <span>{it.name} x{it.quantity}</span>
-                                 <span className="font-bold">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} MT</span>
+                                 <span className="font-bold">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} {storeCurrency}</span>
                                </div>
                              ))}
                           </div>
@@ -946,7 +947,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
 
                           <div className="flex justify-between items-center pt-2">
                              <span className="text-xs font-black text-slate-800">Total</span>
-                             <span className="text-base font-black text-blue-600">{(trackedOrder.total || 0).toLocaleString('pt-MZ')} MT</span>
+                             <span className="text-base font-black text-blue-600">{(trackedOrder.total || 0).toLocaleString('pt-MZ')} {storeCurrency}</span>
                           </div>
                        </div>
                     </div>
@@ -1000,7 +1001,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                           </div>
                           <div className="flex-1 min-w-0">
                              <h4 className="font-black text-slate-800 text-sm truncate">{item.name}</h4>
-                             <p className="text-xs font-bold text-slate-400">{Number(item.price || item.onlinePrice || 0).toLocaleString('pt-MZ')} MT x {item.quantity}</p>
+                             <p className="text-xs font-bold text-slate-400">{Number(item.price || item.onlinePrice || 0).toLocaleString('pt-MZ')} {storeCurrency} x {item.quantity}</p>
                           </div>
                           <div className="flex items-center gap-1">
                              <button onClick={() => updateQuantity(item.id, -1)} className="p-1 hover:bg-slate-200 rounded-lg text-slate-500"><Minus size={14} /></button>
@@ -1083,11 +1084,11 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                   <div className="border-t pt-4 space-y-4">
                      <div className="flex justify-between items-center text-slate-600 text-sm">
                        <span>Total Bruto</span>
-                       <span className="font-bold">{total.toLocaleString('pt-MZ')} MT</span>
+                       <span className="font-bold">{total.toLocaleString('pt-MZ')} {storeCurrency}</span>
                      </div>
                      <div className="flex justify-between items-center text-slate-900">
                        <span className="font-bold text-sm">TOTAL GERAL (IVA Incluso)</span>
-                       <span className="font-black text-xl text-blue-600">{(total * 1.17).toLocaleString('pt-MZ')} MT</span>
+                       <span className="font-black text-xl text-blue-600">{(total * 1.17).toLocaleString('pt-MZ')} {storeCurrency}</span>
                      </div>
 
                      <button 
