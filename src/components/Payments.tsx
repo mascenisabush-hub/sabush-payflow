@@ -337,7 +337,7 @@ export default function Payments() {
     }
 
     if (newPayment.amount > outstandingDebt) {
-      toast.error(`Não é possível registrar um pagamento superior à dívida. O saldo devedor atual deste cliente é de ${outstandingDebt.toLocaleString()} MT.`);
+      toast.error(`Não é possível registrar um pagamento superior à dívida. O saldo devedor atual deste cliente é de ${outstandingDebt.toLocaleString()} ${currency}.`);
       return;
     }
 
@@ -383,7 +383,7 @@ export default function Payments() {
           timestamp: new Date().toISOString(),
           userEmail: profile?.email || 'Sistema',
           actionType: 'PAGAMENTO',
-          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} MT registada via ${newPayment.method?.toUpperCase() || 'PAGAMENTO'}.`
+          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} ${currency} registada via ${newPayment.method?.toUpperCase() || 'PAGAMENTO'}.`
         };
         const updatedAuditTrail = Array.isArray(inv.auditTrail) ? [...inv.auditTrail, auditLogEntry] : [auditLogEntry];
 
@@ -495,7 +495,7 @@ export default function Payments() {
           timestamp: new Date().toISOString(),
           userEmail: profile?.email || 'Sistema',
           actionType: 'PAGAMENTO',
-          details: `Comprovativo de pagamento aprovado no valor de ${proof.amount.toLocaleString('pt-MZ')} MT (via ${proof.method?.toUpperCase() || 'M-PESA'}).`
+          details: `Comprovativo de pagamento aprovado no valor de ${proof.amount.toLocaleString('pt-MZ')} ${currency} (via ${proof.method?.toUpperCase() || 'M-PESA'}).`
         };
         const updatedAuditTrail = Array.isArray(invData.auditTrail) ? [...invData.auditTrail, auditLogEntry] : [auditLogEntry];
 
@@ -556,7 +556,7 @@ export default function Payments() {
         const notiRef = collection(db, `businesses/${profile.businessId}/notifications`);
         await addDoc(notiRef, {
           title: "Comprovativo Recusado",
-          message: `O comprovativo enviado para a Fatura #${proof.invoiceNumber} no valor de ${proof.amount.toLocaleString()} MT foi rejeitado. Motivo: ${rejectionNotes.trim()}`,
+          message: `O comprovativo enviado para a Fatura #${proof.invoiceNumber} no valor de ${proof.amount.toLocaleString()} ${currency} foi rejeitado. Motivo: ${rejectionNotes.trim()}`,
           type: 'alert',
           read: false,
           createdAt: serverTimestamp()
@@ -1268,8 +1268,8 @@ export default function Payments() {
 
       {/* Modern interactive receipt preview overlay modal */}
       {previewPayment && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
               <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
                 <span className="text-xl">🧾</span> Recibo Gerado com Sucesso!
@@ -1316,14 +1316,14 @@ export default function Payments() {
                   "text-xl font-black font-mono",
                   previewPayment.isSupplier ? "text-rose-600" : "text-emerald-600"
                 )}>
-                  {Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT
+                  {Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}
                 </span>
               </div>
               {!previewPayment.isSupplier && (
                 <div className="flex justify-between items-baseline pt-1">
                   <span className="text-red-500 font-black uppercase text-[10px] tracking-wider">Saldo Devedor Restante:</span>
                   <span className="font-black text-red-650 font-mono text-sm">
-                    {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT
+                    {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}
                   </span>
                 </div>
               )}
@@ -1425,8 +1425,8 @@ export default function Payments() {
       )}
       {/* PO Link Prompt Modal */}
       {promptLinkPO && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] max-w-lg w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] max-w-lg w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
               <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
                 <span>🔗</span> Vincular a uma Ordem de Compra?
@@ -1494,8 +1494,8 @@ export default function Payments() {
       )}
       {/* Quick Add Customer/Supplier Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200 font-sans">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] max-w-md w-full p-6 shadow-2xl border border-slate-100 flex flex-col space-y-6 animate-in fade-in zoom-in-95 duration-200 font-sans max-h-[90vh] overflow-y-auto my-auto">
             <div className="flex justify-between items-center border-b border-slate-100 pb-4">
               <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
                 <span>✨</span> {paymentDirection === 'outbound' ? 'Novo Fornecedor Rápido' : 'Novo Cliente Rápido'}

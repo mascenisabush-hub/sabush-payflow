@@ -825,11 +825,11 @@ export default function Reports() {
                     <div className="flex flex-wrap gap-4 text-left sm:text-right font-sans">
                       <div>
                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Faturação</span>
-                        <span className="text-xs font-black text-emerald-600 font-mono">+{item.revenue.toLocaleString()} MT</span>
+                        <span className="text-xs font-black text-emerald-600 font-mono">+{item.revenue.toLocaleString()} {currency}</span>
                       </div>
                       <div>
                         <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block">Custos / Despesas</span>
-                        <span className="text-xs font-black text-rose-550 font-mono">-{item.expenses.toLocaleString()} MT</span>
+                        <span className="text-xs font-black text-rose-550 font-mono">-{item.expenses.toLocaleString()} {currency}</span>
                       </div>
                     </div>
 

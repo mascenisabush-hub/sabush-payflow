@@ -443,7 +443,7 @@ export default function CreditManagement() {
           timestamp: new Date().toISOString(),
           userEmail: profile?.email || 'Sistema',
           actionType: 'PAGAMENTO',
-          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} MT recebida e alocada.`
+          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} ${currency} recebida e alocada.`
         };
         const updatedAuditTrail = Array.isArray(inv.auditTrail) ? [...inv.auditTrail, auditLogEntry] : [auditLogEntry];
 
@@ -1331,12 +1331,12 @@ export default function CreditManagement() {
       {/* Advanced Repayment Modal */}
       <AnimatePresence>
         {isRepaying && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6"
+              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6 max-h-[90vh] overflow-y-auto my-auto"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900">Registar Pagamento</h3>
@@ -1436,12 +1436,12 @@ export default function CreditManagement() {
       {/* Adjust Credit Limit Modal */}
       <AnimatePresence>
         {isAdjustingLimit && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-sm rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6"
+              className="bg-white w-full max-w-sm rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6 max-h-[90vh] overflow-y-auto my-auto"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900 text-left">Ajustar Limite</h3>
@@ -1490,8 +1490,8 @@ export default function CreditManagement() {
 
       {/* Modern interactive receipt preview overlay modal */}
       {previewPayment && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl border border-slate-100 p-6 flex flex-col space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
+          <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl border border-slate-100 p-6 flex flex-col space-y-4 max-h-[90vh] overflow-y-auto my-auto">
             
             <div className="text-center p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col items-center">
               <Printer size={32} className="text-emerald-600 mb-1.5 animate-pulse" />
@@ -1532,12 +1532,12 @@ export default function CreditManagement() {
 
               <div className="flex justify-between font-bold text-slate-900 text-xs border-t border-dashed border-slate-200 pt-2 bg-emerald-50/50 p-1 rounded">
                 <span>VALOR PAGO:</span>
-                <span>{Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
+                <span>{Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}</span>
               </div>
               <div className="flex justify-between items-baseline pt-1">
                 <span className="text-red-500 font-bold uppercase text-[9px] tracking-wider">Dívida Restante:</span>
                 <span className="font-extrabold text-red-650 font-mono">
-                  {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT
+                  {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}
                 </span>
               </div>
             </div>
@@ -1650,12 +1650,12 @@ export default function CreditManagement() {
       {/* Supplier Payment Modal */}
       <AnimatePresence>
         {isRecordingSupplierPayment && selectedSupplier && payingSupplierDoc && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6 text-left"
+              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6 text-left max-h-[90vh] overflow-y-auto my-auto"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900">Registar Pagamento a Fornecedor</h3>
