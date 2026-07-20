@@ -5235,8 +5235,8 @@ export default function POS() {
               ))}
             </div>
 
-            {/* Catalog Grid */}
-            <div className="flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-4 gap-4 p-1 min-h-[220px]">
+            {/* Catalog List */}
+            <div className="flex-1 overflow-y-auto divide-y divide-blue-100/70 border border-blue-100/70 rounded-xl">
               {products
                 .filter(p => catalogCategory === 'all' || p.category === catalogCategory)
                 .map(product => {
@@ -5254,23 +5254,23 @@ export default function POS() {
                         playSuccessBeep();
                       }}
                       className={cn(
-                        "bg-blue-50/20 hover:bg-blue-50/70 border p-3 rounded-2xl cursor-pointer transition-all flex flex-col justify-between self-stretch",
-                        limitStock <= 0 ? "opacity-50 hover:bg-blue-50/10 cursor-not-allowed border-blue-100" : "border-blue-100/80 hover:border-blue-400"
+                        "flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors",
+                        limitStock <= 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50/60"
                       )}
                     >
-                      <div>
-                        {/* Stock label status info */}
-                        <div className="flex justify-between items-center text-[8px] uppercase font-black text-blue-400 mb-1.5">
-                          <span>Stock: {limitStock}</span>
-                          {isLow && limitStock > 0 && <span className="text-rose-600 font-extrabold animate-pulse">Esgotar</span>}
-                        </div>
-                        <h4 className="text-xs font-black text-blue-950 line-clamp-2 leading-tight pr-1">{product.name}</h4>
-                        <p className="text-[10px] text-blue-500 font-medium mt-0.5 select-none">{product.category || 'Normal'}</p>
+                      <div className="flex-1 min-w-0 flex items-baseline gap-2">
+                        <h4 className="text-xs font-black text-blue-950 truncate">{product.name}</h4>
+                        <span className="text-[10px] text-blue-500 font-medium shrink-0">{product.category || 'Normal'}</span>
                       </div>
-
-                      <div className="text-right mt-3 pt-2 border-t border-blue-100/50 flex-shrink-0">
-                        <span className="text-xs font-mono font-black text-blue-800">{(product.price || 0).toLocaleString()} MT</span>
-                      </div>
+                      <span className={cn(
+                        "text-[9px] font-black uppercase shrink-0 w-[70px] text-right",
+                        isLow && limitStock > 0 ? "text-rose-600 animate-pulse" : "text-blue-400"
+                      )}>
+                        Stock: {limitStock}
+                      </span>
+                      <span className="text-xs font-mono font-black text-blue-800 shrink-0 w-[80px] text-right">
+                        {(product.price || 0).toLocaleString()} MT
+                      </span>
                     </div>
                   );
                 })}
