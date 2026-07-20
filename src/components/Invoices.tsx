@@ -3553,8 +3553,8 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
       {/* Shareable Payment Link Generation Modal */}
       {isShareModalOpen && selectedInvoiceForShare && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-150 overflow-y-auto">
+          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl max-w-md w-full p-8 relative animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             {/* Close Button */}
             <button 
               onClick={() => {

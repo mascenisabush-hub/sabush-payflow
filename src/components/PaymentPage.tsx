@@ -18,6 +18,7 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [amountToPay, setAmountToPay] = useState<number>(0);
+  const currency = business?.currency || 'MZN';
 
   useEffect(() => {
     // 1. Fetch Invoice
@@ -100,7 +101,7 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
            </div>
            <div className="space-y-2">
               <h2 className="text-3xl font-black text-slate-900">Payment Complete</h2>
-              <p className="text-slate-500 font-bold">Successfully paid ${amountToPay.toFixed(2)} to {business.name}</p>
+              <p className="text-slate-500 font-bold">Successfully paid {amountToPay.toFixed(2)} {currency} to {business.name}</p>
            </div>
            
            <div className="bg-slate-50 p-6 rounded-3xl text-left divide-y divide-slate-100">
@@ -185,11 +186,11 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
                  </div>
                  <div className="space-y-1">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Amount</p>
-                    <p className="font-bold text-slate-900">${invoice.total.toFixed(2)}</p>
+                    <p className="font-bold text-slate-900">{invoice.total.toFixed(2)} {currency}</p>
                  </div>
                  <div className="space-y-1">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Paid</p>
-                    <p className="font-bold text-emerald-500">${(invoice.amountPaid || 0).toFixed(2)}</p>
+                    <p className="font-bold text-emerald-500">{(invoice.amountPaid || 0).toFixed(2)} {currency}</p>
                  </div>
               </div>
 
@@ -202,7 +203,7 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
                             <span className="font-bold text-slate-900">{item.description || item.name}</span>
                             <span className="text-xs font-medium text-slate-400">Qty: {item.quantity}</span>
                          </div>
-                         <span className="font-black text-slate-900">${(item.price * item.quantity).toFixed(2)}</span>
+                         <span className="font-black text-slate-900">{(item.price * item.quantity).toFixed(2)} {currency}</span>
                       </div>
                     ))}
                  </div>
@@ -234,7 +235,7 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
                  </div>
                  <div className="text-right shrink-0">
                     <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Balance Due</p>
-                    <p className="text-4xl font-black text-blue-600">${(invoice.total - (invoice.amountPaid || 0)).toFixed(2)}</p>
+                    <p className="text-4xl font-black text-blue-600">{(invoice.total - (invoice.amountPaid || 0)).toFixed(2)} {currency}</p>
                  </div>
               </div>
            </div>
@@ -280,10 +281,10 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
                     <button onClick={() => setAmountToPay(invoice.total - (invoice.amountPaid || 0))} className="text-blue-600 hover:underline">Pay Full Balance</button>
                  </div>
                  <div className="relative">
-                    <span className="absolute left-6 top-1/2 -translate-y-1/2 text-2xl font-black text-slate-400">$</span>
+                    <span className="absolute left-6 top-1/2 -translate-y-1/2 text-xl font-black text-slate-400">{currency}</span>
                     <input 
                       type="number"
-                      className="w-full pl-12 pr-6 py-6 bg-slate-50 border-none rounded-3xl text-3xl font-black text-slate-900 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
+                      className="w-full pl-20 pr-6 py-6 bg-slate-50 border-none rounded-3xl text-3xl font-black text-slate-900 focus:ring-4 focus:ring-blue-100 outline-none transition-all"
                       value={amountToPay}
                       max={invoice.total - (invoice.amountPaid || 0)}
                       onChange={e => setAmountToPay(Number(e.target.value))}
@@ -305,7 +306,7 @@ export default function PaymentPage({ businessId, invoiceId, onClose }: PaymentP
                    ) : (
                      <>
                         <ShieldCheck size={24} />
-                        Pay ${amountToPay.toFixed(2)} Now
+                        Pay {amountToPay.toFixed(2)} {currency} Now
                      </>
                    )}
                  </button>

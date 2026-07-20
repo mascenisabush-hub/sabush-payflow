@@ -1808,12 +1808,12 @@ export default function Customers() {
       {/* Cartão de Fidelidade Modal */}
       <AnimatePresence>
         {viewingLoyaltyCustomer && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#FAF7F2] border border-[#E9E1D2] w-full max-w-sm rounded-[36px] shadow-2xl p-6 relative text-left"
+              className="bg-[#FAF7F2] border border-[#E9E1D2] w-full max-w-sm rounded-[36px] shadow-2xl p-6 relative text-left max-h-[90vh] overflow-y-auto my-auto"
             >
               <button 
                 onClick={() => setViewingLoyaltyCustomer(null)}

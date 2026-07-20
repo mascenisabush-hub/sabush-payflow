@@ -19,6 +19,7 @@ import { syncReservedStock } from '../lib/stockReservation';
 export default function Quotations() {
   const { profile, businessData } = useAuth();
   const { t } = useTranslation();
+  const currency = businessData?.currency || 'MZN';
   
   const [quotations, setQuotations] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -625,7 +626,7 @@ export default function Quotations() {
                       const avail = (p.stockLevel || 0) - (p.reservedStock || 0);
                       return (
                         <option key={p.id} value={p.id}>
-                          {p.name} ({p.price} MT) - Disp: {avail} {p.baseUnitLabel || 'un'} ({p.reservedStock || 0} res.)
+                          {p.name} ({p.price} {currency}) - Disp: {avail} {p.baseUnitLabel || 'un'} ({p.reservedStock || 0} res.)
                         </option>
                       );
                     })}
@@ -701,7 +702,7 @@ export default function Quotations() {
                 </div>
                 <div className="col-span-3 flex gap-2">
                   <div className="flex-1 p-3.5 bg-slate-100 rounded-xl font-bold text-slate-650 text-xs text-right">
-                    {((item.price || 0) * (item.quantity || 1)).toLocaleString('pt-MZ')} MT
+                    {((item.price || 0) * (item.quantity || 1)).toLocaleString('pt-MZ')} {currency}
                   </div>
                   <button 
                     onClick={() => {
@@ -727,7 +728,7 @@ export default function Quotations() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t">
             <div className="text-xl font-black text-slate-900 font-sans">
               <span className="text-[10px] font-black text-slate-450 uppercase tracking-wider mr-3">Estimativa Bruta:</span>
-              {calculateTotal(newQuotation.items).toLocaleString('pt-MZ')} MT
+              {calculateTotal(newQuotation.items).toLocaleString('pt-MZ')} {currency}
             </div>
             <div className="flex gap-3 w-full sm:w-auto">
               <button 
@@ -787,7 +788,7 @@ export default function Quotations() {
                 <h3 className="text-base font-black text-slate-900 truncate">{qt.customerName || qt.customerId || 'Cliente Geral'}</h3>
                 <div>
                    <span className="text-[10px] font-black text-slate-400 uppercase">Total Estimado</span>
-                   <p className="text-xl font-black text-blue-600">{Number(qt.total || 0).toLocaleString('pt-MZ')} MT <span className="text-[10px] text-slate-400 font-bold">(IVA Exc.)</span></p>
+                   <p className="text-xl font-black text-blue-600">{Number(qt.total || 0).toLocaleString('pt-MZ')} {currency} <span className="text-[10px] text-slate-400 font-bold">(IVA Exc.)</span></p>
                 </div>
                 <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase">
                   <Clock size={12} />
@@ -921,7 +922,7 @@ export default function Quotations() {
                                    })()}
                                 </div>
                                 <div className="flex items-center gap-2">
-                                   <span className="text-slate-400 text-[10px] font-black uppercase">Preço Unitário (MT):</span>
+                                   <span className="text-slate-400 text-[10px] font-black uppercase">Preço Unitário ({currency}):</span>
                                    <input 
                                      type="number" 
                                      value={it.price}
@@ -932,7 +933,7 @@ export default function Quotations() {
                                      className="w-24 px-3 py-1.5 border border-slate-205 rounded-xl font-bold text-right outline-none focus:ring-2 focus:ring-blue-500 text-xs text-slate-800"
                                    />
                                    <span className="font-extrabold text-slate-900 ml-4 min-w-[70px] text-right">
-                                     {(Number(it.price || 0) * Number(it.quantity || 1)).toLocaleString('pt-MZ')} MT
+                                     {(Number(it.price || 0) * Number(it.quantity || 1)).toLocaleString('pt-MZ')} {currency}
                                    </span>
                                 </div>
                              </div>
@@ -943,7 +944,7 @@ export default function Quotations() {
                              <div key={index} className="p-3 flex justify-between items-center text-xs">
                                 <div>
                                    <p className="font-black text-slate-900">{it.name}</p>
-                                   <p className="text-[10px] font-bold text-slate-400">{Number(it.price || 0).toLocaleString('pt-MZ')} MT x {it.quantity}</p>
+                                   <p className="text-[10px] font-bold text-slate-400">{Number(it.price || 0).toLocaleString('pt-MZ')} {currency} x {it.quantity}</p>
                                    {(() => {
                                      const prod = products.find(p => p.id === it.productId);
                                      if (prod) {
@@ -965,7 +966,7 @@ export default function Quotations() {
                                      return null;
                                    })()}
                                 </div>
-                                <span className="font-black text-slate-950">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} MT</span>
+                                <span className="font-black text-slate-950">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} {currency}</span>
                              </div>
                            ))
                          )}
@@ -980,15 +981,15 @@ export default function Quotations() {
                         <div className="border-t pt-4 space-y-2 text-xs">
                            <div className="flex justify-between font-medium">
                              <span>Subtotal Orçamento</span>
-                             <span>{computedSubtotal.toLocaleString('pt-MZ')} MT</span>
+                             <span>{computedSubtotal.toLocaleString('pt-MZ')} {currency}</span>
                            </div>
                            <div className="flex justify-between font-medium">
                              <span>IVA Incorporado (17%)</span>
-                             <span>{(computedSubtotal * 0.17).toLocaleString('pt-MZ')} MT</span>
+                             <span>{(computedSubtotal * 0.17).toLocaleString('pt-MZ')} {currency}</span>
                            </div>
                            <div className="flex justify-between items-center text-sm font-black text-slate-950 pt-2 border-t border-dashed">
                              <span>Total Convertido</span>
-                             <span className="text-base text-blue-600">{(computedSubtotal * 1.17).toLocaleString('pt-MZ')} MT</span>
+                             <span className="text-base text-blue-600">{(computedSubtotal * 1.17).toLocaleString('pt-MZ')} {currency}</span>
                            </div>
                         </div>
                       );
@@ -1026,7 +1027,7 @@ export default function Quotations() {
                         </div>
                         {approvalPaymentMethod === 'credit' && (
                           <p className="text-[10px] text-amber-600 font-bold">
-                            ⚠️ Isto aumentará o saldo devedor do cliente em {((editedItems.reduce((acc, current) => acc + (Number(current.price || 0) * Number(current.quantity || 1)), 0)) * 1.17).toLocaleString('pt-MZ')} MT e registará a Factura como Pendente no portal de cliente.
+                            ⚠️ Isto aumentará o saldo devedor do cliente em {((editedItems.reduce((acc, current) => acc + (Number(current.price || 0) * Number(current.quantity || 1)), 0)) * 1.17).toLocaleString('pt-MZ')} {currency} e registará a Factura como Pendente no portal de cliente.
                           </p>
                         )}
                      </div>
@@ -1043,9 +1044,9 @@ export default function Quotations() {
                            <div key={index} className="p-3 flex justify-between items-center text-xs">
                               <div>
                                  <p className="font-black text-slate-900">{it.name}</p>
-                                 <p className="text-[10px] font-bold text-slate-400">{Number(it.price || 0).toLocaleString('pt-MZ')} MT x {it.quantity}</p>
+                                 <p className="text-[10px] font-bold text-slate-400">{Number(it.price || 0).toLocaleString('pt-MZ')} {currency} x {it.quantity}</p>
                               </div>
-                              <span className="font-black text-slate-950">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} MT</span>
+                              <span className="font-black text-slate-950">{((it.price || 0) * (it.quantity || 1)).toLocaleString('pt-MZ')} {currency}</span>
                            </div>
                          ))}
                       </div>
@@ -1055,15 +1056,15 @@ export default function Quotations() {
                    <div className="border-t pt-4 space-y-2 text-xs">
                       <div className="flex justify-between font-medium">
                         <span>Subtotal Orçamento</span>
-                        <span>{Number(selectedQuotation.total || 0).toLocaleString('pt-MZ')} MT</span>
+                        <span>{Number(selectedQuotation.total || 0).toLocaleString('pt-MZ')} {currency}</span>
                       </div>
                       <div className="flex justify-between font-medium">
                         <span>IVA Incorporado (17%)</span>
-                        <span>{(Number(selectedQuotation.total || 0) * 0.17).toLocaleString('pt-MZ')} MT</span>
+                        <span>{(Number(selectedQuotation.total || 0) * 0.17).toLocaleString('pt-MZ')} {currency}</span>
                       </div>
                       <div className="flex justify-between items-center text-sm font-black text-slate-950 pt-2 border-t border-dashed">
                         <span>Total Convertido</span>
-                        <span className="text-base text-blue-600">{(Number(selectedQuotation.total || 0) * 1.17).toLocaleString('pt-MZ')} MT</span>
+                        <span className="text-base text-blue-600">{(Number(selectedQuotation.total || 0) * 1.17).toLocaleString('pt-MZ')} {currency}</span>
                       </div>
                    </div>
 

@@ -1917,6 +1917,7 @@ Equipa Técnica Sabush System`;
                <History className="text-blue-600" /> Logs de Atividade Globais da Plataforma
              </h2>
              <div className="bg-white rounded-[40px] shadow-sm border border-slate-100 overflow-hidden">
+               <div className="overflow-x-auto">
                 <table className="w-full text-left min-w-[800px]">
                   <thead>
                     <tr className="bg-slate-50/50 border-b border-slate-100">
@@ -1960,6 +1961,7 @@ Equipa Técnica Sabush System`;
                     ))}
                   </tbody>
                 </table>
+               </div>
              </div>
           </motion.div>
         )}

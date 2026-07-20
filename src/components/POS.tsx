@@ -5947,8 +5947,8 @@ export default function POS() {
 
       {/* ITEM OVERRIDE & MANUAL DISCOUNT MODAL */}
       {isItemOverrideModalOpen && overrideItem && (
-        <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <button 
               type="button"
               onClick={() => setIsItemOverrideModalOpen(false)}
@@ -6086,8 +6086,8 @@ export default function POS() {
 
       {/* GLOBAL CART DISCOUNT MODAL */}
       {isCartDiscountModalOpen && (
-        <div className="fixed inset-0 z-100 bg-[#02182E]/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 bg-[#02182E]/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto my-auto">
             <button 
               type="button"
               onClick={() => setIsCartDiscountModalOpen(false)}

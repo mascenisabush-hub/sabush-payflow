@@ -443,7 +443,7 @@ export default function CreditManagement() {
           timestamp: new Date().toISOString(),
           userEmail: profile?.email || 'Sistema',
           actionType: 'PAGAMENTO',
-          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} MT recebida e alocada.`
+          details: `Amortização de ${paymentForThisInvoice.toLocaleString('pt-MZ')} ${currency} recebida e alocada.`
         };
         const updatedAuditTrail = Array.isArray(inv.auditTrail) ? [...inv.auditTrail, auditLogEntry] : [auditLogEntry];
 
@@ -1532,12 +1532,12 @@ export default function CreditManagement() {
 
               <div className="flex justify-between font-bold text-slate-900 text-xs border-t border-dashed border-slate-200 pt-2 bg-emerald-50/50 p-1 rounded">
                 <span>VALOR PAGO:</span>
-                <span>{Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
+                <span>{Number(previewPayment.payment.amount || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}</span>
               </div>
               <div className="flex justify-between items-baseline pt-1">
                 <span className="text-red-500 font-bold uppercase text-[9px] tracking-wider">Dívida Restante:</span>
                 <span className="font-extrabold text-red-650 font-mono">
-                  {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT
+                  {Number(previewPayment.customerBalance || 0).toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} {currency}
                 </span>
               </div>
             </div>
