@@ -22,9 +22,43 @@ export default class ErrorBoundary extends React.Component<Props, State> {
     return { hasError: true, error };
   }
 
+  // Matches the family of errors browsers throw when a dynamically-imported
+  // module/chunk 404s — the hallmark of a stale deployment (the browser tab
+  // is still running an old JS bundle that references a chunk filename which
+  // no longer exists on the server after a new deploy overwrote it).
+  private static isStaleChunkError(error: Error | null): boolean {
+    if (!error) return false;
+    const msg = `${error.name || ''} ${error.message || ''}`.toLowerCase();
+    return (
+      msg.includes('failed to fetch dynamically imported module') ||
+      msg.includes('error loading dynamically imported module') ||
+      msg.includes('importing a module script failed') ||
+      msg.includes('chunkloaderror') ||
+      msg.includes('loading chunk') ||
+      msg.includes('unable to preload css')
+    );
+  }
+
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("ErrorBoundary caught an uncaught exception:", error, errorInfo);
     this.setState({ errorInfo });
+
+    // Auto-recover from stale-chunk errors: reload once per tab session instead
+    // of leaving the user stuck on a manual error screen. Genuine bugs (anything
+    // that doesn't match the stale-chunk signature) still show the manual UI below,
+    // so real errors remain visible and debuggable rather than being reload-looped.
+    if (ErrorBoundary.isStaleChunkError(error)) {
+      try {
+        const alreadyTried = sessionStorage.getItem('sabush_chunk_reload_attempted');
+        if (!alreadyTried) {
+          sessionStorage.setItem('sabush_chunk_reload_attempted', Date.now().toString());
+          console.warn('[ErrorBoundary] Stale chunk error detected, auto-reloading once:', error.message);
+          this.handleReload();
+        }
+      } catch (e) {
+        // sessionStorage unavailable (e.g. private browsing) — fall through to manual UI
+      }
+    }
   }
 
   private handleReload = () => {

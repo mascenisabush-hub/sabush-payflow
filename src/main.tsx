@@ -58,6 +58,25 @@ if (typeof window !== 'undefined') {
   };
 }
 
+// Auto-recover from stale deployment chunk errors: when a new version is deployed
+// while a tab is already open, a lazy-loaded route chunk (e.g. Dashboard-<hash>.js)
+// can 404 because the old hashed filename no longer exists on the server. Vite fires
+// this specific event for exactly that failure — reload once (guarded against loops
+// via sessionStorage) instead of showing the user an error screen.
+if (typeof window !== 'undefined') {
+  window.addEventListener('vite:preloadError', (event) => {
+    console.warn('[PWA] Stale chunk detected (vite:preloadError), attempting one auto-reload:', event);
+    const alreadyTried = sessionStorage.getItem('sabush_chunk_reload_attempted');
+    if (!alreadyTried) {
+      sessionStorage.setItem('sabush_chunk_reload_attempted', Date.now().toString());
+      event.preventDefault();
+      window.location.href = window.location.pathname + window.location.search + (window.location.search ? '&' : '?') + 'cb=' + Date.now();
+    }
+    // If we already tried once this session and it's still failing, let it surface
+    // to the ErrorBoundary instead of reload-looping forever.
+  });
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
