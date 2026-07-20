@@ -3960,13 +3960,13 @@ export default function POS() {
         </div>
       </div>
 
-      {/* MAIN CONTENT AREA: EXPANDED CART PANEL (Takes full width) */}
+{/* MAIN CONTENT AREA: EXPANDED CART PANEL (Takes full width) */}
       <div className="flex-1 flex flex-col overflow-hidden min-h-0 min-w-0 mt-1">
         
-        {/* EXPANDED TABBED CART PANEL - Cream themed background */}
+        {/* EXPANDED CART PANEL - Cream themed background. Mobile: tabbed. Desktop (md+): permanent split view. */}
         <div className="flex-1 bg-[#FAECE7]/20 rounded-3xl border border-blue-200 flex flex-col overflow-hidden shadow-sm font-sans relative">
           
-          {/* PERSISTENT SUMMARY STRIP (Always visible) */}
+{/* PERSISTENT SUMMARY STRIP (Always visible) */}
           <div className="bg-white px-3 py-1.5 flex items-center justify-between shrink-0 border-b border-blue-200 select-none">
             <div className="flex items-center gap-1.5">
               <ShoppingCart size={13} className="text-blue-600" />
@@ -3983,7 +3983,10 @@ export default function POS() {
             </div>
           </div>
 
-          {/* TAB HEADERS */}
+          
+          {/* MOBILE (below md): tab-switched view */}
+          <div className="md:hidden flex-1 flex flex-col min-h-0 overflow-hidden">
+{/* TAB HEADERS */}
           <div className="flex border-b border-blue-200 bg-blue-50 shrink-0">
             <button
               type="button"
@@ -4020,19 +4023,20 @@ export default function POS() {
             </button>
           </div>
 
-          {/* TAB CONTENT WITH MOTION */}
-          <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
-            <AnimatePresence mode="wait">
-              {activeCartTab === 'items' ? (
-                <motion.div
-                  key="items-tab"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 10 }}
-                  transition={{ duration: 0.15 }}
-                  className="flex-1 flex flex-col min-h-0 overflow-hidden"
-                >
-                  {/* Cart Actions Sub-Header (Suspender, Limpar) */}
+          
+            {/* TAB CONTENT WITH MOTION */}
+            <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative">
+              <AnimatePresence mode="wait">
+                {activeCartTab === 'items' ? (
+                  <motion.div
+                    key="items-tab"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex-1 flex flex-col min-h-0 overflow-hidden"
+                  >
+{/* Cart Actions Sub-Header (Suspender, Limpar) */}
                   <div className="px-3 py-1 bg-[#0C3A42]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
                     <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
                     <div className="flex items-center gap-1">
@@ -4117,7 +4121,8 @@ export default function POS() {
                     )}
                   </div>
 
-                  {/* PROCEED TO PAYMENT CTA BUTTON (Fixed at the bottom of the Items tab if cart has items) */}
+                  
+{/* PROCEED TO PAYMENT CTA BUTTON (Fixed at the bottom of the Items tab if cart has items) */}
                   {cart.length > 0 && (
                     <div className="p-1.5 bg-white border-t border-blue-200/50 shrink-0">
                       <button
@@ -4130,17 +4135,18 @@ export default function POS() {
                       </button>
                     </div>
                   )}
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="payment-tab"
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="flex-1 flex flex-col min-h-0 overflow-y-auto p-2 space-y-2 bg-blue-50/20"
-                >
-                  {/* Back to Items trigger button */}
+                
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="payment-tab"
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    transition={{ duration: 0.15 }}
+                    className="flex-1 flex flex-col min-h-0 overflow-y-auto p-2 space-y-2 bg-blue-50/20"
+                  >
+{/* Back to Items trigger button */}
                   <button
                     type="button"
                     onClick={() => setActiveCartTab('items')}
@@ -4149,7 +4155,8 @@ export default function POS() {
                     <span>⬅️</span> Voltar para Artigos
                   </button>
 
-                  {/* Breakdown details list */}
+                  
+{/* Breakdown details list */}
                   <div className="space-y-1 text-[11px] font-bold text-blue-900">
                     <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
                       <span>Artigos No Carrinho:</span>
@@ -4401,9 +4408,358 @@ export default function POS() {
                       {isProcessing ? 'A REGISTAR...' : `COBRAR — ${total.toLocaleString(undefined, { maximumFractionDigits: 1 })} MT`}
                     </button>
                   </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+
+          {/* DESKTOP (md+): permanent split view, cart always visible next to payment/total */}
+          <div className="hidden md:flex flex-1 min-h-0 overflow-hidden">
+            <div className="flex-[1.6] flex flex-col min-h-0 overflow-hidden border-r border-blue-200/60">
+{/* Cart Actions Sub-Header (Suspender, Limpar) */}
+                  <div className="px-3 py-1 bg-[#0C3A42]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
+                    <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
+                    <div className="flex items-center gap-1">
+                      {/* Suspended carts list button */}
+                      <button
+                        type="button"
+                        onClick={() => setIsSuspendedModalOpen(true)}
+                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#5C2310] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
+                        title="Ver vendas em espera"
+                      >
+                        <span>⏳ Em Espera</span>
+                        {suspendedCarts.length > 0 && (
+                          <span className="bg-amber-400 text-blue-950 text-[8px] font-black px-1 py-0.2 rounded-full leading-none animate-bounce">
+                            {suspendedCarts.length}
+                          </span>
+                        )}
+                      </button>
+
+                      {/* Put on hold button */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (cart.length === 0) {
+                            toast.error("O carrinho está vazio.");
+                            return;
+                          }
+                          setSuspenseCartLabel('');
+                          setIsSuspenseLabelModalOpen(true);
+                        }}
+                        disabled={cart.length === 0}
+                        className="px-2 py-1 bg-emerald-700 text-white hover:bg-emerald-850 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer border-none"
+                        title="Colocar venda em espera"
+                      >
+                        <span>➕ Suspender</span>
+                      </button>
+
+                      {/* Trash icon (🗑️) at the top right of this header to clear cart */}
+                      <button
+                        onClick={clearCart}
+                        disabled={cart.length === 0}
+                        title="Limpar de imediato toda a cesta"
+                        className="p-1 hover:bg-rose-100 text-blue-500 hover:text-rose-700 rounded-lg transition-all border border-transparent disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                      >
+                        <Trash2 size={12} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Column headers below cart header */}
+                  <div className="grid grid-cols-12 gap-1.5 px-3 py-1 bg-blue-100/60 border-b border-blue-200 select-none text-[10px] font-extrabold text-blue-800 uppercase tracking-wider shrink-0">
+                    <div className="col-span-5 text-left">PRODUTO</div>
+                    <div className="col-span-3 text-center">QTD</div>
+                    <div className="col-span-2 text-right">PREÇO</div>
+                    <div className="col-span-2 text-right">TOTAL</div>
+                  </div>
+
+                  {/* Scrollable Cart Items List */}
+                  <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
+                    {cart.length === 0 ? (
+                      <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
+                        <ShoppingCart size={32} className="text-[#B8791A] mb-2 opacity-80" />
+                        <span className="text-xs font-black tracking-widest text-blue-700 uppercase">CARRINHO VAZIO</span>
+                        <span className="text-[10px] text-blue-600 mt-1 max-w-[220px] text-center leading-normal font-medium">
+                          Pesquise um produto no campo de pesquisa superior para começar a compor a venda.
+                        </span>
+                      </div>
+                    ) : (
+                      cart.map((item) => (
+                        <CartItemRow
+                          key={`${item.id}-${item.selectedUnit}`}
+                          item={item}
+                          prices={getCartItemPricing(item)}
+                          updateCartQuantity={updateCartQuantity}
+                          handleRemoveClick={handleRemoveClick}
+                          onPriceClick={(clickedItem) => {
+                            setNumericKeypadItem(clickedItem);
+                            setNumericKeypadMode('price');
+                            setIsNumericKeypadOpen(true);
+                          }}
+                        />
+                      ))
+                    )}
+                  </div>
+
+                  
+            </div>
+            <div className="flex-1 max-w-[380px] min-w-[300px] flex flex-col min-h-0 overflow-y-auto p-2.5 space-y-2 bg-blue-50/20">
+{/* Breakdown details list */}
+                  <div className="space-y-1 text-[11px] font-bold text-blue-900">
+                    <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
+                      <span>Artigos No Carrinho:</span>
+                      <span className="font-black text-blue-950 font-mono">
+                        {cart.reduce((s, i) => s + i.quantity, 0).toLocaleString(undefined, { maximumFractionDigits: 3 })} un
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
+                      <span>Subtotal (sem IVA):</span>
+                      <span className="font-black text-blue-950 font-mono">
+                        {produtosSemIvaValue.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MT
+                      </span>
+                    </div>
+                    <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
+                      <span>Subtotal Geral (com IVA):</span>
+                      <span className="font-black text-blue-950 font-mono">
+                        {subtotal.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MT
+                      </span>
+                    </div>
+                    
+                    {/* Manual Global Discount Button */}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditCartDiscountType(cartDiscountType);
+                        setEditCartDiscountValue(cartDiscountValue.toString());
+                        setOverrideReason('');
+                        setIsCartDiscountModalOpen(true);
+                      }}
+                      className="w-full flex justify-between items-center bg-amber-50 hover:bg-amber-100/70 px-2.5 py-1.5 rounded-lg border border-amber-200/60 text-amber-950 text-[11px] font-extrabold transition-all cursor-pointer text-left shadow-xs border-none"
+                      title="Clique para gerir descontos globais do carrinho"
+                    >
+                      <span className="flex items-center gap-1 font-black uppercase tracking-wider text-[9.5px] text-amber-950">
+                        🏷️ Desconto Global: 
+                        {cartDiscountType !== 'none' && (
+                          <span className="font-mono text-[8.5px] px-1 bg-amber-200 text-amber-950 rounded font-black">
+                            {cartDiscountType === 'percent' ? `${cartDiscountValue}%` : 'Fixo'}
+                          </span>
+                        )}
+                      </span>
+                      <span className="font-black font-mono text-amber-950">
+                        {manualDiscount > 0 ? `-${manualDiscount.toLocaleString()} MT` : 'Adicionar Desconto'}
+                      </span>
+                    </button>
+
+                    <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
+                      <span>IVA Incluído ({userTaxValue}%):</span>
+                      <span className="font-black text-blue-950 font-mono">{ivaCalculated.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MT</span>
+                    </div>
+
+                    {/* PROMINENT GRAND TOTAL TO BE ULTRA VISIBLE */}
+                    <div className="flex justify-between items-center bg-white px-3 py-2.5 rounded-xl border border-blue-200 shadow-sm my-1.5 select-none">
+                      <span className="text-[11px] font-black uppercase tracking-wider text-blue-600">TOTAL A PAGAR:</span>
+                      <span className="font-mono text-base font-black text-black">
+                        {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Customer Debt details / Partial input elements */}
+                  {selectedCustomerId !== 'Walk-in' && selectedCust && saleMode !== 'dinheiro' && (
+                    <div className="bg-blue-50/50 border border-blue-150 p-2.5 rounded-lg text-[11px] font-sans space-y-2 text-left text-blue-900">
+                      {saleMode === 'credito' && (
+                        <div className="space-y-1">
+                          <span className="text-blue-600 font-extrabold uppercase text-[8px] tracking-widest block">Dívida provisória:</span>
+                          <div className="flex flex-col gap-1 text-[11px] font-mono text-blue-900 bg-blue-100/40 p-1.5 rounded">
+                            <div>Acréscimo: <b className="text-rose-600">+{total.toLocaleString()} MT</b></div>
+                            <div className="border-t border-blue-200/50 mt-1 pt-1">Futuro saldo total: <b className="text-amber-800">{(preSaleBalance + total).toLocaleString()} MT</b></div>
+                          </div>
+                        </div>
+                      )}
+
+                      {saleMode === 'parcial' && (
+                        <div className="space-y-2">
+                          <div className="space-y-1">
+                            <label className="block text-[8px] font-black tracking-widest text-blue-600 uppercase">Valor Pago Agora (Entrada):</label>
+                            <div className="flex gap-1.5">
+                              <div className="relative flex-1">
+                                <span className="absolute left-2 top-1/2 -translate-y-1/2 font-mono font-bold text-[9.5px] text-blue-500">MT</span>
+                                <input
+                                  type="number"
+                                  placeholder="Ex: 500"
+                                  value={partialAmountPaid}
+                                  onChange={(e) => setPartialAmountPaid(e.target.value)}
+                                  className="w-full bg-white border border-blue-200 rounded-lg pl-7 pr-1.5 py-1 font-mono text-xs font-bold text-blue-900 outline-none focus:border-blue-400 h-7 font-sans"
+                                />
+                              </div>
+                              <div className="flex gap-1 shrink-0">
+                                {[0.25, 0.5, 0.75].map((percent) => {
+                                  const calculatedFraction = Math.round(total * percent);
+                                  return (
+                                    <button
+                                      key={percent}
+                                      type="button"
+                                      onClick={() => setPartialAmountPaid(calculatedFraction.toString())}
+                                      className="bg-blue-50 border border-blue-200 hover:bg-blue-100 text-[9px] font-extrabold h-7 px-1 rounded transition-colors text-blue-800 cursor-pointer"
+                                    >
+                                      {percent * 100}%
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex justify-between items-center text-[10px] font-mono bg-blue-100/30 border border-blue-200 p-1.5 rounded-lg text-blue-800 leading-none">
+                            <div>Pago (Entrada): <span className="font-extrabold text-blue-950">{(Number(partialAmountPaid) || 0).toLocaleString()} MT</span></div>
+                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#B8791A]">{creditFired.toLocaleString()} MT</div></div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Loyalty Points controls */}
+                  {selectedCustomerId !== 'Walk-in' && selectedCust && (
+                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-150 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-sm">🪙</span>
+                          <div>
+                            <span className="text-blue-500 font-extrabold uppercase text-[8px] tracking-widest block leading-none">Pontos de Fidelização</span>
+                            <span className="font-bold text-xs text-amber-800 font-mono mt-0.5 block leading-none">
+                              {(selectedCust.loyaltyPoints || 0).toLocaleString()} pts
+                              <span className="text-[9px] font-bold text-blue-500 ml-1.5 font-sans">
+                                ({(selectedCust.loyaltyPoints || 0) >= 1000 ? "👑 Platina" :
+                                  (selectedCust.loyaltyPoints || 0) >= 500 ? "🌟 Ouro" :
+                                  (selectedCust.loyaltyPoints || 0) >= 100 ? "Prata ⭐" : "Bronze"}
+                                )
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <span className="text-blue-500 font-extrabold uppercase text-[7.5px] tracking-widest block leading-none">A Acumular</span>
+                          <span className="font-bold text-emerald-600 font-mono text-[10px] mt-0.5 block leading-none">
+                            +{Math.floor((total - (saleMode === 'credito' ? total : (saleMode === 'parcial' ? Math.max(0, total - (Number(partialAmountPaid) || 0)) : 0))) / 100)} pts
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Loyalty Redeem option */}
+                      {(selectedCust.loyaltyPoints || 0) > 0 && (
+                        <div className="pt-1.5 border-t border-blue-100 space-y-1">
+                          <div className="flex justify-between items-center">
+                            <span className="text-blue-700 font-bold text-[9.5px]">Resgatar para Desconto:</span>
+                            {redeemedPoints > 0 && (
+                              <span className="text-rose-600 font-black font-mono text-[10px]">
+                                -{loyaltyDiscount.toLocaleString()} MT
+                              </span>
+                            )}
+                          </div>
+                          <div className="flex gap-1.5">
+                            <input
+                              type="number"
+                              min="0"
+                              max={Math.min(selectedCust.loyaltyPoints || 0, Math.floor(subtotal * 10))}
+                              placeholder="Quantidade de pontos"
+                              value={redeemedPoints || ''}
+                              onChange={(e) => {
+                                const val = Math.max(0, parseInt(e.target.value) || 0);
+                                const maxRedeem = Math.min(selectedCust.loyaltyPoints || 0, Math.floor(subtotal * 10));
+                                setRedeemedPoints(Math.min(val, maxRedeem));
+                              }}
+                              className="w-full bg-white border border-blue-200 rounded-lg px-2 py-1 font-mono text-xs font-bold text-blue-900 outline-none focus:border-blue-400 h-7"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (redeemedPoints > 0) {
+                                  setRedeemedPoints(0);
+                                } else {
+                                  const maxRedeem = Math.min(selectedCust.loyaltyPoints || 0, Math.floor(subtotal * 10));
+                                  setRedeemedPoints(maxRedeem);
+                                }
+                              }}
+                              className={cn(
+                                "px-2 py-1 text-[8.5px] font-black uppercase tracking-wider rounded-lg border transition-all shrink-0 cursor-pointer h-7 leading-none flex items-center justify-center",
+                                redeemedPoints > 0
+                                  ? "bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100"
+                                  : "bg-amber-500 border-amber-600 text-blue-950 hover:bg-amber-450"
+                              )}
+                            >
+                              {redeemedPoints > 0 ? "Limpar" : "Máximo"}
+                            </button>
+                          </div>
+                          <p className="text-[8.5px] text-blue-500 font-medium leading-tight">
+                            Proporção: 10 pontos = 1 MT de desconto. Desconto máximo de 100% da compra.
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Payment Methods Grid */}
+                  {saleMode !== 'credito' && (
+                    <div className="space-y-1 text-left border-t border-blue-200/50 pt-2">
+                      <label className="block text-[8px] font-black uppercase tracking-widest text-blue-600">Método de Liquidação:</label>
+                      <div className="grid grid-cols-2 gap-1">
+                        {paymentMethodsList.filter(m => m.id !== 'card').map(method => {
+                          const isSelected = paymentMethod === method.id;
+                          return (
+                            <button
+                              key={method.id}
+                              type="button"
+                              onClick={() => setPaymentMethod(method.id)}
+                              className={cn(
+                                "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
+                                isSelected 
+                                  ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                                  : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
+                              )}
+                            >
+                              <span className="text-xs select-none shrink-0">{method.icon}</span>
+                              <span className="truncate leading-none">{method.label}</span>
+                            </button>
+                          );
+                        })}
+                        {/* Cartao POS (multibanco) spanning full-width */}
+                        <button
+                          type="button"
+                          onClick={() => setPaymentMethod('card')}
+                          className={cn(
+                            "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
+                            paymentMethod === 'card'
+                              ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                              : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
+                          )}
+                        >
+                          <span className="text-xs select-none">💳</span>
+                          <span>Cartão POS (Multibanco)</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Submit checkout CTA button (Cobrar) */}
+                  <div className="pt-1.5 border-t border-blue-200/50">
+                    <button
+                      onClick={checkOutTransaction}
+                      disabled={isProcessing || cart.length === 0}
+                      className="w-full py-2 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                    >
+                      {isProcessing ? (
+                        <Loader2 size={13} className="animate-spin text-white" />
+                      ) : (
+                        <CreditCard size={13} className="text-white" />
+                      )}
+                      {isProcessing ? 'A REGISTAR...' : `COBRAR — ${total.toLocaleString(undefined, { maximumFractionDigits: 1 })} MT`}
+                    </button>
+                  </div>
+                
+            </div>
           </div>
 
         </div>
