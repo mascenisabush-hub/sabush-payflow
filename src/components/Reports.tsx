@@ -16,6 +16,161 @@ import { generateMonthlyReportPDF } from '../lib/pdfGenerator';
 import { offlineDb } from '../lib/offlineDb';
 import { formatSystemCurrency, formatCurrencyValue } from '../lib/currencies';
 
+// Extracted as a real component (was previously an inline IIFE calling hooks directly
+// inside a conditionally-rendered JSX block). Hooks called inside an IIFE are attached
+// to the *parent* component's hook list, not their own — so when the surrounding
+// {activeTab === 'audit' && ...} block toggled on/off (switching Reports tabs), the
+// number of hooks called by Reports changed between renders, triggering React error
+// #310 ("Rendered fewer hooks than expected"). A real component keeps its own,
+// consistent hook list regardless of when Reports re-renders.
+function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string }) {
+  const [logs, setLogs] = useState<any[]>([]);
+  const [isLoadingLogs, setIsLoadingLogs] = useState(true);
+  const [auditSearch, setAuditSearch] = useState('');
+  const [auditTypeFilter, setAuditTypeFilter] = useState('all');
+
+  useEffect(() => {
+    if (!profile?.businessId || activeTab !== 'audit') return;
+    setIsLoadingLogs(true);
+    
+    const logsRef = collection(db, `businesses/${profile.businessId}/activity_logs`);
+    const unsub = onSnapshot(logsRef, (snapshot: any) => {
+      const list: any[] = [];
+      snapshot.forEach((doc: any) => {
+        list.push({ id: doc.id, ...doc.data() });
+      });
+      // Sort by timestamp desc
+      list.sort((a, b) => {
+        const tA = a.timestamp?.seconds || 0;
+        const tB = b.timestamp?.seconds || 0;
+        return tB - tA;
+      });
+      setLogs(list);
+      setIsLoadingLogs(false);
+    }, (err) => {
+      console.error("Error loading activity logs:", err);
+      setIsLoadingLogs(false);
+    });
+
+    return () => unsub();
+  }, [activeTab, profile?.businessId]);
+
+  const filteredLogs = logs.filter(l => {
+    const matchSearch = (l.userEmail || '').toLowerCase().includes(auditSearch.toLowerCase()) ||
+                        (l.details || '').toLowerCase().includes(auditSearch.toLowerCase()) ||
+                        (l.actionType || '').toLowerCase().includes(auditSearch.toLowerCase());
+    
+    if (!matchSearch) return false;
+
+    if (auditTypeFilter !== 'all') {
+      return l.actionType === auditTypeFilter;
+    }
+    return true;
+  });
+
+  return (
+    <div className="bg-white border border-[#E9E1D2] rounded-[40px] p-8 space-y-6 shadow-sm">
+      <div>
+        <h3 className="text-xl font-black tracking-tight text-[#1D1510] flex items-center gap-2">
+          <span>🛡️ Livro de Registo de Auditoria de Atividades</span>
+        </h3>
+        <p className="text-xs text-[#8B735F] mt-1 font-semibold">
+          Registo em tempo real das ações administrativas de todos os utilizadores no seu negócio para máxima transparência.
+        </p>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#FAF7F2] p-4 rounded-3xl border border-[#E9E1D2]">
+        <div className="relative flex-1">
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#8B735F]" />
+          <input
+            type="text"
+            value={auditSearch}
+            onChange={(e) => setAuditSearch(e.target.value)}
+            placeholder="Pesquisar por operador, ação ou descrição..."
+            className="w-full pl-10 pr-4 py-2 bg-white border border-[#E9E1D2] rounded-xl text-xs text-[#1D1510] placeholder-[#8B735F]/60 focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { id: 'all', label: 'Todos' },
+            { id: 'CREATE_PRODUCT', label: 'Criação Prod ➕' },
+            { id: 'UPDATE_PRODUCT', label: 'Modificação Prod 📝' },
+            { id: 'DELETE_PRODUCT', label: 'Eliminação Prod ❌' },
+            { id: 'UPDATE_STOCK', label: 'Ajuste Stock 🛠️' },
+            { id: 'AUTH_SUCCESS', label: 'Autenticação 🔐' }
+          ].map(f => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setAuditTypeFilter(f.id)}
+              className={cn(
+                "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer",
+                auditTypeFilter === f.id
+                  ? "bg-[#1D1510] text-white shadow-sm"
+                  : "bg-white text-[#8B735F] hover:text-[#1D1510] border border-[#E9E1D2]"
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Timeline */}
+      {isLoadingLogs ? (
+        <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
+          <Loader2 className="w-8 h-8 text-[#1D1510] animate-spin" />
+          <p className="text-xs text-[#8B735F] font-black uppercase tracking-widest">A carregar registos...</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {filteredLogs.map(l => {
+            const dateStr = l.timestamp 
+              ? new Date(l.timestamp.seconds * 1000).toLocaleString('pt-PT') 
+              : 'A processar...';
+
+            return (
+              <div key={l.id} className="flex items-center justify-between gap-4 bg-white border border-slate-100 hover:border-slate-200 p-4 rounded-2xl transition-all shadow-xs">
+                <div className="flex items-center gap-3">
+                  <div className={cn(
+                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-xs font-mono font-black border",
+                    l.actionType?.includes('CREATE') ? "bg-emerald-50 text-emerald-600 border-emerald-100" :
+                    l.actionType?.includes('DELETE') ? "bg-rose-50 text-rose-600 border-rose-100" :
+                    l.actionType?.includes('UPDATE') ? "bg-blue-50 text-blue-600 border-blue-100" : "bg-amber-50 text-amber-600 border-amber-100"
+                  )}>
+                    {l.actionType?.substring(0, 3)}
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-800 leading-tight">{l.details}</h4>
+                    <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-400 font-mono">
+                      <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 border border-slate-200 font-black uppercase tracking-wider">
+                        {l.actionType}
+                      </span>
+                      <span>•</span>
+                      <span>Operador: <strong>{l.userEmail || 'Desconhecido'}</strong></span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right text-[10px] text-slate-400 font-mono">
+                  {dateStr}
+                </div>
+              </div>
+            );
+          })}
+
+          {filteredLogs.length === 0 && (
+            <div className="py-20 text-center text-slate-400 bg-[#FAF7F2] rounded-3xl border border-[#E9E1D2]">
+              <History size={42} className="mx-auto mb-3 opacity-20" />
+              <p className="text-xs uppercase font-black tracking-widest text-[#8B735F]">Nenhuma atividade registada.</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Reports() {
   const { profile, businessData } = useAuth();
   const currency = businessData?.currency || 'MZN';
@@ -879,153 +1034,7 @@ export default function Reports() {
           exit={{ opacity: 0, y: -15 }}
           className="space-y-6 animate-in fade-in duration-300"
         >
-          {(() => {
-            const [logs, setLogs] = useState<any[]>([]);
-            const [isLoadingLogs, setIsLoadingLogs] = useState(true);
-            const [auditSearch, setAuditSearch] = useState('');
-            const [auditTypeFilter, setAuditTypeFilter] = useState('all');
-
-            useEffect(() => {
-              if (!profile?.businessId || activeTab !== 'audit') return;
-              setIsLoadingLogs(true);
-              
-              const logsRef = collection(db, `businesses/${profile.businessId}/activity_logs`);
-              const unsub = onSnapshot(logsRef, (snapshot: any) => {
-                const list: any[] = [];
-                snapshot.forEach((doc: any) => {
-                  list.push({ id: doc.id, ...doc.data() });
-                });
-                // Sort by timestamp desc
-                list.sort((a, b) => {
-                  const tA = a.timestamp?.seconds || 0;
-                  const tB = b.timestamp?.seconds || 0;
-                  return tB - tA;
-                });
-                setLogs(list);
-                setIsLoadingLogs(false);
-              }, (err) => {
-                console.error("Error loading activity logs:", err);
-                setIsLoadingLogs(false);
-              });
-
-              return () => unsub();
-            }, [activeTab]);
-
-            const filteredLogs = logs.filter(l => {
-              const matchSearch = (l.userEmail || '').toLowerCase().includes(auditSearch.toLowerCase()) ||
-                                  (l.details || '').toLowerCase().includes(auditSearch.toLowerCase()) ||
-                                  (l.actionType || '').toLowerCase().includes(auditSearch.toLowerCase());
-              
-              if (!matchSearch) return false;
-
-              if (auditTypeFilter !== 'all') {
-                return l.actionType === auditTypeFilter;
-              }
-              return true;
-            });
-
-            return (
-              <div className="bg-white border border-[#E9E1D2] rounded-[40px] p-8 space-y-6 shadow-sm">
-                <div>
-                  <h3 className="text-xl font-black tracking-tight text-[#1D1510] flex items-center gap-2">
-                    <span>🛡️ Livro de Registo de Auditoria de Atividades</span>
-                  </h3>
-                  <p className="text-xs text-[#8B735F] mt-1 font-semibold">
-                    Registo em tempo real das ações administrativas de todos os utilizadores no seu negócio para máxima transparência.
-                  </p>
-                </div>
-
-                {/* Filters */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#FAF7F2] p-4 rounded-3xl border border-[#E9E1D2]">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#8B735F]" />
-                    <input
-                      type="text"
-                      value={auditSearch}
-                      onChange={(e) => setAuditSearch(e.target.value)}
-                      placeholder="Pesquisar por operador, ação ou descrição..."
-                      className="w-full pl-10 pr-4 py-2 bg-white border border-[#E9E1D2] rounded-xl text-xs text-[#1D1510] placeholder-[#8B735F]/60 focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {[
-                      { id: 'all', label: 'Todos' },
-                      { id: 'CREATE_PRODUCT', label: 'Criação Prod ➕' },
-                      { id: 'UPDATE_PRODUCT', label: 'Modificação Prod 📝' },
-                      { id: 'DELETE_PRODUCT', label: 'Eliminação Prod ❌' },
-                      { id: 'UPDATE_STOCK', label: 'Ajuste Stock 🛠️' },
-                      { id: 'AUTH_SUCCESS', label: 'Autenticação 🔐' }
-                    ].map(f => (
-                      <button
-                        key={f.id}
-                        type="button"
-                        onClick={() => setAuditTypeFilter(f.id)}
-                        className={cn(
-                          "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer",
-                          auditTypeFilter === f.id
-                            ? "bg-[#1D1510] text-white shadow-sm"
-                            : "bg-white text-[#8B735F] hover:text-[#1D1510] border border-[#E9E1D2]"
-                        )}
-                      >
-                        {f.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Timeline */}
-                {isLoadingLogs ? (
-                  <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-                    <Loader2 className="w-8 h-8 text-[#1D1510] animate-spin" />
-                    <p className="text-xs text-[#8B735F] font-black uppercase tracking-widest">A carregar registos...</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {filteredLogs.map(l => {
-                      const dateStr = l.timestamp 
-                        ? new Date(l.timestamp.seconds * 1000).toLocaleString('pt-PT') 
-                        : 'A processar...';
-
-                      return (
-                        <div key={l.id} className="flex items-center justify-between gap-4 bg-white border border-slate-100 hover:border-slate-200 p-4 rounded-2xl transition-all shadow-xs">
-                          <div className="flex items-center gap-3">
-                            <div className={cn(
-                              "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-xs font-mono font-black border",
-                              l.actionType?.includes('CREATE') ? "bg-emerald-50 text-emerald-600 border-emerald-100" :
-                              l.actionType?.includes('DELETE') ? "bg-rose-50 text-rose-600 border-rose-100" :
-                              l.actionType?.includes('UPDATE') ? "bg-blue-50 text-blue-600 border-blue-100" : "bg-amber-50 text-amber-600 border-amber-100"
-                            )}>
-                              {l.actionType?.substring(0, 3)}
-                            </div>
-                            <div className="space-y-0.5">
-                              <h4 className="text-xs font-black text-slate-800 leading-tight">{l.details}</h4>
-                              <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-400 font-mono">
-                                <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 border border-slate-200 font-black uppercase tracking-wider">
-                                  {l.actionType}
-                                </span>
-                                <span>•</span>
-                                <span>Operador: <strong>{l.userEmail || 'Desconhecido'}</strong></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-right text-[10px] text-slate-400 font-mono">
-                            {dateStr}
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                    {filteredLogs.length === 0 && (
-                      <div className="py-20 text-center text-slate-400 bg-[#FAF7F2] rounded-3xl border border-[#E9E1D2]">
-                        <History size={42} className="mx-auto mb-3 opacity-20" />
-                        <p className="text-xs uppercase font-black tracking-widest text-[#8B735F]">Nenhuma atividade registada.</p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })()}
+          <AuditLogPanel profile={profile} activeTab={activeTab} />
         </motion.div>
       )}
     </div>

@@ -310,6 +310,398 @@ interface InventoryProps {
   onActionHandled?: () => void;
 }
 
+// Extracted as a real component (was previously an inline IIFE calling hooks directly
+// inside a conditionally-rendered JSX block). Hooks called inside an IIFE are attached
+// to the *parent* component's hook list, not their own — so when the surrounding
+// {activeTab === 'validade' && ...} block toggled on/off, the number of hooks called
+// by Inventory changed between renders, triggering React error #310 ("Rendered fewer
+// hooks than expected"). Making this a real component gives it its own, consistent
+// hook list regardless of when Inventory re-renders.
+function BatchValidityList({ products, profile, addStockMovement, setPromoProd, setShowPromoModal }: {
+  products: any[];
+  profile: any;
+  addStockMovement: (productId: string, productName: string, qtyChange: number, type: string, reference: string) => Promise<void>;
+  setPromoProd: (p: any) => void;
+  setShowPromoModal: (v: boolean) => void;
+}) {
+  const [valSearch, setValSearch] = useState('');
+  const [valFilter, setValFilter] = useState<'all' | 'expired' | 'critical' | 'warning' | 'safe'>('all');
+
+  const list: any[] = [];
+  products.forEach(p => {
+    const recBatches = getReconciledBatches(p.batches || [], p.stockLevel || 0);
+    recBatches.forEach(b => {
+      list.push({ product: p, ...b });
+    });
+  });
+
+  const today = new Date();
+  const date30 = new Date();
+  date30.setDate(today.getDate() + 30);
+  const date90 = new Date();
+  date90.setDate(today.getDate() + 90);
+
+  const filteredBatches = list.filter(b => {
+    const matchSearch = b.product.name.toLowerCase().includes(valSearch.toLowerCase()) || 
+                        (b.batchNumber || '').toLowerCase().includes(valSearch.toLowerCase());
+    
+    if (!matchSearch) return false;
+
+    const expDate = new Date(b.expiryDate);
+    if (valFilter === 'expired') {
+      return expDate < today;
+    } else if (valFilter === 'critical') {
+      return expDate >= today && expDate <= date30;
+    } else if (valFilter === 'warning') {
+      return expDate > date30 && expDate <= date90;
+    } else if (valFilter === 'safe') {
+      return expDate > date90;
+    }
+    return true;
+  });
+
+  filteredBatches.sort((a, b) => new Date(a.expiryDate).getTime() - new Date(b.expiryDate).getTime());
+
+  const handleDirectBatchQuebra = async (batchItem: any) => {
+    if (!profile?.businessId) return;
+    const prod = batchItem.product;
+    const qtyVal = Number(batchItem.qty) || 0;
+    
+    const confirmAbate = window.confirm(
+      `Deseja abater de imediato todas as ${qtyVal} unidades do lote "${batchItem.batchNumber}" do produto "${prod.name}" como perda por expiração?\n\nEsta operação é irreversível.`
+    );
+    if (!confirmAbate) return;
+
+    const loadingId = toast.loading("A processar abate de stock...");
+    try {
+      const { addDoc, collection, doc, updateDoc, serverTimestamp } = await import('firebase/firestore');
+
+      const currentStock = Number(prod.stockLevel) || 0;
+      const newStock = Math.max(0, currentStock - qtyVal);
+      
+      const updatedBatches = (prod.batches || []).map((b: any) => {
+        if (b.batchNumber === batchItem.batchNumber && b.expiryDate === batchItem.expiryDate) {
+          return { ...b, qty: 0 };
+        }
+        return b;
+      }).filter((b: any) => (Number(b.qty) || 0) > 0);
+
+      const quebraPayload = {
+        businessId: profile.businessId,
+        productId: prod.id,
+        productName: prod.name,
+        qty: qtyVal,
+        unit: 'un',
+        reason: 'expired',
+        notes: `Abate automático de lote vencido/próximo do vencimento (${batchItem.batchNumber})`,
+        reportedBy: profile.displayName || 'Utilizador',
+        reportedByEmail: profile.email || '',
+        createdAt: serverTimestamp()
+      };
+      await addDoc(collection(db, `businesses/${profile.businessId}/quebras`), quebraPayload);
+
+      await updateDoc(doc(db, `businesses/${profile.businessId}/products`, prod.id), {
+        stockLevel: newStock,
+        stockUn: newStock,
+        batches: updatedBatches,
+        updatedAt: serverTimestamp()
+      });
+
+      await addStockMovement(
+        prod.id,
+        prod.name,
+        -qtyVal,
+        'quebra',
+        `Lote Vencido (${batchItem.batchNumber})`
+      );
+
+      toast.success("Abate de lote registado com sucesso!", { id: loadingId });
+    } catch (err: any) {
+      console.error(err);
+      toast.error(`Falha ao abater lote: ${err.message || err}`, { id: loadingId });
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      {/* Search and Filters */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+        <div className="relative flex-1">
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            value={valSearch}
+            onChange={(e) => setValSearch(e.target.value)}
+            placeholder="Pesquisar por produto ou lote..."
+            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { id: 'all', label: 'Todos' },
+            { id: 'expired', label: 'Vencidos 🛑' },
+            { id: 'critical', label: 'Críticos ⚠️' },
+            { id: 'warning', label: 'Alerta ⏳' },
+            { id: 'safe', label: 'Seguros ✅' }
+          ].map(f => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setValFilter(f.id as any)}
+              className={cn(
+                "px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer",
+                valFilter === f.id
+                  ? "bg-slate-900 text-white shadow-sm"
+                  : "bg-white text-slate-500 hover:text-slate-800 border border-slate-200"
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Batches Grid */}
+      <div className="grid gap-4 md:grid-cols-2">
+        {filteredBatches.map((b, idx) => {
+          const expDate = new Date(b.expiryDate);
+          const diffTime = expDate.getTime() - today.getTime();
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          const isExpired = diffDays < 0;
+
+          let statusBadge = '';
+          let statusBg = '';
+          if (isExpired) {
+            statusBadge = `Vencido há ${Math.abs(diffDays)} d`;
+            statusBg = 'bg-rose-50 text-rose-700 border border-rose-100';
+          } else if (diffDays <= 30) {
+            statusBadge = `Expira em ${diffDays} d`;
+            statusBg = 'bg-amber-50 text-amber-700 border border-amber-100';
+          } else if (diffDays <= 90) {
+            statusBadge = `Expira em ${diffDays} d`;
+            statusBg = 'bg-yellow-50 text-yellow-700 border border-yellow-100';
+          } else {
+            statusBadge = `Seguro (${diffDays} d)`;
+            statusBg = 'bg-emerald-50 text-emerald-700 border border-emerald-100';
+          }
+
+          return (
+            <div key={`${b.product.id}-${b.batchNumber}-${idx}`} className="bg-white border border-slate-100 rounded-2xl p-5 flex flex-col justify-between gap-4 shadow-sm hover:border-slate-200 transition-all">
+              <div className="space-y-3">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="text-sm font-black text-slate-900 tracking-tight">{b.product.name}</h4>
+                    <span className="text-[10px] text-slate-400 font-mono">SKU: {b.product.sku || 'N/A'}</span>
+                  </div>
+                  <span className={cn("px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest leading-none", statusBg)}>
+                    {statusBadge}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 font-mono text-xs">
+                  <div className="space-y-0.5">
+                    <span className="text-[9px] text-slate-400 uppercase">Lote</span>
+                    <div className="text-slate-800 font-bold">{b.batchNumber || 'SEM LOTE'}</div>
+                  </div>
+                  <div className="space-y-0.5">
+                    <span className="text-[9px] text-slate-400 uppercase">Quantidade</span>
+                    <div className="text-slate-800 font-bold">{b.qty} Un</div>
+                  </div>
+                  <div className="space-y-0.5 col-span-2">
+                    <span className="text-[9px] text-slate-400 uppercase">Data de Validade</span>
+                    <div className="text-slate-800 font-bold">{new Date(b.expiryDate).toLocaleDateString('pt-PT')}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center gap-2 pt-2 border-t border-dashed border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => handleDirectBatchQuebra(b)}
+                  className="flex-1 py-2 bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 cursor-pointer text-center"
+                >
+                  Abater Stock
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPromoProd(b.product);
+                    setShowPromoModal(true);
+                  }}
+                  className="flex-1 py-2 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-600 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 cursor-pointer text-center"
+                >
+                  Lançar Promo
+                </button>
+              </div>
+            </div>
+          );
+        })}
+
+        {filteredBatches.length === 0 && (
+          <div className="col-span-2 py-16 text-center text-slate-400 bg-slate-50 rounded-2xl border border-slate-100">
+            <Package size={42} className="mx-auto mb-3 opacity-20 text-slate-650" />
+            <p className="text-xs uppercase font-black tracking-widest">Nenhum lote correspondente encontrado.</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// Extracted for the same reason as BatchValidityList above — hooks were previously
+// called inside an IIFE inside {activeTab === 'movimentos' && ...}, which changed
+// Inventory's hook count between renders and triggered React error #310.
+function StockMovementsLedger({ profile, activeTab }: { profile: any; activeTab: string }) {
+  const [movs, setMovs] = useState<any[]>([]);
+  const [isLoadingMovs, setIsLoadingMovs] = useState(true);
+  const [movSearch, setMovSearch] = useState('');
+  const [movTypeFilter, setMovTypeFilter] = useState('all');
+
+  useEffect(() => {
+    if (!profile?.businessId || activeTab !== 'movimentos') return;
+    setIsLoadingMovs(true);
+    
+    const movRef = collection(db, `businesses/${profile.businessId}/stock_movements`);
+    const q = query(movRef, orderBy('timestamp', 'desc'), limit(150));
+
+    const unsub = onSnapshot(q, (snapshot: any) => {
+      const list: any[] = [];
+      snapshot.forEach((doc: any) => {
+        list.push({ id: doc.id, ...doc.data() });
+      });
+      setMovs(list);
+      setIsLoadingMovs(false);
+    }, (err: any) => {
+      console.error("Failed to load movements:", err);
+      setIsLoadingMovs(false);
+    });
+
+    return () => unsub();
+  }, [activeTab, profile?.businessId]);
+
+  const filteredMovs = movs.filter(m => {
+    const matchSearch = (m.productName || '').toLowerCase().includes(movSearch.toLowerCase()) ||
+                        (m.reference || '').toLowerCase().includes(movSearch.toLowerCase());
+    
+    if (!matchSearch) return false;
+
+    if (movTypeFilter !== 'all') {
+      return m.type === movTypeFilter;
+    }
+    return true;
+  });
+
+  return (
+    <div className="bg-white border border-slate-100 rounded-3xl p-6 space-y-6 shadow-sm">
+      <div>
+        <h3 className="text-lg font-black tracking-tight text-slate-950 flex items-center gap-2">
+          <span>📋 Livro de Razão de Movimentos de Stock</span>
+        </h3>
+        <p className="text-xs text-slate-500 mt-1">
+          Audite todas as entradas e saídas de stock do inventário com referência, operadores e carimbo de data/hora.
+        </p>
+      </div>
+
+      {/* Filters */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+        <div className="relative flex-1">
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            value={movSearch}
+            onChange={(e) => setMovSearch(e.target.value)}
+            placeholder="Pesquisar por produto ou referência..."
+            className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none"
+          />
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            { id: 'all', label: 'Todos' },
+            { id: 'manual', label: 'Ajuste Manual 🛠️' },
+            { id: 'sale', label: 'Venda Fatura 🧾' },
+            { id: 'pos', label: 'Venda POS 🛒' },
+            { id: 'purchase', label: 'Compra/PO 📦' },
+            { id: 'quebra', label: 'Perda/Quebra ⚠️' }
+          ].map(f => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setMovTypeFilter(f.id)}
+              className={cn(
+                "px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer",
+                movTypeFilter === f.id
+                  ? "bg-slate-900 text-white shadow-sm"
+                  : "bg-white text-slate-500 hover:text-slate-800 border border-slate-200"
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Timeline */}
+      {isLoadingMovs ? (
+        <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
+          <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+          <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">A carregar registos...</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {filteredMovs.map(m => {
+            const isPositive = m.qtyChange > 0;
+            const dateStr = m.timestamp 
+              ? new Date(m.timestamp.seconds * 1000).toLocaleString('pt-PT') 
+              : 'A processar...';
+
+            return (
+              <div key={m.id} className="flex items-center justify-between gap-4 bg-white border border-slate-100 hover:border-slate-200 p-4 rounded-2xl transition-all shadow-sm">
+                <div className="flex items-center gap-3">
+                  <div className={cn(
+                    "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-xs font-mono border",
+                    isPositive 
+                      ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
+                      : "bg-rose-50 text-rose-600 border-rose-100"
+                  )}>
+                    {isPositive ? `+${m.qtyChange}` : m.qtyChange}
+                  </div>
+                  <div className="space-y-0.5">
+                    <h4 className="text-xs font-black text-slate-800 leading-tight">{m.productName}</h4>
+                    <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-400 font-mono">
+                      <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 border border-slate-200 font-black uppercase tracking-wider">
+                        {m.type === 'manual' ? '🛠️ AJUSTE' : 
+                         m.type === 'sale' ? '🧾 VENDA' : 
+                         m.type === 'pos' ? '🛒 POS' : 
+                         m.type === 'purchase' ? '📦 COMPRA' : 
+                         m.type === 'quebra' ? '⚠️ PERDA' : m.type.toUpperCase()}
+                      </span>
+                      <span>•</span>
+                      <span>Ref: <strong>{m.reference}</strong></span>
+                      <span>•</span>
+                      <span>Operador: <strong>{m.reportedBy}</strong></span>
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right text-[10px] text-slate-400 font-mono">
+                  {dateStr}
+                </div>
+              </div>
+            );
+          })}
+
+          {filteredMovs.length === 0 && (
+            <div className="py-20 text-center text-slate-400 bg-slate-50 rounded-2xl border border-slate-100">
+              <History size={42} className="mx-auto mb-3 opacity-20" />
+              <p className="text-xs uppercase font-black tracking-widest">Nenhuma movimentação de stock registada.</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Inventory({ initialAction, onActionHandled }: InventoryProps = {}) {
   const { profile, businessData } = useAuth();
   const { t } = useTranslation();
@@ -8560,231 +8952,13 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             })()}
 
             {/* Local Batch List Component */}
-            {(() => {
-              const [valSearch, setValSearch] = useState('');
-              const [valFilter, setValFilter] = useState<'all' | 'expired' | 'critical' | 'warning' | 'safe'>('all');
-
-              const list: any[] = [];
-              products.forEach(p => {
-                const recBatches = getReconciledBatches(p.batches || [], p.stockLevel || 0);
-                recBatches.forEach(b => {
-                  list.push({ product: p, ...b });
-                });
-              });
-
-              const today = new Date();
-              const date30 = new Date();
-              date30.setDate(today.getDate() + 30);
-              const date90 = new Date();
-              date90.setDate(today.getDate() + 90);
-
-              const filteredBatches = list.filter(b => {
-                const matchSearch = b.product.name.toLowerCase().includes(valSearch.toLowerCase()) || 
-                                    (b.batchNumber || '').toLowerCase().includes(valSearch.toLowerCase());
-                
-                if (!matchSearch) return false;
-
-                const expDate = new Date(b.expiryDate);
-                if (valFilter === 'expired') {
-                  return expDate < today;
-                } else if (valFilter === 'critical') {
-                  return expDate >= today && expDate <= date30;
-                } else if (valFilter === 'warning') {
-                  return expDate > date30 && expDate <= date90;
-                } else if (valFilter === 'safe') {
-                  return expDate > date90;
-                }
-                return true;
-              });
-
-              filteredBatches.sort((a, b) => new Date(a.expiryDate).getTime() - new Date(b.expiryDate).getTime());
-
-              const handleDirectBatchQuebra = async (batchItem: any) => {
-                if (!profile?.businessId) return;
-                const prod = batchItem.product;
-                const qtyVal = Number(batchItem.qty) || 0;
-                
-                const confirmAbate = window.confirm(
-                  `Deseja abater de imediato todas as ${qtyVal} unidades do lote "${batchItem.batchNumber}" do produto "${prod.name}" como perda por expiração?\n\nEsta operação é irreversível.`
-                );
-                if (!confirmAbate) return;
-
-                const loadingId = toast.loading("A processar abate de stock...");
-                try {
-                  const { addDoc, collection, doc, updateDoc, serverTimestamp } = await import('firebase/firestore');
-
-                  const currentStock = Number(prod.stockLevel) || 0;
-                  const newStock = Math.max(0, currentStock - qtyVal);
-                  
-                  const updatedBatches = (prod.batches || []).map((b: any) => {
-                    if (b.batchNumber === batchItem.batchNumber && b.expiryDate === batchItem.expiryDate) {
-                      return { ...b, qty: 0 };
-                    }
-                    return b;
-                  }).filter((b: any) => (Number(b.qty) || 0) > 0);
-
-                  const quebraPayload = {
-                    businessId: profile.businessId,
-                    productId: prod.id,
-                    productName: prod.name,
-                    qty: qtyVal,
-                    unit: 'un',
-                    reason: 'expired',
-                    notes: `Abate automático de lote vencido/próximo do vencimento (${batchItem.batchNumber})`,
-                    reportedBy: profile.displayName || 'Utilizador',
-                    reportedByEmail: profile.email || '',
-                    createdAt: serverTimestamp()
-                  };
-                  await addDoc(collection(db, `businesses/${profile.businessId}/quebras`), quebraPayload);
-
-                  await updateDoc(doc(db, `businesses/${profile.businessId}/products`, prod.id), {
-                    stockLevel: newStock,
-                    stockUn: newStock,
-                    batches: updatedBatches,
-                    updatedAt: serverTimestamp()
-                  });
-
-                  await addStockMovement(
-                    prod.id,
-                    prod.name,
-                    -qtyVal,
-                    'quebra',
-                    `Lote Vencido (${batchItem.batchNumber})`
-                  );
-
-                  toast.success("Abate de lote registado com sucesso!", { id: loadingId });
-                } catch (err: any) {
-                  console.error(err);
-                  toast.error(`Falha ao abater lote: ${err.message || err}`, { id: loadingId });
-                }
-              };
-
-              return (
-                <div className="space-y-4">
-                  {/* Search and Filters */}
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                    <div className="relative flex-1">
-                      <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
-                      <input
-                        type="text"
-                        value={valSearch}
-                        onChange={(e) => setValSearch(e.target.value)}
-                        placeholder="Pesquisar por produto ou lote..."
-                        className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                      />
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {[
-                        { id: 'all', label: 'Todos' },
-                        { id: 'expired', label: 'Vencidos 🛑' },
-                        { id: 'critical', label: 'Críticos ⚠️' },
-                        { id: 'warning', label: 'Alerta ⏳' },
-                        { id: 'safe', label: 'Seguros ✅' }
-                      ].map(f => (
-                        <button
-                          key={f.id}
-                          type="button"
-                          onClick={() => setValFilter(f.id as any)}
-                          className={cn(
-                            "px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer",
-                            valFilter === f.id
-                              ? "bg-slate-900 text-white shadow-sm"
-                              : "bg-white text-slate-500 hover:text-slate-800 border border-slate-200"
-                          )}
-                        >
-                          {f.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Batches Grid */}
-                  <div className="grid gap-4 md:grid-cols-2">
-                    {filteredBatches.map((b, idx) => {
-                      const expDate = new Date(b.expiryDate);
-                      const diffTime = expDate.getTime() - today.getTime();
-                      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                      const isExpired = diffDays < 0;
-
-                      let statusBadge = '';
-                      let statusBg = '';
-                      if (isExpired) {
-                        statusBadge = `Vencido há ${Math.abs(diffDays)} d`;
-                        statusBg = 'bg-rose-50 text-rose-700 border border-rose-100';
-                      } else if (diffDays <= 30) {
-                        statusBadge = `Expira em ${diffDays} d`;
-                        statusBg = 'bg-amber-50 text-amber-700 border border-amber-100';
-                      } else if (diffDays <= 90) {
-                        statusBadge = `Expira em ${diffDays} d`;
-                        statusBg = 'bg-yellow-50 text-yellow-700 border border-yellow-100';
-                      } else {
-                        statusBadge = `Seguro (${diffDays} d)`;
-                        statusBg = 'bg-emerald-50 text-emerald-700 border border-emerald-100';
-                      }
-
-                      return (
-                        <div key={`${b.product.id}-${b.batchNumber}-${idx}`} className="bg-white border border-slate-100 rounded-2xl p-5 flex flex-col justify-between gap-4 shadow-sm hover:border-slate-200 transition-all">
-                          <div className="space-y-3">
-                            <div className="flex items-start justify-between gap-2">
-                              <div>
-                                <h4 className="text-sm font-black text-slate-900 tracking-tight">{b.product.name}</h4>
-                                <span className="text-[10px] text-slate-400 font-mono">SKU: {b.product.sku || 'N/A'}</span>
-                              </div>
-                              <span className={cn("px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest leading-none", statusBg)}>
-                                {statusBadge}
-                              </span>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100 font-mono text-xs">
-                              <div className="space-y-0.5">
-                                <span className="text-[9px] text-slate-400 uppercase">Lote</span>
-                                <div className="text-slate-800 font-bold">{b.batchNumber || 'SEM LOTE'}</div>
-                              </div>
-                              <div className="space-y-0.5">
-                                <span className="text-[9px] text-slate-400 uppercase">Quantidade</span>
-                                <div className="text-slate-800 font-bold">{b.qty} Un</div>
-                              </div>
-                              <div className="space-y-0.5 col-span-2">
-                                <span className="text-[9px] text-slate-400 uppercase">Data de Validade</span>
-                                <div className="text-slate-800 font-bold">{new Date(b.expiryDate).toLocaleDateString('pt-PT')}</div>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Actions */}
-                          <div className="flex items-center gap-2 pt-2 border-t border-dashed border-slate-100">
-                            <button
-                              type="button"
-                              onClick={() => handleDirectBatchQuebra(b)}
-                              className="flex-1 py-2 bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 cursor-pointer text-center"
-                            >
-                              Abater Stock
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setPromoProd(b.product);
-                                setShowPromoModal(true);
-                              }}
-                              className="flex-1 py-2 bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-600 rounded-xl font-bold text-xs uppercase tracking-wider transition-all active:scale-95 cursor-pointer text-center"
-                            >
-                              Lançar Promo
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                    {filteredBatches.length === 0 && (
-                      <div className="col-span-2 py-16 text-center text-slate-400 bg-slate-50 rounded-2xl border border-slate-100">
-                        <Package size={42} className="mx-auto mb-3 opacity-20 text-slate-650" />
-                        <p className="text-xs uppercase font-black tracking-widest">Nenhum lote correspondente encontrado.</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              );
-            })()}
+            <BatchValidityList
+              products={products}
+              profile={profile}
+              addStockMovement={addStockMovement}
+              setPromoProd={setPromoProd}
+              setShowPromoModal={setShowPromoModal}
+            />
           </div>
         </motion.div>
       )}
@@ -8799,155 +8973,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           exit={{ opacity: 0, y: -15 }}
           className="space-y-6"
         >
-          {(() => {
-            const [movs, setMovs] = useState<any[]>([]);
-            const [isLoadingMovs, setIsLoadingMovs] = useState(true);
-            const [movSearch, setMovSearch] = useState('');
-            const [movTypeFilter, setMovTypeFilter] = useState('all');
-
-            useEffect(() => {
-              if (!profile?.businessId || activeTab !== 'movimentos') return;
-              setIsLoadingMovs(true);
-              
-              const movRef = collection(db, `businesses/${profile.businessId}/stock_movements`);
-              const q = query(movRef, orderBy('timestamp', 'desc'), limit(150));
-
-              const unsub = onSnapshot(q, (snapshot: any) => {
-                const list: any[] = [];
-                snapshot.forEach((doc: any) => {
-                  list.push({ id: doc.id, ...doc.data() });
-                });
-                setMovs(list);
-                setIsLoadingMovs(false);
-              }, (err: any) => {
-                console.error("Failed to load movements:", err);
-                setIsLoadingMovs(false);
-              });
-
-              return () => unsub();
-            }, [activeTab]);
-
-            const filteredMovs = movs.filter(m => {
-              const matchSearch = (m.productName || '').toLowerCase().includes(movSearch.toLowerCase()) ||
-                                  (m.reference || '').toLowerCase().includes(movSearch.toLowerCase());
-              
-              if (!matchSearch) return false;
-
-              if (movTypeFilter !== 'all') {
-                return m.type === movTypeFilter;
-              }
-              return true;
-            });
-
-            return (
-              <div className="bg-white border border-slate-100 rounded-3xl p-6 space-y-6 shadow-sm">
-                <div>
-                  <h3 className="text-lg font-black tracking-tight text-slate-950 flex items-center gap-2">
-                    <span>📋 Livro de Razão de Movimentos de Stock</span>
-                  </h3>
-                  <p className="text-xs text-slate-500 mt-1">
-                    Audite todas as entradas e saídas de stock do inventário com referência, operadores e carimbo de data/hora.
-                  </p>
-                </div>
-
-                {/* Filters */}
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="relative flex-1">
-                    <Search className="absolute left-3.5 top-3 w-4 h-4 text-slate-400" />
-                    <input
-                      type="text"
-                      value={movSearch}
-                      onChange={(e) => setMovSearch(e.target.value)}
-                      placeholder="Pesquisar por produto ou referência..."
-                      className="w-full pl-10 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 placeholder-slate-400 focus:outline-none"
-                    />
-                  </div>
-                  <div className="flex flex-wrap gap-1.5">
-                    {[
-                      { id: 'all', label: 'Todos' },
-                      { id: 'manual', label: 'Ajuste Manual 🛠️' },
-                      { id: 'sale', label: 'Venda Fatura 🧾' },
-                      { id: 'pos', label: 'Venda POS 🛒' },
-                      { id: 'purchase', label: 'Compra/PO 📦' },
-                      { id: 'quebra', label: 'Perda/Quebra ⚠️' }
-                    ].map(f => (
-                      <button
-                        key={f.id}
-                        type="button"
-                        onClick={() => setMovTypeFilter(f.id)}
-                        className={cn(
-                          "px-3 py-1.5 rounded-lg text-xs font-black uppercase tracking-wider transition-all cursor-pointer",
-                          movTypeFilter === f.id
-                            ? "bg-slate-900 text-white shadow-sm"
-                            : "bg-white text-slate-500 hover:text-slate-800 border border-slate-200"
-                        )}
-                      >
-                        {f.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Timeline */}
-                {isLoadingMovs ? (
-                  <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-                    <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-                    <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">A carregar registos...</p>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {filteredMovs.map(m => {
-                      const isPositive = m.qtyChange > 0;
-                      const dateStr = m.timestamp 
-                        ? new Date(m.timestamp.seconds * 1000).toLocaleString('pt-PT') 
-                        : 'A processar...';
-
-                      return (
-                        <div key={m.id} className="flex items-center justify-between gap-4 bg-white border border-slate-100 hover:border-slate-200 p-4 rounded-2xl transition-all shadow-sm">
-                          <div className="flex items-center gap-3">
-                            <div className={cn(
-                              "w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-xs font-mono border",
-                              isPositive 
-                                ? "bg-emerald-50 text-emerald-600 border-emerald-100" 
-                                : "bg-rose-50 text-rose-600 border-rose-100"
-                            )}>
-                              {isPositive ? `+${m.qtyChange}` : m.qtyChange}
-                            </div>
-                            <div className="space-y-0.5">
-                              <h4 className="text-xs font-black text-slate-800 leading-tight">{m.productName}</h4>
-                              <div className="flex flex-wrap items-center gap-1.5 text-[9px] text-slate-400 font-mono">
-                                <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 border border-slate-200 font-black uppercase tracking-wider">
-                                  {m.type === 'manual' ? '🛠️ AJUSTE' : 
-                                   m.type === 'sale' ? '🧾 VENDA' : 
-                                   m.type === 'pos' ? '🛒 POS' : 
-                                   m.type === 'purchase' ? '📦 COMPRA' : 
-                                   m.type === 'quebra' ? '⚠️ PERDA' : m.type.toUpperCase()}
-                                </span>
-                                <span>•</span>
-                                <span>Ref: <strong>{m.reference}</strong></span>
-                                <span>•</span>
-                                <span>Operador: <strong>{m.reportedBy}</strong></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="text-right text-[10px] text-slate-400 font-mono">
-                            {dateStr}
-                          </div>
-                        </div>
-                      );
-                    })}
-
-                    {filteredMovs.length === 0 && (
-                      <div className="py-20 text-center text-slate-400 bg-slate-50 rounded-2xl border border-slate-100">
-                        <History size={42} className="mx-auto mb-3 opacity-20" />
-                        <p className="text-xs uppercase font-black tracking-widest">Nenhuma movimentação de stock registada.</p>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })()}
+          <StockMovementsLedger profile={profile} activeTab={activeTab} />
         </motion.div>
       )}
     </div>
