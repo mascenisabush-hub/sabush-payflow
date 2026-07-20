@@ -26,6 +26,12 @@ const devLog = (...args: any[]) => {
   }
 };
 
+const devError = (...args: any[]) => {
+  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+    console.error(...args);
+  }
+};
+
 export interface AuthLog {
   id: string;
   timestamp: string;
@@ -77,9 +83,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
     setAuthLogs(prev => [newLog, ...prev].slice(0, 50));
     if (type === 'error') {
-      console.error(`[AUTH DIAGNOSTIC] ${event}: ${description}`, details);
+      devError(`[AUTH DIAGNOSTIC] ${event}: ${description}`, details);
     } else {
-      console.log(`[AUTH DIAGNOSTIC] ${event}: ${description}`, details);
+      devLog(`[AUTH DIAGNOSTIC] ${event}: ${description}`, details);
     }
   };
 
