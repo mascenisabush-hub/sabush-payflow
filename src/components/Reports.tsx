@@ -380,8 +380,8 @@ export default function Reports() {
   }, [filteredProducts]);
 
   const salesMixData = [
-    { name: 'POS Sales', value: stats.posSales, color: '#0F4C3A' }, // Deep African Green
-    { name: 'Invoices', value: stats.invoiceSales, color: '#D14D2A' } // African Sunset Orange
+    { name: 'POS Sales', value: stats.posSales, color: '#0F274C' }, // Deep African Green
+    { name: 'Invoices', value: stats.invoiceSales, color: '#B8791A' } // African Sunset Orange
   ];
 
   const wholesaleRetailMix = [
@@ -396,7 +396,7 @@ export default function Reports() {
         <div>
           <h2 className="text-3xl font-black text-[#1D1510] tracking-tight flex items-center gap-2">
             <span>Business Reports</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D14D2A]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#B8791A]" />
           </h2>
           <p className="text-[#8B735F] text-sm font-semibold tracking-wide mt-1">Estatísticas, análises financeiras e controlo inteligente de stock.</p>
         </div>
@@ -546,8 +546,8 @@ export default function Reports() {
                     <AreaChart data={revenueData}>
                        <defs>
                           <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                             <stop offset="5%" stopColor="#D14D2A" stopOpacity={0.15}/>
-                             <stop offset="95%" stopColor="#D14D2A" stopOpacity={0}/>
+                             <stop offset="5%" stopColor="#B8791A" stopOpacity={0.15}/>
+                             <stop offset="95%" stopColor="#B8791A" stopOpacity={0}/>
                           </linearGradient>
                        </defs>
                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
@@ -556,7 +556,7 @@ export default function Reports() {
                        <Tooltip 
                         contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }}
                        />
-                       <Area type="monotone" dataKey="revenue" stroke="#D14D2A" strokeWidth={4} fillOpacity={1} fill="url(#colorRev)" />
+                       <Area type="monotone" dataKey="revenue" stroke="#B8791A" strokeWidth={4} fillOpacity={1} fill="url(#colorRev)" />
                     </AreaChart>
                  </ResponsiveContainer>
               </div>
@@ -605,7 +605,7 @@ export default function Reports() {
           <div className="bg-slate-50 border border-slate-100 p-8 rounded-[40px] grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 animate-in fade-in zoom-in-95 duration-300">
             <div className="lg:col-span-2 space-y-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-black tracking-widest text-[#D14D2A] uppercase">Dashboard de Distribuição</span>
+                <span className="text-[10px] font-black tracking-widest text-[#B8791A] uppercase">Dashboard de Distribuição</span>
                 <h3 className="text-xl font-black text-slate-900 mt-1 flex items-center gap-2">
                   <span>Movimento por Segmentos Financeiros</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
@@ -696,7 +696,7 @@ export default function Reports() {
                 <select 
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#D14D2A] cursor-pointer min-w-[140px]"
+                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todas as Categorias</option>
                   {categoriesList.map(cat => (
@@ -711,7 +711,7 @@ export default function Reports() {
                 <select 
                   value={supplierFilter}
                   onChange={(e) => setSupplierFilter(e.target.value)}
-                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#D14D2A] cursor-pointer min-w-[140px]"
+                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todos Fornecedores</option>
                   {suppliersList.map(sup => (
@@ -727,7 +727,7 @@ export default function Reports() {
                     setCategoryFilter('all');
                     setSupplierFilter('all');
                   }}
-                  className="text-[10px] font-black uppercase text-[#D14D2A] hover:text-[#A8381A] px-2.5 py-2.5 tracking-wider hover:bg-[#FAF7F2] rounded-xl transition-all cursor-pointer"
+                  className="text-[10px] font-black uppercase text-[#B8791A] hover:text-[#A8381A] px-2.5 py-2.5 tracking-wider hover:bg-[#FAF7F2] rounded-xl transition-all cursor-pointer"
                 >
                   Limpar Filtros
                 </button>
@@ -792,7 +792,7 @@ export default function Reports() {
                         contentStyle={{ borderRadius: '16px', border: '1px solid #E9E1D2', boxShadow: '0 8px 16px rgba(0,0,0,0.04)' }}
                         formatter={(value, name) => [typeof value === 'number' ? value.toLocaleString() : value, name === 'value' ? `Valor Total (${currency})` : 'Qtd Total']}
                       />
-                      <Bar dataKey="value" fill="#0F4C3A" radius={[8, 8, 0, 0]} name="value" />
+                      <Bar dataKey="value" fill="#0F274C" radius={[8, 8, 0, 0]} name="value" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -888,7 +888,7 @@ export default function Reports() {
                           </span>
                         </td>
                         <td className="py-4 text-right font-bold text-slate-700">{formatSystemCurrency(p.price || 0, businessData)}</td>
-                        <td className="py-4 text-right font-black text-[#0F4C3A]">
+                        <td className="py-4 text-right font-black text-[#0F274C]">
                           {formatSystemCurrency((p.stockLevel || 0) * (p.price || 0), businessData)}
                         </td>
                       </tr>
@@ -1055,7 +1055,7 @@ function StatCard({ label, value, trend, color, icon: Icon }: any) {
   return (
     <div className="p-8 bg-white rounded-[40px] border border-slate-100 shadow-sm relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
       <div className={cn("absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-500", 
-        color === 'blue' ? 'text-blue-600' : color === 'emerald' ? 'text-[#0F4C3A]' : color === 'rose' ? 'text-rose-600' : 'text-amber-600'
+        color === 'blue' ? 'text-blue-600' : color === 'emerald' ? 'text-[#0F274C]' : color === 'rose' ? 'text-rose-600' : 'text-amber-600'
       )}>
          <Icon size={80} strokeWidth={3} />
       </div>
@@ -1065,7 +1065,7 @@ function StatCard({ label, value, trend, color, icon: Icon }: any) {
         <span className={cn(
           "px-2.5 py-1 rounded-lg text-[10px] font-black capitalize tracking-wide",
           color === 'blue' ? 'bg-blue-50 text-blue-600' :
-          color === 'emerald' ? 'bg-emerald-50 text-[#0F4C3A]' :
+          color === 'emerald' ? 'bg-emerald-50 text-[#0F274C]' :
           color === 'rose' ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600'
         )}>
           {trend}

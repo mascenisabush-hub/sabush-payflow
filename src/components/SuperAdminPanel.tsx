@@ -2773,7 +2773,7 @@ Equipa Técnica Sabush System`;
                             type="button" 
                             className={cn(
                               "w-full h-11 rounded-xl text-white font-extrabold text-[11px] uppercase tracking-wider shadow-lg transition-colors cursor-default",
-                              primaryColor === 'royal-blue' ? "bg-[#0C3A42] shadow-blue-900/20" :
+                              primaryColor === 'royal-blue' ? "bg-[#0C2242] shadow-blue-900/20" :
                               primaryColor === 'classic-orange' ? "bg-amber-600 shadow-amber-600/20" :
                               primaryColor === 'forest-green' ? "bg-emerald-600 shadow-emerald-600/20" :
                               "bg-slate-700 shadow-slate-700/20"
@@ -3166,7 +3166,7 @@ Equipa Técnica Sabush System`;
                             <span className="text-[10px] font-extrabold text-blue-900 font-sans leading-none">Azul Professional</span>
                             <span className="text-[7.5px] text-slate-400 font-bold leading-none mt-1">Azul Escuro dominante, detalhes Amber</span>
                             <div className="flex gap-1 mt-1.5">
-                              <span className="w-4 h-1.5 rounded-sm bg-[#0C3A42]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#0C2242]" />
                               <span className="w-4 h-1.5 rounded-sm bg-[#B8791A]" />
                             </div>
                           </button>
@@ -3185,7 +3185,7 @@ Equipa Técnica Sabush System`;
                             <span className="text-[7.5px] text-slate-400 font-bold leading-none mt-1">Laranja dominante, detalhes Azul</span>
                             <div className="flex gap-1 mt-1.5">
                               <span className="w-4 h-1.5 rounded-sm bg-amber-500" />
-                              <span className="w-4 h-1.5 rounded-sm bg-[#0C3A42]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#0C2242]" />
                             </div>
                           </button>
 

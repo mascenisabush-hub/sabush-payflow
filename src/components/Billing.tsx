@@ -152,7 +152,7 @@ export default function Billing() {
       ],
       color: 'from-slate-800 to-slate-950 text-white',
       textColor: 'text-slate-900',
-      badgeColor: 'bg-[#D14D2A] text-white border-none'
+      badgeColor: 'bg-[#B8791A] text-white border-none'
     },
     enterprise: {
       name: 'Enterprise',
@@ -413,7 +413,7 @@ https://sabush-system.web.app/super-admin`;
           <span className="text-[10px] font-black uppercase text-emerald-600 tracking-widest bg-emerald-50 px-2.5 py-1 rounded-md">Assinatura Oficial</span>
           <h1 className="text-4xl font-black text-[#1D1510] tracking-tight mt-2 flex items-center gap-2">
             <span>Gestão & Facturação</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#D14D2A]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#B8791A]" />
           </h1>
           <p className="text-slate-500 font-medium text-sm leading-relaxed mt-1">
             Escolha o plano ideal para a dimensão operativa do seu negócio e expanda conforme crescer.
@@ -491,7 +491,7 @@ https://sabush-system.web.app/super-admin`;
                   <div className="font-extrabold capitalize text-slate-900">{latestProof.plan}</div>
 
                   <div className="text-slate-400 font-bold uppercase tracking-wide text-[10px]">Valor Pago:</div>
-                  <div className="font-extrabold text-[#D14D2A]">{latestProof.amount} MZN</div>
+                  <div className="font-extrabold text-[#B8791A]">{latestProof.amount} MZN</div>
 
                   <div className="text-slate-400 font-bold uppercase tracking-wide text-[10px]">Método:</div>
                   <div className="font-extrabold capitalize text-slate-700">
@@ -551,7 +551,7 @@ https://sabush-system.web.app/super-admin`;
                   setSelectedPlanTier(latestProof.plan);
                   setIsInstructionModalOpen(true);
                 }}
-                className="px-6 py-2.5 bg-[#D14D2A] hover:bg-[#b03d1e] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2"
+                className="px-6 py-2.5 bg-[#B8791A] hover:bg-[#b03d1e] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2"
               >
                 <UploadCloud size={14} /> Corrigir e Re-submeter
               </button>
@@ -606,7 +606,7 @@ https://sabush-system.web.app/super-admin`;
               >
                 {/* Popularity/Current Active Badges */}
                 {tier === 'pro' && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D14D2A] text-white px-4 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#B8791A] text-white px-4 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
                     RECOMENDADO / MAIS POPULAR
                   </span>
                 )}
@@ -840,10 +840,10 @@ https://sabush-system.web.app/super-admin`;
           </div>
 
           <div className="bg-[#FAF7F2] border border-[#E9E1D2] p-6 md:p-8 rounded-[40px] space-y-4 text-left relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-6 -mt-6 opacity-5 pointer-events-none text-[#D14D2A]">
+            <div className="absolute top-0 right-0 -mr-6 -mt-6 opacity-5 pointer-events-none text-[#B8791A]">
               <Sparkles size={120} />
             </div>
-            <h4 className="text-[#D14D2A] font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5">
+            <h4 className="text-[#B8791A] font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5">
               <Sparkles size={12} className="animate-pulse" /> Suporte Empresarial África
             </h4>
             <p className="text-[#8B735F] font-bold text-xs leading-normal">
@@ -851,7 +851,7 @@ https://sabush-system.web.app/super-admin`;
             </p>
             <button 
               onClick={() => toast.success("Notificação enviada! O seu gestor de conta entrará em contacto.")}
-              className="text-[#1D1510] text-xs font-black flex items-center gap-1.5 group hover:text-[#D14D2A] transition-colors cursor-pointer"
+              className="text-[#1D1510] text-xs font-black flex items-center gap-1.5 group hover:text-[#B8791A] transition-colors cursor-pointer"
             >
               <span>Falar com Vendas</span> 
               <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />

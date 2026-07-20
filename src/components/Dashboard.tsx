@@ -28,14 +28,14 @@ const data = [
 
 export const schemaColors = {
   classic: {
-    primary: '#0A3038', // Brand Blue
+    primary: '#0A1C38', // Brand Blue
     secondary: '#10b981', // Semantic Green
     warning: '#f59e0b', // Semantic Amber
     danger: '#ef4444', // Semantic Red
     glow: 'rgba(26, 115, 196, 0.1)',
   },
   neon: {
-    primary: '#0A3038', // Brand Blue (redirected for safe fallback)
+    primary: '#0A1C38', // Brand Blue (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
     warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
@@ -1871,7 +1871,7 @@ Sabush System ERP`;
       <div className="fixed inset-0 z-[100] bg-[#090C16] text-[#F3F4F6] flex flex-col lg:flex-row h-screen w-screen overflow-hidden font-sans select-none animate-in fade-in duration-300">
         
         {/* LEFT HUD SIDEBAR */}
-        <div className="w-full lg:w-72 bg-[#081F1E] border-r border-[#163B3A] p-6 flex flex-col justify-between shrink-0 h-auto lg:h-full overflow-y-auto">
+        <div className="w-full lg:w-72 bg-[#081F1E] border-r border-[#16253B] p-6 flex flex-col justify-between shrink-0 h-auto lg:h-full overflow-y-auto">
           <div className="space-y-8">
             {/* Header / Logo */}
             <div className="flex items-center gap-3 bg-[#112E2B] p-3 rounded-2xl border border-[#1C4340] shadow-sm">
@@ -1935,7 +1935,7 @@ Sabush System ERP`;
             </div>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-[#163B3A] flex flex-col gap-2">
+          <div className="mt-8 pt-4 border-t border-[#16253B] flex flex-col gap-2">
             <div className="flex items-center gap-2 px-3 text-[9px] font-black text-[#566A96] tracking-widest uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping inline-block" />
               <span>TERMINAL TELEMETRIA</span>
@@ -1948,7 +1948,7 @@ Sabush System ERP`;
         <div className="flex-1 overflow-y-auto p-6 lg:p-8 flex flex-col gap-6 custom-scrollbar bg-[#090D1A]">
           
           {/* Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#163B3A] pb-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#16253B] pb-6">
             <div className="space-y-1">
               <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-md inline-block mb-1">
                 Active Session Telemetry
@@ -1959,7 +1959,7 @@ Sabush System ERP`;
             </div>
 
             {/* Real-time Clock Card */}
-            <div className="flex items-center gap-4 bg-[#081F1E] border border-[#163B3A] p-3.5 rounded-2xl">
+            <div className="flex items-center gap-4 bg-[#081F1E] border border-[#16253B] p-3.5 rounded-2xl">
               <div className="flex flex-col items-end leading-none text-right shrink-0">
                 <span className="text-xl font-mono font-black text-white flex items-center gap-2">
                   <Clock className="w-4 h-4 text-orange-400 animate-pulse" />
@@ -1982,7 +1982,7 @@ Sabush System ERP`;
           </div>
 
           {/* Filtro por Intervalo de Datas HUD */}
-          <div className="bg-[#081F1E] border border-[#163B3A] rounded-2xl p-5 space-y-4 animate-in fade-in duration-300">
+          <div className="bg-[#081F1E] border border-[#16253B] rounded-2xl p-5 space-y-4 animate-in fade-in duration-300">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-2.5">
                 <div className="p-2 bg-[#112E2B] text-blue-400 rounded-xl border border-[#1C4340]">
@@ -2054,14 +2054,14 @@ Sabush System ERP`;
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2.5 border-t border-[#163B3A]/60">
+            <div className="flex flex-col sm:flex-row items-center gap-3 pt-2.5 border-t border-[#16253B]/60">
               <div className="w-full sm:w-auto flex items-center gap-2">
                 <span className="text-[10px] font-black text-[#566A96] tracking-wider uppercase">Início:</span>
                 <input
                   type="date"
                   value={startDateStr}
                   onChange={(e) => setStartDateStr(e.target.value)}
-                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#163B3A] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#16253B] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
               <div className="w-full sm:w-auto flex items-center gap-2">
@@ -2070,7 +2070,7 @@ Sabush System ERP`;
                   type="date"
                   value={endDateStr}
                   onChange={(e) => setEndDateStr(e.target.value)}
-                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#163B3A] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
+                  className="w-full sm:w-auto text-xs font-bold font-mono text-white bg-[#0F2B29] border border-[#16253B] hover:bg-[#14332F] focus:bg-[#090D1A] px-3 py-1.5 rounded-xl focus:outline-none focus:border-blue-500 transition-all"
                 />
               </div>
               
@@ -2116,7 +2116,7 @@ Sabush System ERP`;
           )}
 
           {/* Core Metrics Widgets */}
-          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-b border-dashed border-[#163B3A] pb-4">
+          <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-6 border-b border-dashed border-[#16253B] pb-4">
             {[
               { label: t('revenue'), value: `${currency} ${filteredChartAndMetricData.metrics.revenue.toLocaleString()}`, color: 'border-emerald-500/20 bg-emerald-500/5', labelColor: 'text-emerald-400', icon: TrendingUp },
               { label: t('total_debt'), value: `${currency} ${metrics.outstanding.toLocaleString()}`, color: 'border-rose-500/20 bg-rose-500/5', labelColor: 'text-rose-400', icon: AlertCircle },
@@ -2142,8 +2142,8 @@ Sabush System ERP`;
           </div>
 
           {/* Detailed Sales & Credit Control Panel (HUD Mode) */}
-          <div className="bg-[#111625] border border-[#163B3A] rounded-3xl p-6 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#163B3A]/60 pb-3">
+          <div className="bg-[#111625] border border-[#16253B] rounded-3xl p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#16253B]/60 pb-3">
               <div className="space-y-1">
                 <span className="text-[9px] font-black tracking-widest text-[#8FB0AC] uppercase bg-[#14332F] border border-[#1C4340] px-2 py-0.5 rounded">
                   Relatório Analítico Consolidado
@@ -2299,14 +2299,14 @@ Sabush System ERP`;
 
           <div className="grid gap-6 md:grid-cols-7">
             {/* AI Advisor Panel */}
-            <div className="md:col-span-7 bg-[#081F1E] border border-[#163B3A] rounded-3xl p-6 shadow-xl relative overflow-hidden">
+            <div className="md:col-span-7 bg-[#081F1E] border border-[#16253B] rounded-3xl p-6 shadow-xl relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 blur-3xl rounded-full" />
               <AIAdvisor />
             </div>
 
             {/* Analytics with dark mode theme */}
             <div className="md:col-span-4 space-y-6">
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-black text-white pl-3 border-l-3 border-blue-500">
                     Growth Analytics
@@ -2332,7 +2332,7 @@ Sabush System ERP`;
                           if (active && payload && payload.length) {
                             const pointData = payload[0].payload;
                             return (
-                              <div className="bg-[#090D1A] border border-[#163B3A] p-3 rounded-xl shadow-xl text-white">
+                              <div className="bg-[#090D1A] border border-[#16253B] p-3 rounded-xl shadow-xl text-white">
                                 <p className="text-[10px] font-black tracking-wider text-blue-400 uppercase">{pointData.period}</p>
                                 <p className="text-sm font-black mt-1 font-mono">
                                   {Number(pointData.sales).toLocaleString()} {currency}
@@ -2357,7 +2357,7 @@ Sabush System ERP`;
               </div>
 
               {/* Cash Flow Insights (Dark HUD Mode) */}
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl space-y-6">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl space-y-6">
                 <div className="flex items-center justify-between">
                   <div className="space-y-1">
                     <span className="text-[10px] font-black tracking-widest text-[#8FB0AC] uppercase">Análise de Liquidez</span>
@@ -2421,7 +2421,7 @@ Sabush System ERP`;
                       <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8FB0AC', fontSize: 10 }} />
                       <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8FB0AC', fontSize: 10 }} />
                       <Tooltip 
-                        contentStyle={{ backgroundColor: '#090D1A', border: '1px solid #163B3A', borderRadius: '12px', color: '#fff' }}
+                        contentStyle={{ backgroundColor: '#090D1A', border: '1px solid #16253B', borderRadius: '12px', color: '#fff' }}
                         itemStyle={{ color: '#fff' }}
                       />
                       <Legend verticalAlign="top" height={36} iconType="circle" wrapperStyle={{ fontSize: '11px', color: '#8FB0AC' }} />
@@ -2433,7 +2433,7 @@ Sabush System ERP`;
               </div>
 
               {/* Transactions in HUD mode */}
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-lg font-black text-white pl-3 border-l-3 border-blue-500">
                     Live Ledger Log
@@ -2451,7 +2451,7 @@ Sabush System ERP`;
 
                 <div className="space-y-3.5">
                   {recentSales.map((sale) => (
-                    <div key={sale.id} className="flex items-center gap-4 p-4 rounded-2xl bg-[#0F2B29] hover:bg-[#14332F] border border-[#163B3A]/40 transition-all group">
+                    <div key={sale.id} className="flex items-center gap-4 p-4 rounded-2xl bg-[#0F2B29] hover:bg-[#14332F] border border-[#16253B]/40 transition-all group">
                       <div className="w-10 h-10 rounded-xl bg-[#090D1A] flex items-center justify-center font-black text-[#8FB0AC] group-hover:scale-110 transition-transform">
                         {sale.customerId?.[0]?.toUpperCase() || 'W'}
                       </div>
@@ -2483,7 +2483,7 @@ Sabush System ERP`;
                   ))}
                   {recentSales.length === 0 && (
                     <div className="py-10 text-center space-y-3">
-                      <ShoppingCart size={40} className="mx-auto text-[#163B3A]" />
+                      <ShoppingCart size={40} className="mx-auto text-[#16253B]" />
                       <p className="text-xs font-bold text-[#8FB0AC] uppercase tracking-widest">No recent transactions</p>
                     </div>
                   )}
@@ -2493,38 +2493,38 @@ Sabush System ERP`;
 
             {/* Sidebar Column within HUD */}
             <div className="md:col-span-3 space-y-6">
-              <div className="bg-[#081F1E] border border-[#163B3A] rounded-3xl overflow-hidden shadow-xl">
+              <div className="bg-[#081F1E] border border-[#16253B] rounded-3xl overflow-hidden shadow-xl">
                 <MarketRates />
               </div>
 
               {/* Action grid (Quick operations) */}
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl">
                 <h3 className="text-base font-black text-white mb-4">Operations Control</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <button 
                     onClick={() => { (window as any).toggleStorefront(true); }}
-                    className="p-4 bg-[#0F2B29] hover:bg-indigo-600/25 border border-[#163B3A] text-indigo-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-indigo-600/25 border border-[#16253B] text-indigo-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <ShoppingBag size={20} />
                     Online Store
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('pos'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#0F2B29] hover:bg-emerald-600/25 border border-[#163B3A] text-emerald-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-emerald-600/25 border border-[#16253B] text-emerald-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <ShoppingCart size={20} />
                     POS Billing
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('quotations'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#0F2B29] hover:bg-blue-600/25 border border-[#163B3A] text-blue-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-blue-600/25 border border-[#16253B] text-blue-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <FileSearch size={20} />
                     New Quote
                   </button>
                   <button 
                     onClick={() => { (window as any).setCurrentTab('expenses'); setIsFullScreen(false); }}
-                    className="p-4 bg-[#0F2B29] hover:bg-rose-600/25 border border-[#163B3A] text-rose-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
+                    className="p-4 bg-[#0F2B29] hover:bg-rose-600/25 border border-[#16253B] text-rose-400 hover:text-white rounded-2xl font-bold text-xs hover:scale-105 transition-all flex flex-col items-center gap-2 cursor-pointer"
                   >
                     <TrendingDown size={20} />
                     Log Expense
@@ -2533,7 +2533,7 @@ Sabush System ERP`;
               </div>
 
               {/* Stock Health */}
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-base font-black text-white">{t('inventory_status')}</h3>
                   <span className="text-[9px] font-semibold text-[#8FB0AC]">HEALTH INDEX</span>
@@ -2572,13 +2572,13 @@ Sabush System ERP`;
               </div>
 
               {/* Gross Profit Margin (HUD edition) */}
-              <div className="p-6 bg-[#081F1E] border border-[#163B3A] rounded-3xl shadow-xl space-y-4 animate-in fade-in duration-300">
+              <div className="p-6 bg-[#081F1E] border border-[#16253B] rounded-3xl shadow-xl space-y-4 animate-in fade-in duration-300">
                 <div className="flex items-center justify-between">
                   <h3 className="text-base font-black text-white">Gross Profit Margin %</h3>
                   <span className="text-[9px] font-semibold text-[#8FB0AC]">CATEGORY METRICS</span>
                 </div>
 
-                <div className="p-4 bg-[#0F2B29] border border-[#163B3A]/60 rounded-2xl flex items-center justify-between">
+                <div className="p-4 bg-[#0F2B29] border border-[#16253B]/60 rounded-2xl flex items-center justify-between">
                   <div>
                     <p className="text-[9px] font-black text-[#8FB0AC] uppercase tracking-widest leading-none">Overall Weighted GM</p>
                     <p className="text-xl font-black text-white mt-1.5 font-mono">
@@ -2827,7 +2827,7 @@ Sabush System ERP`;
         </div>
 
         {/* Card 2: Vendas por Grosso */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#0A3038] via-[#0F5C56] to-[#178F82] text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1C38] via-[#0F5C56] to-[#178F82] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest opacity-100">
@@ -4052,7 +4052,7 @@ Sabush System ERP`;
                 <h3 className="text-md font-black text-slate-900 tracking-tight flex items-center gap-2">
                   <span>Margem Bruta (COGS)</span>
                 </h3>
-                <span className="text-[9px] font-black uppercase tracking-widest text-[#0F4C3A] bg-[#0F4C3A]/10 px-2 py-0.5 rounded border border-[#0F4C3A]/20">
+                <span className="text-[9px] font-black uppercase tracking-widest text-[#0F274C] bg-[#0F274C]/10 px-2 py-0.5 rounded border border-[#0F274C]/20">
                   REAL-TIME GP
                 </span>
               </div>
@@ -4067,7 +4067,7 @@ Sabush System ERP`;
                   {overallMargin.toFixed(1)}% <span className="text-xs font-medium text-slate-500">GPM</span>
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-[#0F4C3A]/10 flex items-center justify-center font-black text-[#0F4C3A]">
+              <div className="w-10 h-10 rounded-xl bg-[#0F274C]/10 flex items-center justify-center font-black text-[#0F274C]">
                 %
               </div>
             </div>
@@ -4081,7 +4081,7 @@ Sabush System ERP`;
 
                 if (cat.margin >= 45) {
                   badgeColor = "bg-emerald-50 text-emerald-700 border-emerald-100";
-                  barColor = "bg-[#0F4C3A]";
+                  barColor = "bg-[#0F274C]";
                   ratingLabel = "Excelente";
                 } else if (cat.margin >= 25) {
                   badgeColor = "bg-amber-50 text-amber-700 border-amber-100";

@@ -448,14 +448,14 @@ export function printInvoiceHTML(
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #0A3038;
+            border-bottom: 2px solid #0A1C38;
             padding-bottom: 8px;
             margin-bottom: 12px;
           }
           .doc-title {
             font-size: 18px;
             font-weight: 800;
-            color: #0A3038;
+            color: #0A1C38;
             letter-spacing: 0.5px;
             margin: 0;
           }
@@ -525,7 +525,7 @@ export function printInvoiceHTML(
             overflow: hidden;
           }
           .party-header {
-            background-color: #0A3038;
+            background-color: #0A1C38;
             color: #ffffff;
             font-weight: 800;
             font-size: 8.5px;
@@ -557,8 +557,8 @@ export function printInvoiceHTML(
             text-transform: uppercase;
             font-weight: bold;
             color: #ffffff;
-            background-color: #0A3038;
-            border: 1px solid #0A3038;
+            background-color: #0A1C38;
+            border: 1px solid #0A1C38;
             padding: 6px 8px;
             text-align: left;
           }
@@ -598,7 +598,7 @@ export function printInvoiceHTML(
             margin: 0 0 4px 0;
             font-size: 9px;
             text-transform: uppercase;
-            color: #0A3038;
+            color: #0A1C38;
             font-weight: 800;
             border-bottom: 1px solid #cbd5e1;
             padding-bottom: 3px;
@@ -612,7 +612,7 @@ export function printInvoiceHTML(
           
           /* Words Box */
           .words-container {
-            border: 1px dashed #0A3038;
+            border: 1px dashed #0A1C38;
             background-color: #eff6ff;
             border-radius: 6px;
             padding: 8px;
@@ -620,7 +620,7 @@ export function printInvoiceHTML(
           .words-title {
             font-size: 9px;
             font-weight: 800;
-            color: #0A3038;
+            color: #0A1C38;
             text-transform: uppercase;
             margin-bottom: 4px;
           }
@@ -654,7 +654,7 @@ export function printInvoiceHTML(
             border-bottom: 1px solid #f1f5f9;
           }
           .financials-table tr.total-row {
-            background-color: #0A3038;
+            background-color: #0A1C38;
             color: #ffffff;
             font-weight: bold;
             font-size: 11px;
@@ -848,7 +848,7 @@ export function printInvoiceHTML(
                 <td align="right" style="font-weight: 500;">${formattedSubtotal}</td>
               </tr>
               ${(invoice.globalAjuste || 0) > 0 ? `
-              <tr style="color: #0A3038; font-weight: bold;">
+              <tr style="color: #0A1C38; font-weight: bold;">
                 <td>Ajuste / Desconto Global:</td>
                 <td align="right">- ${formattedAjusteGlobal}</td>
               </tr>
@@ -870,12 +870,12 @@ export function printInvoiceHTML(
                 <td align="right" style="font-size: 9.5px; font-weight: 500;">${formattedIvaValue}</td>
               </tr>
               <tr style="font-weight: bold; background-color: #f8fafc; border-top: 1px solid #cbd5e1;">
-                <td style="font-size: 10px; color: #0A3038;">Total confirmado:</td>
-                <td align="right" style="font-size: 10px; color: #0A3038;">${formattedTotal}</td>
+                <td style="font-size: 10px; color: #0A1C38;">Total confirmado:</td>
+                <td align="right" style="font-size: 10px; color: #0A1C38;">${formattedTotal}</td>
               </tr>
               ${(invoice.outstandingBalance || 0) <= 0 ? `
               <tr style="background-color: #eff6ff;">
-                <td colspan="2" style="font-weight: bold; text-align: center; color: #0A3038; font-size: 9.5px; padding: 4px;">Cash Sales</td>
+                <td colspan="2" style="font-weight: bold; text-align: center; color: #0A1C38; font-size: 9.5px; padding: 4px;">Cash Sales</td>
               </tr>
               ` : ''}
             </table>
@@ -1355,7 +1355,7 @@ export function printInvoiceHTML(
             <td align="right" style="font-weight: 500;">${formattedSubtotal}</td>
           </tr>
           ${(invoice.globalAjuste || 0) > 0 ? `
-          <tr style="color: #0A3038; font-weight: bold;">
+          <tr style="color: #0A1C38; font-weight: bold;">
             <td>Ajuste / Desconto Global:</td>
             <td align="right">- ${formattedAjusteGlobal}</td>
           </tr>
@@ -1379,12 +1379,12 @@ export function printInvoiceHTML(
             <td align="right" style="font-size: 11px; padding: 4px 10px; font-weight: 500;">${formattedIvaValue}</td>
           </tr>
           <tr style="font-weight: bold; background-color: #f8fafc; border-top: 1px solid #cbd5e1;">
-            <td style="font-size: 11px; padding: 6px 10px; color: #0A3038;">Total confirmado:</td>
-            <td align="right" style="font-size: 11px; padding: 6px 10px; color: #0A3038;">${formattedTotal}</td>
+            <td style="font-size: 11px; padding: 6px 10px; color: #0A1C38;">Total confirmado:</td>
+            <td align="right" style="font-size: 11px; padding: 6px 10px; color: #0A1C38;">${formattedTotal}</td>
           </tr>
           ${(invoice.outstandingBalance || 0) <= 0 ? `
           <tr style="background-color: #eff6ff;">
-            <td colspan="2" style="font-weight: bold; text-align: center; color: #0A3038; font-size: 10px; padding: 4px;">Cash Sales</td>
+            <td colspan="2" style="font-weight: bold; text-align: center; color: #0A1C38; font-size: 10px; padding: 4px;">Cash Sales</td>
           </tr>
           ` : ''}
         </table>
@@ -1402,7 +1402,7 @@ export function printInvoiceHTML(
           <span>Preço cobrado:</span>
           <span>${totalCharged.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
         </div>
-        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0A3038; margin-top: 5px;">
+        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0A1C38; margin-top: 5px;">
           <span>Desconto total:</span>
           <span>&minus; ${totalSavings.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT &nbsp;(${discountPercent.toFixed(1)}%)</span>
         </div>
@@ -2270,7 +2270,7 @@ export function printTestPageHTML(
     contentHtml = `
       <div class="test-card">
         <div class="test-header">
-          <h1 style="margin: 0; font-size: 24px; color: #0A3038;">SABUSH SYSTEM ERP</h1>
+          <h1 style="margin: 0; font-size: 24px; color: #0A1C38;">SABUSH SYSTEM ERP</h1>
           <p style="margin: 4px 0 0; color: #64748b; font-size: 14px;">Página de Teste da Impressora Comercial</p>
         </div>
         <div style="margin-bottom: 24px;">

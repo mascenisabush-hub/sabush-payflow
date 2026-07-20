@@ -3592,7 +3592,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
               </div>
               <div className="flex justify-between items-center text-xs">
                 <span className="font-bold text-[#8B735F] uppercase tracking-wider">Valor total:</span>
-                <span className="font-black text-[#0F4C39]">{(selectedInvoiceForShare.total || 0).toLocaleString()} {currency}</span>
+                <span className="font-black text-[#0F274C]">{(selectedInvoiceForShare.total || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
 
@@ -3645,7 +3645,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     placeholder="Ex: +258 840000000"
                     value={clientPhone}
                     onChange={(e) => setClientPhone(e.target.value)}
-                    className="w-full pl-24 pr-3.5 py-3 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#D14D2A]"
+                    className="w-full pl-24 pr-3.5 py-3 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#B8791A]"
                   />
                 </div>
 
@@ -3653,14 +3653,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   value={whatsappMessage}
                   onChange={(e) => setWhatsappMessage(e.target.value)}
                   rows={4}
-                  className="w-full p-4 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs text-slate-700 leading-relaxed font-semibold focus:ring-2 focus:ring-[#D14D2A]"
+                  className="w-full p-4 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs text-slate-700 leading-relaxed font-semibold focus:ring-2 focus:ring-[#B8791A]"
                   placeholder="Mensagem rápida do WhatsApp..."
                 />
               </div>
 
               <button
                 onClick={handleSendWhatsAppDirect}
-                className="w-full py-4 bg-[#0F4C3A] hover:bg-[#093025] active:bg-[#062018] text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0F4C39]/15"
+                className="w-full py-4 bg-[#0F274C] hover:bg-[#093025] active:bg-[#062018] text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0F274C]/15"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.46h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -4046,7 +4046,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
           <div className="fixed inset-0 bg-[#090C16]/80 backdrop-blur-md z-[150] flex flex-col h-screen w-screen overflow-hidden select-none animate-in fade-in duration-200 block" id="invoice-preview-modal">
             
             {/* Control Bar Header */}
-            <div className="bg-[#081F1E] border-b border-[#163B3A] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+            <div className="bg-[#081F1E] border-b border-[#16253B] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
                   <Eye size={18} />
@@ -4086,7 +4086,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </button>
 
                   {showFormatConfig && (
-                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#081F1E] border border-[#163B3A] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
+                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#081F1E] border border-[#16253B] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
                       <p className="text-[10px] font-black uppercase tracking-widest text-[#8FB0AC]">Formato de Impressão</p>
                       
                       <div className="flex flex-col gap-1.5">
@@ -4139,7 +4139,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         </button>
                       </div>
 
-                      <div className="border-t border-[#163B3A] pt-2 mt-1 text-[9px] text-[#8FB0AC]/80 flex items-start gap-1 leading-snug">
+                      <div className="border-t border-[#16253B] pt-2 mt-1 text-[9px] text-[#8FB0AC]/80 flex items-start gap-1 leading-snug">
                         <span>💡</span>
                         <p>Selecionar um formato guarda automaticamente a preferência nas configurações da empresa.</p>
                       </div>
@@ -4208,7 +4208,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             <div className="flex-1 overflow-hidden flex flex-col md:flex-row bg-[#080B16]">
               
               {/* Left Side: Document Canvas (Interactive zoom & preview) */}
-              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#163B3A]">
+              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#16253B]">
                 <div 
                   style={{ transform: `scale(${previewZoom / 100})`, transformOrigin: 'top center' }}
                   className="transition-transform duration-100 ease-out"
@@ -4235,7 +4235,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                             <p className="text-[10px] font-bold text-slate-300 tracking-widest">FACTURA COMERCIAL</p>
                           </div>
                           <div className="text-right leading-tight">
-                            <h4 className="text-lg font-mono font-extrabold text-[#D14D2A]">
+                            <h4 className="text-lg font-mono font-extrabold text-[#B8791A]">
                               {inv.invoiceNumber}
                             </h4>
                             <div className="text-[10px] text-slate-300 font-semibold space-y-0.5 mt-1">
@@ -4470,7 +4470,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
               </div>
 
               {/* Right Side: ERP Control Panel / Sidebar */}
-              <div className="w-full md:w-[380px] bg-[#0E1325] border-t md:border-t-0 md:border-l border-[#163B3A] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
+              <div className="w-full md:w-[380px] bg-[#0E1325] border-t md:border-t-0 md:border-l border-[#16253B] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
                 
                 <div className="space-y-5 flex-1">
                   <div className="flex items-center justify-between">
@@ -4481,7 +4481,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
 
                   {/* Summary Box */}
-                  <div className="bg-[#0C2624] rounded-xl p-4 border border-[#163B3A] space-y-2">
+                  <div className="bg-[#0C2624] rounded-xl p-4 border border-[#16253B] space-y-2">
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-400">Total Fatura:</span>
                       <span className="font-mono font-black text-white">{grandTotalAmount.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
@@ -4578,7 +4578,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                   {/* ADD PRODUCT TO EXISTING INVOICE (ADICIONAR ITEM) */}
                   {inv.status !== 'paid' && inv.status !== 'cancelled' && (
-                    <div className="space-y-3 pt-2 border-t border-[#163B3A]">
+                    <div className="space-y-3 pt-2 border-t border-[#16253B]">
                       <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest">
                         ➕ Adicionar Artigo à Fatura
                       </h5>
@@ -4588,14 +4588,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         <input
                           type="text"
                           placeholder="Pesquise por nome do produto..."
-                          className="w-full px-3 py-2 bg-[#0C2624] border border-[#163B3A] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
+                          className="w-full px-3 py-2 bg-[#0C2624] border border-[#16253B] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
                           value={invoiceItemSearch}
                           onChange={e => setInvoiceItemSearch(e.target.value)}
                         />
                       </div>
 
                       {invoiceItemSearch && (
-                        <div className="bg-[#0C2624] border border-[#163B3A] hover:shadow-2xl rounded-xl divide-y divide-[#163B3A]/60 max-h-40 overflow-y-auto custom-scrollbar">
+                        <div className="bg-[#0C2624] border border-[#16253B] hover:shadow-2xl rounded-xl divide-y divide-[#16253B]/60 max-h-40 overflow-y-auto custom-scrollbar">
                           {filteredInvoiceItemSearchProducts
                             .map((p, idx) => (
                               <button
@@ -4626,14 +4626,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   )}
 
                   {/* HISTÓRICO DE AMORTIZAÇÕES */}
-                  <div className="pt-4 border-t border-[#163B3A] space-y-3">
+                  <div className="pt-4 border-t border-[#16253B] space-y-3">
                     <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>💰 Histórico de Amortizações</span>
                     </h5>
                     <p className="text-[10px] text-slate-400 font-medium">Lista de pagamentos e amortizações efetuadas para esta fatura.</p>
                     
                     {invoicePayments.length === 0 ? (
-                      <div className="bg-[#0C2624] p-3 rounded-xl border border-[#163B3A]/60 text-center text-[10px] text-slate-400 font-bold">
+                      <div className="bg-[#0C2624] p-3 rounded-xl border border-[#16253B]/60 text-center text-[10px] text-slate-400 font-bold">
                         Nenhuma amortização efetuada ainda.
                       </div>
                     ) : (
@@ -4641,7 +4641,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         {invoicePayments.map((pay: any, idx: number) => {
                           const payDate = pay.date ? formatDateInTimezone(new Date(pay.date), businessData?.timezone || profile?.timezone || 'Africa/Maputo') : 'N/A';
                           return (
-                            <div key={pay.id || idx} className="bg-[#0C2624] p-3 rounded-xl border border-[#163B3A]/60 space-y-2">
+                            <div key={pay.id || idx} className="bg-[#0C2624] p-3 rounded-xl border border-[#16253B]/60 space-y-2">
                               <div className="flex justify-between items-center text-xs">
                                 <span className="font-extrabold text-white font-mono">
                                   #{pay.id ? pay.id.slice(-6).toUpperCase() : `PAG-${idx}`}
@@ -4690,7 +4690,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
 
                   {/* AUDIT TIMELINE (RASTO DE AUDITORIA) */}
-                  <div className="pt-4 border-t border-[#163B3A] space-y-3">
+                  <div className="pt-4 border-t border-[#16253B] space-y-3">
                     <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
                       <span>📋 Rasto de Auditoria</span>
                     </h5>

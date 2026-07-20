@@ -207,7 +207,7 @@ export function generateInvoicePDF(invoice: any, company: PDFCompanyInfo, option
   const pageWidth = 210;
   
   // Header background accent (Vyapar Classic Navy Blue)
-  doc.setFillColor(10, 48, 56); // Forest Teal / #0A3038
+  doc.setFillColor(10, 48, 56); // Forest Teal / #0A1C38
   doc.rect(0, 0, pageWidth, 42, 'F');
   
   // Title

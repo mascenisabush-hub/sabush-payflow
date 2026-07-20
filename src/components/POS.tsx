@@ -3679,8 +3679,8 @@ export default function POS() {
             className={cn(
               "h-6 px-2 rounded-md flex items-center gap-1 transition-all cursor-pointer relative shrink-0",
               isCameraActive 
-                ? "bg-[#0C3A42] text-[#E3F4F2]" 
-                : "bg-[#0C3A42] text-[#E3F4F2] hover:opacity-90"
+                ? "bg-[#0C2242] text-[#E3F4F2]" 
+                : "bg-[#0C2242] text-[#E3F4F2] hover:opacity-90"
             )}
             title="Sincronizar Câmara"
           >
@@ -3691,7 +3691,7 @@ export default function POS() {
 
           {/* Hardware visual active icon (〄) */}
           <div 
-            className="h-6 px-2 bg-[#0C3A42] text-[#E3F4F2] rounded-md flex items-center gap-1 pointer-events-none shrink-0"
+            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] rounded-md flex items-center gap-1 pointer-events-none shrink-0"
             title="Modo USB escuta automática ativo"
           >
             <span className="text-[10px] text-amber-300">〄</span>
@@ -3703,7 +3703,7 @@ export default function POS() {
           <button
             type="button"
             onClick={() => setIsCatalogOpen(true)}
-            className="h-6 px-2 bg-[#0C3A42] text-[#E3F4F2] hover:opacity-90 rounded-md flex items-center gap-1 transition-all cursor-pointer shrink-0"
+            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] hover:opacity-90 rounded-md flex items-center gap-1 transition-all cursor-pointer shrink-0"
           >
             <Package size={11} className="text-[#E3F4F2]" />
             <span className="text-[10px] font-bold text-[#E3F4F2] hidden md:inline">📦 Catálogo</span>
@@ -3712,7 +3712,7 @@ export default function POS() {
           {/* Sync Status Component */}
           <div className="flex items-center gap-1.5 shrink-0">
             {isSyncing ? (
-              <div className="h-6 px-2 bg-[#0C3A42] border border-[#E3F4F2]/15 text-[#E3F4F2]/85 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
+              <div className="h-6 px-2 bg-[#0C2242] border border-[#E3F4F2]/15 text-[#E3F4F2]/85 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
                 <RefreshCw size={10} className="animate-spin text-amber-300" />
                 <span className="hidden md:inline">A sincronizar...</span>
               </div>
@@ -3766,7 +3766,7 @@ export default function POS() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="bg-[#0C3A42] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
+            className="bg-[#0C2242] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
           >
             <button 
               onClick={() => setIsCameraActive(false)}
@@ -3832,7 +3832,7 @@ export default function POS() {
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest leading-none shrink-0">CLIENTE:</span>
           {selectedCustomerId === 'Walk-in' ? (
-            <span className="bg-[#0C3A42]/10 border border-[#0C3A42]/20 text-[#0C3A42] font-black text-[10px] px-2 py-0.5 rounded-md uppercase shadow-xs leading-none shrink-0">
+            <span className="bg-[#0C2242]/10 border border-[#0C2242]/20 text-[#0C2242] font-black text-[10px] px-2 py-0.5 rounded-md uppercase shadow-xs leading-none shrink-0">
               WALK-IN
             </span>
           ) : (
@@ -3875,7 +3875,7 @@ export default function POS() {
             onClick={() => setIsBrowseCustomersOpen(true)}
             className="h-6 px-2 bg-white hover:bg-blue-50/40 text-blue-700 font-bold text-[10px] uppercase tracking-wider rounded-md transition-all border border-blue-200 flex items-center gap-1 cursor-pointer shrink-0"
           >
-            <Users size={11} className="text-[#0C3A42]" />
+            <Users size={11} className="text-[#0C2242]" />
             <span className="hidden sm:inline">Lista de Clientes</span>
             <span className="sm:hidden">Lista</span>
           </button>
@@ -3883,7 +3883,7 @@ export default function POS() {
           <button
             type="button"
             onClick={() => setIsQuickCustomerOpen(true)}
-            className="h-6 px-2 bg-[#0C3A42] text-[#E3F4F2] hover:opacity-90 font-black text-[10px] uppercase tracking-wider rounded-md transition-all flex items-center gap-0.5 cursor-pointer border-none shrink-0"
+            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] hover:opacity-90 font-black text-[10px] uppercase tracking-wider rounded-md transition-all flex items-center gap-0.5 cursor-pointer border-none shrink-0"
           >
             <span>➕</span> <span className="hidden sm:inline">Novo Registo</span><span className="sm:hidden">Novo</span>
           </button>
@@ -3902,7 +3902,7 @@ export default function POS() {
                   onClick={() => setSaleMode('dinheiro')}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'dinheiro' ? "bg-[#0C3A42] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'dinheiro' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Dinheiro
@@ -3925,7 +3925,7 @@ export default function POS() {
                   }}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'parcial' ? "bg-[#0C3A42] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'parcial' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Parcial
@@ -3941,7 +3941,7 @@ export default function POS() {
               onClick={() => handleToggleSaleType('retail')}
               className={cn(
                 "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'retail' ? "bg-[#0C3A42] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                saleType === 'retail' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
               )}
             >
               <span>📦</span> <span className="hidden sm:inline">Retalho</span>
@@ -3951,7 +3951,7 @@ export default function POS() {
               onClick={() => handleToggleSaleType('wholesale')}
               className={cn(
                 "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'wholesale' ? "bg-[#0C3A42] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                saleType === 'wholesale' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
               )}
             >
               <span>🏭</span> <span className="hidden sm:inline">Grosso</span>
@@ -4037,7 +4037,7 @@ export default function POS() {
                     className="flex-1 flex flex-col min-h-0 overflow-hidden"
                   >
 {/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0C3A42]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
+                  <div className="px-3 py-1 bg-[#0C2242]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
                     <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
                     <div className="flex items-center gap-1">
                       {/* Suspended carts list button */}
@@ -4419,7 +4419,7 @@ export default function POS() {
           <div className="hidden md:flex flex-1 min-h-0 overflow-hidden">
             <div className="flex-[1.6] flex flex-col min-h-0 overflow-hidden border-r border-blue-200/60">
 {/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0C3A42]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
+                  <div className="px-3 py-1 bg-[#0C2242]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
                     <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
                     <div className="flex items-center gap-1">
                       {/* Suspended carts list button */}
@@ -5161,7 +5161,7 @@ export default function POS() {
         <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/70 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2">
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#0C3A42]">Ficha e Histórico do Cliente</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[#0C2242]">Ficha e Histórico do Cliente</h3>
               <button onClick={() => setIsHistoryOpen(false)} className="text-blue-400 hover:text-blue-900">
                 <X size={16} />
               </button>
@@ -6662,7 +6662,7 @@ export default function POS() {
             </button>
 
             <div className="flex items-center gap-3 border-b border-blue-100 pb-4">
-              <div className="p-3 bg-blue-50 text-[#0C3A42] rounded-2xl">
+              <div className="p-3 bg-blue-50 text-[#0C2242] rounded-2xl">
                 <Calculator size={24} />
               </div>
               <div>
@@ -6736,7 +6736,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsCheatSheetOpen(false)}
-                className="w-full py-3 bg-[#0C3A42] text-white font-bold uppercase tracking-widest rounded-2xl text-[10px] hover:bg-[#032240] transition-all cursor-pointer border-none"
+                className="w-full py-3 bg-[#0C2242] text-white font-bold uppercase tracking-widest rounded-2xl text-[10px] hover:bg-[#032240] transition-all cursor-pointer border-none"
               >
                 Fechar Manual [Esc]
               </button>

@@ -6900,7 +6900,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           className="space-y-6 animate-fade-in"
         >
           {/* Bento Header Callout */}
-          <div className="bg-[#081F1E] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#163B3A]">
+          <div className="bg-[#081F1E] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#16253B]">
             <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 blur-3xl rounded-full translate-x-20 -translate-y-20" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1 text-left font-sans">

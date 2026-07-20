@@ -931,11 +931,11 @@ function ProtectedApp() {
     return (
       <div className="w-full min-h-screen bg-[#071120] flex items-center justify-center p-0 md:p-6 lg:p-8 overflow-hidden select-none font-sans">
         <div 
-          className="w-full max-w-[1280px] min-h-[100vh] md:min-h-[640px] md:h-[85vh] flex flex-col md:flex-row bg-[#0A3038] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-800/60"
+          className="w-full max-w-[1280px] min-h-[100vh] md:min-h-[640px] md:h-[85vh] flex flex-col md:flex-row bg-[#0A1C38] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-800/60"
         >
           {/* Left Panel: ~45% width */}
           <div 
-            className="w-full md:w-[45%] p-8 md:p-12 lg:p-14 flex flex-col justify-between shrink-0 relative min-h-[480px] md:min-h-0 bg-[#0A3038] overflow-hidden"
+            className="w-full md:w-[45%] p-8 md:p-12 lg:p-14 flex flex-col justify-between shrink-0 relative min-h-[480px] md:min-h-0 bg-[#0A1C38] overflow-hidden"
           >
             {/* Soft depth wash - clean, no texture noise */}
             <div 
@@ -964,7 +964,7 @@ function ProtectedApp() {
                     />
                   ) : (
                     <div 
-                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0A3038] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A] shadow-lg"
+                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0A1C38] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A] shadow-lg"
                     >
                       S
                     </div>
@@ -1028,7 +1028,7 @@ function ProtectedApp() {
                     return (
                       <li key={index} className="flex items-center gap-3.5">
                         <div 
-                          className="w-9 h-9 rounded-full border-2 border-[#F2C46B]/40 bg-[#0A3038]/60 flex items-center justify-center shrink-0 shadow-inner"
+                          className="w-9 h-9 rounded-full border-2 border-[#F2C46B]/40 bg-[#0A1C38]/60 flex items-center justify-center shrink-0 shadow-inner"
                         >
                           <IconComponent size={16} className="text-[#F2C46B] stroke-[2.2]" />
                         </div>
@@ -1056,7 +1056,7 @@ function ProtectedApp() {
                     <stop offset="100%" stopColor="#B8791A" />
                   </linearGradient>
                 </defs>
-                <path d="M 0,0 L 0,30 C 250,55 750,5 1000,30 L 1000,0 Z" fill="#0A3038" />
+                <path d="M 0,0 L 0,30 C 250,55 750,5 1000,30 L 1000,0 Z" fill="#0A1C38" />
                 <path d="M -10,20 C 240,45 740,-5 1010,20 L 1010,40 C 740,15 240,65 -10,40 Z" fill="black" opacity="0.25" />
                 <path d="M 0,22 C 250,47 750,-3 1000,22 L 1000,38 C 750,13 250,63 0,38 Z" fill="url(#gold-grad-horiz)" />
                 <path d="M 0,22 C 250,47 750,-3 1000,22 L 1000,25 C 750,0 250,50 0,25 Z" fill="#FFF2D6" opacity="0.6" />
@@ -1088,7 +1088,7 @@ function ProtectedApp() {
               {/* Navy extension mask (matching Left Panel Background) */}
               <path 
                 d="M 0,0 L 60,0 C 110,250 10,750 60,1000 L 0,1000 Z" 
-                fill="#0A3038" 
+                fill="#0A1C38" 
               />
 
               {/* Behind-shadow for 3D depth */}
@@ -1169,7 +1169,7 @@ function ProtectedApp() {
             <div className="w-full max-w-[400px] py-4 relative z-10">
               {/* Heading */}
               <h3 
-                className="text-2xl md:text-3xl font-extrabold text-[#0A3038] font-display text-left tracking-tight"
+                className="text-2xl md:text-3xl font-extrabold text-[#0A1C38] font-display text-left tracking-tight"
               >
                 {isRegistering ? "Criar conta" : "Bem-vindo de volta"}
               </h3>
@@ -1207,7 +1207,7 @@ function ProtectedApp() {
               <form onSubmit={handleEmailAuth} className="space-y-4">
                 {/* Email field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A3038] font-display">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A1C38] font-display">
                     E-mail
                   </label>
                   <div className="relative">
@@ -1230,7 +1230,7 @@ function ProtectedApp() {
 
                 {/* Password field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A3038] font-display">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A1C38] font-display">
                     Palavra-passe
                   </label>
                   <div className="relative">
@@ -1251,7 +1251,7 @@ function ProtectedApp() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0A3038] p-1 focus:outline-none bg-transparent border-0 cursor-pointer flex items-center justify-center transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0A1C38] p-1 focus:outline-none bg-transparent border-0 cursor-pointer flex items-center justify-center transition-colors"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
@@ -1275,7 +1275,7 @@ function ProtectedApp() {
                 <button
                   type="submit"
                   disabled={isAuthenticating}
-                  className="w-full h-[46px] rounded-[10px] bg-[#0A3038] hover:bg-[#123F3D] active:scale-[0.985] flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider text-[#F2C46B] transition-all cursor-pointer font-display border-0 shadow-md"
+                  className="w-full h-[46px] rounded-[10px] bg-[#0A1C38] hover:bg-[#123F3D] active:scale-[0.985] flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider text-[#F2C46B] transition-all cursor-pointer font-display border-0 shadow-md"
                 >
                   {isAuthenticating && loginMethod === 'email' ? (
                     <Loader2 className="w-5 h-5 animate-spin text-[#F2C46B]" />
@@ -1445,7 +1445,7 @@ function ProtectedApp() {
             {/* Features Bullet List - responsive grid for mobile/tablet layout, flex col for desktop */}
             <div className="grid grid-cols-2 gap-x-3 gap-y-2 lg:flex lg:flex-col lg:space-y-4 max-w-md pt-2 shrink-0 left-features-list">
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#17A398] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
                   <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
@@ -1457,7 +1457,7 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#17A398] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
                   <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
@@ -1469,8 +1469,8 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#17A398] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
-                  <svg className="w-5 h-5 text-[#17A398]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                  <svg className="w-5 h-5 text-[#174FA3]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
@@ -1481,7 +1481,7 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#17A398] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
                   <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
                   </svg>
@@ -1576,18 +1576,18 @@ function ProtectedApp() {
                           <svg className="w-full h-[85%] absolute inset-0" viewBox="0 0 100 30" preserveAspectRatio="none">
                             <defs>
                               <linearGradient id="laptopAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#17A398" stopOpacity="0.25" />
-                                <stop offset="100%" stopColor="#17A398" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="#174FA3" stopOpacity="0.25" />
+                                <stop offset="100%" stopColor="#174FA3" stopOpacity="0.0" />
                               </linearGradient>
                             </defs>
                             <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5 L100,30 L0,30 Z" fill="url(#laptopAreaGrad)"></path>
-                            <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5" fill="none" stroke="#17A398" strokeWidth="2.5" strokeLinecap="round"></path>
+                            <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5" fill="none" stroke="#174FA3" strokeWidth="2.5" strokeLinecap="round"></path>
                             
-                            <circle cx="42" cy="14" r="2.5" fill="#17A398" className="animate-ping" style={{ transformOrigin: '42px 14px' }}></circle>
-                            <circle cx="42" cy="14" r="1.5" fill="#ffffff" stroke="#17A398" strokeWidth="1.5"></circle>
+                            <circle cx="42" cy="14" r="2.5" fill="#174FA3" className="animate-ping" style={{ transformOrigin: '42px 14px' }}></circle>
+                            <circle cx="42" cy="14" r="1.5" fill="#ffffff" stroke="#174FA3" strokeWidth="1.5"></circle>
 
-                            <circle cx="85" cy="8" r="2.5" fill="#17A398" className="animate-ping" style={{ transformOrigin: '85px 8px' }}></circle>
-                            <circle cx="85" cy="8" r="1.5" fill="#ffffff" stroke="#17A398" strokeWidth="1.5"></circle>
+                            <circle cx="85" cy="8" r="2.5" fill="#174FA3" className="animate-ping" style={{ transformOrigin: '85px 8px' }}></circle>
+                            <circle cx="85" cy="8" r="1.5" fill="#ffffff" stroke="#174FA3" strokeWidth="1.5"></circle>
                           </svg>
                         </div>
                       </div>
@@ -2205,7 +2205,7 @@ function ProtectedApp() {
     return (
       <div className="h-screen w-screen flex items-center justify-center bg-[#140F0D] font-sans p-4 relative overflow-hidden select-none">
         {/* Abstract design nodes in the background */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D14D2A]/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#B8791A]/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
         
         <div className="w-full max-w-md bg-[#1D1510] border border-[#3A2F26] rounded-[40px] p-8 text-center space-y-6 shadow-2xl z-10 transition-all">

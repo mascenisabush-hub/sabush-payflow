@@ -3252,7 +3252,7 @@ export default function Settings() {
                         checked={!forceLongPolling} 
                         onChange={e => setForceLongPolling(!e.target.checked)}
                       />
-                      <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F4C39]"></div>
+                      <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F274C]"></div>
                     </label>
                   </div>
                   
@@ -3287,14 +3287,14 @@ export default function Settings() {
                       checked={cacheFirstMode} 
                       onChange={e => setCacheFirstMode(e.target.checked)}
                     />
-                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F4C39]"></div>
+                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F274C]"></div>
                   </label>
                 </div>
 
                 {/* IndexedDB database indicators */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
                   <div className="p-4 bg-white rounded-xl border border-[#E9E1D2]/40 text-xs flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0F4C39] flex items-center justify-center self-start">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0F274C] flex items-center justify-center self-start">
                       <Database size={16} />
                     </div>
                     <div>
@@ -4126,7 +4126,7 @@ export default function Settings() {
 
                 <div className="p-6 bg-[#FCFBF9] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
                   <div>
-                    <h4 className="font-extrabold text-[#D14D2A] text-sm uppercase tracking-wider font-sans">Estado do Consentimento</h4>
+                    <h4 className="font-extrabold text-[#B8791A] text-sm uppercase tracking-wider font-sans">Estado do Consentimento</h4>
                     {legalAcknowledgement?.acknowledged ? (
                       <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-emerald-50 border border-emerald-150 rounded-2xl">
                         <div className="flex items-center gap-3">
