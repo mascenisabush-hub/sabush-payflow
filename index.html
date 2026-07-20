@@ -64,9 +64,184 @@
     <meta property="twitter:url" content="https://sabush-system.web.app/" />
     <meta property="twitter:title" content="Sabush System ERP" />
     <meta property="twitter:description" content="O ERP moderno focado em PMEs Africanas. Vendas, faturas e controle de estoque de forma simples." />
+
+    <!-- Boot splash styles: fully self-contained (no external fonts/assets besides the
+         app icon) so this renders instantly, before the JS bundle finishes loading.
+         React's createRoot().render() replaces the entire contents of #root on mount,
+         so this markup disappears automatically the moment the app boots — no manual
+         removal script needed. -->
+    <style>
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        background:
+          radial-gradient(circle at 50% 38%, rgba(184, 121, 26, 0.16), transparent 55%),
+          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.10), transparent 60%),
+          #060d1c;
+        overflow: hidden;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      }
+
+      #boot-splash .grid-bg {
+        position: absolute;
+        inset: -50%;
+        background-image:
+          linear-gradient(rgba(184, 121, 26, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(184, 121, 26, 0.07) 1px, transparent 1px);
+        background-size: 42px 42px;
+        animation: boot-grid-drift 16s linear infinite;
+        mask-image: radial-gradient(circle at 50% 45%, black 0%, transparent 70%);
+      }
+
+      @keyframes boot-grid-drift {
+        from { transform: translate(0, 0); }
+        to { transform: translate(42px, 42px); }
+      }
+
+      #boot-splash .mark-wrap {
+        position: relative;
+        width: 116px;
+        height: 116px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #boot-splash .ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 2px solid transparent;
+        border-top-color: #B8791A;
+        border-right-color: rgba(184, 121, 26, 0.35);
+        animation: boot-spin 1.3s linear infinite;
+      }
+
+      #boot-splash .ring.ring-2 {
+        inset: 12px;
+        border-top-color: rgba(96, 165, 250, 0.85);
+        border-right-color: transparent;
+        animation: boot-spin-reverse 2.1s linear infinite;
+      }
+
+      @keyframes boot-spin {
+        to { transform: rotate(360deg); }
+      }
+      @keyframes boot-spin-reverse {
+        to { transform: rotate(-360deg); }
+      }
+
+      #boot-splash .mark-glow {
+        position: absolute;
+        inset: 18px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(184, 121, 26, 0.35), transparent 70%);
+        animation: boot-pulse 2.4s ease-in-out infinite;
+      }
+
+      @keyframes boot-pulse {
+        0%, 100% { opacity: 0.5; transform: scale(0.92); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+
+      #boot-splash .mark-icon {
+        position: relative;
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
+        z-index: 1;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+
+      #boot-splash .wordmark {
+        position: relative;
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        color: #f5f1e8;
+        text-transform: uppercase;
+      }
+
+      #boot-splash .wordmark span {
+        background: linear-gradient(90deg, #f5c877, #B8791A 60%, #f5c877);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: boot-shine 3s linear infinite;
+      }
+
+      @keyframes boot-shine {
+        to { background-position: -200% center; }
+      }
+
+      #boot-splash .tagline {
+        position: relative;
+        margin-top: -18px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: #8a93a6;
+      }
+
+      #boot-splash .bar-track {
+        position: relative;
+        width: 148px;
+        height: 3px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      #boot-splash .bar-fill {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, transparent, #B8791A, #f5c877, #B8791A, transparent);
+        animation: boot-sweep 1.4s ease-in-out infinite;
+      }
+
+      @keyframes boot-sweep {
+        0% { left: -45%; }
+        100% { left: 105%; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #boot-splash .grid-bg,
+        #boot-splash .ring,
+        #boot-splash .mark-glow,
+        #boot-splash .wordmark span,
+        #boot-splash .bar-fill {
+          animation: none;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="boot-splash">
+        <div class="grid-bg"></div>
+        <div class="mark-wrap">
+          <div class="ring"></div>
+          <div class="ring ring-2"></div>
+          <div class="mark-glow"></div>
+          <img class="mark-icon" src="/icon-192.png" alt="Sabush" />
+        </div>
+        <div>
+          <div class="wordmark">SAB<span>USH</span></div>
+          <div class="tagline">A INICIALIZAR O SISTEMA...</div>
+        </div>
+        <div class="bar-track"><div class="bar-fill"></div></div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
