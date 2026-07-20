@@ -2613,46 +2613,8 @@ export default function POS() {
         toast.success("Venda guardada em modo offline! Aguardando ligação para sincronizar.");
       }
 
-      if (isOnline) {
-        // Record stock movements in background
-        try {
-          const { addDoc, collection } = await import('firebase/firestore');
-          for (const item of cart) {
-            const itemsToDeduct = item.quantity * (item.unitMultiplier || 1);
-            await addDoc(collection(db, `businesses/${profile.businessId}/stock_movements`), {
-              productId: item.id,
-              productName: item.name,
-              qtyChange: -itemsToDeduct,
-              type: 'pos',
-              reference: uniqueId,
-              reportedBy: profile.email || 'Utilizador',
-              timestamp: serverTimestamp()
-            });
-          }
-        } catch (errM) {
-          console.error("[POS] Error logging stock movements:", errM);
-        }
-
-        // Section 10: Log individual purchase record sub-collection histories
-        if (selectedCustomerId && selectedCustomerId !== 'Walk-in') {
-          const purchaseLog = {
-            invoiceId: uniqueId,
-            invoiceNumber: uniqueId,
-            date: new Date().toISOString(),
-            total: total,
-            paymentMethod: saleMode,
-            status: creditOutstandingAmount <= 0 ? 'PAGO' : (creditOutstandingAmount === total ? 'PENDENTE' : 'PARCIAL'),
-            items: cart.map(item => ({
-              name: item.name,
-              quantity: item.quantity,
-              price: getCartItemPricing(item).finalUnitPrice
-            }))
-          };
-          await addDoc(collection(db, `businesses/${profile.businessId}/customers/${selectedCustomerId}/purchases`), purchaseLog);
-        }
-      }
-
-      // Complete checkout visual modal flow
+      // Complete checkout visual modal flow immediately — the sale is already committed
+      // above, so the receipt/print screen must not wait on secondary audit writes below.
       const resolvedSale = {
         ...invoiceData,
         customerName: selectedCust ? selectedCust.name : "Cliente Geral",
@@ -2665,6 +2627,61 @@ export default function POS() {
       toast.success("Venda Concluída!");
       setCart([]);
       setRedeemedPoints(0);
+
+      // Auto-print the receipt immediately — no manual click required.
+      // If the browser blocks the pop-up, triggerCustomMultiPagePrint already
+      // shows a toast telling the operator to enable pop-ups; the "Imprimir"
+      // button on the success modal remains available to reprint on demand.
+      triggerCustomMultiPagePrint(resolvedSale);
+
+      if (isOnline) {
+        // Fire-and-forget background logging: stock movements + customer purchase history.
+        // Previously this was a sequential per-item `await` loop (plus a redundant dynamic
+        // import of a module already imported statically at the top of the file) that
+        // blocked the receipt/print screen for several seconds on multi-item carts. Neither
+        // write affects the sale itself, so failures here are only logged, not surfaced.
+        const cartSnapshot = cart;
+        (async () => {
+          try {
+            await Promise.all(cartSnapshot.map(item => {
+              const itemsToDeduct = item.quantity * (item.unitMultiplier || 1);
+              return addDoc(collection(db, `businesses/${profile.businessId}/stock_movements`), {
+                productId: item.id,
+                productName: item.name,
+                qtyChange: -itemsToDeduct,
+                type: 'pos',
+                reference: uniqueId,
+                reportedBy: profile.email || 'Utilizador',
+                timestamp: serverTimestamp()
+              });
+            }));
+          } catch (errM) {
+            console.error("[POS] Error logging stock movements:", errM);
+          }
+
+          // Section 10: Log individual purchase record sub-collection histories
+          if (selectedCustomerId && selectedCustomerId !== 'Walk-in') {
+            try {
+              const purchaseLog = {
+                invoiceId: uniqueId,
+                invoiceNumber: uniqueId,
+                date: new Date().toISOString(),
+                total: total,
+                paymentMethod: saleMode,
+                status: creditOutstandingAmount <= 0 ? 'PAGO' : (creditOutstandingAmount === total ? 'PENDENTE' : 'PARCIAL'),
+                items: cartSnapshot.map(item => ({
+                  name: item.name,
+                  quantity: item.quantity,
+                  price: getCartItemPricing(item).finalUnitPrice
+                }))
+              };
+              await addDoc(collection(db, `businesses/${profile.businessId}/customers/${selectedCustomerId}/purchases`), purchaseLog);
+            } catch (errP) {
+              console.error("[POS] Error logging customer purchase history:", errP);
+            }
+          }
+        })();
+      }
     } catch (err: any) {
       console.error(err);
       if (err && err.code === 'insufficient_stock') {
@@ -4732,7 +4749,7 @@ export default function POS() {
                 className="w-full py-4.5 bg-blue-600 hover:bg-blue-700 text-white font-black text-xs uppercase tracking-widest rounded-2xl flex items-center justify-center gap-2 shadow-lg cursor-pointer border-none"
               >
                 <Printer size={15} />
-                Emitir Recibo Multipage
+                Reimprimir Recibo
               </button>
 
               <button
