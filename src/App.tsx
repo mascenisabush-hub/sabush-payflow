@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AuthProvider, useAuth, AuthLog } from './contexts/AuthContext';
 import Onboarding from './components/Onboarding';
+import AppLoadingScreen from './components/AppLoadingScreen';
 import ErrorBoundary from './components/ErrorBoundary';
 import Sidebar from './components/Sidebar';
 import ManagerAuthListener from './components/ManagerAuthListener';
@@ -881,24 +882,13 @@ function ProtectedApp() {
   }, [user, profile, twoFactorVerified, twoFactorCodeSent, sending2FaCode, businessData]);
 
   if (loading || isAuthenticating || (user && !profile)) {
-    return (
-      <div className="h-screen w-screen flex items-center justify-center bg-slate-50">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-slate-500 font-medium animate-pulse">Carregando Sabush System ERP...</p>
-        </div>
-      </div>
-    );
+    return <AppLoadingScreen message="A carregar Sabush System ERP..." />;
   }
 
   // Standalone Public Direct Routes (No Authentication required)
   if (publicShopId) {
     return (
-      <Suspense fallback={
-        <div className="h-screen w-screen flex items-center justify-center bg-slate-50">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      }>
+      <Suspense fallback={<AppLoadingScreen message="A carregar a montra online..." />}>
         <div className="w-screen h-screen bg-slate-50 overflow-hidden relative">
           <Storefront businessId={publicShopId} onClose={() => setPublicShopId(null)} />
         </div>
@@ -908,11 +898,7 @@ function ProtectedApp() {
 
   if (activePaymentLink) {
     return (
-      <Suspense fallback={
-        <div className="h-screen w-screen flex items-center justify-center bg-slate-50">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      }>
+      <Suspense fallback={<AppLoadingScreen message="A carregar a página de pagamento..." />}>
         <div className="w-screen h-screen bg-slate-50 overflow-hidden relative">
           <PaymentPage 
             businessId={activePaymentLink.businessId} 
@@ -926,11 +912,7 @@ function ProtectedApp() {
 
   if (isCustomerPortalRoute) {
     return (
-      <Suspense fallback={
-        <div className="h-screen w-screen flex items-center justify-center bg-[#1A0F05]">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      }>
+      <Suspense fallback={<AppLoadingScreen message="A carregar o portal do cliente..." />}>
         <div className="w-screen min-h-screen bg-[#1A0F05] overflow-x-hidden relative">
           <CustomerPortal />
         </div>
@@ -2172,14 +2154,7 @@ function ProtectedApp() {
   const isSuperAdmin = profile?.role?.toLowerCase() === 'super_admin' || profile?.superAdmin === true || user?.email === 'mascenisabush@gmail.com';
   if (user && (!profile || (!isSuperAdmin && (!profile.businessId || profile.onboardingCompleted === false)))) {
     return (
-      <Suspense fallback={
-        <div className="h-screen w-screen flex items-center justify-center bg-slate-50">
-          <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-slate-500 font-medium animate-pulse">Carregando formulário inicial...</p>
-          </div>
-        </div>
-      }>
+      <Suspense fallback={<AppLoadingScreen message="A carregar formulário inicial..." />}>
         <Onboarding />
       </Suspense>
     );
