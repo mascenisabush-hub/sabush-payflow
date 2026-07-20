@@ -6,7 +6,8 @@ export type AuditEventType =
   | 'discount_applied' 
   | 'item_voided' 
   | 'manager_override_used' 
-  | 'refund_processed';
+  | 'refund_processed'
+  | 'price_adjustment_processed';
 
 export interface AuditLogParams {
   businessId: string;

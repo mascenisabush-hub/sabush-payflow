@@ -299,6 +299,41 @@ service cloud.firestore {
       allow create, update, delete: if canWrite(businessId);
     }
 
+    // --- POS returns/refunds, price adjustments, stock movement log & audit trail ---
+    // These were previously uncovered by any rule and fell through to the
+    // default-deny match at the top of this file, meaning POS returns, price
+    // adjustments, stock movement logging and audit logging would all fail
+    // with permission-denied in production. Fixed here.
+    match /businesses/{businessId}/returns/{returnId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId);
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/price_adjustments/{adjustmentId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId);
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/stock_movements/{movementId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId);
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/customers/{customerId}/purchases/{purchaseId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId);
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
+    match /businesses/{businessId}/auditLogs/{logId} {
+      allow list, get: if isStaffOfBusiness(businessId);
+      allow create: if canWrite(businessId);
+      allow update, delete: if isOwnerOfBusiness(businessId);
+    }
+
     // --- User-specific notification sub-collection ---
     match /users/{userId}/notifications/{notifId} {
       allow list, get: if userId == 'demo_user_123' || (isSignedIn() && (request.auth.uid == userId || isSuperAdmin()));

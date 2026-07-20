@@ -279,7 +279,7 @@ export default function POS() {
   const [customVoidReason, setCustomVoidReason] = useState('');
   const [voidPinThreshold, setVoidPinThreshold] = useState<number>(1000);
 
-  const [activePINActionType, setActivePINActionType] = useState<'credit_bypass' | 'void_item' | 'refund_sale' | 'price_override' | null>(null);
+  const [activePINActionType, setActivePINActionType] = useState<'credit_bypass' | 'void_item' | 'refund_sale' | 'price_override' | 'price_adjustment' | null>(null);
 
   const [isReturnModalOpen, setIsReturnModalOpen] = useState(false);
   const [searchInvoiceTerm, setSearchInvoiceTerm] = useState('');
@@ -291,6 +291,13 @@ export default function POS() {
   const [returnReason, setReturnReason] = useState('Wrong size/item');
   const [customReturnReason, setCustomReturnReason] = useState('');
   const [isProcessingReturn, setIsProcessingReturn] = useState(false);
+
+  // Price Adjustment mode (post-sale discount/correction without touching stock)
+  const [returnMode, setReturnMode] = useState<'stock' | 'price_adjustment'>('stock');
+  const [adjustmentItemKey, setAdjustmentItemKey] = useState<string>('');
+  const [adjustmentAmount, setAdjustmentAmount] = useState<string>('');
+  const [adjustmentReason, setAdjustmentReason] = useState<string>('');
+  const [isProcessingAdjustment, setIsProcessingAdjustment] = useState(false);
 
   // Line-item overrides and Global discounts state
   const [cartDiscountType, setCartDiscountType] = useState<'percent' | 'flat' | 'none'>('none');
@@ -3180,6 +3187,262 @@ export default function POS() {
     printWindow.document.close();
   };
 
+  // Price Adjustment: refunds/credits an amount against a past invoice WITHOUT
+  // touching stock levels — for correcting overcharges/pricing errors where the
+  // customer keeps the goods (as opposed to executeRefund, which is a physical
+  // return and restocks the returned quantity).
+  const executePriceAdjustment = async (authorizedByManager = false, approvedBy?: string) => {
+    if (!selectedInvoice || !profile?.businessId) return;
+
+    const amount = Number(adjustmentAmount) || 0;
+    if (amount <= 0) {
+      toast.error("Indique um valor de ajuste válido.");
+      return;
+    }
+    if (amount > selectedInvoice.total) {
+      toast.error("O valor do ajuste não pode exceder o total da fatura original.");
+      return;
+    }
+    if (!adjustmentReason.trim()) {
+      toast.error("Indique o motivo do ajuste de preço.");
+      return;
+    }
+
+    if (!authorizedByManager) {
+      setManagerPINAction(`Ajuste de Preço (${amount.toFixed(1)} MT)`);
+      setActivePINActionType('price_adjustment');
+      setIsManagerPINOpen(true);
+      return;
+    }
+
+    setIsProcessingAdjustment(true);
+    try {
+      const relatedItem = adjustmentItemKey
+        ? selectedInvoice.items?.find((it: any) => `${it.id}-${it.selectedUnit}` === adjustmentItemKey)
+        : null;
+      const adjustmentId = `ADJ-${Date.now()}`;
+      const finalReason = adjustmentReason.trim();
+
+      const adjustmentRecord = {
+        id: adjustmentId,
+        invoiceId: selectedInvoice.id,
+        itemId: relatedItem?.id || null,
+        itemName: relatedItem?.name || null,
+        amount,
+        refundMethod,
+        reason: finalReason,
+        shiftId: currentShift?.id || '',
+        adjustedBy: profile.email || profile.displayName || 'Utilizador',
+        createdAt: new Date().toISOString(),
+        businessId: profile.businessId
+      };
+
+      const batch = writeBatch(db);
+      const adjustmentDocRef = doc(db, `businesses/${profile.businessId}/price_adjustments`, adjustmentId);
+      batch.set(adjustmentDocRef, adjustmentRecord);
+
+      // Reflect the adjustment in the active shift's totals — no stock changes.
+      if (currentShift) {
+        const shiftRef = doc(db, `businesses/${profile.businessId}/pos_shifts`, currentShift.id);
+        const shiftUpdates: any = {
+          totalSales: increment(-amount),
+        };
+        const methodKey = refundMethod.toLowerCase();
+        if (['cash', 'mpesa', 'emola', 'bank', 'card', 'credit'].includes(methodKey)) {
+          shiftUpdates[`paymentBreakdown.${methodKey}`] = increment(-amount);
+        }
+        batch.update(shiftRef, shiftUpdates);
+      }
+
+      await batch.commit();
+
+      // Adjust customer financials if applicable
+      if (selectedInvoice.customerId && selectedInvoice.customerId !== 'Walk-in') {
+        try {
+          const custRef = doc(db, `businesses/${profile.businessId}/customers`, selectedInvoice.customerId);
+          if (refundMethod === 'credit') {
+            await updateDoc(custRef, { outstandingBalance: increment(-amount) });
+          } else {
+            await updateDoc(custRef, { totalSpent: increment(-amount) });
+          }
+        } catch (errC) {
+          console.error("[POS] Error adjusting customer financials:", errC);
+        }
+      }
+
+      // Log compliance audit event
+      await logAuditEvent({
+        businessId: profile.businessId,
+        eventType: 'price_adjustment_processed',
+        performedBy: {
+          uid: profile.uid || '',
+          name: profile.displayName || profile.email || 'Utilizador',
+          email: profile.email || '',
+        },
+        approvedBy: approvedBy || 'Gerente',
+        originalValue: selectedInvoice.total,
+        newValue: Math.max(0, selectedInvoice.total - amount),
+        reason: finalReason,
+        relatedInvoiceId: selectedInvoice.id,
+        details: {
+          adjustmentId,
+          amount,
+          refundMethod,
+          itemId: relatedItem?.id || null,
+          itemName: relatedItem?.name || null
+        }
+      });
+
+      toast.success("Ajuste de preço processado com sucesso!");
+      triggerAdjustmentPrint(adjustmentRecord, selectedInvoice);
+
+      setIsReturnModalOpen(false);
+      setSelectedInvoice(null);
+      setReturnQuantities({});
+      setAdjustmentAmount('');
+      setAdjustmentReason('');
+      setAdjustmentItemKey('');
+      setReturnMode('stock');
+    } catch (e: any) {
+      console.error("[POS] Price adjustment execution failed:", e);
+      toast.error("Falha ao processar ajuste de preço.");
+    } finally {
+      setIsProcessingAdjustment(false);
+    }
+  };
+
+  const triggerAdjustmentPrint = (adjustmentRecord: any, originalInvoice: any) => {
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) {
+      toast.error("Pop-up bloqueado pelo navegador! Ative os pop-ups para imprimir.");
+      return;
+    }
+
+    const bizName = businessData?.name || profile?.businessName || 'Sabush System ERP';
+    const bizAddress = businessData?.address || "Morada do Estabelecimento";
+    const bizPhone = businessData?.phone || "Telemóvel Comercial";
+    const bizNif = businessData?.taxId || "NIF Contribuinte";
+    const cashierLabel = adjustmentRecord.adjustedBy || profile?.displayName || "Operador";
+    const formattedDate = formatDateTimeInTimezone(adjustmentRecord.createdAt || new Date().toISOString(), 'Africa/Maputo');
+
+    const pageHtml = `
+      <div class="invoice-page">
+        <div class="invoice-header" style="text-align: center;">
+          <div style="font-size: 15px; font-weight: bold; text-transform: uppercase;">${bizName}</div>
+          <div style="font-size: 11px; color: #111;">${bizAddress} | Tel: ${bizPhone}</div>
+          <div style="font-size: 11px; color: #111;">NIF/NUIT: ${bizNif}</div>
+          <hr style="border: none; border-top: 1px dashed #000; margin: 6px 0;" />
+
+          <div style="font-size: 13px; font-weight: bold; margin: 8px 0; text-transform: uppercase; background: #eee; padding: 4px;">
+            NOTA DE AJUSTE DE PREÇO
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 11px;">
+            <span><strong>Nº Ajuste:</strong> #${adjustmentRecord.id}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 2px;">
+            <span><strong>Fatura Original:</strong> #${adjustmentRecord.invoiceId}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 2px;">
+            <span><strong>Operador:</strong> ${cashierLabel}</span>
+            <span><strong>Data:</strong> ${formattedDate}</span>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid #000; margin: 6px 0;" />
+
+        <div style="font-size: 11px; font-family: monospace;">
+          <div style="display: flex; justify-content: space-between;">
+            <span>Total Fatura Original:</span>
+            <span>${(originalInvoice.total || 0).toFixed(2)} MT</span>
+          </div>
+          ${adjustmentRecord.itemName ? `
+            <div style="display: flex; justify-content: space-between; margin-top: 2px;">
+              <span>Artigo Referente:</span>
+              <span>${adjustmentRecord.itemName}</span>
+            </div>
+          ` : ''}
+
+          <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; margin-top: 6px; border-top: 1px dashed #000; padding-top: 4px;">
+            <span>VALOR DO AJUSTE:</span>
+            <span>-${adjustmentRecord.amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT</span>
+          </div>
+
+          <div style="margin-top: 6px; font-size: 10px; line-height: 1.3; background: #eee; padding: 4px; color: #000; border: 1px solid #ccc;">
+            <strong>Modo de Reembolso:</strong> ${adjustmentRecord.refundMethod?.toUpperCase()} <br/>
+            <strong>Motivo:</strong> ${adjustmentRecord.reason}
+          </div>
+
+          <div style="margin-top: 30px; display: flex; justify-content: space-between; font-size: 9px; font-family: sans-serif;">
+            <div style="border-top: 1px solid #000; width: 45%; text-align: center; padding-top: 4px; margin-top: 15px;">
+              Assinatura do Operador
+            </div>
+            <div style="border-top: 1px solid #000; width: 45%; text-align: center; padding-top: 4px; margin-top: 15px;">
+              Assinatura do Cliente
+            </div>
+          </div>
+
+          <div class="thanks-note" style="margin-top: 25px; text-align: center; font-style: italic; font-weight: bold; font-size: 11px;">
+            Ajuste de preço processado com sucesso.<br/>
+            SABUSH SYSTEM ERP
+          </div>
+        </div>
+      </div>
+    `;
+
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8" />
+        <title>Nota de Ajuste #${adjustmentRecord.id}</title>
+        <style>
+          @page {
+            size: 80mm auto;
+            margin: 0;
+          }
+          body {
+            font-family: 'JetBrains Mono', Courier, monospace;
+            width: 74mm;
+            margin: 0 auto;
+            padding: 10px;
+            background: white;
+            color: black;
+            box-sizing: border-box;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+          }
+          .invoice-page {
+            box-sizing: border-box;
+            background: #fff;
+            padding: 2px;
+            width: 100%;
+          }
+          .thanks-note {
+            margin-top: 15px;
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 12px;
+          }
+          @media print {
+            body {
+              width: 74mm !important;
+              max-width: 74mm !important;
+              margin: 0 auto !important;
+              padding: 10px !important;
+            }
+          }
+        </style>
+      </head>
+      <body onload="window.focus(); setTimeout(function() { window.print(); window.close(); }, 500);">
+        ${pageHtml}
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
+
   useEffect(() => {
     if (isReturnModalOpen && profile?.businessId) {
       setLoadingInvoices(true);
@@ -5118,6 +5381,10 @@ export default function POS() {
                 setIsReturnModalOpen(false);
                 setSelectedInvoice(null);
                 setReturnQuantities({});
+                setReturnMode('stock');
+                setAdjustmentItemKey('');
+                setAdjustmentAmount('');
+                setAdjustmentReason('');
               }}
               className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 hover:bg-slate-800 rounded-xl transition-all"
             >
@@ -5126,10 +5393,10 @@ export default function POS() {
 
             <div className="space-y-1.5 text-left shrink-0">
               <h3 className="text-xl font-black text-white flex items-center gap-2">
-                <span className="text-2xl text-amber-500">🔄</span> Processar Devolução e Reembolso
+                <span className="text-2xl text-amber-500">🔄</span> Devoluções e Ajustes de Preço
               </h3>
               <p className="text-xs text-slate-400">
-                Selecione uma venda concluída para devolver artigos ao stock e reembolsar o cliente. 
+                Selecione uma venda concluída para devolver artigos ao stock, ou aplicar um ajuste de preço sem alterar o stock.
                 <span className="text-amber-400 font-semibold ml-1">🔒 Requer PIN do Gerente.</span>
               </p>
             </div>
@@ -5197,6 +5464,10 @@ export default function POS() {
                             });
                             setReturnQuantities(qties);
                             setRefundMethod(inv.paymentMethod || 'cash');
+                            // Reset price-adjustment fields for the newly selected invoice
+                            setAdjustmentItemKey('');
+                            setAdjustmentAmount('');
+                            setAdjustmentReason('');
                           }}
                           className={cn(
                             "p-3.5 rounded-xl text-left border cursor-pointer transition-all flex flex-col space-y-1.5",
@@ -5250,6 +5521,137 @@ export default function POS() {
                       </div>
                     </div>
 
+                    {/* Mode Toggle: Stock Return vs Price Adjustment */}
+                    <div className="flex gap-2 mb-4 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setReturnMode('stock')}
+                        className={cn(
+                          "flex-1 py-2.5 rounded-xl text-[10.5px] font-black uppercase tracking-wider transition-all cursor-pointer border",
+                          returnMode === 'stock'
+                            ? "bg-amber-500 text-slate-950 border-amber-500"
+                            : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700"
+                        )}
+                      >
+                        🔄 Devolução de Stock
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setReturnMode('price_adjustment')}
+                        className={cn(
+                          "flex-1 py-2.5 rounded-xl text-[10.5px] font-black uppercase tracking-wider transition-all cursor-pointer border",
+                          returnMode === 'price_adjustment'
+                            ? "bg-amber-500 text-slate-950 border-amber-500"
+                            : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700"
+                        )}
+                      >
+                        💲 Ajuste de Preço
+                      </button>
+                    </div>
+
+                    {returnMode === 'price_adjustment' ? (
+                      <div className="flex-1 flex flex-col min-h-0">
+                        <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-1 shrink-0">
+                          Ajuste de Preço — sem alteração de stock
+                        </div>
+                        <p className="text-[10px] text-slate-450 text-left mb-4 shrink-0">
+                          Use esta opção para corrigir um valor cobrado incorrectamente (ex: erro de preço, cobrança a mais). O cliente mantém o(s) artigo(s) — o stock NÃO é alterado.
+                        </p>
+
+                        <div className="flex-1 overflow-y-auto space-y-4 pr-1 min-h-0">
+                          <div className="space-y-1.5 text-left">
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Artigo Referente (opcional)</label>
+                            <select
+                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer"
+                              value={adjustmentItemKey}
+                              onChange={(e) => setAdjustmentItemKey(e.target.value)}
+                            >
+                              <option value="">Fatura completa / vários artigos</option>
+                              {selectedInvoice.items?.map((item: any) => {
+                                const key = `${item.id}-${item.selectedUnit}`;
+                                return (
+                                  <option key={key} value={key}>
+                                    {item.name} ({item.selectedUnit}) — {item.price.toFixed(1)} MT/un
+                                  </option>
+                                );
+                              })}
+                            </select>
+                          </div>
+
+                          <div className="space-y-1.5 text-left">
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Valor do Ajuste (MT)</label>
+                            <input
+                              type="number"
+                              min="0"
+                              step="0.01"
+                              placeholder="0.00"
+                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm font-mono font-black text-amber-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                              value={adjustmentAmount}
+                              onChange={(e) => setAdjustmentAmount(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="space-y-1.5 text-left">
+                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Motivo do Ajuste</label>
+                              <input
+                                type="text"
+                                required
+                                placeholder="Ex: erro de preço, artigo cobrado a mais..."
+                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                                value={adjustmentReason}
+                                onChange={(e) => setAdjustmentReason(e.target.value)}
+                              />
+                            </div>
+
+                            <div className="space-y-1.5 text-left">
+                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
+                              <select
+                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer"
+                                value={refundMethod}
+                                onChange={(e) => setRefundMethod(e.target.value)}
+                              >
+                                <option value="cash">Dinheiro em Caixa (Cash)</option>
+                                <option value="mpesa">M-Pesa Moçambique</option>
+                                <option value="emola">e-Mola</option>
+                                <option value="bank">Transferência Bancária</option>
+                                <option value="card">Cartão de Crédito/Débito</option>
+                                <option value="credit">Nota de Crédito (Store Credit)</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-5 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+                          <div className="text-left w-full sm:w-auto">
+                            <span className="text-[10px] text-slate-450 uppercase tracking-widest block font-black leading-none">Total a Ajustar</span>
+                            <span className="text-2xl font-mono font-black text-amber-500 block mt-1.5 leading-none">
+                              {(Number(adjustmentAmount) || 0).toLocaleString()} MT
+                            </span>
+                          </div>
+
+                          <button
+                            type="button"
+                            disabled={isProcessingAdjustment || !(Number(adjustmentAmount) > 0) || !adjustmentReason.trim()}
+                            onClick={() => executePriceAdjustment(false)}
+                            className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-450 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                          >
+                            {isProcessingAdjustment ? (
+                              <>
+                                <Loader2 size={14} className="animate-spin text-slate-950" />
+                                A Processar...
+                              </>
+                            ) : (
+                              <>
+                                <DollarSign size={13} className="text-slate-950" />
+                                Confirmar Ajuste
+                              </>
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                    <>
                     {/* Invoice items to return */}
                     <div className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0">
                       <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-2 shrink-0">
@@ -5415,6 +5817,8 @@ export default function POS() {
                         )}
                       </button>
                     </div>
+                    </>
+                    )}
                   </div>
                 ) : (
                   <div className="flex-1 flex flex-col items-center justify-center text-slate-500 p-8 space-y-3 select-none">
@@ -5854,6 +6258,8 @@ export default function POS() {
             executeVoidItem(true, approvedBy);
           } else if (activePINActionType === 'refund_sale') {
             executeRefund(true, approvedBy);
+          } else if (activePINActionType === 'price_adjustment') {
+            executePriceAdjustment(true, approvedBy);
           } else if (activePINActionType === 'price_override' && pendingPriceOverride) {
             const { id, unit, price, reason } = pendingPriceOverride;
             updateCartItemOverride(id, unit, price, 'none', 0, reason + ` (Autorizado por gerente: ${approvedBy || 'Gerente'})`);
