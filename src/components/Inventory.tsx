@@ -5554,8 +5554,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
           {/* MODAIS DE CAPTURA DE IMAGEM & DESIGN INTELIGENTE POR IA */}
           {isCameraOpen && (
-            <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-              <div className="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200">
+            <div className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              <div className="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200">
                 <div className="p-5 border-b border-slate-800 flex items-center justify-between">
                   <h4 className="text-white font-bold flex items-center gap-2 text-sm">
                     <Camera className="text-blue-500 animate-pulse" size={16} />
@@ -5607,8 +5607,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           )}
 
           {showAiGenerator && (
-            <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-              <div className="bg-white rounded-3xl overflow-hidden max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
+            <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+              <div className="bg-white rounded-3xl max-w-sm w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
                 <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
                   <h4 className="font-bold flex items-center gap-2 text-sm">
                     <Sparkles className="text-amber-400 stroke-[2.5]" size={16} />
@@ -7417,8 +7417,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Modal de Lançar Promoção */}
       {showPromoModal && promoProd && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in font-sans">
-          <div className="bg-white w-full max-w-sm rounded-[28px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200 text-left font-sans text-slate-950">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[60] animate-fade-in font-sans overflow-y-auto">
+          <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-[28px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200 text-left font-sans text-slate-950">
             {/* Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">
@@ -7565,8 +7565,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Quick Adjust Stock Modal */}
       {quickAdjustProduct && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
-          <div className="bg-white w-full max-w-sm rounded-[24px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in overflow-y-auto">
+          <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-[24px] border border-slate-100 shadow-2xl p-6 flex flex-col gap-4 animate-in zoom-in-95 duration-200">
             {/* Header */}
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-2.5">
@@ -8151,8 +8151,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Configure Security PIN Modal */}
       {pinSetupModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/45 backdrop-blur-md z-[9999] flex items-center justify-center p-4 min-h-screen">
-          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in scale-in duration-200">
+        <div className="fixed inset-0 bg-slate-900/45 backdrop-blur-md z-[9999] flex items-center justify-center p-4 min-h-screen overflow-y-auto">
+          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-in fade-in scale-in duration-200">
             {/* Header */}
             <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -8276,8 +8276,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Device Camera Barcode Scanner Modal for Inventário */}
       {isInventoryScanning && (
-        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[10000] flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in scale-in duration-200">
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[10000] flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-in fade-in scale-in duration-200">
             {/* Header */}
             <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -8348,8 +8348,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
       {/* Printable Barcode Label Modal */}
       {isBarcodeLabelOpen && viewingProduct && (
-        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[10001] flex items-center justify-center p-4">
-          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in scale-in duration-200">
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[10001] flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-in fade-in scale-in duration-200">
             {/* Header */}
             <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-between">
               <div className="flex items-center gap-3">

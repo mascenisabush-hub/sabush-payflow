@@ -1336,7 +1336,7 @@ export default function CreditManagement() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6"
+              className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-[40px] p-8 shadow-2xl relative space-y-6"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900">Registar Pagamento</h3>
@@ -1441,7 +1441,7 @@ export default function CreditManagement() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-sm rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6"
+              className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-[40px] p-8 shadow-2xl relative space-y-6"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900 text-left">Ajustar Limite</h3>
@@ -1491,7 +1491,7 @@ export default function CreditManagement() {
       {/* Modern interactive receipt preview overlay modal */}
       {previewPayment && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-sm rounded-[32px] overflow-hidden shadow-2xl border border-slate-100 p-6 flex flex-col space-y-4">
+          <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-[32px] shadow-2xl border border-slate-100 p-6 flex flex-col space-y-4">
             
             <div className="text-center p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col items-center">
               <Printer size={32} className="text-emerald-600 mb-1.5 animate-pulse" />
@@ -1655,7 +1655,7 @@ export default function CreditManagement() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
-              className="bg-white w-full max-w-md rounded-[40px] p-8 shadow-2xl relative overflow-hidden space-y-6 text-left"
+              className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-[40px] p-8 shadow-2xl relative space-y-6 text-left"
             >
               <div className="flex justify-between items-center">
                 <h3 className="text-xl font-black text-slate-900">Registar Pagamento a Fornecedor</h3>

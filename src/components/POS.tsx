@@ -4132,8 +4132,8 @@ export default function POS() {
 
       {/* Turno Opening / Closing Modal */}
       {isShiftModalOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Controle do Turno de Caixa</h3>
               <button onClick={() => setIsShiftModalOpen(false)} className="text-slate-450 hover:text-slate-800">
@@ -4384,8 +4384,8 @@ export default function POS() {
 
       {/* POS Quick Customer Creation Modal */}
       {isQuickCustomerOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Registar Novo Cliente</h3>
               <button onClick={() => setIsQuickCustomerOpen(false)} className="text-slate-450 hover:text-slate-800">
@@ -4522,8 +4522,8 @@ export default function POS() {
 
       {/* POS Section 10: Selected Customer History Tooltip/Overlay */}
       {isHistoryOpen && selectedCust && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/70 backdrop-blur-xs">
-          <div className="bg-white w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/70 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2">
               <h3 className="text-xs font-black uppercase tracking-widest text-[#0C3A42]">Ficha e Histórico do Cliente</h3>
               <button onClick={() => setIsHistoryOpen(false)} className="text-blue-400 hover:text-blue-900">

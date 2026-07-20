@@ -3466,13 +3466,13 @@ Equipa Técnica Sabush System`;
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans"
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6"
+              className="bg-white rounded-[40px] max-w-lg w-full max-h-[90vh] overflow-y-auto p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6"
             >
               <div className="flex items-start gap-4 text-rose-600">
                 <div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center shrink-0">
@@ -3564,13 +3564,13 @@ Equipa Técnica Sabush System`;
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans animate-fade-in"
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 font-sans animate-fade-in overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-[40px] max-w-lg w-full p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 text-slate-900"
+              className="bg-white rounded-[40px] max-w-lg w-full max-h-[90vh] overflow-y-auto p-8 md:p-10 border border-slate-100 shadow-2xl space-y-6 text-slate-900"
             >
               <div className="flex items-start gap-4 text-orange-600">
                 <div className="w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center shrink-0">
@@ -3659,12 +3659,12 @@ Equipa Técnica Sabush System`;
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6 text-slate-900"
+            className="fixed inset-0 z-[150] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6 text-slate-900 overflow-y-auto"
           >
             <motion.div
               initial={{ scale: 0.95, y: 15 }}
               animate={{ scale: 1, y: 0 }}
-              className="w-full max-w-md bg-white rounded-[40px] shadow-2xl overflow-hidden"
+              className="w-full max-w-md bg-white rounded-[40px] shadow-2xl max-h-[90vh] overflow-y-auto"
             >
               <form onSubmit={handleRejectProof}>
                 <div className="p-8 md:p-10 space-y-6">

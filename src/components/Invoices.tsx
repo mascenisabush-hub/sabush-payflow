@@ -4738,7 +4738,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
       {/* Cancel Invoice Confirmation Modal with reasons and audit trail */}
       {cancelModalOpen && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4 z-[200] animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden transform scale-100 transition-all">
+          <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-100 transition-all">
             <div className="bg-slate-50 px-6 py-4 border-b border-slate-150 flex items-center justify-between">
               <div className="flex items-center gap-2 text-rose-600">
                 <span className="p-2 bg-rose-55 text-rose-605 rounded-lg">
@@ -5037,7 +5037,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
       {/* Quick Customer Creation Modal */}
       {quickCustomerModalOpen && (
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl border border-slate-100 overflow-hidden transform scale-100 transition-all">
+          <div className="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-100 transition-all">
             {/* Header */}
             <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
               <div className="flex items-center gap-2">

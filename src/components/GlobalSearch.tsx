@@ -403,12 +403,12 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
       {/* QUICK VIEW GLOBAL MODAL SHEET */}
       <AnimatePresence>
         {quickViewItem && (
-          <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[10000] flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[10000] flex items-center justify-center p-4 overflow-y-auto">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white rounded-[32px] w-full max-w-lg overflow-hidden border border-slate-100 shadow-2xl flex flex-col"
+              className="bg-white rounded-[32px] w-full max-w-lg max-h-[90vh] overflow-y-auto border border-slate-100 shadow-2xl flex flex-col"
             >
               {/* Modal Header */}
               <div className="p-6 pb-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">

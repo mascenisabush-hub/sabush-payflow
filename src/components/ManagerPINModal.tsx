@@ -160,8 +160,8 @@ export default function ManagerPINModal({ isOpen, onClose, onSuccess, actionName
   };
 
   return (
-    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[9999] flex items-center justify-center p-4 min-h-screen select-none">
-      <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in scale-in duration-200">
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-md z-[9999] flex items-center justify-center p-4 min-h-screen select-none overflow-y-auto">
+      <div className="bg-white rounded-[32px] border border-slate-100 shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-in fade-in scale-in duration-200">
         
         {/* Header decoration */}
         <div className="bg-slate-50 border-b border-slate-100 p-6 flex items-center justify-between">
