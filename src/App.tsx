@@ -2,6 +2,7 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AuthProvider, useAuth, AuthLog } from './contexts/AuthContext';
 import Onboarding from './components/Onboarding';
 import AppLoadingScreen from './components/AppLoadingScreen';
+import WelcomeSplash from './components/WelcomeSplash';
 import ErrorBoundary from './components/ErrorBoundary';
 import Sidebar from './components/Sidebar';
 import ManagerAuthListener from './components/ManagerAuthListener';
@@ -9,7 +10,6 @@ import ClientInventorySync from './components/ClientInventorySync';
 import { Toaster, toast } from 'sonner';
 import { useTranslation } from 'react-i18next';
 import './lib/i18n';
-import { Joyride, Step, STATUS } from 'react-joyride';
 import { motion, AnimatePresence } from 'motion/react';
 import { LogIn, Phone, Smartphone, Loader2, ShieldCheck, AlertCircle as AlertIcon, LogOut, ListChecks, Copy, Check, Mail, Key, ExternalLink, Eye, EyeOff, Sparkles, TrendingUp, Lock, Keyboard, HelpCircle, Maximize2, Minimize2, ShoppingCart, Shield, Users, BarChart3, ArrowRight } from 'lucide-react';
 import { sendPasswordResetEmail } from 'firebase/auth';
@@ -457,10 +457,10 @@ function ProtectedApp() {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Guided Welcome Tour (react-joyride) State & Step Configuration
+  // Grand Welcome Splash — shown once, right after loading resolves
   const [runTour, setRunTour] = useState(() => {
     try {
-      const completed = localStorage.getItem('has_completed_welcome_tour_v1');
+      const completed = localStorage.getItem('has_seen_welcome_splash_v2');
       return completed !== 'true';
     } catch (_) {
       return false;
@@ -469,27 +469,11 @@ function ProtectedApp() {
 
   const activeLang = i18n.language || 'pt';
 
-  const joyrideSteps: Step[] = [
-    {
-      target: 'body',
-      placement: 'center',
-      title: activeLang === 'pt' ? '🎉 Bem-vindo ao Sabush ERP!' : '🎉 Welcome to Sabush ERP!',
-      content: activeLang === 'pt' 
-        ? 'A sua plataforma inteligente para gerir e otimizar o seu negócio.' 
-        : 'Your smart platform to manage and optimize your business.',
-    }
-  ];
-
-  const handleJoyrideCallback = (data: any) => {
-    const { status } = data;
-    const finishedStatuses: string[] = [STATUS.FINISHED, STATUS.SKIPPED];
-
-    if (finishedStatuses.includes(status)) {
-      try {
-        localStorage.setItem('has_completed_welcome_tour_v1', 'true');
-      } catch (_) {}
-      setRunTour(false);
-    }
+  const handleWelcomeSplashFinish = () => {
+    try {
+      localStorage.setItem('has_seen_welcome_splash_v2', 'true');
+    } catch (_) {}
+    setRunTour(false);
   };
 
   useEffect(() => {
@@ -2264,70 +2248,10 @@ function ProtectedApp() {
     );
   }
 
-  const JoyrideComponent = Joyride as any;
-
   return (
     <div className="flex bg-[#FAFAFA] h-screen overflow-hidden flex-col md:flex-row">
       {user && runTour && (
-        <JoyrideComponent
-          steps={joyrideSteps}
-          run={runTour}
-          continuous={true}
-          showSkipButton={true}
-          showProgress={true}
-          callback={handleJoyrideCallback}
-          locale={{
-            back: activeLang === 'pt' ? 'Anterior' : 'Back',
-            close: activeLang === 'pt' ? 'Fechar' : 'Close',
-            last: activeLang === 'pt' ? 'Finalizar' : 'Last',
-            next: activeLang === 'pt' ? 'Seguinte' : 'Next',
-            skip: activeLang === 'pt' ? 'Saltar' : 'Skip',
-          }}
-          styles={{
-            options: {
-              arrowColor: '#ffffff',
-              backgroundColor: '#ffffff',
-              overlayColor: 'rgba(15, 23, 42, 0.45)',
-              primaryColor: businessData?.brandColor || '#178F82',
-              textColor: '#0f172a',
-              zIndex: 10000,
-            },
-            tooltipContainer: {
-              textAlign: 'left',
-              fontFamily: 'Inter, system-ui, sans-serif',
-            },
-            tooltip: {
-              borderRadius: '24px',
-              padding: '20px',
-              border: '1px solid #e2e8f0',
-              boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-            },
-            buttonClose: {
-              display: 'none',
-            },
-            buttonNext: {
-              backgroundColor: businessData?.brandColor || '#178F82',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              borderRadius: '12px',
-              padding: '10px 18px',
-              cursor: 'pointer',
-            },
-            buttonBack: {
-              marginRight: '12px',
-              fontSize: '12px',
-              fontWeight: 'bold',
-              color: '#475569',
-              cursor: 'pointer',
-            },
-            buttonSkip: {
-              fontSize: '12px',
-              fontWeight: 'bold',
-              color: '#94a3b8',
-              cursor: 'pointer',
-            },
-          } as any}
-        />
+        <WelcomeSplash lang={activeLang} onFinish={handleWelcomeSplashFinish} />
       )}
       <Sidebar currentTab={currentTab} setCurrentTab={setCurrentTab} />
       
