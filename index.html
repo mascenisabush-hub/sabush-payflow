@@ -79,7 +79,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 28px;
+        gap: 34px;
         background:
           radial-gradient(circle at 50% 38%, rgba(184, 121, 26, 0.16), transparent 55%),
           radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.10), transparent 60%),
@@ -104,10 +104,45 @@
         to { transform: translate(42px, 42px); }
       }
 
+      /* Slowly rotating wash of brand + accent colour behind everything —
+         a "lamp" effect that keeps the boot moment feeling alive and premium. */
+      #boot-splash .lamp {
+        position: absolute;
+        width: 140vmax;
+        height: 140vmax;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: conic-gradient(
+          from 0deg,
+          #2C63B8 0deg,
+          #B8791A 70deg,
+          #D69B25 130deg,
+          #7CA3E0 190deg,
+          #6b3fa0 250deg,
+          #2C63B8 310deg,
+          #2C63B8 360deg
+        );
+        filter: blur(90px) saturate(140%);
+        opacity: 0.32;
+        animation: boot-lamp-spin 18s linear infinite;
+        mix-blend-mode: screen;
+      }
+      @keyframes boot-lamp-spin {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+
+      #boot-splash .vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 32%, #060d1c 80%);
+      }
+
       #boot-splash .mark-wrap {
         position: relative;
-        width: 116px;
-        height: 116px;
+        width: 196px;
+        height: 196px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -117,14 +152,14 @@
         position: absolute;
         inset: 0;
         border-radius: 50%;
-        border: 2px solid transparent;
+        border: 3px solid transparent;
         border-top-color: #B8791A;
         border-right-color: rgba(184, 121, 26, 0.35);
         animation: boot-spin 1.3s linear infinite;
       }
 
       #boot-splash .ring.ring-2 {
-        inset: 12px;
+        inset: 20px;
         border-top-color: rgba(96, 165, 250, 0.85);
         border-right-color: transparent;
         animation: boot-spin-reverse 2.1s linear infinite;
@@ -139,9 +174,9 @@
 
       #boot-splash .mark-glow {
         position: absolute;
-        inset: 18px;
+        inset: 30px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(184, 121, 26, 0.35), transparent 70%);
+        background: radial-gradient(circle, rgba(184, 121, 26, 0.4), transparent 70%);
         animation: boot-pulse 2.4s ease-in-out infinite;
       }
 
@@ -152,20 +187,21 @@
 
       #boot-splash .mark-icon {
         position: relative;
-        width: 58px;
-        height: 58px;
-        border-radius: 16px;
+        width: 96px;
+        height: 96px;
+        border-radius: 24px;
         z-index: 1;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
       }
 
       #boot-splash .wordmark {
         position: relative;
-        font-size: 21px;
+        font-size: 40px;
         font-weight: 900;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.14em;
         color: #f5f1e8;
         text-transform: uppercase;
+        text-align: center;
       }
 
       #boot-splash .wordmark span {
@@ -183,17 +219,18 @@
 
       #boot-splash .tagline {
         position: relative;
-        margin-top: 6px;
-        font-size: 11px;
+        margin-top: 10px;
+        font-size: 13px;
         font-weight: 700;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         color: #8a93a6;
+        text-align: center;
       }
 
       #boot-splash .bar-track {
         position: relative;
-        width: 148px;
-        height: 3px;
+        width: 220px;
+        height: 4px;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.08);
         overflow: hidden;
@@ -215,11 +252,7 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        #boot-splash .grid-bg,
-        #boot-splash .ring,
-        #boot-splash .mark-glow,
-        #boot-splash .wordmark span,
-        #boot-splash .bar-fill {
+        #boot-splash .grid-bg, #boot-splash .lamp, #boot-splash .ring, #boot-splash .mark-glow, #boot-splash .wordmark span, #boot-splash .bar-fill {
           animation: none;
         }
       }
@@ -228,7 +261,9 @@
   <body>
     <div id="root">
       <div id="boot-splash">
+        <div class="lamp"></div>
         <div class="grid-bg"></div>
+        <div class="vignette"></div>
         <div class="mark-wrap">
           <div class="ring"></div>
           <div class="ring ring-2"></div>
