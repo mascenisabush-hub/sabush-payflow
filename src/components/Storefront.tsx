@@ -625,7 +625,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                         )}
                       >
                          {isFeatured && (
-                           <div className="absolute -top-3 left-6 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-[9px] font-black tracking-widest px-3 py-1 rounded-full uppercase shadow-md flex items-center gap-1.5 animate-pulse">
+                           <div className="absolute -top-3 left-6 bg-amber-600 text-white text-[9px] font-black tracking-widest px-3 py-1 rounded-full uppercase shadow-md flex items-center gap-1.5 animate-pulse">
                              <Check size={10} className="stroke-[3]" /> Artigo Selecionado
                            </div>
                          )}

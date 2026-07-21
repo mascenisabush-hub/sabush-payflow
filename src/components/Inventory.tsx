@@ -159,7 +159,7 @@ const getReasonBadgeClass = (reason: string) => {
     case 'uncaped':
       return 'bg-blue-50 text-blue-750 border-blue-200/50';
     case 'half-filled':
-      return 'bg-indigo-50 text-indigo-750 border-indigo-200/50';
+      return 'bg-blue-50 text-blue-750 border-blue-200/50';
     case 'defective':
       return 'bg-orange-50 text-orange-755 border-orange-200/50';
     default:
@@ -2870,7 +2870,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'list' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2936,7 +2936,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'add' || isCreating || editingProduct 
-                ? "bg-gradient-to-r from-emerald-500 to-teal-650 text-white shadow-md shadow-emerald-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2953,7 +2953,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'manage' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-purple-600 to-indigo-650 text-white shadow-md shadow-purple-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2969,7 +2969,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'quebras' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-md shadow-amber-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2985,7 +2985,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'etiquetas' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -3001,7 +3001,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'validade' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-red-500 to-amber-600 text-white shadow-md shadow-red-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -3017,7 +3017,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'movimentos' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-650 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -3044,7 +3044,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               <Download size={13} />
               Exportar CSV
             </button>
-            <label className="flex items-center gap-1.5 bg-violet-600 hover:bg-violet-700 text-white px-3.5 py-2 rounded-xl transition-all font-black text-xs uppercase tracking-wider cursor-pointer shadow-sm active:scale-95">
+            <label className="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl transition-all font-black text-xs uppercase tracking-wider cursor-pointer shadow-sm active:scale-95">
               {isParsingPdf ? (
                 <>
                   <Loader2 size={13} className="animate-spin" />
@@ -3250,7 +3250,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                         <input 
                           type="number"
                           placeholder="0"
-                          className="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono font-bold text-center text-xs outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full p-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono font-bold text-center text-xs outline-none focus:ring-2 focus:ring-emerald-500"
                           value={addQtyUn}
                           onChange={e => setAddQtyUn(e.target.value)}
                         />
@@ -3349,7 +3349,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             onClick={() => setCalcCostType('total')}
                             className={`py-1 rounded border transition-all ${
                               calcCostType === 'total'
-                                ? 'bg-indigo-650 text-white border-indigo-500 font-black'
+                                ? 'bg-blue-650 text-white border-blue-500 font-black'
                                 : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-850'
                             }`}
                           >
@@ -3360,7 +3360,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             onClick={() => setCalcCostType('unit')}
                             className={`py-1 rounded border transition-all ${
                               calcCostType === 'unit'
-                                ? 'bg-indigo-650 text-white border-indigo-500 font-black'
+                                ? 'bg-blue-650 text-white border-blue-500 font-black'
                                 : 'bg-slate-900 border-slate-800 text-slate-400 hover:bg-slate-850'
                             }`}
                           >
@@ -3473,8 +3473,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             <div className="space-y-1 text-[11px]">
                               <span className="text-slate-450 block text-[9.5px] font-bold uppercase mb-1">Preços de Venda por Grosso / Retalho Sugeridos:</span>
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 mt-1 font-mono text-[10.5px]">
-                                <div className="bg-slate-950 p-1.5 rounded border border-purple-900/40">
-                                  <span className="text-purple-400 text-[8.5px] uppercase font-bold block">1x {selectedStockProduct.baseUnitLabel || 'Un'}:</span>
+                                <div className="bg-slate-950 p-1.5 rounded border border-emerald-900/40">
+                                  <span className="text-emerald-400 text-[8.5px] uppercase font-bold block">1x {selectedStockProduct.baseUnitLabel || 'Un'}:</span>
                                   <span className="text-white font-black">{results.unitPrice.toFixed(2)} {currency}</span>
                                 </div>
                                 {selectedStockProduct.hasBoxUnit && (
@@ -4032,7 +4032,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           className="space-y-6"
         >
           {/* PAINEL INFORMATIVO DE VALOR TOTAL DO STOCK */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 bg-gradient-to-r from-blue-50/75 to-indigo-50/75 border border-blue-100 rounded-3xl shadow-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 bg-blue-50/75 border border-blue-100 rounded-3xl shadow-sm">
             {/* Card 1: Valor de Venda */}
             <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-blue-50 shadow-xs">
               <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
@@ -4053,7 +4053,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
             {/* Card 2: Valor de Custo */}
             <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-blue-50 shadow-xs">
-              <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+              <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
                 <Tag size={20} className="stroke-[2.5]" />
               </div>
               <div className="flex flex-col text-left">
@@ -4062,7 +4062,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   {totalCompanyCostValue.toLocaleString()} {currency}
                 </span>
                 {hasActiveFilters && (
-                  <span className="text-[9px] font-bold text-indigo-600/80 mt-0.5">
+                  <span className="text-[9px] font-bold text-blue-600/80 mt-0.5">
                     Filtrado: {totalFilteredCostValue.toLocaleString()} {currency}
                   </span>
                 )}
@@ -4828,15 +4828,15 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       "border p-3 rounded-xl transition-opacity",
                       (!uCompra)
                         ? "bg-stone-100/50 border-stone-200/60 opacity-40 cursor-not-allowed"
-                        : "bg-purple-50 border border-purple-100 opacity-100"
+                        : "bg-emerald-50 border border-emerald-100 opacity-100"
                     )}>
-                      <span className="block text-[10px] font-black text-purple-800 uppercase tracking-wider mb-1">
+                      <span className="block text-[10px] font-black text-emerald-800 uppercase tracking-wider mb-1">
                         Unidade (Un)
                       </span>
                       <input 
                         type="number"
                         placeholder="Ex: 3 Un"
-                        className="w-full p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none text-xs font-bold bg-white text-center font-mono disabled:bg-slate-100/50 disabled:text-slate-400"
+                        className="w-full p-2 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-xs font-bold bg-white text-center font-mono disabled:bg-slate-100/50 disabled:text-slate-400"
                         disabled={!uCompra}
                         value={!uCompra ? '' : newProduct.stockUn}
                         onChange={e => setNewProduct({...newProduct, stockUn: e.target.value})}
@@ -4907,7 +4907,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       setNewProduct(prev => ({ ...prev, costPrice: calc }));
                       toast.success(`Custo unitário calculado a partir da Embalagem: ${calc} ${currency}`);
                     }}
-                    className="text-[10px] text-indigo-700 hover:text-indigo-800 font-bold bg-indigo-50/50 hover:bg-indigo-50 border border-indigo-100 p-1 px-1.5 rounded-lg flex items-center gap-1 cursor-pointer transition-all self-start"
+                    className="text-[10px] text-blue-700 hover:text-blue-800 font-bold bg-blue-50/50 hover:bg-blue-50 border border-blue-100 p-1 px-1.5 rounded-lg flex items-center gap-1 cursor-pointer transition-all self-start"
                   >
                     🧮 Calcular pela Embalagem ({newProduct.packUnitCostPrice} {currency} ÷ {newProduct.packUnitQty} un = {Number((Number(newProduct.packUnitCostPrice) / Number(newProduct.packUnitQty)).toFixed(2))} {currency})
                   </button>
@@ -5004,7 +5004,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           onClick={() => setCalcCostType('total')}
                           className={`py-1.5 rounded-xl border transition-all ${
                             calcCostType === 'total'
-                              ? 'bg-indigo-600 text-white border-indigo-500'
+                              ? 'bg-blue-600 text-white border-blue-500'
                               : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                           }`}
                         >
@@ -5015,7 +5015,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           onClick={() => setCalcCostType('unit')}
                           className={`py-1.5 rounded-xl border transition-all ${
                             calcCostType === 'unit'
-                              ? 'bg-indigo-650 text-white border-indigo-500'
+                              ? 'bg-blue-650 text-white border-blue-500'
                               : 'bg-white border-slate-200 text-slate-500 hover:bg-slate-50'
                           }`}
                         >
@@ -5104,8 +5104,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             <div className="space-y-1.5 pt-1.5 border-t border-slate-800">
                               <span className="text-slate-400 block text-[9.5px] font-bold uppercase">Preços Finais de Venda Recomendados:</span>
                               <div className="grid grid-cols-1 sm:grid-cols-3 gap-1.5 text-slate-900 font-bold font-mono">
-                                <div className="bg-purple-50 p-2 rounded border border-purple-200">
-                                  <span className="text-purple-800 text-[8.5px] uppercase font-black block">1x Unidade ({newProduct.baseUnitLabel || 'un'}):</span>
+                                <div className="bg-emerald-50 p-2 rounded border border-emerald-200">
+                                  <span className="text-emerald-800 text-[8.5px] uppercase font-black block">1x Unidade ({newProduct.baseUnitLabel || 'un'}):</span>
                                   <span className="text-slate-950 text-sm block font-black">{results.unitPrice.toFixed(2)} {currency}</span>
                                   <span className="text-[8px] text-slate-500 font-medium font-sans">Margem: {calcMarkup}%</span>
                                 </div>
@@ -5175,12 +5175,12 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                 />
               </div>
               <div>
-                <label className="block text-xs font-black uppercase tracking-wider text-indigo-700 mb-1.5 flex items-center gap-1.5 font-sans">
+                <label className="block text-xs font-black uppercase tracking-wider text-blue-700 mb-1.5 flex items-center gap-1.5 font-sans">
                   🔒 Notas Internas de Gestão (Confidencial)
                 </label>
                 <textarea 
                   rows={2}
-                  className="w-full p-3 border border-indigo-150 bg-indigo-50/10 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white outline-none text-xs font-semibold text-slate-850 resize-none"
+                  className="w-full p-3 border border-blue-150 bg-blue-50/10 rounded-xl focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none text-xs font-semibold text-slate-850 resize-none"
                   placeholder="Regras de desconto raras, contacto alternativo do fornecedor, etc..."
                   value={newProduct.managerNotes || ''}
                   onChange={e => setNewProduct({...newProduct, managerNotes: e.target.value})}
@@ -5969,7 +5969,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       playsInline 
                       className="w-full h-full object-cover scale-x-[-1]"
                     />
-                    <div className="absolute inset-0 border-2 border-indigo-500/30 rounded-2xl pointer-events-none flex items-center justify-center">
+                    <div className="absolute inset-0 border-2 border-blue-500/30 rounded-2xl pointer-events-none flex items-center justify-center">
                       <div className="w-[80%] h-[80%] border border-dashed border-white/20 rounded-xl" />
                     </div>
                   </div>
@@ -6255,7 +6255,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     <Package size={24} className="stroke-[2]" />
                   )}
                   {product.availableOnline && (
-                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-lg animate-in zoom-in-50 duration-300" title="Listed in Online Store">
+                    <div className="absolute -top-1 -right-1 w-5 h-5 bg-blue-600 text-white rounded-full flex items-center justify-center shadow-lg animate-in zoom-in-50 duration-300" title="Listed in Online Store">
                       <ShoppingBag size={10} />
                     </div>
                   )}
@@ -6335,9 +6335,9 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     <span className="block text-[8px] font-extrabold text-blue-700 uppercase">Emb</span>
                     <span className="font-black text-[11px] text-blue-900">{product.stockEmb !== undefined ? product.stockEmb : 0}</span>
                   </div>
-                  <div className="flex-1 bg-purple-50 border border-purple-150/40 py-1 px-1.5 rounded-lg text-center">
-                    <span className="block text-[8px] font-extrabold text-purple-700 uppercase">Un</span>
-                    <span className="font-black text-[11px] text-purple-900">{product.stockUn !== undefined ? product.stockUn : 0}</span>
+                  <div className="flex-1 bg-emerald-50 border border-emerald-150/40 py-1 px-1.5 rounded-lg text-center">
+                    <span className="block text-[8px] font-extrabold text-emerald-700 uppercase">Un</span>
+                    <span className="font-black text-[11px] text-emerald-900">{product.stockUn !== undefined ? product.stockUn : 0}</span>
                   </div>
                 </div>
               </div>
@@ -6395,7 +6395,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Preço de Venda</span>
                   <p className="text-base font-black text-blue-600">{(product.price || 0).toLocaleString()} {currency}</p>
                   {product.tieredPrices && product.tieredPrices.length > 0 && (
-                    <p className="text-[9px] font-extrabold uppercase text-indigo-600 tracking-tighter mt-0.5" title="Preços especiais por escalão de quantidade">
+                    <p className="text-[9px] font-extrabold uppercase text-blue-600 tracking-tighter mt-0.5" title="Preços especiais por escalão de quantidade">
                       🏷️ {product.tieredPrices.length} Escalões
                     </p>
                   )}
@@ -6901,14 +6901,14 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
         >
           {/* Bento Header Callout */}
           <div className="bg-[#081F1E] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#16253B]">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 blur-3xl rounded-full translate-x-20 -translate-y-20" />
+            <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 blur-3xl rounded-full translate-x-20 -translate-y-20" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1 text-left font-sans">
-                <span className="text-[10px] uppercase font-black bg-indigo-600/30 text-indigo-200 border border-indigo-500/20 px-2.5 py-0.5 rounded-full tracking-widest font-mono">
+                <span className="text-[10px] uppercase font-black bg-blue-600/30 text-blue-200 border border-blue-500/20 px-2.5 py-0.5 rounded-full tracking-widest font-mono">
                   Painel de Produtividade do Negócio
                 </span>
                 <h3 className="text-xl font-black tracking-tight text-white mt-1.5 flex items-center gap-2">
-                  <Tag className="text-indigo-400" size={20} />
+                  <Tag className="text-blue-400" size={20} />
                   Gerador de Etiquetas de Preços & Código de Barras
                 </h3>
                 <p className="text-xs text-slate-405 max-w-xl font-medium leading-relaxed text-slate-400">
@@ -6962,7 +6962,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     placeholder="Pesquisar por nome ou SKU..."
                     value={etiquetaSearch}
                     onChange={(e) => setEtiquetaSearch(e.target.value)}
-                    className="w-full pl-9 pr-4 py-2.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-600 transition-all font-sans font-medium"
+                    className="w-full pl-9 pr-4 py-2.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-600 transition-all font-sans font-medium"
                   />
                   <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                 </div>
@@ -7005,7 +7005,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             className={cn(
                               "px-2.5 py-1.5 rounded-xl border font-black text-[9.5px] uppercase tracking-wider cursor-pointer select-none transition-all",
                               inQueue 
-                                ? "bg-indigo-50 border-indigo-200 text-indigo-600" 
+                                ? "bg-blue-50 border-blue-200 text-blue-600" 
                                 : "bg-white hover:bg-slate-50 border-slate-200 text-slate-500"
                             )}
                           >
@@ -7083,7 +7083,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
                   {printQueue.length === 0 && (
                     <div className="py-12 text-center text-slate-400">
-                      <Tag size={28} className="mx-auto mb-2 text-indigo-400 opacity-20" />
+                      <Tag size={28} className="mx-auto mb-2 text-blue-400 opacity-20" />
                       <p className="text-xs font-extrabold text-slate-700 font-sans">A fila está vazia</p>
                       <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed font-sans">Clique em "+ Adicionar" nos produtos acima para iniciar o design da folha.</p>
                     </div>
@@ -7096,7 +7096,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             <div className="lg:col-span-8 space-y-6">
               {/* Customizer Settings Card */}
               <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm text-left font-sans">
-                <h4 className="font-extrabold text-xs text-indigo-600 uppercase tracking-widest font-mono mb-6 pb-2.5 border-b border-slate-100 flex items-center gap-1.5 pt-0.5">
+                <h4 className="font-extrabold text-xs text-blue-600 uppercase tracking-widest font-mono mb-6 pb-2.5 border-b border-slate-100 flex items-center gap-1.5 pt-0.5">
                   <Sliders size={14} />
                   3. Configuração do Modelo Visual & Estilo das Etiquetas
                 </h4>
@@ -7130,7 +7130,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                             : "bg-white hover:bg-slate-50 border-slate-200"
                         )}
                       >
-                        <span className={cn("text-xs font-extrabold leading-none", tagTemplate === 'modern' ? "text-indigo-400" : "text-slate-800")}>✨ Selo Contemporâneo</span>
+                        <span className={cn("text-xs font-extrabold leading-none", tagTemplate === 'modern' ? "text-blue-400" : "text-slate-800")}>✨ Selo Contemporâneo</span>
                         <span className="text-[9.5px] text-slate-400 leading-normal font-sans">Bordas estilizadas, visual premium para boutiques.</span>
                       </button>
 
@@ -7174,7 +7174,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           type="checkbox" 
                           checked={showStoreName} 
                           onChange={(e) => setShowStoreName(e.target.checked)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
                         />
                         Nome da Loja
                       </label>
@@ -7184,7 +7184,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           type="checkbox" 
                           checked={showPrice} 
                           onChange={(e) => setShowPrice(e.target.checked)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
                         />
                         Preço Unitário
                       </label>
@@ -7194,7 +7194,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           type="checkbox" 
                           checked={showBarcode} 
                           onChange={(e) => setShowBarcode(e.target.checked)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
                         />
                         Código de Barras
                       </label>
@@ -7204,7 +7204,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           type="checkbox" 
                           checked={showSku} 
                           onChange={(e) => setShowSku(e.target.checked)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
                         />
                         Código SKU (Texto)
                       </label>
@@ -7214,7 +7214,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           type="checkbox" 
                           checked={showCategory} 
                           onChange={(e) => setShowCategory(e.target.checked)}
-                          className="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 w-4 h-4 cursor-pointer"
+                          className="rounded border-slate-300 text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
                         />
                         Categoria do Artigo
                       </label>
@@ -7231,7 +7231,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       placeholder="Ex: Supermercado Maputo"
                       value={customStoreName}
                       onChange={(e) => setCustomStoreName(e.target.value)}
-                      className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-indigo-600 font-sans font-medium"
+                      className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-600 font-sans font-medium"
                     />
                   </div>
 
@@ -7262,7 +7262,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     <select
                       value={tagColumns}
                       onChange={(e) => setTagColumns(Number(e.target.value))}
-                      className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-205 outline-none focus:ring-2 focus:ring-indigo-600 font-sans"
+                      className="w-full px-3 py-1.5 bg-slate-50 hover:bg-slate-100/50 focus:bg-white text-xs text-slate-800 rounded-xl border border-slate-205 outline-none focus:ring-2 focus:ring-blue-600 font-sans"
                     >
                       <option value="2">2 colunas por linha (Grande)</option>
                       <option value="3">3 colunas por linha (Padrão)</option>
@@ -7302,7 +7302,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest inline-block mr-1 font-mono">TÍTULO:</span>
                       <h5 className="text-sm font-extrabold text-[#081F1E] tracking-tight leading-snug line-clamp-1">Produto de Amostra Premium</h5>
                       {showCategory && (
-                        <span className="text-[8px] uppercase font-black font-mono tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 rounded mt-1 inline-block">
+                        <span className="text-[8px] uppercase font-black font-mono tracking-widest text-blue-600 bg-blue-50 border border-blue-100 px-1.5 py-0.5 rounded mt-1 inline-block">
                           Bebidas / Mercearia
                         </span>
                       )}
@@ -7357,7 +7357,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       }
                       setIsPreviewModalOpen(true);
                     }}
-                    className="flex-1 sm:flex-initial bg-indigo-600 hover:bg-indigo-700 text-white border border-indigo-500 rounded-2xl px-6 py-3 font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-indigo-150 flex items-center justify-center gap-1.5 select-none hover:shadow-indigo-200 cursor-pointer active:scale-95"
+                    className="flex-1 sm:flex-initial bg-blue-600 hover:bg-blue-700 text-white border border-blue-500 rounded-2xl px-6 py-3 font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-blue-150 flex items-center justify-center gap-1.5 select-none hover:shadow-blue-200 cursor-pointer active:scale-95"
                   >
                     <Download size={14} />
                     Gerar Folha de Etiquetas (.PDF / Impressora)
@@ -7376,9 +7376,9 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             {/* Header Toolbar */}
             <div className="bg-slate-900 border-b border-slate-800 p-5 px-6 flex items-center justify-between text-left select-none">
               <div className="text-left">
-                <span className="text-[9px] font-black tracking-widest uppercase bg-indigo-600 text-indigo-100 border border-indigo-500 px-2 py-0.5 rounded">FOLHA DE ETIQUETAS</span>
+                <span className="text-[9px] font-black tracking-widest uppercase bg-blue-600 text-blue-100 border border-blue-500 px-2 py-0.5 rounded">FOLHA DE ETIQUETAS</span>
                 <h4 className="text-md font-black text-white mt-1 leading-none flex items-center gap-2">
-                  <Tag className="text-indigo-400" size={16} />
+                  <Tag className="text-blue-400" size={16} />
                   Visualização Prévia Alinhada
                 </h4>
               </div>
@@ -7389,7 +7389,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   onClick={() => {
                     window.print();
                   }}
-                  className="px-4 py-2.5 bg-indigo-650 hover:bg-indigo-750 text-white bg-indigo-600 rounded-xl text-xs font-black uppercase tracking-wider transition-all select-none cursor-pointer flex items-center gap-1.5 shadow-md shadow-indigo-900/30"
+                  className="px-4 py-2.5 bg-blue-650 hover:bg-blue-750 text-white bg-blue-600 rounded-xl text-xs font-black uppercase tracking-wider transition-all select-none cursor-pointer flex items-center gap-1.5 shadow-md shadow-blue-900/30"
                 >
                   <Download size={13} />
                   Imprimir / Gravar PDF
@@ -7449,7 +7449,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           </h5>
                           
                           {showCategory && qi.product.category && (
-                            <span className="text-[7.5px] uppercase font-black font-mono tracking-widest text-indigo-700 opacity-80 mt-1 block">
+                            <span className="text-[7.5px] uppercase font-black font-mono tracking-widest text-blue-700 opacity-80 mt-1 block">
                               {qi.product.category}
                             </span>
                           )}
@@ -7590,7 +7590,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
               {/* Wholesale / Tiered Prices details if any */}
               {viewingProduct.allowWholesale && (
-                <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-emerald-950/20">
+                <div className="bg-blue-950 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-blue-950/20">
                   <span className="text-[9px] uppercase font-extrabold tracking-wider text-emerald-300 block border-b border-emerald-500/20 pb-2">📦 Valores & Configuração de Grosso (Wholesale)</span>
                   <div className="flex justify-between items-center bg-emerald-500/10 border border-emerald-500/20 p-2.5 rounded-xl">
                     <span className="text-[10px] uppercase font-black tracking-wider text-emerald-100">Preço de Grosso Base:</span>
@@ -7614,7 +7614,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
               {/* Retail / Unit Discounts details if any */}
               {viewingProduct.unitDiscountTiers && viewingProduct.unitDiscountTiers.length > 0 && (
-                <div className="bg-gradient-to-br from-blue-900 to-indigo-950 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-blue-950/20">
+                <div className="bg-blue-900 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-blue-950/20">
                   <span className="text-[9px] uppercase font-extrabold tracking-wider text-blue-300 block border-b border-blue-500/20 pb-2">🛍️ Tabela de Descontos por Volume de Unidades ('un')</span>
                   <div className="space-y-1.5">
                     <span className="block text-[8px] font-black uppercase text-blue-300 tracking-wider font-sans">Descontos de retalho por quantidade comprada:</span>
@@ -8028,7 +8028,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   className={cn(
                     "py-1.5 text-[10px] font-black rounded-lg transition-all cursor-pointer",
                     adjustType === 'set' 
-                      ? "bg-white text-indigo-600 shadow-sm border border-slate-200/20" 
+                      ? "bg-white text-blue-600 shadow-sm border border-slate-200/20" 
                       : "text-slate-600 hover:text-slate-900"
                   )}
                 >
@@ -8099,7 +8099,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               <div className="text-slate-400 flex items-center gap-1">
                 {adjustType === 'add' && <span className="text-emerald-500 font-black text-xs">+</span>}
                 {adjustType === 'subtract' && <span className="text-rose-500 font-black text-xs">-</span>}
-                {adjustType === 'set' && <span className="text-indigo-500 font-black text-xs">→</span>}
+                {adjustType === 'set' && <span className="text-blue-500 font-black text-xs">→</span>}
                 <span className="text-[10px] font-bold font-mono text-slate-600">{adjustValue}</span>
               </div>
 
@@ -8109,7 +8109,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                 <span className="text-[7px] uppercase font-black text-slate-400">Novo Stock</span>
                 <p className={cn(
                   "text-sm font-black font-mono",
-                  adjustType === 'subtract' ? "text-rose-600" : adjustType === 'set' ? "text-indigo-600" : "text-emerald-600"
+                  adjustType === 'subtract' ? "text-rose-600" : adjustType === 'set' ? "text-blue-600" : "text-emerald-600"
                 )}>
                   {adjustType === 'add' 
                     ? (quickAdjustProduct.stockLevel || 0) + Number(adjustValue) 
@@ -8312,7 +8312,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               <div>
                 <h3 className="text-lg font-black text-slate-900 flex items-center gap-2">
                   <span>📄 Revisão de Artigos Extraídos do PDF</span>
-                  <span className="text-xs bg-violet-100 text-violet-800 px-2.5 py-0.5 rounded-full font-bold font-mono">
+                  <span className="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold font-mono">
                     {parsedPdfProducts.filter(p => p.selected).length} de {parsedPdfProducts.length} selecionados
                   </span>
                 </h3>
@@ -8514,7 +8514,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   type="button"
                   onClick={handleConfirmPdfImport}
                   disabled={isSavingParsed || parsedPdfProducts.filter(p => p.selected).length === 0}
-                  className="px-5 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 disabled:opacity-40 hover:from-violet-700 hover:to-indigo-700 text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 bg-blue-600 disabled:opacity-40 hover:bg-blue-700 text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5"
                 >
                   {isSavingParsed ? (
                     <>

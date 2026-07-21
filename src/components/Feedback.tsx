@@ -237,7 +237,7 @@ export default function Feedback() {
         );
       case 'reviewing':
         return (
-          <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-wider bg-violet-50 text-violet-600 px-2.5 py-1 rounded-full border border-violet-100">
+          <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full border border-emerald-100">
             <Filter size={10} /> Em Análise
           </span>
         );
@@ -275,8 +275,8 @@ export default function Feedback() {
         return {
           icon: Sparkles,
           label: 'Sugestão / Melhoria',
-          color: 'text-violet-600',
-          bg: 'bg-violet-50 border-violet-100'
+          color: 'text-emerald-600',
+          bg: 'bg-emerald-50 border-emerald-100'
         };
       case 'question':
         return {
@@ -384,7 +384,7 @@ export default function Feedback() {
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
                     { id: 'bug', icon: Bug, label: 'Bug/Falha', color: 'rose', hoverClass: 'hover:border-rose-250 hover:bg-rose-50/15' },
-                    { id: 'feature', icon: Sparkles, label: 'Sugestão', color: 'violet', hoverClass: 'hover:border-violet-250 hover:bg-violet-50/15' },
+                    { id: 'feature', icon: Sparkles, label: 'Sugestão', color: 'violet', hoverClass: 'hover:border-emerald-250 hover:bg-emerald-50/15' },
                     { id: 'question', icon: HelpCircle, label: 'Apoio/Dúvida', color: 'blue', hoverClass: 'hover:border-blue-250 hover:bg-blue-50/15' },
                     { id: 'praise', icon: Heart, label: 'Elogio', color: 'emerald', hoverClass: 'hover:border-emerald-250 hover:bg-emerald-50/15' },
                   ].map((preset) => {

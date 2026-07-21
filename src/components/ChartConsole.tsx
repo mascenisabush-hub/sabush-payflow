@@ -58,24 +58,24 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
   schemaColors,
 }) => {
   return (
-    <div className="p-6 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[32px] border border-indigo-500/20 shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+    <div className="p-6 bg-blue-950 rounded-[32px] border border-blue-500/20 shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
       {/* Background absolute glowing accents */}
-      <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
-      <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-pink-500/5 blur-3xl pointer-events-none" />
+      <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+      <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-emerald-500/5 blur-3xl pointer-events-none" />
       
       <div className="relative space-y-6">
         {/* Header with Title & Animated Status */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-white/5 pb-5">
           <div>
             <div className="flex items-center gap-2">
-              <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-indigo-500/10 text-indigo-400 animate-pulse">
+              <span className="flex items-center justify-center w-7 h-7 rounded-lg bg-blue-500/10 text-blue-400 animate-pulse">
                 <Sparkles size={15} />
               </span>
               <h3 className="text-lg font-black text-white tracking-tight uppercase">
                 Consola de Esquemas de Gráficos
               </h3>
             </div>
-            <p className="text-xs text-indigo-200/65 font-medium mt-1">
+            <p className="text-xs text-blue-200/65 font-medium mt-1">
               Visualize o seu desempenho financeiro com esquemas visuais impressionantes e totalmente personalizáveis.
             </p>
           </div>
@@ -92,7 +92,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
           {/* Selector 1: Color Schema */}
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-indigo-300 block">
+            <span className="text-[10px] font-black uppercase tracking-wider text-blue-300 block">
               🎨 Esquema de Cores (Stunning designs)
             </span>
             <div className="grid grid-cols-2 gap-2">
@@ -125,7 +125,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
 
           {/* Selector 2: Layout Type */}
           <div className="space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-indigo-300 block">
+            <span className="text-[10px] font-black uppercase tracking-wider text-blue-300 block">
               📊 Arquitetura de Exibição
             </span>
             <div className="grid grid-cols-2 gap-2 h-[68px]">
@@ -135,7 +135,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                 className={cn(
                   "rounded-xl text-[11px] font-extrabold uppercase transition-all duration-300 border cursor-pointer flex flex-col items-center justify-center gap-1",
                   activeChartLayout === 'combined'
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white border-indigo-400 shadow-md shadow-indigo-500/20"
+                    ? "bg-blue-600 text-white border-blue-400 shadow-md shadow-blue-500/20"
                     : "bg-transparent text-slate-300 border-white/10 hover:border-white/20"
                 )}
               >
@@ -148,7 +148,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                 className={cn(
                   "rounded-xl text-[11px] font-extrabold uppercase transition-all duration-300 border cursor-pointer flex flex-col items-center justify-center gap-1",
                   activeChartLayout === 'separate'
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-pink-400 shadow-md shadow-pink-500/20"
+                    ? "bg-emerald-500 text-white border-emerald-400 shadow-md shadow-emerald-500/20"
                     : "bg-transparent text-slate-300 border-white/10 hover:border-white/20"
                 )}
               >
@@ -170,7 +170,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                     <span className="w-2 h-2 rounded-full" style={{ backgroundColor: schemaColors[chartSchema].primary }} />
                     Análise Agrupada de Receitas, Custos & Margem
                   </h4>
-                  <p className="text-[11px] text-indigo-200/50 mt-0.5">Visão consolidada utilizando a paleta {chartSchema.toUpperCase()}.</p>
+                  <p className="text-[11px] text-blue-200/50 mt-0.5">Visão consolidada utilizando a paleta {chartSchema.toUpperCase()}.</p>
                 </div>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   <span className="px-2 py-0.5 rounded text-[9px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">

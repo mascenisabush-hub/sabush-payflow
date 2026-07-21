@@ -759,7 +759,7 @@ export default function Quotations() {
                 <span className={cn(
                   "px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest text-white shadow-sm",
                   qt.status === 'accepted' ? "bg-emerald-500" : 
-                  qt.status === 'client_accepted' ? "bg-teal-500 animate-pulse" :
+                  qt.status === 'client_accepted' ? "bg-blue-500 animate-pulse" :
                   qt.status === 'expired' ? "bg-amber-600" :
                   qt.status === 'rejected' ? "bg-rose-500" : 
                   qt.status === 'client_rejected' ? "bg-rose-600 font-black" :
@@ -1080,8 +1080,8 @@ export default function Quotations() {
                     )}
 
                     {selectedQuotation.status === 'client_accepted' && (
-                     <div className="p-4 bg-teal-50 text-teal-900 border border-teal-200 rounded-2xl text-xs space-y-1">
-                        <span className="font-black uppercase tracking-wider block text-[10px] text-teal-700">Aprovado pelo Cliente ✅</span>
+                     <div className="p-4 bg-blue-50 text-blue-900 border border-blue-200 rounded-2xl text-xs space-y-1">
+                        <span className="font-black uppercase tracking-wider block text-[10px] text-blue-700">Aprovado pelo Cliente ✅</span>
                         <p className="font-bold">O cliente reviu os preços e aprovou esta proposta! Pode faturar e expedir os artigos agora.</p>
                      </div>
                    )}

@@ -1357,8 +1357,8 @@ export default function PurchaseOrders() {
                       <span className={cn(
                         "px-2.5 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest flex items-center gap-1",
                         isCredit 
-                          ? "bg-indigo-50 text-indigo-700 border border-indigo-100" 
-                          : "bg-teal-50 text-teal-700 border border-teal-100"
+                          ? "bg-blue-50 text-blue-700 border border-blue-100" 
+                          : "bg-blue-50 text-blue-700 border border-blue-100"
                       )}>
                         {isCredit ? (isPt ? "💳 A Crédito" : "💳 Credit") : (isPt ? "💵 Pronto Pagamento" : "💵 Cash")}
                       </span>
@@ -1420,7 +1420,7 @@ export default function PurchaseOrders() {
                         <Bell size={12} /> {isPt ? "Aviso Crítico" : "1 Day Left"}
                       </div>
                     ) : daysLeft !== null && daysLeft === 2 && order.reminder2DaysBefore ? (
-                      <div className="p-1 px-2.5 bg-indigo-500 text-white font-black rounded-lg text-[9px] uppercase tracking-wide flex items-center gap-1 shrink-0">
+                      <div className="p-1 px-2.5 bg-blue-500 text-white font-black rounded-lg text-[9px] uppercase tracking-wide flex items-center gap-1 shrink-0">
                         <Bell size={12} /> {isPt ? "Aviso Prévio" : "2 Days Left"}
                       </div>
                     ) : (
@@ -1443,7 +1443,7 @@ export default function PurchaseOrders() {
                             : `⚠️ ONLY 1 DAY LEFT! Payment is due tomorrow (${order.dueDate}).`}
                         </p>
                       ) : daysLeft !== null && daysLeft === 2 && order.reminder2DaysBefore ? (
-                        <p className="text-indigo-900 font-bold">
+                        <p className="text-blue-900 font-bold">
                           {isPt 
                             ? `🔔 ATENÇÃO: Falta 2 dias para o vencimento do pagamento (${order.dueDate}).` 
                             : `🔔 ATTENTION: 2 days remaining until pay limit (${order.dueDate}).`}
@@ -1585,7 +1585,7 @@ export default function PurchaseOrders() {
                     <button
                       type="button"
                       onClick={() => setPayAmount(String((payingOrder.outstandingBalance || 0) / 2))}
-                      className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-200 text-xs font-bold text-slate-700 text-center transition-all select-none cursor-pointer"
+                      className="p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-blue-50 hover:border-blue-200 text-xs font-bold text-slate-700 text-center transition-all select-none cursor-pointer"
                     >
                       {isPt ? "🌓 Metade (50%)" : "🌓 Half Payment (50%)"}
                     </button>
@@ -2266,7 +2266,7 @@ export default function PurchaseOrders() {
 
                   {Number(quickProduct.costPrice) > 0 && Number(quickProduct.price) > 0 && (
                     <div className="flex gap-4 text-[10px] font-bold uppercase tracking-wider text-slate-450 mt-1 select-none font-mono">
-                      <span>Margin: <span className="text-teal-650 font-black">{Math.round(((Number(quickProduct.price) - Number(quickProduct.costPrice)) / Number(quickProduct.price)) * 100)}%</span></span>
+                      <span>Margin: <span className="text-blue-650 font-black">{Math.round(((Number(quickProduct.price) - Number(quickProduct.costPrice)) / Number(quickProduct.price)) * 100)}%</span></span>
                       <span>Markup: <span className="text-blue-550 font-black">{Math.round(((Number(quickProduct.price) - Number(quickProduct.costPrice)) / Number(quickProduct.costPrice)) * 100)}%</span></span>
                     </div>
                   )}

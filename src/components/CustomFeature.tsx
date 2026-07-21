@@ -195,7 +195,7 @@ export default function CustomFeature() {
     <div className="space-y-8 animate-in fade-in duration-300">
       
       {/* Dynamic Header Block with Glowing African Clay Accents */}
-      <div className="bg-gradient-to-br from-[#1D1510] via-[#35261C] to-[#120D0A] p-8 rounded-[40px] shadow-lg border border-[#E9E1D2]/15 text-left text-white relative overflow-hidden">
+      <div className="bg-[#0A1C38] p-8 rounded-[40px] shadow-lg border border-[#E9E1D2]/15 text-left text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-[#B8791A]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2.5 max-w-2xl">
@@ -372,7 +372,7 @@ export default function CustomFeature() {
                             req.status === 'em_analise' ? "bg-amber-50 text-amber-600 border border-amber-200" :
                             req.status === 'aprovado' ? "bg-emerald-50 text-emerald-600 border border-emerald-200" :
                             req.status === 'em_desenvolvimento' ? "bg-blue-50 text-blue-600 border border-blue-200" :
-                            "bg-purple-50 text-purple-600 border border-purple-200"
+                            "bg-emerald-50 text-emerald-600 border border-emerald-200"
                           )}>
                             {req.status === 'em_analise' ? "Em Análise" :
                              req.status === 'aprovado' ? "Aprovado" :

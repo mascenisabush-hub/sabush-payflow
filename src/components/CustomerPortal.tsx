@@ -764,7 +764,7 @@ export default function CustomerPortal() {
   const langKey = i18n.language || 'pt';
 
   return (
-    <div className="min-h-screen w-full bg-[#1A0F05] bg-gradient-to-br from-[#2a1005] via-[#ea580c]/15 to-[#0F0501] text-slate-100 flex flex-col font-sans relative overflow-x-hidden antialiased">
+    <div className="min-h-screen w-full bg-[#0A1C38] text-slate-100 flex flex-col font-sans relative overflow-x-hidden antialiased">
       {/* Background visual accents */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-600/5 rounded-full blur-2xl pointer-events-none"></div>
@@ -836,7 +836,7 @@ export default function CustomerPortal() {
             id="login-card-container"
           >
             {/* Visual shine */}
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600"></div>
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-blue-600"></div>
 
             <div className="text-center mb-8">
               <h2 className="text-2xl font-black text-white tracking-tight">
@@ -868,7 +868,7 @@ export default function CustomerPortal() {
                 <button
                   id="reset-password-btn"
                   onClick={handlePasswordReset}
-                  className="w-full py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold rounded-xl text-xs transition-all tracking-wide uppercase shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs transition-all tracking-wide uppercase shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                 >
                   Enviar Link de Recuperação
                 </button>
@@ -1888,7 +1888,7 @@ export default function CustomerPortal() {
                                       isApproved 
                                         ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/40'
                                         : isClientAccepted
-                                          ? 'bg-teal-950 text-teal-400 border border-teal-900/40 animate-pulse'
+                                          ? 'bg-blue-950 text-blue-400 border border-blue-900/40 animate-pulse'
                                           : isCancelled
                                             ? 'bg-rose-950 text-rose-400 border border-rose-900/40'
                                             : isClientRejected

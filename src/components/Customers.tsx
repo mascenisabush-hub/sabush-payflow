@@ -838,7 +838,7 @@ export default function Customers() {
                         });
                         setActiveTab('manage');
                       }}
-                      className="p-2 hover:bg-slate-50 rounded-lg text-slate-400 hover:text-indigo-600 transition-colors"
+                      className="p-2 hover:bg-slate-50 rounded-lg text-slate-400 hover:text-blue-600 transition-colors"
                       title="Editar Perfil"
                     >
                       <Edit2 size={18} />
@@ -1005,7 +1005,7 @@ export default function Customers() {
                                   {cust.phone || cust.email || 'Sem contacto'}
                                 </span>
                                 {cust.notes && (
-                                  <span className="text-[9px] bg-indigo-50 text-indigo-700 font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-md mt-1 inline-block">
+                                  <span className="text-[9px] bg-blue-50 text-blue-700 font-bold uppercase tracking-wide px-1.5 py-0.5 rounded-md mt-1 inline-block">
                                     📝 {cust.notes}
                                   </span>
                                 )}
@@ -1040,7 +1040,7 @@ export default function Customers() {
                                     loyaltyPoints: cust.loyaltyPoints || 0
                                   });
                                 }}
-                                className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg cursor-pointer transition-colors"
+                                className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg cursor-pointer transition-colors"
                                 title="Editar Perfil"
                               >
                                 <Edit2 size={16} />
@@ -1130,7 +1130,7 @@ export default function Customers() {
                 {/* Edit Form */}
                 <div className="bg-white p-6 border border-slate-100 rounded-[28px] shadow-sm space-y-5 text-left">
                   <div>
-                    <span className="text-[10px] bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-md font-black uppercase tracking-wider">✏️ Gestor de Perfis</span>
+                    <span className="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded-md font-black uppercase tracking-wider">✏️ Gestor de Perfis</span>
                     <h3 className="text-base font-black text-slate-900 mt-1.5">Editar Ficha de Cliente</h3>
                     <p className="text-xs text-slate-500">Adicione contactos, moradas, ou notas de preferência do cliente.</p>
                   </div>
@@ -1140,7 +1140,7 @@ export default function Customers() {
                       <div>
                         <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Nome Completo</label>
                         <input 
-                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500"
                           value={editingForm.name}
                           onChange={e => setEditingForm({...editingForm, name: e.target.value})}
                         />
@@ -1149,7 +1149,7 @@ export default function Customers() {
                         <div>
                           <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Email</label>
                           <input 
-                            className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500"
                             value={editingForm.email}
                             onChange={e => setEditingForm({...editingForm, email: e.target.value})}
                           />
@@ -1157,7 +1157,7 @@ export default function Customers() {
                         <div>
                           <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Telemóvel</label>
                           <input 
-                            className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                            className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500"
                             value={editingForm.phone}
                             onChange={e => setEditingForm({...editingForm, phone: e.target.value})}
                           />
@@ -1166,7 +1166,7 @@ export default function Customers() {
                       <div>
                         <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Morada de Entrega</label>
                         <input 
-                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none focus:ring-2 focus:ring-blue-500"
                           value={editingForm.address}
                           onChange={e => setEditingForm({...editingForm, address: e.target.value})}
                         />
@@ -1176,7 +1176,7 @@ export default function Customers() {
                         <div className="flex gap-2 items-center">
                           <input 
                             type="number"
-                            className="w-32 p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-indigo-500 text-indigo-650"
+                            className="w-32 p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-mono font-bold outline-none focus:ring-2 focus:ring-blue-500 text-blue-650"
                             value={editingForm.loyaltyPoints || 0}
                             onChange={e => setEditingForm({...editingForm, loyaltyPoints: parseInt(e.target.value) || 0})}
                           />
@@ -1191,7 +1191,7 @@ export default function Customers() {
                             <button
                               type="button"
                               onClick={() => setEditingForm(prev => ({ ...prev, loyaltyPoints: prev.loyaltyPoints + 100 }))}
-                              className="px-2.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-black text-[10px] rounded-lg transition-colors border border-indigo-100 cursor-pointer"
+                              className="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 font-black text-[10px] rounded-lg transition-colors border border-blue-100 cursor-pointer"
                             >
                               +100 pts
                             </button>
@@ -1212,7 +1212,7 @@ export default function Customers() {
                         <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Notas Pessoais / Observações</label>
                         <textarea 
                           rows={3}
-                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none resize-none focus:ring-2 focus:ring-indigo-500"
+                          className="w-full p-2.5 bg-slate-50 border border-slate-100 rounded-xl text-xs font-semibold outline-none resize-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Ex: Gosta de descontos, prefere entrega rápida, cliente premium..."
                           value={editingForm.notes || ''}
                           onChange={e => setEditingForm({...editingForm, notes: e.target.value})}
@@ -1229,7 +1229,7 @@ export default function Customers() {
                         <button 
                           onClick={handleSaveCustomerProfile}
                           disabled={isSavingEdit}
-                          className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-black text-[10px] uppercase tracking-wider rounded-lg active:scale-95 transition-all shadow-md shadow-indigo-500/10 cursor-pointer"
+                          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-wider rounded-lg active:scale-95 transition-all shadow-md shadow-blue-500/10 cursor-pointer"
                         >
                           {isSavingEdit ? 'A gravar...' : 'Gravar Alterações'}
                         </button>
@@ -1315,7 +1315,7 @@ export default function Customers() {
 
                     {mainCustomerId && targetCustomerId && (
                       <div className="p-4 rounded-xl bg-blue-50/20 border border-blue-100/30 text-xs font-semibold text-slate-600 animate-in slide-in-from-bottom-2 duration-150">
-                        💡 O cliente <span className="text-indigo-600 font-bold">"{customers.find(c => c.id === targetCustomerId)?.name}"</span> será removido e todas as suas faturas serão transferidas para <span className="text-indigo-600 font-bold">"{customers.find(c => c.id === mainCustomerId)?.name}"</span>.
+                        💡 O cliente <span className="text-blue-600 font-bold">"{customers.find(c => c.id === targetCustomerId)?.name}"</span> será removido e todas as suas faturas serão transferidas para <span className="text-blue-600 font-bold">"{customers.find(c => c.id === mainCustomerId)?.name}"</span>.
                       </div>
                     )}
 
@@ -1400,10 +1400,10 @@ export default function Customers() {
                 </div>
                 <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-center min-h-[64px]">
                   <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl"><Sparkles size={20} /></div>
+                    <div className="p-2.5 bg-blue-50 text-blue-600 rounded-xl"><Sparkles size={20} /></div>
                     <div>
                       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Fidelização</p>
-                      <p className="text-base font-black text-indigo-600 flex flex-wrap items-center gap-1 leading-none mt-0.5">
+                      <p className="text-base font-black text-blue-600 flex flex-wrap items-center gap-1 leading-none mt-0.5">
                         {Math.floor(selectedCustomer.loyaltyPoints || 0).toLocaleString()} pts
                       </p>
                     </div>
@@ -1411,7 +1411,7 @@ export default function Customers() {
                   <div className="mt-2 pl-1 flex items-center justify-between gap-1.5 flex-wrap">
                     <span className={cn(
                       "text-[9px] px-2 py-0.5 rounded-full font-black uppercase tracking-wider",
-                      (selectedCustomer.loyaltyPoints || 0) >= 1000 ? "bg-violet-100 text-violet-700 border border-violet-200" :
+                      (selectedCustomer.loyaltyPoints || 0) >= 1000 ? "bg-emerald-100 text-emerald-700 border border-emerald-200" :
                       (selectedCustomer.loyaltyPoints || 0) >= 500  ? "bg-amber-100 text-amber-700 border border-amber-200" :
                       (selectedCustomer.loyaltyPoints || 0) >= 100  ? "bg-blue-100 text-blue-700 border border-blue-200" :
                       "bg-slate-100 text-slate-650"
@@ -1492,7 +1492,7 @@ export default function Customers() {
                             <div className={cn(
                               "p-3 rounded-xl shadow-sm",
                               tx.type === 'pos' ? "bg-emerald-50 text-emerald-600 border border-emerald-100/50" : 
-                              tx.type === 'repayment' ? "bg-indigo-50 text-indigo-600 border border-indigo-150/50" : 
+                              tx.type === 'repayment' ? "bg-blue-50 text-blue-600 border border-blue-150/50" : 
                               "bg-blue-50 text-blue-600 border border-blue-100"
                             )}>
                               {tx.type === 'pos' ? <ShoppingCart size={18} /> : 
@@ -1507,7 +1507,7 @@ export default function Customers() {
                                   <span className="text-[9px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-805 px-1.5 py-0.5 rounded-full">POS</span>
                                 )}
                                 {tx.type === 'repayment' && (
-                                  <span className="text-[9px] font-black uppercase tracking-wider bg-indigo-100 text-indigo-805 px-1.5 py-0.5 rounded-full">Repayment</span>
+                                  <span className="text-[9px] font-black uppercase tracking-wider bg-blue-100 text-blue-805 px-1.5 py-0.5 rounded-full">Repayment</span>
                                 )}
                               </div>
                               <p className="text-xs text-slate-400 font-medium flex items-center gap-1 mt-1">
@@ -1628,7 +1628,7 @@ export default function Customers() {
                                     </div>
                                     <div className="flex justify-between">
                                       <span className="text-slate-400">Gateway / Channel:</span>
-                                      <span className="font-black text-indigo-600 uppercase tracking-widest text-[10px] bg-indigo-50 px-1.5 py-0.5 rounded-md self-center">
+                                      <span className="font-black text-blue-600 uppercase tracking-widest text-[10px] bg-blue-50 px-1.5 py-0.5 rounded-md self-center">
                                         {tx.method || 'Cash'}
                                       </span>
                                     </div>
@@ -1828,7 +1828,7 @@ export default function Customers() {
               </div>
 
               {/* High elegance Loyalty Card */}
-              <div className="bg-gradient-to-br from-[#1D1510] via-[#35261C] to-[#120D0A] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#E9E1D2]/25">
+              <div className="bg-[#0A1C38] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#E9E1D2]/25">
                 {/* Decorative Pattern Background */}
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#FAF7F2_1px,transparent_1px)] [background-size:16px_16px]" />
 
@@ -1842,7 +1842,7 @@ export default function Customers() {
                   </div>
                   <span className={cn(
                     "text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full",
-                    (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "bg-violet-550/30 text-violet-300 border border-violet-500/30" :
+                    (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "bg-emerald-550/30 text-emerald-300 border border-emerald-500/30" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 500  ? "bg-amber-500/20 text-amber-300 border border-amber-500/25" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 100  ? "bg-blue-500/20 text-blue-300 border border-blue-500/25" :
                     "bg-[#8B735F]/20 text-[#FAF7F2] border border-[#8B735F]/30"
@@ -1858,7 +1858,7 @@ export default function Customers() {
                 <div className="flex justify-between items-end z-10">
                   <div>
                     <span className="text-[8px] tracking-widest text-[#E9E1D2]/60 font-black uppercase block">SALDO ACUMULADO</span>
-                    <span className="text-xl font-bold font-mono text-indigo-300">
+                    <span className="text-xl font-bold font-mono text-blue-300">
                       {(viewingLoyaltyCustomer.loyaltyPoints || 0).toLocaleString()} <span className="text-xs text-[#E9E1D2]/70 font-sans font-bold">pts</span>
                     </span>
                   </div>

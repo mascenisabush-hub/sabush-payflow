@@ -282,7 +282,7 @@ export default function SupplierDebtSection({
                           <div className="min-w-0 flex-1 pr-4 text-left">
                             <span className={cn(
                               "px-2 py-0.5 rounded-md text-[8px] font-black uppercase tracking-wider mb-1.5 inline-block",
-                              doc.docType === 'expense' ? "bg-purple-100 text-purple-700" : "bg-blue-100 text-blue-700"
+                              doc.docType === 'expense' ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"
                             )}>
                               {doc.docType === 'expense' ? 'Despesa' : 'Ordem Compra'}
                             </span>

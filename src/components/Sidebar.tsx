@@ -299,7 +299,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
   return (
     <>
       {/* MOBILE TOP navbar header (Visible only on small devices) */}
-      <header className="flex md:hidden items-center justify-between px-4 py-3 bg-gradient-to-br from-[#06142A] via-[#0C2242] to-[#0A1C38] border-b border-white/10 text-white w-full shrink-0 z-40 shadow-sm">
+      <header className="flex md:hidden items-center justify-between px-4 py-3 bg-[#0A1C38] border-b border-white/10 text-white w-full shrink-0 z-40 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsMobileOpen(true)}
@@ -350,7 +350,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
 
       {/* MASTER SIDEBAR: Pinned on Left on Desktop, slide-over from Left on Mobile */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-br from-[#06142A] via-[#0C2242] to-[#0A1C38] border-r border-white/10 flex flex-col justify-between transition-transform duration-300 transform md:relative md:translate-x-0 shrink-0 h-screen select-none",
+        "fixed inset-y-0 left-0 z-50 w-72 bg-[#0A1C38] border-r border-white/10 flex flex-col justify-between transition-transform duration-300 transform md:relative md:translate-x-0 shrink-0 h-screen select-none",
         isMobileOpen ? "translate-x-0 animate-in slide-in-from-left duration-250" : "-translate-x-full md:translate-x-0"
       )}>
         <div className="flex flex-col h-full overflow-hidden">

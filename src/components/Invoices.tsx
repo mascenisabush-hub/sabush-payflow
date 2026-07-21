@@ -131,8 +131,8 @@ export default function Invoices({ initialAction, onActionHandled }: InvoicesPro
       dotClass = 'bg-emerald-500';
     } else if (normalized === 'cancelled' || normalized === 'cancelada') {
       label = 'CANCELADA';
-      classes = 'bg-purple-100 text-purple-700 border-purple-200';
-      dotClass = 'bg-purple-500';
+      classes = 'bg-emerald-100 text-emerald-700 border-emerald-200';
+      dotClass = 'bg-emerald-500';
     }
 
     return (
@@ -2148,7 +2148,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'list' && !isCreating 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-850"
             )}
           >
@@ -2176,7 +2176,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'add' || isCreating 
-                ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-850"
             )}
           >
@@ -2191,7 +2191,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'manage' 
-                ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-amber-500/20 font-black scale-102" 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-853"
             )}
           >
@@ -2745,7 +2745,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 placeholder="Faturas, clientes ou operadores..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-semibold text-slate-800 transition-all placeholder:text-slate-400"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none text-sm font-semibold text-slate-800 transition-all placeholder:text-slate-400"
               />
             </div>
             
@@ -2760,7 +2760,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   <select
                     value={operatorFilter}
                     onChange={(e) => setOperatorFilter(e.target.value)}
-                    className="w-full sm:w-44 p-2 bg-white border border-slate-200/80 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-[10px] font-black uppercase tracking-wider cursor-pointer text-slate-700 shadow-sm"
+                    className="w-full sm:w-44 p-2 bg-white border border-slate-200/80 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-[10px] font-black uppercase tracking-wider cursor-pointer text-slate-700 shadow-sm"
                   >
                     <option value="all">Todos os Colaboradores</option>
                     {uniqueOperators.map(op => (
@@ -2775,7 +2775,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 <select
                   value={saleTypeFilter}
                   onChange={(e) => setSaleTypeFilter(e.target.value as any)}
-                  className="w-full sm:w-44 p-2 bg-white border border-slate-200/80 rounded-lg focus:ring-2 focus:ring-indigo-500 outline-none text-[10px] font-black uppercase tracking-wider cursor-pointer text-slate-700 shadow-sm"
+                  className="w-full sm:w-44 p-2 bg-white border border-slate-200/80 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-[10px] font-black uppercase tracking-wider cursor-pointer text-slate-700 shadow-sm"
                 >
                   <option value="all">🌐 Todos os Canais</option>
                   <option value="retail">🛍️ Retalho (Detail)</option>
@@ -2921,7 +2921,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           <div className="flex items-center gap-3.5 text-slate-400">
                             <button 
                               onClick={() => openPaymentShareModal(inv)}
-                              className="hover:text-indigo-600 transition-colors p-1 cursor-pointer"
+                              className="hover:text-blue-600 transition-colors p-1 cursor-pointer"
                               title="Partilhar Link"
                             >
                               <Share2 size={16} />
@@ -3066,7 +3066,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                                       }}
                                       className="w-full text-left px-4 py-2 hover:bg-slate-50 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-2 cursor-pointer"
                                     >
-                                      <Share2 size={14} className="text-indigo-400" />
+                                      <Share2 size={14} className="text-blue-400" />
                                       Partilhar Link
                                     </button>
                                   </div>
@@ -3489,7 +3489,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             {/* PRINT FORMAT DEFAULTS CONFIG */}
             <div className="bg-white p-6 rounded-[24px] border border-slate-150 shadow-sm space-y-5 text-left">
               <div>
-                <span className="text-[10px] bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded font-black uppercase tracking-wider">🖨️ Configuração Padrão do Recibo / Impressora</span>
+                <span className="text-[10px] bg-blue-50 text-blue-700 px-2.5 py-1 rounded font-black uppercase tracking-wider">🖨️ Configuração Padrão do Recibo / Impressora</span>
                 <h3 className="text-sm font-black text-slate-900 mt-2">Selecione o Formato Predefinido para Emissão de Faturas</h3>
                 <p className="text-xs text-slate-550">O formato selecionado será carregado automaticamente no momento da pré-visualização ou impressão direta.</p>
               </div>
@@ -3571,7 +3571,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
             {/* Header */}
             <div className="flex flex-col items-center text-center gap-2 mb-6">
-              <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-[20px] flex items-center justify-center mb-1">
+              <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-[20px] flex items-center justify-center mb-1">
                 <Share2 size={24} />
               </div>
               <h3 className="text-xl font-bold text-[#1D1510] font-sans">Ecrã de Pagamento Online</h3>
@@ -3966,10 +3966,10 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           checked={sendEmail}
                           disabled={!customerObj?.email}
                           onChange={(e) => setSendEmail(e.target.checked)}
-                          className="w-4 h-4 text-purple-650 border-slate-350 rounded focus:ring-purple-500 cursor-pointer mt-0.5 shrink-0"
+                          className="w-4 h-4 text-emerald-650 border-slate-350 rounded focus:ring-emerald-500 cursor-pointer mt-0.5 shrink-0"
                         />
                         <div className="text-left font-sans">
-                          <p className="text-xs font-extrabold text-slate-800 group-hover:text-purple-600 transition-colors font-sans">✉️ Enviar Comprovativo por E-mail</p>
+                          <p className="text-xs font-extrabold text-slate-800 group-hover:text-emerald-600 transition-colors font-sans">✉️ Enviar Comprovativo por E-mail</p>
                           <p className="text-[9.5px] text-slate-500 font-semibold mt-0.5 font-sans">
                             {customerObj?.email 
                               ? `Enviar anexo digital a: ${customerObj.email}` 
@@ -4522,7 +4522,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   )}
 
                   {inv.status === 'cancelled' && (
-                    <div className="text-[10px] bg-purple-950/20 border border-purple-920/40 text-purple-400 p-3 rounded-xl font-bold leading-normal">
+                    <div className="text-[10px] bg-emerald-950/20 border border-emerald-920/40 text-emerald-400 p-3 rounded-xl font-bold leading-normal">
                       ℹ️ Esta fatura está CANCELADA. Nenhum ajuste de stock ou de valor é elegível.
                     </div>
                   )}

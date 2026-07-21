@@ -1173,7 +1173,7 @@ export default function CreditManagement() {
                               <div 
                                 className={cn(
                                   "h-full rounded-full transition-all duration-500",
-                                  ratioExceeded ? "bg-gradient-to-r from-rose-500 to-red-600" : limitPercentage > 80 ? "bg-amber-500" : "bg-gradient-to-r from-emerald-500 to-teal-600"
+                                  ratioExceeded ? "bg-red-600" : limitPercentage > 80 ? "bg-amber-500" : "bg-blue-600"
                                 )} 
                                 style={{ width: `${limitPercentage}%` }}
                               />

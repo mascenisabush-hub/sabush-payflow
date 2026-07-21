@@ -356,7 +356,7 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
               {results.customers.length > 0 && (
                 <div className="space-y-1.5 pt-1">
                   <h4 className="px-2 text-[9px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1">
-                    <User size={11} className="text-indigo-500" />
+                    <User size={11} className="text-blue-500" />
                     Clientes ({results.customers.length})
                   </h4>
                   <div className="space-y-1">
@@ -367,11 +367,11 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
                         className="flex items-center justify-between p-2.5 bg-slate-50/50 hover:bg-slate-100/80 rounded-xl border border-slate-100 transition-all cursor-pointer group"
                       >
                         <div className="flex items-center gap-2.5 min-w-0">
-                          <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold font-mono text-[9px]">
+                          <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 font-bold font-mono text-[9px]">
                             CL
                           </div>
                           <div className="min-w-0">
-                            <p className="text-xs font-extrabold text-slate-800 group-hover:text-indigo-600 transition-colors truncate">
+                            <p className="text-xs font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors truncate">
                               {cust.name}
                             </p>
                             <p className="text-[10px] text-slate-500 font-semibold truncate">
@@ -416,7 +416,7 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
                   <div className={cn(
                     "w-10 h-10 rounded-xl flex items-center justify-center font-bold text-white shadow-sm",
                     quickViewItem.type === 'invoice' ? "bg-blue-600" :
-                    quickViewItem.type === 'product' ? "bg-amber-500" : "bg-indigo-600"
+                    quickViewItem.type === 'product' ? "bg-amber-500" : "bg-blue-600"
                   )}>
                     {quickViewItem.type === 'invoice' && <FileText size={20} />}
                     {quickViewItem.type === 'product' && <Package size={20} />}
@@ -634,7 +634,7 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
                   <button
                     type="button"
                     onClick={() => handleDownloadPDF(quickViewItem.data)}
-                    className="flex justify-center items-center gap-1.5 px-4 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 border border-indigo-200/50 rounded-2xl text-xs font-black uppercase transition-all select-none cursor-pointer"
+                    className="flex justify-center items-center gap-1.5 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200/50 rounded-2xl text-xs font-black uppercase transition-all select-none cursor-pointer"
                     title="Descarregar PDF"
                   >
                     <Download size={14} />

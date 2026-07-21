@@ -1062,7 +1062,7 @@ export default function Settings() {
 
       {/* WhatsApp Integration Quick Suggestion Banner */}
       {(!formData.whatsappApiKey || !formData.whatsappPhoneNumberId || !formData.whatsappPhone) && (
-        <div className="bg-gradient-to-r from-emerald-50 to-teal-50/50 p-6 md:p-8 rounded-[32px] border border-emerald-100 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="bg-emerald-50 p-6 md:p-8 rounded-[32px] border border-emerald-100 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="space-y-2 max-w-xl flex-1">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 bg-emerald-600/10 text-emerald-700 text-[10px] font-black uppercase tracking-wider rounded-full">Recomendado</span>
@@ -1400,7 +1400,7 @@ export default function Settings() {
                         : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-300 dark:hover:border-slate-600"
                     )}
                   >
-                    <Laptop size={18} className={cn(formData.theme === 'auto' ? "text-indigo-400" : "text-slate-500 dark:text-slate-400")} />
+                    <Laptop size={18} className={cn(formData.theme === 'auto' ? "text-blue-400" : "text-slate-500 dark:text-slate-400")} />
                     <span>Automático (System)</span>
                   </button>
                 </div>
@@ -1811,7 +1811,7 @@ export default function Settings() {
                   {/* Actions / Dispatch Toggles Section */}
                   <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm space-y-5">
                     <div className="flex items-center gap-2.5 border-b border-slate-50 pb-3">
-                      <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                         <Bell size={16} />
                       </div>
                       <div>
@@ -2124,8 +2124,8 @@ export default function Settings() {
                           else if (log.type === 'success') { labelPrefix = '[✓ SUCESSO]'; textColor = 'text-emerald-400 font-semibold'; }
                           else if (log.type === 'warn') { labelPrefix = '[⚠ ALERTA]'; textColor = 'text-yellow-400'; }
                           else if (log.type === 'error') { labelPrefix = '[✗ ERRO]'; textColor = 'text-red-400 font-bold'; }
-                          else if (log.type === 'request') { labelPrefix = '[REQUEST-API]'; textColor = 'text-indigo-300 font-medium'; }
-                          else if (log.type === 'response') { labelPrefix = '[RESPONSE-API]'; textColor = 'text-purple-300 font-medium'; }
+                          else if (log.type === 'request') { labelPrefix = '[REQUEST-API]'; textColor = 'text-blue-300 font-medium'; }
+                          else if (log.type === 'response') { labelPrefix = '[RESPONSE-API]'; textColor = 'text-emerald-300 font-medium'; }
 
                           return (
                             <div key={idx} className="space-y-1 bg-slate-950/45 p-2 rounded-xl border border-slate-900 text-left">
@@ -2154,23 +2154,23 @@ export default function Settings() {
                                 <div className="mt-2 bg-slate-950 p-3 rounded-xl border border-slate-800 font-mono text-[10px] text-slate-400 space-y-2 overflow-x-auto overflow-y-hidden transition-all animate-in slide-in-from-top-2 duration-200">
                                   {isRequest && (
                                     <>
-                                      <div><span className="text-indigo-400 font-bold">MÉTODO:</span> {log.details.method}</div>
-                                      <div><span className="text-indigo-400 font-bold">ENDPOINT URL:</span> <span className="text-slate-350">{log.details.url}</span></div>
+                                      <div><span className="text-blue-400 font-bold">MÉTODO:</span> {log.details.method}</div>
+                                      <div><span className="text-blue-400 font-bold">ENDPOINT URL:</span> <span className="text-slate-350">{log.details.url}</span></div>
                                       <div>
-                                        <span className="text-indigo-400 font-bold">HEADERS:</span>
+                                        <span className="text-blue-400 font-bold">HEADERS:</span>
                                         <pre className="text-slate-400 bg-slate-900/50 p-2 rounded-lg mt-1 border border-slate-850">{JSON.stringify(log.details.headers, null, 2)}</pre>
                                       </div>
                                       <div>
-                                        <span className="text-indigo-400 font-bold">BODY (PAYLOAD):</span>
+                                        <span className="text-blue-400 font-bold">BODY (PAYLOAD):</span>
                                         <pre className="text-slate-350 bg-slate-900/50 p-2 rounded-lg mt-1 border border-slate-850">{JSON.stringify(log.details.body, null, 2)}</pre>
                                       </div>
                                     </>
                                   )}
                                   {isResponse && (
                                     <>
-                                      <div><span className="text-purple-400 font-bold">STATUS HTTP:</span> {log.message}</div>
+                                      <div><span className="text-emerald-400 font-bold">STATUS HTTP:</span> {log.message}</div>
                                       <div>
-                                        <span className="text-purple-400 font-bold">BODY DE RETORNO:</span>
+                                        <span className="text-emerald-400 font-bold">BODY DE RETORNO:</span>
                                         <pre className="text-slate-350 bg-slate-900/50 p-2 rounded-lg mt-1 border border-slate-850">{JSON.stringify(log.details, null, 2)}</pre>
                                       </div>
                                     </>
@@ -2378,7 +2378,7 @@ export default function Settings() {
                           </div>
                           <div className="text-[8px] font-bold text-[#b5cbca] text-right mt-1.5 select-none font-mono flex items-center justify-end gap-1">
                             <span>12:28</span>
-                            <span className="text-sky-455 font-bold">✓✓</span>
+                            <span className="text-blue-455 font-bold">✓✓</span>
                           </div>
                         </div>
                       </div>
@@ -2448,7 +2448,7 @@ export default function Settings() {
                       <label className="block text-xs font-bold text-slate-600">Nome da Filial / Loja</label>
                       <input
                         type="text"
-                        className="w-full p-3 text-xs bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500/25 outline-none transition-all text-slate-850"
+                        className="w-full p-3 text-xs bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/25 outline-none transition-all text-slate-850"
                         placeholder="Ex: Sabush Maputo - Matola, Armazém Central"
                         value={newBranchName}
                         onChange={e => setNewBranchName(e.target.value)}
@@ -2459,7 +2459,7 @@ export default function Settings() {
                       <label className="block text-xs font-bold text-slate-600">Localização / Endereço</label>
                       <input
                         type="text"
-                        className="w-full p-3 text-xs bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-indigo-500/25 outline-none transition-all text-slate-850"
+                        className="w-full p-3 text-xs bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-blue-500/25 outline-none transition-all text-slate-850"
                         placeholder="Ex: Av. 24 de Julho, Maputo"
                         value={newBranchLocation}
                         onChange={e => setNewBranchLocation(e.target.value)}
@@ -2472,7 +2472,7 @@ export default function Settings() {
                       type="button"
                       onClick={handleAddBranch}
                       disabled={isAddingBranch || !newBranchName.trim()}
-                      className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all active:scale-95 disabled:opacity-50 cursor-pointer shadow-md shadow-indigo-600/10 text-xs"
+                      className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center gap-2 transition-all active:scale-95 disabled:opacity-50 cursor-pointer shadow-md shadow-blue-600/10 text-xs"
                     >
                       {isAddingBranch ? <Loader2 size={16} className="animate-spin" /> : <Plus size={16} />}
                       Adicionar Nova Loja
@@ -2491,7 +2491,7 @@ export default function Settings() {
 
                   {branchesLoading ? (
                     <div className="flex flex-col items-center justify-center py-12 text-slate-400 gap-2">
-                      <Loader2 size={32} className="animate-spin text-indigo-500" />
+                      <Loader2 size={32} className="animate-spin text-blue-500" />
                       <p className="text-xs font-bold font-sans uppercase tracking-widest">A carregar lojas...</p>
                     </div>
                   ) : branchesList.length === 0 ? (
@@ -2618,7 +2618,7 @@ export default function Settings() {
                           type="button"
                           onClick={() => setFormData({...formData, printerInterface: conn.id})}
                           className={`p-4 rounded-3xl border-2 transition-all text-left flex flex-col justify-between h-32 ${
-                            formData.printerInterface === conn.id ? 'border-indigo-600 bg-indigo-50/50 text-indigo-900' : 'border-slate-100 hover:border-slate-200 bg-white text-slate-700'
+                            formData.printerInterface === conn.id ? 'border-blue-600 bg-blue-50/50 text-blue-900' : 'border-slate-100 hover:border-slate-200 bg-white text-slate-700'
                           }`}
                         >
                           <p className="font-bold text-xs">{conn.name}</p>
@@ -2629,25 +2629,25 @@ export default function Settings() {
                   </div>
 
                   {formData.printerInterface === 'wifi_network' && (
-                    <div className="p-5 bg-indigo-50/50 rounded-3xl border border-indigo-100 grid grid-cols-1 md:grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
+                    <div className="p-5 bg-blue-50/50 rounded-3xl border border-blue-100 grid grid-cols-1 md:grid-cols-2 gap-4 animate-in slide-in-from-top-2 duration-200">
                       <div>
-                        <label className="block text-xs font-bold text-indigo-950 uppercase mb-2">Wi-Fi Printer IP Address</label>
+                        <label className="block text-xs font-bold text-blue-950 uppercase mb-2">Wi-Fi Printer IP Address</label>
                         <input
                           type="text"
                           placeholder="e.g. 192.168.1.100"
                           value={formData.printerIpAddress || ''}
                           onChange={e => setFormData({...formData, printerIpAddress: e.target.value})}
-                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none rounded-2xl text-xs font-mono font-bold text-slate-800"
+                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none rounded-2xl text-xs font-mono font-bold text-slate-800"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-bold text-indigo-950 uppercase mb-2">RAW Port</label>
+                        <label className="block text-xs font-bold text-blue-950 uppercase mb-2">RAW Port</label>
                         <input
                           type="text"
                           placeholder="9100"
                           value={formData.printerPort || '9100'}
                           onChange={e => setFormData({...formData, printerPort: e.target.value})}
-                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none rounded-2xl text-xs font-mono font-bold text-slate-800"
+                          className="w-full px-4 py-3 bg-white border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none rounded-2xl text-xs font-mono font-bold text-slate-800"
                         />
                       </div>
                     </div>
@@ -2834,7 +2834,7 @@ export default function Settings() {
                         }`}
                       >
                         <div className="flex justify-between items-start w-full">
-                          <span className="font-mono text-xs font-bold text-teal-800 bg-teal-50 px-1.5 py-0.5 rounded border border-teal-100">
+                          <span className="font-mono text-xs font-bold text-blue-800 bg-blue-50 px-1.5 py-0.5 rounded border border-blue-100">
                             {curr.code} ({curr.symbol})
                           </span>
                           {formData.secondaryCurrency === curr.code && (
@@ -2894,7 +2894,7 @@ export default function Settings() {
                   {formData.secondaryCurrency && (
                     <div className="p-3 bg-white border border-slate-100 rounded-xl flex flex-col justify-center">
                       <span className="text-[10px] uppercase font-bold tracking-wider text-slate-400">Moeda Secundária</span>
-                      <span className="text-xs font-bold text-teal-700 mt-1">
+                      <span className="text-xs font-bold text-blue-700 mt-1">
                         1 MZN = {businessData?.exchangeRates?.[formData.secondaryCurrency] 
                           ? `${Number(businessData?.exchangeRates?.[formData.secondaryCurrency]).toFixed(4)} ${formData.secondaryCurrency}`
                           : `N/A`}
@@ -3182,7 +3182,7 @@ export default function Settings() {
               </div>
 
               {/* Data Protection Shield Card */}
-              <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50/50 rounded-[32px] border border-blue-100/60 shadow-sm space-y-4">
+              <div className="p-6 bg-blue-50 rounded-[32px] border border-blue-100/60 shadow-sm space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/10">
                     <Lock size={20} />
@@ -3305,7 +3305,7 @@ export default function Settings() {
                   </div>
 
                   <div className="p-4 bg-white rounded-xl border border-[#E9E1D2]/40 text-xs flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-750 flex items-center justify-center self-start">
+                    <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-750 flex items-center justify-center self-start">
                       <Globe size={16} />
                     </div>
                     <div>
@@ -3657,7 +3657,7 @@ export default function Settings() {
 
                 <div className="p-5 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-4">
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
-                    isInstalled ? 'bg-indigo-100 text-indigo-600' : 'bg-amber-100 text-amber-600 animate-pulse'
+                    isInstalled ? 'bg-blue-100 text-blue-600' : 'bg-amber-100 text-amber-600 animate-pulse'
                   }`}>
                     <Smartphone size={20} />
                   </div>
@@ -3689,7 +3689,7 @@ export default function Settings() {
               </div>
 
               {/* Install Prompt Showcase CTA Card */}
-              <div className="p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-[32px] border border-blue-100 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 shadow-sm">
+              <div className="p-6 bg-blue-50/50 rounded-[32px] border border-blue-100 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 shadow-sm">
                 <div className="flex-1 space-y-1">
                   <h4 className="font-black text-slate-905 text-sm font-sans flex items-center gap-2">
                     <Smartphone size={16} className="text-blue-600" />
@@ -3777,7 +3777,7 @@ export default function Settings() {
                   {/* Dynamic Push Notification Simulation Station */}
                   <div className="space-y-4 border-t md:border-t-0 md:border-l border-slate-100 pt-6 md:pt-0 md:pl-6 text-left">
                     <h5 className="text-xs font-black text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
-                      <Wifi className="text-indigo-500" size={14} />
+                      <Wifi className="text-blue-500" size={14} />
                       Simulador de Eventos PWA (Lighthouse Ready)
                     </h5>
                     <p className="text-xs text-slate-505 font-medium leading-relaxed">
@@ -3980,7 +3980,7 @@ export default function Settings() {
               </div>
 
               {/* Direct Manual Backup Action Card */}
-              <div className="p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-[32px] border border-blue-100/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+              <div className="p-6 bg-blue-50/50 rounded-[32px] border border-blue-100/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
                 <div className="flex-1">
                   <h4 className="font-black text-slate-900 text-sm font-sans flex items-center gap-2">
                     <Database size={16} className="text-blue-600" />

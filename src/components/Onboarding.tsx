@@ -213,12 +213,12 @@ export default function Onboarding() {
 
   return (
     <div 
-      style={{ background: 'linear-gradient(135deg, #B8791A 0%, #3B6D11 100%)', minHeight: '100vh' }}
+      style={{ background: '#B8791A', minHeight: '100vh' }}
       className="w-full text-slate-100 flex items-center justify-center p-4 md:p-8 font-sans overflow-y-auto relative antialiased selection:bg-orange-500 selection:text-white"
     >
       {/* Background overlay shapes */}
       <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#178F82]/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div 
         style={{
@@ -235,7 +235,7 @@ export default function Onboarding() {
           <div>
             <div className="flex items-center gap-2 mb-6 pointer-events-none">
               <Zap className="text-[#639922] animate-pulse" size={24} />
-              <span className="font-extrabold text-sm tracking-wider uppercase bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">Sabush System ERP</span>
+              <span className="font-extrabold text-sm tracking-wider uppercase text-white">Sabush System ERP</span>
             </div>
 
             <div className="space-y-4">
@@ -507,7 +507,7 @@ export default function Onboarding() {
               type="button"
               disabled={loading || !termsAccepted || !selectedCountry}
               onClick={executeCompleteOnboarding}
-              className="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-400/20 min-w-[220px]"
+              className="px-6 py-3.5 bg-emerald-500 text-white text-xs font-black uppercase tracking-widest rounded-2xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/10 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed border border-emerald-400/20 min-w-[220px]"
             >
               {loading ? (
                 <>

@@ -703,7 +703,7 @@ export default function SystemInterpreter() {
                   <button
                     onClick={handleFetchInterpreterGuide}
                     disabled={aiLoading}
-                    className="w-full py-3.5 px-4 rounded-xl bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-black text-xs flex items-center justify-center gap-2.5 transition-all shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
+                    className="w-full py-3.5 px-4 rounded-xl bg-linear-to-r from-blue-600 to-blue-600 hover:from-blue-700 hover:to-blue-700 text-white font-black text-xs flex items-center justify-center gap-2.5 transition-all shadow-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed uppercase"
                   >
                     {aiLoading ? (
                       <>
@@ -809,8 +809,8 @@ function LoaderPattern() {
   return (
     <div className="flex justify-center items-center gap-3 py-4">
       <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping" />
-      <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-ping" style={{ animationDelay: '0.2s' }} />
-      <span className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping" style={{ animationDelay: '0.4s' }} />
+      <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping" style={{ animationDelay: '0.2s' }} />
+      <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping" style={{ animationDelay: '0.4s' }} />
     </div>
   );
 }
