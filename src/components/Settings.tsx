@@ -1062,7 +1062,7 @@ export default function Settings() {
 
       {/* WhatsApp Integration Quick Suggestion Banner */}
       {(!formData.whatsappApiKey || !formData.whatsappPhoneNumberId || !formData.whatsappPhone) && (
-        <div className="bg-gradient-to-r from-emerald-50 to-teal-50/50 p-6 md:p-8 rounded-[32px] border border-emerald-100 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
+        <div className="bg-[#FBF3E0] p-6 md:p-8 rounded-[32px] border border-[#B8791A]/20 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-6 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="space-y-2 max-w-xl flex-1">
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 bg-emerald-600/10 text-emerald-700 text-[10px] font-black uppercase tracking-wider rounded-full">Recomendado</span>
@@ -3182,7 +3182,7 @@ export default function Settings() {
               </div>
 
               {/* Data Protection Shield Card */}
-              <div className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50/50 rounded-[32px] border border-blue-100/60 shadow-sm space-y-4">
+              <div className="p-6 bg-[#E4E9F0] rounded-[32px] border border-[#0A1C38]/10 shadow-sm space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-blue-600 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-blue-600/10">
                     <Lock size={20} />
@@ -3689,7 +3689,7 @@ export default function Settings() {
               </div>
 
               {/* Install Prompt Showcase CTA Card */}
-              <div className="p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-[32px] border border-blue-100 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 shadow-sm">
+              <div className="p-6 bg-[#E4E9F0] rounded-[32px] border border-[#0A1C38]/10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 shadow-sm">
                 <div className="flex-1 space-y-1">
                   <h4 className="font-black text-slate-905 text-sm font-sans flex items-center gap-2">
                     <Smartphone size={16} className="text-blue-600" />
@@ -3980,7 +3980,7 @@ export default function Settings() {
               </div>
 
               {/* Direct Manual Backup Action Card */}
-              <div className="p-6 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-[32px] border border-blue-100/50 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+              <div className="p-6 bg-[#E4E9F0] rounded-[32px] border border-[#0A1C38]/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
                 <div className="flex-1">
                   <h4 className="font-black text-slate-900 text-sm font-sans flex items-center gap-2">
                     <Database size={16} className="text-blue-600" />

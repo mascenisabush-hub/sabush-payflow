@@ -225,7 +225,7 @@ export default function ManagerPINModal({ isOpen, onClose, onSuccess, actionName
             <button
               type="button"
               onClick={handleRequestRemote}
-              className="w-full py-3.5 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-2xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md shadow-blue-500/10"
+              className="w-full py-3.5 px-4 bg-[#0A1C38] hover:bg-[#06142A] text-white rounded-2xl text-xs font-black uppercase tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md shadow-blue-500/10"
             >
               <Laptop size={15} /> Solicitar Remotamente ao Gerente
             </button>

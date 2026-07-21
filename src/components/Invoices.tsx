@@ -2148,7 +2148,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'list' && !isCreating 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-850"
             )}
           >
@@ -2176,7 +2176,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'add' || isCreating 
-                ? "bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-md shadow-emerald-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-850"
             )}
           >
@@ -2191,7 +2191,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5",
               activeTab === 'manage' 
-                ? "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-amber-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-853"
             )}
           >

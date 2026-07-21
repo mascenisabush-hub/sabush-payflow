@@ -1828,7 +1828,7 @@ export default function Customers() {
               </div>
 
               {/* High elegance Loyalty Card */}
-              <div className="bg-gradient-to-br from-[#1D1510] via-[#35261C] to-[#120D0A] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#E9E1D2]/25">
+              <div className="bg-[#0A1C38] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#E9E1D2]/25">
                 {/* Decorative Pattern Background */}
                 <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#FAF7F2_1px,transparent_1px)] [background-size:16px_16px]" />
 

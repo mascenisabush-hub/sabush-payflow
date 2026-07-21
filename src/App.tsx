@@ -948,7 +948,7 @@ function ProtectedApp() {
                     />
                   ) : (
                     <div 
-                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0A1C38] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A] shadow-lg"
+                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0A1C38] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-[#B8791A] shadow-lg"
                     >
                       S
                     </div>
@@ -964,7 +964,7 @@ function ProtectedApp() {
                   <div className="flex items-center gap-2 mt-2">
                     <span className="h-[2px] w-5 rounded-full bg-gradient-to-r from-transparent to-[#F2C46B]" />
                     <span 
-                      className="font-display font-extrabold text-[13px] tracking-[0.5em] bg-gradient-to-r from-[#FFF2D6] via-[#F2C46B] to-[#B8791A] bg-clip-text text-transparent"
+                      className="font-display font-extrabold text-[13px] tracking-[0.5em] text-[#B8791A]"
                     >
                       TECH
                     </span>
@@ -977,7 +977,7 @@ function ProtectedApp() {
               <div className="flex-grow flex flex-col justify-center py-4">
                 {/* Thin gold horizontal divider bar */}
                 <div 
-                  className="w-[40px] h-[3px] rounded-full mb-5 bg-gradient-to-r from-[#F2C46B] to-[#B8791A]"
+                  className="w-[40px] h-[3px] rounded-full mb-5 bg-[#B8791A]"
                 />
 
                 {/* Sabush System ERP Heading */}
@@ -2052,7 +2052,7 @@ function ProtectedApp() {
   // Active Session Prompt for users who are already logged in but haven't confirmed
   if (user && !sessionConfirmed) {
     return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0A051D] via-[#0F1B47] to-[#04020D] p-6 selection:bg-[#4F46E5] selection:text-white">
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-[#0A1C38] p-6 selection:bg-[#B8791A] selection:text-white">
         <div className="w-full max-w-md bg-white/95 p-8 md:p-10 rounded-[32px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] border border-white/20 flex flex-col items-center gap-6">
           <img 
             src="/sabush-logo.svg" 

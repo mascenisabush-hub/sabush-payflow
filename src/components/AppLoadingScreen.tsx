@@ -77,22 +77,14 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           to   { transform: rotate(360deg) translateX(74px) rotate(-360deg); }
         }
         .als-wordmark span {
-          background: linear-gradient(90deg, #f5c877, #B8791A 60%, #f5c877);
-          background-size: 200% auto;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          animation: als-shine 3s linear infinite;
-        }
-        @keyframes als-shine {
-          to { background-position: -200% center; }
+          color: #B8791A;
         }
         .als-bar-fill {
           position: absolute;
           top: 0; bottom: 0;
           width: 40%;
           border-radius: 999px;
-          background: linear-gradient(90deg, transparent, #B8791A, #f5c877, #B8791A, transparent);
+          background: #B8791A;
           animation: als-sweep 1.4s ease-in-out infinite;
         }
         @keyframes als-sweep {

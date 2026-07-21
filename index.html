@@ -82,7 +82,6 @@
         gap: 34px;
         background:
           radial-gradient(circle at 50% 38%, rgba(184, 121, 26, 0.16), transparent 55%),
-          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.10), transparent 60%),
           #060d1c;
         overflow: hidden;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -113,16 +112,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: conic-gradient(
-          from 0deg,
-          #2C63B8 0deg,
-          #B8791A 70deg,
-          #D69B25 130deg,
-          #7CA3E0 190deg,
-          #6b3fa0 250deg,
-          #2C63B8 310deg,
-          #2C63B8 360deg
-        );
+        background: #0A1C38;
         filter: blur(90px) saturate(140%);
         opacity: 0.32;
         animation: boot-lamp-spin 18s linear infinite;
@@ -160,7 +150,7 @@
 
       #boot-splash .ring.ring-2 {
         inset: 20px;
-        border-top-color: rgba(96, 165, 250, 0.85);
+        border-top-color: rgba(10, 28, 56, 0.85);
         border-right-color: transparent;
         animation: boot-spin-reverse 2.1s linear infinite;
       }
@@ -205,16 +195,7 @@
       }
 
       #boot-splash .wordmark span {
-        background: linear-gradient(90deg, #f5c877, #B8791A 60%, #f5c877);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: boot-shine 3s linear infinite;
-      }
-
-      @keyframes boot-shine {
-        to { background-position: -200% center; }
+        color: #B8791A;
       }
 
       #boot-splash .tagline {
@@ -242,7 +223,7 @@
         bottom: 0;
         width: 40%;
         border-radius: 999px;
-        background: linear-gradient(90deg, transparent, #B8791A, #f5c877, #B8791A, transparent);
+        background: #B8791A;
         animation: boot-sweep 1.4s ease-in-out infinite;
       }
 

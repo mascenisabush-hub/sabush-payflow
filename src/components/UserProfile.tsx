@@ -366,7 +366,7 @@ export default function UserProfile() {
   return (
     <div className="space-y-8 max-w-6xl">
       {/* Dynamic Header Profile Hero banner */}
-      <div className="relative bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 rounded-3xl p-6 md:p-8 text-white overflow-hidden shadow-xl">
+      <div className="relative bg-[#0A1C38] rounded-3xl p-6 md:p-8 text-white overflow-hidden shadow-xl">
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
 

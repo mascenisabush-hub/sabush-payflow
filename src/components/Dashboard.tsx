@@ -2633,7 +2633,7 @@ Sabush System ERP`;
       
       {/* Brand New Welcome Banner - Requisito 4 */}
       {showWelcomeBanner && (
-        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-[24px] p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-sm animate-in fade-in duration-300">
+        <div className="bg-[#E4E9F0] border border-[#0A1C38]/10 rounded-[24px] p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 shadow-sm animate-in fade-in duration-300">
           <div className="flex items-start gap-3">
             <span className="text-2xl mt-0.5 select-none font-sans">👋</span>
             <div>
@@ -2661,7 +2661,7 @@ Sabush System ERP`;
       )}
 
       {/* 1. WELCOME HERO CARDS ROW */}
-      <div className="pos-root relative overflow-hidden bg-gradient-to-br from-amber-500 via-orange-600 to-orange-700 text-white p-6 md:p-8 rounded-[32px] shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6 border border-orange-500/20">
+      <div className="pos-root relative overflow-hidden bg-[#B8791A] text-white p-6 md:p-8 rounded-[32px] shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6 border border-orange-500/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.15),transparent_60%)] pointer-events-none" />
         
         <div className="space-y-2 relative">
@@ -2786,7 +2786,7 @@ Sabush System ERP`;
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pos-root">
         
         {/* Card 1: Vendas a Retalho */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-[#0A1C38] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-blue-200 uppercase tracking-widest opacity-100">
@@ -2827,7 +2827,7 @@ Sabush System ERP`;
         </div>
 
         {/* Card 2: Vendas por Grosso */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1C38] via-[#0F5C56] to-[#178F82] text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-[#0A1C38] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest opacity-100">
@@ -2866,7 +2866,7 @@ Sabush System ERP`;
         </div>
 
         {/* Card 3: Vendas a Dinheiro */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-[#B8791A] text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
             <span className="text-[10px] font-black text-amber-100 uppercase tracking-widest opacity-100">

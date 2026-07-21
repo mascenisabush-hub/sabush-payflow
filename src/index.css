@@ -181,7 +181,7 @@
    Premium Dark Modo (Cosmic Sleek Theme)
    ========================================== */
 .dark {
-  background-color: #1c0d02 !important;
+  background-color: #050D1A !important;
   color: #cbd5e1;
 }
 
@@ -196,7 +196,7 @@
 .dark .bg-\[\#FAF7F2\],
 .dark .bg-\[\#FAF9F6\],
 .dark .bg-zinc-50 {
-  background-color: #120902 !important;
+  background-color: #050D1A !important;
   background-image: none !important;
 }
 
@@ -204,7 +204,7 @@
 .dark .bg-white,
 .dark .bg-slate-50\/85,
 .dark .bg-neutral-50 {
-  background-color: #241205 !important; /* Premium Slate-900 look */
+  background-color: #0A1C38 !important; /* Brand navy card look */
 }
 
 /* Secondary background accents */
@@ -217,7 +217,7 @@
 .dark .bg-slate-100\/50,
 .dark .bg-slate-200\/40,
 .dark .bg-slate-50\/50 {
-  background-color: #321b0a !important;
+  background-color: #13294D !important;
 }
 
 /* Border Overrides */
@@ -838,7 +838,7 @@ html:not(.dark) main .border-dashed {
    Dashboard Page Gradient Background
    ========================================== */
 .dashboard-dark-bg {
-  background: linear-gradient(160deg, #0A0F1C 0%, #131B2E 50%, #0E1422 100%) !important;
+  background: #0A1C38 !important;
 }
 
 

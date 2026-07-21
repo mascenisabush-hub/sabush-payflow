@@ -46,7 +46,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          background: radial-gradient(ellipse at 50% 40%, #0F274C 0%, #06142A 62%, #030a16 100%);
+          background: #0A1C38;
           animation: ws-fade-in 0.6s ease-out both;
         }
         .ws-root.ws-closing {
@@ -69,16 +69,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          background: conic-gradient(
-            from 0deg,
-            #2C63B8 0deg,
-            #B8791A 70deg,
-            #D69B25 130deg,
-            #7CA3E0 190deg,
-            #6b3fa0 250deg,
-            #2C63B8 310deg,
-            #2C63B8 360deg
-          );
+          background: #0A1C38;
           filter: blur(90px) saturate(140%);
           opacity: 0.4;
           animation: ws-lamp-spin 18s linear infinite;
@@ -144,7 +135,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           font-size: clamp(2.4rem, 7vw, 3.8rem);
           letter-spacing: 0.02em;
           line-height: 1.05;
-          background: linear-gradient(100deg, #E7B448 0%, #F4E3B0 18%, #D69B25 32%, #7CA3E0 55%, #E7B448 78%, #F4E3B0 92%, #D69B25 100%);
+          background: #B8791A;
           background-size: 260% 100%;
           -webkit-background-clip: text;
           background-clip: text;
@@ -198,7 +189,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           font-size: 0.95rem;
           letter-spacing: 0.01em;
           color: #06142A;
-          background: linear-gradient(120deg, #D69B25, #E7B448 45%, #D69B25 100%);
+          background: #B8791A;
           border: none;
           cursor: pointer;
           box-shadow: 0 8px 30px rgba(184, 121, 26, 0.45), 0 0 0 1px rgba(255,255,255,0.08) inset;

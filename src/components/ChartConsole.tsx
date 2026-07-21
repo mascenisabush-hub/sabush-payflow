@@ -58,7 +58,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
   schemaColors,
 }) => {
   return (
-    <div className="p-6 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 rounded-[32px] border border-indigo-500/20 shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
+    <div className="p-6 bg-[#0A1C38] rounded-[32px] border border-[#0A1C38]/20 shadow-2xl relative overflow-hidden animate-in fade-in duration-300">
       {/* Background absolute glowing accents */}
       <div className="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
       <div className="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-pink-500/5 blur-3xl pointer-events-none" />
@@ -135,7 +135,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                 className={cn(
                   "rounded-xl text-[11px] font-extrabold uppercase transition-all duration-300 border cursor-pointer flex flex-col items-center justify-center gap-1",
                   activeChartLayout === 'combined'
-                    ? "bg-gradient-to-r from-indigo-500 to-indigo-600 text-white border-indigo-400 shadow-md shadow-indigo-500/20"
+                    ? "bg-[#0A1C38] text-white border-[#0A1C38] shadow-md shadow-[#0A1C38]/20"
                     : "bg-transparent text-slate-300 border-white/10 hover:border-white/20"
                 )}
               >
@@ -148,7 +148,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                 className={cn(
                   "rounded-xl text-[11px] font-extrabold uppercase transition-all duration-300 border cursor-pointer flex flex-col items-center justify-center gap-1",
                   activeChartLayout === 'separate'
-                    ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white border-pink-400 shadow-md shadow-pink-500/20"
+                    ? "bg-[#B8791A] text-white border-[#B8791A] shadow-md shadow-[#B8791A]/20"
                     : "bg-transparent text-slate-300 border-white/10 hover:border-white/20"
                 )}
               >

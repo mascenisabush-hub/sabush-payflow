@@ -4273,7 +4273,7 @@ export default function POS() {
 
                   {/* Loyalty Points controls */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && (
-                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-150 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-[#E4E9F0] border border-[#0A1C38]/10 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-[#0A1C38]">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-1.5">
                           <span className="text-sm">🪙</span>
@@ -4623,7 +4623,7 @@ export default function POS() {
 
                   {/* Loyalty Points controls */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && (
-                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-150 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-[#E4E9F0] border border-[#0A1C38]/10 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-[#0A1C38]">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-1.5">
                           <span className="text-sm">🪙</span>

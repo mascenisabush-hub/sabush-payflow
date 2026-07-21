@@ -2870,7 +2870,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'list' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2936,7 +2936,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'add' || isCreating || editingProduct 
-                ? "bg-gradient-to-r from-emerald-500 to-teal-650 text-white shadow-md shadow-emerald-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2953,7 +2953,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'manage' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-purple-600 to-indigo-650 text-white shadow-md shadow-purple-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2969,7 +2969,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'quebras' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-md shadow-amber-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -2985,7 +2985,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'etiquetas' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -3001,7 +3001,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'validade' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-red-500 to-amber-600 text-white shadow-md shadow-red-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -3017,7 +3017,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             className={cn(
               "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
               activeTab === 'movimentos' && !isCreating && !editingProduct 
-                ? "bg-gradient-to-r from-blue-600 to-indigo-650 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
+                ? "bg-[#0A1C38] text-white shadow-md shadow-[#0A1C38]/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
             )}
           >
@@ -4032,7 +4032,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           className="space-y-6"
         >
           {/* PAINEL INFORMATIVO DE VALOR TOTAL DO STOCK */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 bg-gradient-to-r from-blue-50/75 to-indigo-50/75 border border-blue-100 rounded-3xl shadow-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-5 bg-[#E4E9F0] border border-[#0A1C38]/10 rounded-3xl shadow-sm">
             {/* Card 1: Valor de Venda */}
             <div className="flex items-center gap-3 bg-white p-4 rounded-2xl border border-blue-50 shadow-xs">
               <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
@@ -7590,7 +7590,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
               {/* Wholesale / Tiered Prices details if any */}
               {viewingProduct.allowWholesale && (
-                <div className="bg-gradient-to-br from-emerald-900 to-teal-950 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-emerald-950/20">
+                <div className="bg-[#0A1C38] text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-[#0A1C38]/20">
                   <span className="text-[9px] uppercase font-extrabold tracking-wider text-emerald-300 block border-b border-emerald-500/20 pb-2">📦 Valores & Configuração de Grosso (Wholesale)</span>
                   <div className="flex justify-between items-center bg-emerald-500/10 border border-emerald-500/20 p-2.5 rounded-xl">
                     <span className="text-[10px] uppercase font-black tracking-wider text-emerald-100">Preço de Grosso Base:</span>
@@ -7614,7 +7614,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
               {/* Retail / Unit Discounts details if any */}
               {viewingProduct.unitDiscountTiers && viewingProduct.unitDiscountTiers.length > 0 && (
-                <div className="bg-gradient-to-br from-blue-900 to-indigo-950 text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-blue-950/20">
+                <div className="bg-[#0A1C38] text-white rounded-[24px] p-5 space-y-3.5 shadow-xl shadow-[#0A1C38]/20">
                   <span className="text-[9px] uppercase font-extrabold tracking-wider text-blue-300 block border-b border-blue-500/20 pb-2">🛍️ Tabela de Descontos por Volume de Unidades ('un')</span>
                   <div className="space-y-1.5">
                     <span className="block text-[8px] font-black uppercase text-blue-300 tracking-wider font-sans">Descontos de retalho por quantidade comprada:</span>
@@ -8514,7 +8514,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   type="button"
                   onClick={handleConfirmPdfImport}
                   disabled={isSavingParsed || parsedPdfProducts.filter(p => p.selected).length === 0}
-                  className="px-5 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 disabled:opacity-40 hover:from-violet-700 hover:to-indigo-700 text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5"
+                  className="px-5 py-2 bg-[#0A1C38] disabled:opacity-40 hover:bg-[#06142A] text-white font-black text-xs uppercase tracking-wider rounded-xl cursor-pointer active:scale-95 shadow-md flex items-center gap-1.5"
                 >
                   {isSavingParsed ? (
                     <>
