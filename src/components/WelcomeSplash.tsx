@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ShoppingCart, Package, Receipt, BarChart3 } from 'lucide-react';
 
 interface WelcomeSplashProps {
   lang?: string;
@@ -94,6 +95,60 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           inset: 0;
           background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 35%, #06142A 82%);
         }
+
+        /* Faint rotating sunburst rays, matching the boot splash and loading screen */
+        .ws-rays {
+          position: absolute;
+          width: 620px;
+          height: 620px;
+          border-radius: 50%;
+          background: repeating-conic-gradient(from 0deg, rgba(245,200,119,0.14) 0deg 1.2deg, transparent 1.2deg 9deg);
+          mask-image: radial-gradient(circle, transparent 30%, black 48%, transparent 70%);
+          -webkit-mask-image: radial-gradient(circle, transparent 30%, black 48%, transparent 70%);
+          animation: ws-lamp-spin 44s linear infinite;
+          mix-blend-mode: screen;
+        }
+
+        /* Comet rings + orbiting module hex-badges around the mark */
+        .ws-mark-wrap { position: relative; width: 168px; height: 168px; display: flex; align-items: center; justify-content: center; }
+        .ws-ring-svg { position: absolute; inset: 0; overflow: visible; }
+        .ws-ring-svg.cw { animation: ws-spin 24s linear infinite; }
+        .ws-ring-svg.ccw { animation: ws-spin-rev 30s linear infinite; }
+        @keyframes ws-spin { to { transform: rotate(360deg); } }
+        @keyframes ws-spin-rev { to { transform: rotate(-360deg); } }
+        .ws-orbit-node {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 36px;
+          height: 36px;
+          margin: -18px;
+          clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 15px;
+          background: linear-gradient(160deg, #0d1e3a, #071224);
+          filter: drop-shadow(0 0 8px var(--node-glow, rgba(184,121,26,0.6)));
+          opacity: 0;
+          animation: ws-orbit 17s linear infinite, ws-node-in 0.5s 0.5s ease-out forwards;
+        }
+        .ws-orbit-node::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          clip-path: inherit;
+          padding: 1.3px;
+          background: linear-gradient(160deg, var(--node-c, #f5c877), transparent 55%, var(--node-c, #f5c877));
+          -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+        }
+        @keyframes ws-orbit {
+          from { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+          to   { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+        @keyframes ws-node-in { to { opacity: 1; } }
 
         /* Drifting soft particles for depth */
         .ws-spark {
@@ -229,13 +284,14 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .ws-lamp { animation: none; }
+          .ws-lamp, .ws-rays, .ws-ring-svg, .ws-orbit-node { animation: none; opacity: 1; }
           .ws-wordmark { animation: ws-word-in 0.4s both; }
           .ws-spark { display: none; }
         }
       `}</style>
 
       <div className="ws-lamp" />
+      <div className="ws-rays" />
       <div className="ws-vignette" />
 
       {[...Array(14)].map((_, i) => (
@@ -253,12 +309,36 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
       ))}
 
       <div className="ws-content">
-        <div className="ws-mark">
-          <img
-            src="/sabush-logo.png"
-            alt="Sabush Tech"
-            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          />
+        <div className="ws-mark-wrap">
+          <svg className="ws-ring-svg cw" viewBox="0 0 168 168" aria-hidden="true">
+            <circle cx="84" cy="84" r="80" fill="none" stroke="rgba(214,155,37,0.2)" strokeWidth="1.2" strokeDasharray="2 9" />
+            <circle cx="84" cy="84" r="80" fill="none" stroke="#f5c877" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="14 488" style={{ filter: 'drop-shadow(0 0 6px #f5c877)' }} />
+          </svg>
+          <svg className="ws-ring-svg ccw" viewBox="0 0 168 168" aria-hidden="true">
+            <circle cx="84" cy="84" r="68" fill="none" stroke="rgba(44,99,184,0.2)" strokeWidth="1" strokeDasharray="1 12" />
+            <circle cx="84" cy="84" r="68" fill="none" stroke="#7CA3E0" strokeWidth="2" strokeLinecap="round" strokeDasharray="10 417" style={{ filter: 'drop-shadow(0 0 6px #7CA3E0)' }} />
+          </svg>
+
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#f5c877', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#f5c877', animationDelay: '0s, 0.5s' }}>
+            <ShoppingCart size={15} />
+          </div>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#7CA3E0', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#7CA3E0', animationDelay: '-4.25s, 0.65s' }}>
+            <Package size={15} />
+          </div>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#D69B25', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#D69B25', animationDelay: '-8.5s, 0.8s' }}>
+            <Receipt size={15} />
+          </div>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#60a5fa', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#60a5fa', animationDelay: '-12.75s, 0.95s' }}>
+            <BarChart3 size={15} />
+          </div>
+
+          <div className="ws-mark">
+            <img
+              src="/sabush-logo.png"
+              alt="Sabush Tech"
+              style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+            />
+          </div>
         </div>
 
         <h1 className="ws-wordmark">SABUSH TECH</h1>
