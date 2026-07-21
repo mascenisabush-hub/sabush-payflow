@@ -386,7 +386,7 @@ export default function POS() {
     return (
       <div className="bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl p-4 space-y-3 font-sans mt-3">
         <div className="flex justify-between items-center pb-2 border-b border-[#E9E1D2]">
-          <span className="text-[10px] font-black text-[#1D1510] uppercase tracking-wider flex items-center gap-1">
+          <span className="text-[10px] font-black text-[#0C2440] uppercase tracking-wider flex items-center gap-1">
             💵 Calculadora de Notas & Moedas
           </span>
           <button
@@ -396,7 +396,7 @@ export default function POS() {
               Object.keys(cleared).forEach(k => cleared[k] = 0);
               setDenoms(cleared);
             }}
-            className="text-[10px] text-[#8B735F] hover:text-rose-500 font-bold transition-all cursor-pointer"
+            className="text-[10px] text-[#4A5C78] hover:text-rose-500 font-bold transition-all cursor-pointer"
           >
             Limpar
           </button>
@@ -407,7 +407,7 @@ export default function POS() {
             const qty = denoms[String(val)] || 0;
             return (
               <div key={val} className="flex items-center justify-between gap-1 border-b border-slate-100 pb-1 font-mono text-[11px]">
-                <span className="font-bold text-[#8B735F] shrink-0 min-w-[50px]">{val} MT:</span>
+                <span className="font-bold text-[#4A5C78] shrink-0 min-w-[50px]">{val} MT:</span>
                 <div className="flex items-center gap-1 justify-end w-full">
                   <input
                     type="number"
@@ -418,9 +418,9 @@ export default function POS() {
                       setDenoms(prev => ({ ...prev, [String(val)]: newQty }));
                     }}
                     placeholder="0"
-                    className="w-10 text-center py-0.5 bg-white border border-[#E9E1D2] rounded font-bold text-xs focus:outline-none text-[#1D1510]"
+                    className="w-10 text-center py-0.5 bg-white border border-[#E9E1D2] rounded font-bold text-xs focus:outline-none text-[#0C2440]"
                   />
-                  <span className="text-[9px] text-[#8B735F] font-bold w-[35px] text-right">
+                  <span className="text-[9px] text-[#4A5C78] font-bold w-[35px] text-right">
                     {(qty * val).toFixed(0)}
                   </span>
                 </div>
@@ -430,14 +430,14 @@ export default function POS() {
         </div>
 
         <div className="flex items-center justify-between pt-1.5 border-t border-[#E9E1D2]">
-          <div className="text-[10px] font-bold text-[#8B735F]">Total Calculado:</div>
+          <div className="text-[10px] font-bold text-[#4A5C78]">Total Calculado:</div>
           <div className="text-xs font-black text-[#B8791A] font-mono">{total.toFixed(1)} MT</div>
         </div>
 
         <button
           type="button"
           onClick={() => onApply(total)}
-          className="w-full py-1.5 bg-[#1D1510] text-[#FCFAF6] rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
+          className="w-full py-1.5 bg-[#0C2440] text-[#FCFAF6] rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
         >
           Confirmar e Aplicar Contagem
         </button>
@@ -3467,17 +3467,17 @@ export default function POS() {
           <div className="p-4 bg-amber-50 text-amber-600 rounded-full mb-4">
             <Lock size={32} className="stroke-[2]" />
           </div>
-          <h2 className="text-xl font-black text-[#1D1510] mb-1 font-sans text-center">Abertura de Turno e Caixa</h2>
-          <p className="text-xs text-[#8B735F] text-center mb-6 font-sans leading-relaxed font-semibold">
+          <h2 className="text-xl font-black text-[#0C2440] mb-1 font-sans text-center">Abertura de Turno e Caixa</h2>
+          <p className="text-xs text-[#4A5C78] text-center mb-6 font-sans leading-relaxed font-semibold">
             Declare o fundo de maneio inicial e selecione o terminal para abrir a gaveta e iniciar o registo de vendas.
           </p>
 
           <div className="w-full space-y-4 mb-6">
             {/* Terminal Selector */}
             <div className="text-left">
-              <label className="block text-[10px] font-black text-[#8B735F] uppercase tracking-wider mb-2 font-sans">Selecione o Terminal / Balcão</label>
+              <label className="block text-[10px] font-black text-[#4A5C78] uppercase tracking-wider mb-2 font-sans">Selecione o Terminal / Balcão</label>
               <select
-                className="w-full px-4 py-2.5 bg-slate-50 border border-[#E9E1D2] rounded-xl text-xs font-bold text-[#1D1510] outline-none"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-[#E9E1D2] rounded-xl text-xs font-bold text-[#0C2440] outline-none"
                 value={selectedTerminal}
                 onChange={e => setSelectedTerminal(e.target.value)}
               >
@@ -3492,7 +3492,7 @@ export default function POS() {
             {/* Float Cash Input */}
             <div className="text-left">
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-[10px] font-black text-[#8B735F] uppercase tracking-wider font-sans">Fundo de Maneio Inicial (Float)</label>
+                <label className="block text-[10px] font-black text-[#4A5C78] uppercase tracking-wider font-sans">Fundo de Maneio Inicial (Float)</label>
                 <button
                   type="button"
                   onClick={() => setIsOpeningCalculatorOpen(!isOpeningCalculatorOpen)}
@@ -3507,7 +3507,7 @@ export default function POS() {
                 <input 
                   type="number" 
                   placeholder="Ex: 500.0" 
-                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#E9E1D2] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#B8791A] transition-all text-[#1D1510]"
+                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#E9E1D2] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#B8791A] transition-all text-[#0C2440]"
                   value={openingFloat}
                   onChange={e => setOpeningFloat(e.target.value)}
                 />
@@ -3531,7 +3531,7 @@ export default function POS() {
 
           <button
             onClick={handleOpenShift}
-            className="w-full py-4 bg-[#1D1510] hover:bg-[#34261E] text-[#FCFAF6] font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition-all cursor-pointer active:scale-98"
+            className="w-full py-4 bg-[#0C2440] hover:bg-[#06142A] text-[#FCFAF6] font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition-all cursor-pointer active:scale-98"
           >
             Abrir Caixa & Iniciar Vendas
           </button>
@@ -3544,7 +3544,7 @@ export default function POS() {
     <div className="flex flex-col w-full h-full bg-[#F4F8FA] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
       
       {/* Quick Sale Keyboard Status & Buffer Bar */}
-      <div className="bg-[#1D1510] border border-orange-900/35 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
+      <div className="bg-[#0C2440] border border-orange-900/35 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
         <div className="flex items-center gap-2">
           <span className="bg-[#B8791A] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
             <span className="shrink-0">⚡</span> QUICK

@@ -1271,7 +1271,7 @@ export default function Customers() {
                                 setMainCustomerId(match.customer1.id);
                                 setTargetCustomerId(match.customer2.id);
                               }}
-                              className="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-[#1D1510] font-black text-[9px] uppercase tracking-wider rounded-lg transition-transform active:scale-95 cursor-pointer"
+                              className="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-[#0C2440] font-black text-[9px] uppercase tracking-wider rounded-lg transition-transform active:scale-95 cursor-pointer"
                             >
                               Selecionar
                             </button>
@@ -1425,7 +1425,7 @@ export default function Customers() {
                     <button
                       type="button"
                       onClick={() => setViewingLoyaltyCustomer(selectedCustomer)}
-                      className="flex items-center gap-1 bg-[#1D1510] hover:bg-black text-[#FCFAF6] px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                      className="flex items-center gap-1 bg-[#0C2440] hover:bg-black text-[#FCFAF6] px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
                       title="Gerar Cartão Digital de Fidelização"
                     >
                       <QrCode size={10} /> QR Code
@@ -1817,14 +1817,14 @@ export default function Customers() {
             >
               <button 
                 onClick={() => setViewingLoyaltyCustomer(null)}
-                className="absolute top-4 right-4 p-2 bg-[#E9E1D2]/40 text-[#1D1510] hover:bg-[#E9E1D2]/80 transition-all rounded-full cursor-pointer border-0"
+                className="absolute top-4 right-4 p-2 bg-[#E9E1D2]/40 text-[#0C2440] hover:bg-[#E9E1D2]/80 transition-all rounded-full cursor-pointer border-0"
               >
                 <X size={14} />
               </button>
 
               <div className="text-center mb-4">
-                <span className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest font-sans">CARTÃO DE FIDELIZAÇÃO</span>
-                <h4 className="text-lg font-black text-[#1D1510] font-sans mt-0.5 leading-tight">Sabush Club Premium</h4>
+                <span className="text-[10px] font-black text-[#4A5C78] uppercase tracking-widest font-sans">CARTÃO DE FIDELIZAÇÃO</span>
+                <h4 className="text-lg font-black text-[#0C2440] font-sans mt-0.5 leading-tight">Sabush Club Premium</h4>
               </div>
 
               {/* High elegance Loyalty Card */}
@@ -1845,7 +1845,7 @@ export default function Customers() {
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "bg-violet-550/30 text-violet-300 border border-violet-500/30" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 500  ? "bg-amber-500/20 text-amber-300 border border-amber-500/25" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 100  ? "bg-blue-500/20 text-blue-300 border border-blue-500/25" :
-                    "bg-[#8B735F]/20 text-[#FAF7F2] border border-[#8B735F]/30"
+                    "bg-[#4A5C78]/20 text-[#FAF7F2] border border-[#4A5C78]/30"
                   )}>
                     {(viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "👑 Platina" :
                      (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 500  ? "🌟 Ouro" :
@@ -1885,7 +1885,7 @@ export default function Customers() {
                 <span className="text-[9px] font-black text-slate-400 tracking-wider inline-block mt-3 uppercase font-mono">
                   CLI-{viewingLoyaltyCustomer.phone || viewingLoyaltyCustomer.id?.slice(0, 10).toUpperCase()}
                 </span>
-                <p className="text-[10px] text-[#8B735F] font-bold text-center mt-2 font-sans leading-snug px-3">
+                <p className="text-[10px] text-[#4A5C78] font-bold text-center mt-2 font-sans leading-snug px-3">
                   Apresente este código no leitor de caixa (POS) para acumular ou resgatar pontos da sua conta.
                 </p>
               </div>
@@ -1896,7 +1896,7 @@ export default function Customers() {
                   onClick={() => {
                     window.print();
                   }}
-                  className="w-full flex items-center justify-center gap-1 bg-[#1D1510] hover:bg-black text-white text-[10.5px] font-black uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer shadow-sm border-0"
+                  className="w-full flex items-center justify-center gap-1 bg-[#0C2440] hover:bg-black text-white text-[10.5px] font-black uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer shadow-sm border-0"
                 >
                   🖨️ Imprimir
                 </button>
@@ -1904,7 +1904,7 @@ export default function Customers() {
                   onClick={() => {
                     toast.success("Link do Cartão copiado para envio via WhatsApp!");
                   }}
-                  className="w-full flex items-center justify-center gap-1 bg-white hover:bg-slate-50 text-[#1D1510] text-[10.5px] font-[#1D1510] uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer border border-[#E9E1D2]"
+                  className="w-full flex items-center justify-center gap-1 bg-white hover:bg-slate-50 text-[#0C2440] text-[10.5px] font-[#0C2440] uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer border border-[#E9E1D2]"
                 >
                   🔗 Copiar Link
                 </button>

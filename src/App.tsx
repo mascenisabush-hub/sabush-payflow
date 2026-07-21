@@ -2192,7 +2192,7 @@ function ProtectedApp() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#B8791A]/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
         
-        <div className="w-full max-w-md bg-[#1D1510] border border-[#3A2F26] rounded-[40px] p-8 text-center space-y-6 shadow-2xl z-10 transition-all">
+        <div className="w-full max-w-md bg-[#0C2440] border border-[#13294D] rounded-[40px] p-8 text-center space-y-6 shadow-2xl z-10 transition-all">
           <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500 mx-auto animate-pulse">
             <Lock size={32} />
           </div>
@@ -2213,7 +2213,7 @@ function ProtectedApp() {
                 value={twoFactorCodeInput}
                 onChange={e => setTwoFactorCodeInput(e.target.value.replace(/\D/g, ''))}
                 placeholder="000 000"
-                className="w-full bg-[#140F0D] border border-[#3A2F26] rounded-2xl p-4 font-mono text-center tracking-[0.5em] text-2xl font-black text-amber-400 focus:outline-none focus:border-amber-400/50 outline-none"
+                className="w-full bg-[#140F0D] border border-[#13294D] rounded-2xl p-4 font-mono text-center tracking-[0.5em] text-2xl font-black text-amber-400 focus:outline-none focus:border-amber-400/50 outline-none"
               />
             </div>
 
@@ -2226,11 +2226,11 @@ function ProtectedApp() {
           </form>
 
           <div className="pt-4 border-t border-[#3a2f26]/40 flex flex-col items-center gap-2">
-            <p className="text-[10px] text-[#8B735F] font-bold leading-relaxed">
+            <p className="text-[10px] text-[#4A5C78] font-bold leading-relaxed">
               Não recebeu o código ou está em ambiente de sandbox?
             </p>
             {/* Fallback secure text only shown for testing convenience so users don't get locked out in local sessions */}
-            <div className="bg-[#140F0D]/60 border border-[#3A2F26]/30 rounded-xl px-4 py-2 font-mono text-[10px] text-amber-400/80 font-bold flex items-center gap-1.5">
+            <div className="bg-[#140F0D]/60 border border-[#13294D]/30 rounded-xl px-4 py-2 font-mono text-[10px] text-amber-400/80 font-bold flex items-center gap-1.5">
               <span>💡 Modo Desenvolvedor: Senha OTP =</span>
               <span className="text-white select-all">{twoFactorCodeSent || "Gerando..."}</span>
             </div>
@@ -2238,7 +2238,7 @@ function ProtectedApp() {
             <button 
               onClick={() => logout()}
               type="button"
-              className="text-[#8B735F] hover:text-[#FDFAF7] text-[10px] font-black uppercase tracking-wider underline mt-2"
+              className="text-[#4A5C78] hover:text-[#FDFAF7] text-[10px] font-black uppercase tracking-wider underline mt-2"
             >
               Terminar Sessão (Logout)
             </button>

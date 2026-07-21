@@ -3574,31 +3574,31 @@ A equipa de ${businessData?.name || 'Sabush System'}
               <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-[20px] flex items-center justify-center mb-1">
                 <Share2 size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#1D1510] font-sans">Ecrã de Pagamento Online</h3>
+              <h3 className="text-xl font-bold text-[#0C2440] font-sans">Ecrã de Pagamento Online</h3>
               <p className="text-slate-500 text-xs">Gere e partilha links de faturação segura para os teus clientes.</p>
             </div>
 
             {/* Quick Invoice Info */}
             <div className="bg-[#FAF7F2] border border-[#E9E1D2] p-5 rounded-[22px] flex flex-col gap-2.5 mb-6">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Fatura Nº:</span>
+                <span className="font-bold text-[#4A5C78] uppercase tracking-wider">Fatura Nº:</span>
                 <span className="font-mono font-black text-slate-800">#{selectedInvoiceForShare.invoiceNumber}</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Cliente:</span>
+                <span className="font-bold text-[#4A5C78] uppercase tracking-wider">Cliente:</span>
                 <span className="font-extrabold text-slate-800">
                   {customers.find(c => c.id === selectedInvoiceForShare.customerId)?.name || selectedInvoiceForShare.customerId || 'Walk-in'}
                 </span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Valor total:</span>
+                <span className="font-bold text-[#4A5C78] uppercase tracking-wider">Valor total:</span>
                 <span className="font-black text-[#0F274C]">{(selectedInvoiceForShare.total || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
 
             {/* Link Copy form */}
             <div className="space-y-2 mb-6">
-              <label className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest block">Link Seguro de Pagamento</label>
+              <label className="text-[10px] font-black text-[#4A5C78] uppercase tracking-widest block">Link Seguro de Pagamento</label>
               <div className="flex gap-2">
                 <input 
                   type="text" 
@@ -3608,7 +3608,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 />
                 <button
                   onClick={handleCopyLinkFromModal}
-                  className="px-4 py-2 bg-[#1D1510] hover:bg-[#2F231B] text-white text-xs font-black rounded-xl uppercase tracking-wider transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 bg-[#0C2440] hover:bg-[#06142A] text-white text-xs font-black rounded-xl uppercase tracking-wider transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
                 >
                   {copied ? (
                     <>
@@ -3628,7 +3628,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             {/* Direct WhatsApp Action */}
             <div className="space-y-4 border-t border-slate-100 pt-6">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest block">Enviar via WhatsApp</label>
+                <label className="text-[10px] font-black text-[#4A5C78] uppercase tracking-widest block">Enviar via WhatsApp</label>
                 <span className={cn(
                   "text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full",
                   clientPhone ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"
@@ -3639,7 +3639,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
               <div className="space-y-2.5">
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#8B735F]">Enviar para:</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#4A5C78]">Enviar para:</span>
                   <input 
                     type="tel"
                     placeholder="Ex: +258 840000000"

@@ -234,13 +234,13 @@ export default function CustomFeature() {
         <div className="lg:col-span-2 space-y-6">
           
           <div className="bg-white rounded-[40px] border border-[#E9E1D2] shadow-sm p-8 text-left space-y-6">
-            <h2 className="text-lg font-black text-[#1D1510] font-sans flex items-center gap-2">
+            <h2 className="text-lg font-black text-[#0C2440] font-sans flex items-center gap-2">
               <Hammer size={18} className="text-[#B8791A]" /> Projetar Nova Ferramenta
             </h2>
             
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="space-y-2">
-                <label className="block text-[10px] font-black uppercase tracking-widest text-[#8B735F]">
+                <label className="block text-[10px] font-black uppercase tracking-widest text-[#4A5C78]">
                   Título ou Nome do Módulo
                 </label>
                 <input
@@ -248,20 +248,20 @@ export default function CustomFeature() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Ex: Cartões de Fidelidade Digitais para Clientes"
-                  className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] placeholder-slate-400/80 transition-all"
+                  className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#0C2440] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] placeholder-slate-400/80 transition-all"
                   required
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-[#8B735F]">
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-[#4A5C78]">
                     Categoria do Recurso
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer"
+                    className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#0C2440] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer"
                   >
                     <option value="Geral">Módulo Geral</option>
                     <option value="Vendas POS">Vendas & Caixa POS</option>
@@ -273,7 +273,7 @@ export default function CustomFeature() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[10px] font-black uppercase tracking-widest text-[#8B735F]">
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-[#4A5C78]">
                     Ícone para o Sidebar
                   </label>
                   <div className="flex gap-2.5 p-1 bg-[#FAF7F2] border border-[#E9E1D2] rounded-xl justify-between items-center h-[50px] px-3">
@@ -286,7 +286,7 @@ export default function CustomFeature() {
                           "w-8 h-8 rounded-lg flex items-center justify-center transition-all cursor-pointer",
                           selectedIcon === ic 
                             ? "bg-[#B8791A] text-white shadow-sm" 
-                            : "text-[#8B735F] hover:bg-slate-100"
+                            : "text-[#4A5C78] hover:bg-slate-100"
                         )}
                         title={`Ícone ${ic}`}
                       >
@@ -298,7 +298,7 @@ export default function CustomFeature() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-[10px] font-black uppercase tracking-widest text-[#8B735F]">
+                <label className="block text-[10px] font-black uppercase tracking-widest text-[#4A5C78]">
                   Como deve funcionar? (Especificação)
                 </label>
                 <textarea
@@ -306,7 +306,7 @@ export default function CustomFeature() {
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Descreva em detalhe como esta funcionalidade deve operar na sua loja. Por exemplo: 'Ao finalizar uma venda no POS, o cliente deve acumular 5% do valor em pontos para descontar no próximo talão.'"
                   rows={5}
-                  className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] placeholder-slate-400/80 transition-all resize-none leading-relaxed"
+                  className="w-full bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#0C2440] p-4 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] placeholder-slate-400/80 transition-all resize-none leading-relaxed"
                   required
                 />
               </div>
@@ -329,7 +329,7 @@ export default function CustomFeature() {
 
           {/* Core Interactive List: Submitted ideas history timeline */}
           <div className="bg-white rounded-[40px] border border-[#E9E1D2] shadow-sm p-8 text-left space-y-6">
-            <h3 className="text-lg font-black text-[#1D1510] font-sans flex items-center gap-2">
+            <h3 className="text-lg font-black text-[#0C2440] font-sans flex items-center gap-2">
               <Cpu size={18} className="text-[#B8791A]" /> O Seu Roteiro de Customizações ({userRequests.length})
             </h3>
 
@@ -340,7 +340,7 @@ export default function CustomFeature() {
             ) : userRequests.length === 0 ? (
               <div className="border border-dashed border-[#E9E1D2] rounded-3xl p-10 text-center space-y-3">
                 <Lightbulb size={36} className="mx-auto text-[#B8791A]/35" />
-                <h4 className="font-extrabold text-[#1D1510] text-sm font-sans">Nenhuma ferramenta planeada ainda</h4>
+                <h4 className="font-extrabold text-[#0C2440] text-sm font-sans">Nenhuma ferramenta planeada ainda</h4>
                 <p className="text-slate-400 text-xs max-w-md mx-auto leading-relaxed">
                   Utilize os presets à direita ou digite a sua especificação acima para agendar o lançamento da sua nova funcionalidade.
                 </p>
@@ -360,11 +360,11 @@ export default function CustomFeature() {
                           <div className="w-7 h-7 bg-[#FAF7F2] border border-[#E9E1D2] rounded-lg flex items-center justify-center text-[#B8791A]">
                             {renderIcon(req.iconName, 13)}
                           </div>
-                          <h4 className="font-black text-sm text-[#1D1510] leading-snug">{req.title}</h4>
+                          <h4 className="font-black text-sm text-[#0C2440] leading-snug">{req.title}</h4>
                         </div>
 
                         <div className="flex items-center gap-2">
-                          <span className="px-2.5 py-1 bg-[#FAF7F2] border border-[#E9E1D2] text-[#8B735F] text-[9px] font-black uppercase rounded-lg">
+                          <span className="px-2.5 py-1 bg-[#FAF7F2] border border-[#E9E1D2] text-[#4A5C78] text-[9px] font-black uppercase rounded-lg">
                             {req.category}
                           </span>
                           <span className={cn(
@@ -407,7 +407,7 @@ export default function CustomFeature() {
           {/* Quick Presets Select Card */}
           <div className="bg-white rounded-[40px] border border-[#E9E1D2] shadow-sm p-8 text-left space-y-6">
             <div className="space-y-1">
-              <h3 className="text-lg font-black text-[#1D1510] font-sans flex items-center gap-2">
+              <h3 className="text-lg font-black text-[#0C2440] font-sans flex items-center gap-2">
                 <Lightbulb size={18} className="text-[#B8791A]" /> Modelos Rápidos
               </h3>
               <p className="text-xs text-slate-400">
@@ -427,9 +427,9 @@ export default function CustomFeature() {
                       <div className="p-2 bg-white rounded-xl text-[#B8791A] group-hover:scale-105 transition-transform shadow-xs">
                         <preset.icon size={14} />
                       </div>
-                      <span className="font-extrabold text-xs text-[#1D1510] line-clamp-1 leading-none">{preset.title}</span>
+                      <span className="font-extrabold text-xs text-[#0C2440] line-clamp-1 leading-none">{preset.title}</span>
                     </div>
-                    <span className="text-[8px] bg-white border border-[#E9E1D2] px-2 py-0.5 rounded-full uppercase tracking-wider font-black text-[#8B735F]">
+                    <span className="text-[8px] bg-white border border-[#E9E1D2] px-2 py-0.5 rounded-full uppercase tracking-wider font-black text-[#4A5C78]">
                       {preset.badge}
                     </span>
                   </div>
@@ -443,28 +443,28 @@ export default function CustomFeature() {
 
           {/* Development Cycle info card */}
           <div className="bg-[#FAF7F2] border border-[#E9E1D2] rounded-[40px] p-8 text-left space-y-5">
-            <h4 className="text-sm font-black text-[#1D1510] uppercase tracking-widest flex items-center gap-1.5 font-sans">
+            <h4 className="text-sm font-black text-[#0C2440] uppercase tracking-widest flex items-center gap-1.5 font-sans">
               <CheckCircle size={15} className="text-[#B8791A]" /> Fluxo de Ativação
             </h4>
             <div className="space-y-4 text-xs text-slate-500 leading-relaxed font-sans">
               <div className="flex items-start gap-2.5">
                 <div className="w-5 h-5 rounded-full bg-[#B8791A]/15 text-[#B8791A] flex items-center justify-center font-black text-[10px] shrink-0">1</div>
                 <div>
-                  <p className="font-black text-[#1D1510] mb-0.5">Submissão do Pedido</p>
+                  <p className="font-black text-[#0C2440] mb-0.5">Submissão do Pedido</p>
                   <p>A sua proposta é registada na nossa fila de prioridades em tempo real.</p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <div className="w-5 h-5 rounded-full bg-[#B8791A]/15 text-[#B8791A] flex items-center justify-center font-black text-[10px] shrink-0">2</div>
                 <div>
-                  <p className="font-black text-[#1D1510] mb-0.5">Estudo de Viabilidade</p>
+                  <p className="font-black text-[#0C2440] mb-0.5">Estudo de Viabilidade</p>
                   <p>O arquiteto de software do Sabush ERP avalia os dados de entrada e saídas requeridos.</p>
                 </div>
               </div>
               <div className="flex items-start gap-2.5">
                 <div className="w-5 h-5 rounded-full bg-[#B8791A]/15 text-[#B8791A] flex items-center justify-center font-black text-[10px] shrink-0">3</div>
                 <div>
-                  <p className="font-black text-[#1D1510] mb-0.5">Compilação do Módulo</p>
+                  <p className="font-black text-[#0C2440] mb-0.5">Compilação do Módulo</p>
                   <p>O código TypeScript correspondente é injetado diretamente no menu lateral para a sua empresa.</p>
                 </div>
               </div>

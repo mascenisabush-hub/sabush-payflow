@@ -3176,7 +3176,7 @@ export default function Settings() {
             <fieldset disabled={!isSystemAdmin} className="space-y-8 animate-in fade-in duration-300">
               <div>
                 <h3 className="text-lg font-bold text-slate-900 font-sans">Segurança & Conectividade de Faturação</h3>
-                <p className="text-sm text-[#8B735F] font-semibold">
+                <p className="text-sm text-[#4A5C78] font-semibold">
                   Controle a proteção de dados do negócio, PINs de colaboradores, e configure o desempenho móvel para internet lenta.
                 </p>
               </div>
@@ -3311,7 +3311,7 @@ export default function Settings() {
                     <div>
                       <p className="font-black text-slate-700 uppercase tracking-tight font-sans">Otimização Móvel</p>
                       <p className="text-[10px] text-slate-400 font-bold leading-none mt-0.5">Compactador de tráfego móvel</p>
-                      <p className="text-[10px] text-[#8B735F] font-black mt-1">✓ Compressão Base64 ativada</p>
+                      <p className="text-[10px] text-[#4A5C78] font-black mt-1">✓ Compressão Base64 ativada</p>
                     </div>
                   </div>
                 </div>

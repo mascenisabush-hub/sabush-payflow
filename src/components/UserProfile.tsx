@@ -615,7 +615,7 @@ export default function UserProfile() {
                 </div>
 
                 {/* 2-Factor Authentication Advanced Settings Card */}
-                <div className="bg-[#1D1510] p-6 rounded-3xl text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 mt-6 border border-amber-900/10">
+                <div className="bg-[#0C2440] p-6 rounded-3xl text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 mt-6 border border-amber-900/10">
                   <div className="flex items-start gap-4 text-left">
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 border border-white/10">
                       <Lock className="text-amber-400" size={20} />

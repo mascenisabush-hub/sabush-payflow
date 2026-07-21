@@ -333,13 +333,13 @@
 }
 
 /* Custom Dark-on-Dark Text Contrast Amends for Dark Mode */
-.dark .text-\[\#1D1510\],
-.dark [class*="text-[#1D1510]"] {
+.dark .text-\[\#0C2440\],
+.dark [class*="text-[#0C2440]"] {
   color: #fcf9f5 !important;
 }
 
-.dark .text-\[\#8B735F\],
-.dark [class*="text-[#8B735F]"] {
+.dark .text-\[\#4A5C78\],
+.dark [class*="text-[#4A5C78]"] {
   color: #d2c1b0 !important;
 }
 

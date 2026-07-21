@@ -71,10 +71,10 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
   return (
     <div className="bg-white border border-[#E9E1D2] rounded-[40px] p-8 space-y-6 shadow-sm">
       <div>
-        <h3 className="text-xl font-black tracking-tight text-[#1D1510] flex items-center gap-2">
+        <h3 className="text-xl font-black tracking-tight text-[#0C2440] flex items-center gap-2">
           <span>🛡️ Livro de Registo de Auditoria de Atividades</span>
         </h3>
-        <p className="text-xs text-[#8B735F] mt-1 font-semibold">
+        <p className="text-xs text-[#4A5C78] mt-1 font-semibold">
           Registo em tempo real das ações administrativas de todos os utilizadores no seu negócio para máxima transparência.
         </p>
       </div>
@@ -82,13 +82,13 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
       {/* Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#FAF7F2] p-4 rounded-3xl border border-[#E9E1D2]">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#8B735F]" />
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#4A5C78]" />
           <input
             type="text"
             value={auditSearch}
             onChange={(e) => setAuditSearch(e.target.value)}
             placeholder="Pesquisar por operador, ação ou descrição..."
-            className="w-full pl-10 pr-4 py-2 bg-white border border-[#E9E1D2] rounded-xl text-xs text-[#1D1510] placeholder-[#8B735F]/60 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-[#E9E1D2] rounded-xl text-xs text-[#0C2440] placeholder-[#4A5C78]/60 focus:outline-none"
           />
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -107,8 +107,8 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
               className={cn(
                 "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer",
                 auditTypeFilter === f.id
-                  ? "bg-[#1D1510] text-white shadow-sm"
-                  : "bg-white text-[#8B735F] hover:text-[#1D1510] border border-[#E9E1D2]"
+                  ? "bg-[#0C2440] text-white shadow-sm"
+                  : "bg-white text-[#4A5C78] hover:text-[#0C2440] border border-[#E9E1D2]"
               )}
             >
               {f.label}
@@ -120,8 +120,8 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
       {/* Timeline */}
       {isLoadingLogs ? (
         <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-          <Loader2 className="w-8 h-8 text-[#1D1510] animate-spin" />
-          <p className="text-xs text-[#8B735F] font-black uppercase tracking-widest">A carregar registos...</p>
+          <Loader2 className="w-8 h-8 text-[#0C2440] animate-spin" />
+          <p className="text-xs text-[#4A5C78] font-black uppercase tracking-widest">A carregar registos...</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -162,7 +162,7 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
           {filteredLogs.length === 0 && (
             <div className="py-20 text-center text-slate-400 bg-[#FAF7F2] rounded-3xl border border-[#E9E1D2]">
               <History size={42} className="mx-auto mb-3 opacity-20" />
-              <p className="text-xs uppercase font-black tracking-widest text-[#8B735F]">Nenhuma atividade registada.</p>
+              <p className="text-xs uppercase font-black tracking-widest text-[#4A5C78]">Nenhuma atividade registada.</p>
             </div>
           )}
         </div>
@@ -394,11 +394,11 @@ export default function Reports() {
       {/* Header with high fidelity title styling */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#FAF7F2] pb-6">
         <div>
-          <h2 className="text-3xl font-black text-[#1D1510] tracking-tight flex items-center gap-2">
+          <h2 className="text-3xl font-black text-[#0C2440] tracking-tight flex items-center gap-2">
             <span>Business Reports</span>
             <span className="w-2.5 h-2.5 rounded-full bg-[#B8791A]" />
           </h2>
-          <p className="text-[#8B735F] text-sm font-semibold tracking-wide mt-1">Estatísticas, análises financeiras e controlo inteligente de stock.</p>
+          <p className="text-[#4A5C78] text-sm font-semibold tracking-wide mt-1">Estatísticas, análises financeiras e controlo inteligente de stock.</p>
         </div>
 
         {/* Africa-inspired polished tab selector */}
@@ -408,8 +408,8 @@ export default function Reports() {
             className={cn(
               "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all cursor-pointer",
               activeTab === 'general' 
-                ? "bg-[#1D1510] text-[#FCFAF6] shadow-md" 
-                : "text-[#8B735F] hover:text-[#1D1510]"
+                ? "bg-[#0C2440] text-[#FCFAF6] shadow-md" 
+                : "text-[#4A5C78] hover:text-[#0C2440]"
             )}
           >
             Insights Gerais
@@ -427,8 +427,8 @@ export default function Reports() {
               (businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico')
                 ? "text-slate-400 cursor-not-allowed"
                 : activeTab === 'inventory' 
-                  ? "bg-[#1D1510] text-[#FCFAF6] shadow-md" 
-                  : "text-[#8B735F] hover:text-[#1D1510]"
+                  ? "bg-[#0C2440] text-[#FCFAF6] shadow-md" 
+                  : "text-[#4A5C78] hover:text-[#0C2440]"
             )}
           >
             {(businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico') && <Lock size={12} className="text-amber-500" />}
@@ -447,8 +447,8 @@ export default function Reports() {
               (businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico')
                 ? "text-slate-400 cursor-not-allowed"
                 : activeTab === 'scheduled' 
-                  ? "bg-[#1D1510] text-[#FCFAF6] shadow-md" 
-                  : "text-[#8B735F] hover:text-[#1D1510]"
+                  ? "bg-[#0C2440] text-[#FCFAF6] shadow-md" 
+                  : "text-[#4A5C78] hover:text-[#0C2440]"
             )}
           >
             {(businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico') && <Lock size={12} className="text-amber-500" />}
@@ -467,8 +467,8 @@ export default function Reports() {
             className={cn(
               "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all cursor-pointer flex items-center gap-1.5",
               activeTab === 'audit' 
-                ? "bg-[#1D1510] text-[#FCFAF6] shadow-md" 
-                : "text-[#8B735F] hover:text-[#1D1510]"
+                ? "bg-[#0C2440] text-[#FCFAF6] shadow-md" 
+                : "text-[#4A5C78] hover:text-[#0C2440]"
             )}
           >
             <History size={12} />
@@ -680,23 +680,23 @@ export default function Reports() {
           {/* Advanced Filter Toolbar */}
           <div className="bg-white p-6 rounded-[28px] border border-[#E9E1D2] shadow-[0_12px_24px_rgba(42,28,19,0.02)] flex flex-wrap gap-6 items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#FAF7F2] text-[#8B735F] rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-[#FAF7F2] text-[#4A5C78] rounded-xl flex items-center justify-center">
                 <SlidersHorizontal size={18} />
               </div>
               <div>
-                <h3 className="font-bold text-[#1D1510] text-sm">Filtros de Faturação</h3>
-                <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#8B735F]">Filtre e analise por categoria ou fornecedor</p>
+                <h3 className="font-bold text-[#0C2440] text-sm">Filtros de Faturação</h3>
+                <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#4A5C78]">Filtre e analise por categoria ou fornecedor</p>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-4 items-center">
               {/* Category selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black text-[#8B735F] uppercase tracking-wider">Categoria:</span>
+                <span className="text-xs font-black text-[#4A5C78] uppercase tracking-wider">Categoria:</span>
                 <select 
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
+                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#0C2440] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todas as Categorias</option>
                   {categoriesList.map(cat => (
@@ -707,11 +707,11 @@ export default function Reports() {
 
               {/* Supplier selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black text-[#8B735F] uppercase tracking-wider">Fornecedor:</span>
+                <span className="text-xs font-black text-[#4A5C78] uppercase tracking-wider">Fornecedor:</span>
                 <select 
                   value={supplierFilter}
                   onChange={(e) => setSupplierFilter(e.target.value)}
-                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#1D1510] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
+                  className="bg-[#FAF7F2] border border-[#E9E1D2] font-semibold text-xs text-[#0C2440] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todos Fornecedores</option>
                   {suppliersList.map(sup => (
@@ -776,8 +776,8 @@ export default function Reports() {
             <div className="lg:col-span-2 bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b pb-4">
                 <div>
-                  <h3 className="text-lg font-black text-[#1D1510]">Distribuição por Categoria</h3>
-                  <p className="text-[10px] font-extrabold uppercase text-[#8B735F] tracking-wider mt-0.5">Visão geral de quantidades e valores</p>
+                  <h3 className="text-lg font-black text-[#0C2440]">Distribuição por Categoria</h3>
+                  <p className="text-[10px] font-extrabold uppercase text-[#4A5C78] tracking-wider mt-0.5">Visão geral de quantidades e valores</p>
                 </div>
               </div>
               
@@ -807,7 +807,7 @@ export default function Reports() {
             {/* List of low-stock items requiring replenishment action list */}
             <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm flex flex-col justify-between space-y-6">
               <div>
-                <h3 className="text-lg font-black text-[#1D1510] mb-1">Avisos Críticos</h3>
+                <h3 className="text-lg font-black text-[#0C2440] mb-1">Avisos Críticos</h3>
                 <p className="text-[10px] font-bold text-rose-500 uppercase tracking-widest flex items-center gap-1.5">
                   <ShieldAlert size={14} />
                   Reposição Recomendada
@@ -819,8 +819,8 @@ export default function Reports() {
                   inventoryStats.lowStockItemsList.map(p => (
                     <div key={p.id} className="flex items-center justify-between p-3.5 bg-[#FAF7F2] rounded-2xl border border-rose-100/60 transition-all hover:border-rose-200">
                       <div className="min-w-0 pr-3">
-                        <p className="font-extrabold text-xs text-[#1D1510] truncate">{p.name}</p>
-                        <p className="text-[9px] font-extrabold text-[#8B735F] uppercase tracking-wide truncate mt-0.5">
+                        <p className="font-extrabold text-xs text-[#0C2440] truncate">{p.name}</p>
+                        <p className="text-[9px] font-extrabold text-[#4A5C78] uppercase tracking-wide truncate mt-0.5">
                           {p.supplier || 'Sem Fornecedor'}
                         </p>
                       </div>
@@ -853,8 +853,8 @@ export default function Reports() {
           <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm p-8 space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-4 border-b pb-4">
               <div>
-                <h3 className="text-lg font-black text-[#1D1510]">Lista Detalhada de Artigos Correspondentes</h3>
-                <p className="text-[10px] font-extrabold uppercase text-[#8B735F] tracking-wider mt-0.5">
+                <h3 className="text-lg font-black text-[#0C2440]">Lista Detalhada de Artigos Correspondentes</h3>
+                <p className="text-[10px] font-extrabold uppercase text-[#4A5C78] tracking-wider mt-0.5">
                   Visualização rápida de preços, unidades e alertas ({filteredProducts.length} itens)
                 </p>
               </div>
@@ -863,7 +863,7 @@ export default function Reports() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[#FAF7F2] text-[10px] font-black text-[#8B735F] uppercase tracking-wider">
+                  <tr className="border-b border-[#FAF7F2] text-[10px] font-black text-[#4A5C78] uppercase tracking-wider">
                     <th className="pb-4">Nome do Artigo</th>
                     <th className="pb-4">Fornecedor</th>
                     <th className="pb-4 text-center">Nível de Stock</th>
@@ -876,7 +876,7 @@ export default function Reports() {
                     const isLow = (p.stockLevel || 0) <= (p.lowStockThreshold || 5);
                     return (
                       <tr key={p.id} className="text-xs hover:bg-[#FCFAF6] transition-colors">
-                        <td className="py-4 font-extrabold text-[#1D1510]">{p.name}</td>
+                        <td className="py-4 font-extrabold text-[#0C2440]">{p.name}</td>
                         <td className="py-4 text-slate-600 font-semibold">{p.supplier || '—'}</td>
                         <td className="py-4 text-center">
                           <span className={cn(
@@ -916,11 +916,11 @@ export default function Reports() {
       ) : (
         <div className="space-y-8 animate-in fade-in duration-300">
           <div className="bg-[#FAF7F2] border border-[#E9E1D2] p-8 rounded-[40px] shadow-sm text-left">
-            <h3 className="text-xl font-black text-[#1D1510] tracking-tight flex items-center gap-2 mb-2 font-sans">
+            <h3 className="text-xl font-black text-[#0C2440] tracking-tight flex items-center gap-2 mb-2 font-sans">
               <span>Configuração de Relatórios Periódicos Automáticos</span>
               <span className="w-1.5 h-1.5 rounded-full bg-orange-600" />
             </h3>
-            <p className="text-[#8B735F] text-xs font-semibold leading-relaxed mb-6 font-sans">
+            <p className="text-[#4A5C78] text-xs font-semibold leading-relaxed mb-6 font-sans">
               Programe o sistema para autogerar relatórios de faturação e auditoria de stock em PDF ao fim de cada mês comercial.
             </p>
 
@@ -929,7 +929,7 @@ export default function Reports() {
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-sans">Estado da Programação</span>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-extrabold text-[#1D1510] text-sm font-sans">Relatório Mensal PDF</h4>
+                    <h4 className="font-extrabold text-[#0C2440] text-sm font-sans">Relatório Mensal PDF</h4>
                     <p className="text-[11px] text-slate-405 font-medium leading-none mt-1">Próxima geração: 01 de Julho de 2026</p>
                   </div>
                   <label className="relative inline-flex items-center cursor-pointer select-none">
@@ -949,7 +949,7 @@ export default function Reports() {
               <div className="space-y-3 p-5 bg-white rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between">
                 <div>
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-sans">Canal de Notificações</span>
-                  <h4 className="font-extrabold text-[#1D1510] text-sm mt-1 font-sans">Envio de Cópia PDF via WhatsApp</h4>
+                  <h4 className="font-extrabold text-[#0C2440] text-sm mt-1 font-sans">Envio de Cópia PDF via WhatsApp</h4>
                   <p className="text-[11px] text-slate-405 font-medium mt-1">Se ativado, envia o link direto ao proprietário.</p>
                 </div>
                 <div className="text-right">
@@ -960,7 +960,7 @@ export default function Reports() {
 
             {/* List of generated reports */}
             <div className="mt-8">
-              <h4 className="text-sm font-black text-[#1D1510] uppercase tracking-widest mb-4 flex items-center gap-1.5 font-sans">
+              <h4 className="text-sm font-black text-[#0C2440] uppercase tracking-widest mb-4 flex items-center gap-1.5 font-sans">
                 📋 Relatórios Coletivos Emitidos (Automação)
               </h4>
 
@@ -1008,7 +1008,7 @@ export default function Reports() {
                           outstandingCredit: stats.outstandingCredit || 12000
                         }, compInfo, products);
                       }}
-                      className="bg-[#1D1510] hover:bg-black text-[#FCFAF6] shadow-md px-4 py-2.5 rounded-xl font-bold font-sans text-xs uppercase tracking-wider cursor-pointer active:scale-95 transition-all text-center flex items-center justify-center gap-1.5"
+                      className="bg-[#0C2440] hover:bg-black text-[#FCFAF6] shadow-md px-4 py-2.5 rounded-xl font-bold font-sans text-xs uppercase tracking-wider cursor-pointer active:scale-95 transition-all text-center flex items-center justify-center gap-1.5"
                     >
                       🖨️ Descarregar PDF
                     </button>
@@ -1019,7 +1019,7 @@ export default function Reports() {
             
             <div className="mt-8 bg-amber-50/50 p-4 rounded-3xl border border-amber-200/50 text-amber-850 text-xs font-sans font-semibold text-left flex items-start gap-2 max-w-xl">
               <span className="text-sm">💡</span>
-              <p className="leading-relaxed text-[#8B735F]">
+              <p className="leading-relaxed text-[#4A5C78]">
                 <b>Dica de Produtividade:</b> As gerações automáticas de relatórios são disparadas no primeiro dia útil de cada mês útil. O proprietário recebe o arquivo em anexo diretamente na conta de WhatsApp informada nas configurações.
               </p>
             </div>
@@ -1060,7 +1060,7 @@ function StatCard({ label, value, trend, color, icon: Icon }: any) {
          <Icon size={80} strokeWidth={3} />
       </div>
       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{label}</p>
-      <h4 className="text-2xl font-black text-[#1D1510] leading-tight mb-2">{value}</h4>
+      <h4 className="text-2xl font-black text-[#0C2440] leading-tight mb-2">{value}</h4>
       <div className="flex items-center gap-2">
         <span className={cn(
           "px-2.5 py-1 rounded-lg text-[10px] font-black capitalize tracking-wide",
