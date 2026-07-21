@@ -163,6 +163,15 @@
   box-shadow: 0 10px 15px -3px var(--brand-color-glow), 0 4px 6px -4px var(--brand-color-glow) !important;
 }
 
+/* Hide scrollbar for horizontally-scrollable strips (e.g. POS mobile toolbar) while keeping scroll functional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Custom transitions and styling for smoother brand color updates */
 .transition-colors, .transition-all {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;

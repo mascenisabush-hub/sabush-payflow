@@ -3583,7 +3583,7 @@ export default function POS() {
 
       {/* SECTION 1: TOP BAR — SEARCH + SCANNER ICONS (COMPACT ROW 1) */}
       <div className="bg-white border border-blue-200 px-2 py-1 shrink-0 rounded-lg text-blue-900 select-none flex flex-row items-center gap-2 h-8">
-        <div className="relative flex-1 flex items-center gap-2 h-full min-w-0">
+        <div className="relative flex-1 flex items-center gap-2 h-full min-w-[110px]">
           {/* Main search field */}
           <div className="relative flex-1 h-full">
             <input 
@@ -3634,7 +3634,7 @@ export default function POS() {
         </div>
 
         {/* Action Widgets Icons */}
-        <div className="flex items-center gap-1.5 shrink-0 h-full">
+        <div className="flex items-center gap-1.5 shrink-0 h-full max-w-[55%] sm:max-w-none overflow-x-auto no-scrollbar">
           {/* Shift Indicator Button */}
           <button
             type="button"
