@@ -81,31 +81,31 @@
         justify-content: center;
         gap: 30px;
         background:
-          radial-gradient(ellipse at 50% 10%, rgba(255, 241, 204, 0.95), transparent 52%),
-          radial-gradient(circle at 10% 85%, rgba(111, 191, 91, 0.24), transparent 56%),
-          radial-gradient(circle at 92% 80%, rgba(63, 145, 66, 0.18), transparent 58%),
-          linear-gradient(180deg, #FFFBEF 0%, #FDF3CE 20%, #F3EBC2 40%, #E9F1D4 68%, #DCEBC8 100%);
+          radial-gradient(circle at 14% 50%, rgba(214, 155, 37, 0.14), transparent 46%),
+          radial-gradient(circle at 86% 50%, rgba(44, 99, 184, 0.16), transparent 46%),
+          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.08), transparent 60%),
+          #050b17;
         overflow: hidden;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
 
-      /* Faint circuit-board texture, kept very subtle now that the backdrop is
-         bright — tinted gold on the left half and forest-green on the right. */
+      /* Fine circuit-board texture, tinted gold on the left half and blue on the
+         right half — the "two energies meeting in the middle" backdrop. */
       #boot-splash .grid-bg {
         position: absolute;
         inset: -50%;
         background-image:
-          linear-gradient(rgba(184, 121, 26, 0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(184, 121, 26, 0.05) 1px, transparent 1px);
+          linear-gradient(rgba(214, 155, 37, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(214, 155, 37, 0.06) 1px, transparent 1px);
         background-size: 42px 42px;
         animation: boot-grid-drift 22s linear infinite;
         mask-image: radial-gradient(circle at 50% 50%, transparent 26%, black 46%, transparent 78%);
-        opacity: 0.55;
+        opacity: 0.8;
       }
       #boot-splash .grid-bg.grid-bg-2 {
         background-image:
-          linear-gradient(rgba(63, 145, 66, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(63, 145, 66, 0.06) 1px, transparent 1px);
+          linear-gradient(rgba(96, 165, 250, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
         animation-direction: reverse;
         animation-duration: 28s;
         mask-image: radial-gradient(circle at 50% 50%, transparent 30%, black 50%, transparent 80%),
@@ -119,8 +119,8 @@
         to { transform: translate(42px, 42px); }
       }
 
-      /* Slowly rotating wash of brand + forest colour behind everything — a
-         sunrise breaking through canopy, kept as an accent over the light sky. */
+      /* Slowly rotating wash of brand + accent colour behind everything —
+         a "sun" of light that keeps the boot moment feeling alive and premium. */
       #boot-splash .lamp {
         position: absolute;
         width: 150vmax;
@@ -130,65 +130,47 @@
         transform: translate(-50%, -50%);
         background: conic-gradient(
           from 0deg,
-          #F6D375 0deg,
-          #FFF3D0 40deg,
-          #8FCB6E 100deg,
-          #4E9A4E 150deg,
-          #2C63B8 210deg,
-          #7CA3E0 260deg,
-          #F6D375 320deg,
-          #F6D375 360deg
+          #2C63B8 0deg,
+          #7CA3E0 55deg,
+          #D69B25 130deg,
+          #f5c877 165deg,
+          #B8791A 200deg,
+          #6b3fa0 260deg,
+          #2C63B8 320deg,
+          #2C63B8 360deg
         );
-        filter: blur(110px) saturate(150%);
+        filter: blur(95px) saturate(150%);
         opacity: 0.34;
         animation: boot-lamp-spin 26s linear infinite;
-        mix-blend-mode: multiply;
+        mix-blend-mode: screen;
       }
       @keyframes boot-lamp-spin {
         from { transform: translate(-50%, -50%) rotate(0deg); }
         to { transform: translate(-50%, -50%) rotate(360deg); }
       }
 
-      /* Radiating sunbeams fanning out from the core — turned up brighter than
-         before, using soft-light so they read as genuine light on the pale sky
-         instead of washing out to white. */
+      /* Faint radiating sunburst spokes behind the rings, like light rays fanning
+         out from the core — reinforces the "solar" read. */
       #boot-splash .rays {
         position: absolute;
-        width: clamp(360px, 64vmin, 620px);
-        height: clamp(360px, 64vmin, 620px);
+        width: clamp(340px, 60vmin, 560px);
+        height: clamp(340px, 60vmin, 560px);
         border-radius: 50%;
         background: repeating-conic-gradient(
           from 0deg,
-          rgba(255, 236, 168, 0.6) 0deg 1.4deg,
-          transparent 1.4deg 8deg
+          rgba(245, 200, 119, 0.16) 0deg 1.2deg,
+          transparent 1.2deg 9deg
         );
-        mask-image: radial-gradient(circle, transparent 30%, black 50%, transparent 76%);
-        -webkit-mask-image: radial-gradient(circle, transparent 30%, black 50%, transparent 76%);
+        mask-image: radial-gradient(circle, transparent 34%, black 52%, transparent 74%);
+        -webkit-mask-image: radial-gradient(circle, transparent 34%, black 52%, transparent 74%);
         animation: boot-lamp-spin 40s linear infinite;
-        mix-blend-mode: soft-light;
-      }
-
-      /* Extra breathing highlight at the core for a brighter, more "shining"
-         centre — this is the piece that pushes the shine further. */
-      #boot-splash .shine-pulse {
-        position: absolute;
-        width: clamp(280px, 42vmin, 440px);
-        height: clamp(280px, 42vmin, 440px);
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 250, 220, 0.95), transparent 70%);
-        filter: blur(4px);
-        animation: shine-breathe 3.2s ease-in-out infinite;
-        mix-blend-mode: soft-light;
-      }
-      @keyframes shine-breathe {
-        0%, 100% { opacity: 0.5; transform: scale(0.9); }
-        50% { opacity: 1; transform: scale(1.1); }
+        mix-blend-mode: screen;
       }
 
       #boot-splash .vignette {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 42%, rgba(196, 222, 166, 0.55) 100%);
+        background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 34%, #050b17 82%);
         pointer-events: none;
       }
 
@@ -221,9 +203,6 @@
       }
       #boot-splash .comet-blue {
         filter: drop-shadow(0 0 6px #7CA3E0) drop-shadow(0 0 14px rgba(44, 99, 184, 0.8));
-      }
-      #boot-splash .comet-green {
-        filter: drop-shadow(0 0 6px #8FCB6E) drop-shadow(0 0 14px rgba(63, 145, 66, 0.8));
       }
 
       #boot-splash .mark-wrap {
@@ -295,7 +274,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        filter: drop-shadow(0 0 10px var(--hex-glow)) drop-shadow(0 6px 12px rgba(11, 27, 51, 0.22));
+        filter: drop-shadow(0 0 10px var(--hex-glow));
         animation: hex-float 5s ease-in-out infinite;
       }
       #boot-splash .hex-icon::before {
@@ -320,22 +299,10 @@
       #boot-splash .hex-tr { top: 10%; right: 3%; --hex-border: #7CA3E0; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 1.2s; }
       #boot-splash .hex-bl { bottom: 10%; left: 3%; --hex-border: #D69B25; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 2.4s; }
       #boot-splash .hex-br { bottom: 10%; right: 3%; --hex-border: #60a5fa; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 0.6s; }
-      #boot-splash .hex-top {
-        top: -3%;
-        left: 50%;
-        --hex-border: #6FBF5B;
-        --hex-glow: rgba(63, 145, 66, 0.55);
-        animation: hex-float-top 5s ease-in-out infinite;
-        animation-delay: 1.8s;
-      }
 
       @keyframes hex-float {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(-6px); }
-      }
-      @keyframes hex-float-top {
-        0%, 100% { transform: translateX(-50%) translateY(0); }
-        50% { transform: translateX(-50%) translateY(-6px); }
       }
 
       #boot-splash .wordmark {
@@ -346,63 +313,41 @@
         gap: 4px;
       }
 
-      /* On a bright sky, a light gradient fill disappears — so the wordmark is
-         solid dark brand-ink, and the "shine" becomes a bright sweep clipped to
-         the letters and laid on top via mix-blend-mode, like sunlight moving
-         across engraved lettering. */
       #boot-splash .word-main {
-        position: relative;
         font-size: clamp(30px, 6vmin, 40px);
         font-weight: 900;
         letter-spacing: 0.12em;
         text-transform: uppercase;
         text-align: center;
         white-space: nowrap;
-        color: #0B1B33;
-        filter: drop-shadow(0 0 10px rgba(214, 155, 37, 0.25));
-      }
-      #boot-splash .word-main::after {
-        content: attr(data-text);
-        position: absolute;
-        inset: 0;
         background: linear-gradient(100deg,
-          transparent 20%, rgba(255,255,255,0.9) 40%, #f5c877 48%,
-          rgba(255,255,255,0.9) 56%, transparent 76%);
-        background-size: 260% auto;
+          #f5c877 0%, #B8791A 18%, #f5e9c8 32%, #7CA3E0 48%,
+          #f5c877 64%, #60a5fa 80%, #f5c877 100%);
+        background-size: 300% auto;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        animation: boot-shine 3.2s linear infinite;
-        mix-blend-mode: overlay;
+        animation: boot-shine 4.5s linear infinite;
+        filter: drop-shadow(0 0 14px rgba(214, 155, 37, 0.35));
       }
 
       #boot-splash .word-tech {
-        position: relative;
         font-size: clamp(12px, 2.4vmin, 15px);
         font-weight: 800;
         letter-spacing: 0.55em;
         text-indent: 0.55em; /* offsets the trailing letter-spacing so the word optically centres */
         text-transform: uppercase;
         text-align: center;
-        color: #4E9A4E;
-      }
-      #boot-splash .word-tech::after {
-        content: attr(data-text);
-        position: absolute;
-        inset: 0;
-        text-indent: 0.55em;
-        background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,0.9) 45%, #8FCB6E 52%, rgba(255,255,255,0.9) 59%, transparent 78%);
+        background: linear-gradient(100deg, #7CA3E0 0%, #f5e9c8 35%, #f5c877 60%, #7CA3E0 100%);
         background-size: 260% auto;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         animation: boot-shine 3.6s linear infinite reverse;
-        mix-blend-mode: overlay;
       }
 
       @keyframes boot-shine {
-        from { background-position: 260% center; }
-        to { background-position: -260% center; }
+        to { background-position: -300% center; }
       }
 
       #boot-splash .bar-track {
@@ -410,7 +355,7 @@
         width: 220px;
         height: 4px;
         border-radius: 999px;
-        background: rgba(11, 27, 51, 0.1);
+        background: rgba(255, 255, 255, 0.08);
         overflow: hidden;
       }
 
@@ -435,14 +380,14 @@
         font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.08em;
-        color: #B8791A;
+        color: #D69B25;
         text-align: center;
         font-variant-numeric: tabular-nums;
       }
 
       @media (prefers-reduced-motion: reduce) {
-        #boot-splash .grid-bg, #boot-splash .lamp, #boot-splash .rays, #boot-splash .shine-pulse, #boot-splash .orbit-rings,
-        #boot-splash .ring, #boot-splash .mark-glow, #boot-splash .word-main::after, #boot-splash .word-tech::after,
+        #boot-splash .grid-bg, #boot-splash .lamp, #boot-splash .rays, #boot-splash .orbit-rings,
+        #boot-splash .ring, #boot-splash .mark-glow, #boot-splash .word-main, #boot-splash .word-tech,
         #boot-splash .bar-fill, #boot-splash .hex-icon {
           animation: none;
         }
@@ -456,20 +401,17 @@
         <div class="grid-bg"></div>
         <div class="grid-bg grid-bg-2"></div>
         <div class="rays"></div>
-        <div class="shine-pulse"></div>
         <div class="vignette"></div>
 
         <div class="orbit">
           <svg class="orbit-rings spin-cw" viewBox="0 0 460 460" aria-hidden="true">
-            <circle cx="230" cy="230" r="212" fill="none" stroke="rgba(184,121,26,0.28)" stroke-width="1.4" stroke-dasharray="2 10" />
-            <circle cx="230" cy="230" r="212" class="comet-gold" fill="none" stroke="#B8791A" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 1316" />
-            <circle cx="230" cy="230" r="168" fill="none" stroke="rgba(44,99,184,0.22)" stroke-width="1" stroke-dasharray="1 8" />
-            <circle cx="230" cy="230" r="150" fill="none" stroke="rgba(63,145,66,0.24)" stroke-width="1" stroke-dasharray="1 10" />
-            <circle cx="230" cy="230" r="150" class="comet-green" fill="none" stroke="#3F9142" stroke-width="2" stroke-linecap="round" stroke-dasharray="10 932" />
+            <circle cx="230" cy="230" r="212" fill="none" stroke="rgba(214,155,37,0.22)" stroke-width="1.4" stroke-dasharray="2 10" />
+            <circle cx="230" cy="230" r="212" class="comet-gold" fill="none" stroke="#f5c877" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 1316" />
+            <circle cx="230" cy="230" r="168" fill="none" stroke="rgba(96,165,250,0.18)" stroke-width="1" stroke-dasharray="1 8" />
           </svg>
           <svg class="orbit-rings spin-ccw" viewBox="0 0 460 460" aria-hidden="true">
-            <circle cx="230" cy="230" r="190" fill="none" stroke="rgba(44,99,184,0.24)" stroke-width="1.2" stroke-dasharray="1 14" />
-            <circle cx="230" cy="230" r="190" class="comet-blue" fill="none" stroke="#2C63B8" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="12 1182" />
+            <circle cx="230" cy="230" r="190" fill="none" stroke="rgba(44,99,184,0.2)" stroke-width="1.2" stroke-dasharray="1 14" />
+            <circle cx="230" cy="230" r="190" class="comet-blue" fill="none" stroke="#7CA3E0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="12 1182" />
           </svg>
 
           <div class="hex-icon hex-tl" title="Faturação">
@@ -484,9 +426,6 @@
           <div class="hex-icon hex-br" title="Vendas">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L20 8H6"/><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
           </div>
-          <div class="hex-icon hex-top" title="Automação">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 21 3 21 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8Z"/></svg>
-          </div>
 
           <div class="mark-wrap">
             <div class="ring"></div>
@@ -497,8 +436,8 @@
         </div>
 
         <div class="wordmark">
-          <div class="word-main" data-text="SABUSH">SABUSH</div>
-          <div class="word-tech" data-text="TECH">TECH</div>
+          <div class="word-main">SABUSH</div>
+          <div class="word-tech">TECH</div>
         </div>
         <div class="bar-track"><div class="bar-fill"></div></div>
         <div class="percent"><span id="boot-percent">0%</span></div>
