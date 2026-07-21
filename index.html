@@ -79,24 +79,39 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 34px;
+        gap: 30px;
         background:
-          radial-gradient(circle at 50% 38%, rgba(184, 121, 26, 0.16), transparent 55%),
-          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.10), transparent 60%),
-          #060d1c;
+          radial-gradient(circle at 14% 50%, rgba(214, 155, 37, 0.14), transparent 46%),
+          radial-gradient(circle at 86% 50%, rgba(44, 99, 184, 0.16), transparent 46%),
+          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.08), transparent 60%),
+          #050b17;
         overflow: hidden;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
 
+      /* Fine circuit-board texture, tinted gold on the left half and blue on the
+         right half — the "two energies meeting in the middle" backdrop. */
       #boot-splash .grid-bg {
         position: absolute;
         inset: -50%;
         background-image:
-          linear-gradient(rgba(184, 121, 26, 0.07) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(184, 121, 26, 0.07) 1px, transparent 1px);
+          linear-gradient(rgba(214, 155, 37, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(214, 155, 37, 0.06) 1px, transparent 1px);
         background-size: 42px 42px;
-        animation: boot-grid-drift 16s linear infinite;
-        mask-image: radial-gradient(circle at 50% 45%, black 0%, transparent 70%);
+        animation: boot-grid-drift 22s linear infinite;
+        mask-image: radial-gradient(circle at 50% 50%, transparent 26%, black 46%, transparent 78%);
+        opacity: 0.8;
+      }
+      #boot-splash .grid-bg.grid-bg-2 {
+        background-image:
+          linear-gradient(rgba(96, 165, 250, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
+        animation-direction: reverse;
+        animation-duration: 28s;
+        mask-image: radial-gradient(circle at 50% 50%, transparent 30%, black 50%, transparent 80%),
+          linear-gradient(90deg, transparent 50%, black 50%);
+        mask-composite: intersect;
+        -webkit-mask-composite: source-in;
       }
 
       @keyframes boot-grid-drift {
@@ -105,27 +120,28 @@
       }
 
       /* Slowly rotating wash of brand + accent colour behind everything —
-         a "lamp" effect that keeps the boot moment feeling alive and premium. */
+         a "sun" of light that keeps the boot moment feeling alive and premium. */
       #boot-splash .lamp {
         position: absolute;
-        width: 140vmax;
-        height: 140vmax;
+        width: 150vmax;
+        height: 150vmax;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         background: conic-gradient(
           from 0deg,
           #2C63B8 0deg,
-          #B8791A 70deg,
+          #7CA3E0 55deg,
           #D69B25 130deg,
-          #7CA3E0 190deg,
-          #6b3fa0 250deg,
-          #2C63B8 310deg,
+          #f5c877 165deg,
+          #B8791A 200deg,
+          #6b3fa0 260deg,
+          #2C63B8 320deg,
           #2C63B8 360deg
         );
-        filter: blur(90px) saturate(140%);
-        opacity: 0.32;
-        animation: boot-lamp-spin 18s linear infinite;
+        filter: blur(95px) saturate(150%);
+        opacity: 0.34;
+        animation: boot-lamp-spin 26s linear infinite;
         mix-blend-mode: screen;
       }
       @keyframes boot-lamp-spin {
@@ -133,16 +149,66 @@
         to { transform: translate(-50%, -50%) rotate(360deg); }
       }
 
+      /* Faint radiating sunburst spokes behind the rings, like light rays fanning
+         out from the core — reinforces the "solar" read. */
+      #boot-splash .rays {
+        position: absolute;
+        width: clamp(340px, 60vmin, 560px);
+        height: clamp(340px, 60vmin, 560px);
+        border-radius: 50%;
+        background: repeating-conic-gradient(
+          from 0deg,
+          rgba(245, 200, 119, 0.16) 0deg 1.2deg,
+          transparent 1.2deg 9deg
+        );
+        mask-image: radial-gradient(circle, transparent 34%, black 52%, transparent 74%);
+        -webkit-mask-image: radial-gradient(circle, transparent 34%, black 52%, transparent 74%);
+        animation: boot-lamp-spin 40s linear infinite;
+        mix-blend-mode: screen;
+      }
+
       #boot-splash .vignette {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 32%, #060d1c 80%);
+        background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 34%, #050b17 82%);
+        pointer-events: none;
+      }
+
+      /* The orbit stage: rings + hex feature icons + the centre mark all live here,
+         sized together so everything scales as one unit on small screens. */
+      #boot-splash .orbit {
+        position: relative;
+        width: clamp(300px, 46vmin, 460px);
+        height: clamp(300px, 46vmin, 460px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #boot-splash .orbit-rings {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+      #boot-splash .orbit-rings.spin-cw { animation: boot-spin 26s linear infinite; }
+      #boot-splash .orbit-rings.spin-ccw { animation: boot-spin-reverse 34s linear infinite; }
+
+      /* The bright little arc on each ring is short relative to the ring's full
+         circumference, so as the ring rotates it reads as a comet of light
+         travelling around the circle rather than a static ring. */
+      #boot-splash .comet-gold {
+        filter: drop-shadow(0 0 6px #f5c877) drop-shadow(0 0 14px rgba(184, 121, 26, 0.8));
+      }
+      #boot-splash .comet-blue {
+        filter: drop-shadow(0 0 6px #7CA3E0) drop-shadow(0 0 14px rgba(44, 99, 184, 0.8));
       }
 
       #boot-splash .mark-wrap {
         position: relative;
-        width: 196px;
-        height: 196px;
+        width: 42%;
+        aspect-ratio: 1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -159,7 +225,7 @@
       }
 
       #boot-splash .ring.ring-2 {
-        inset: 20px;
+        inset: 14%;
         border-top-color: rgba(96, 165, 250, 0.85);
         border-right-color: transparent;
         animation: boot-spin-reverse 2.1s linear infinite;
@@ -174,7 +240,7 @@
 
       #boot-splash .mark-glow {
         position: absolute;
-        inset: 30px;
+        inset: 18%;
         border-radius: 50%;
         background: radial-gradient(circle, rgba(184, 121, 26, 0.4), transparent 70%);
         animation: boot-pulse 2.4s ease-in-out infinite;
@@ -187,44 +253,101 @@
 
       #boot-splash .mark-icon {
         position: relative;
-        width: 96px;
-        height: 96px;
+        width: 78%;
+        aspect-ratio: 1;
         border-radius: 24px;
         z-index: 1;
         box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
       }
 
-      #boot-splash .wordmark {
-        position: relative;
-        font-size: 40px;
-        font-weight: 900;
-        letter-spacing: 0.14em;
-        color: #f5f1e8;
-        text-transform: uppercase;
-        text-align: center;
+      /* The four feature hexagons orbiting the centre mark — document/invoicing,
+         analytics, inventory and orders — each glowing in whichever half of the
+         palette (gold or blue) it sits in. */
+      #boot-splash .hex-icon {
+        --hex-border: #B8791A;
+        --hex-glow: rgba(184, 121, 26, 0.55);
+        position: absolute;
+        width: clamp(46px, 15%, 74px);
+        aspect-ratio: 1;
+        clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+        background: linear-gradient(160deg, #0d1e3a, #071224);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(0 0 10px var(--hex-glow));
+        animation: hex-float 5s ease-in-out infinite;
+      }
+      #boot-splash .hex-icon::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        clip-path: inherit;
+        padding: 1.5px;
+        background: linear-gradient(160deg, var(--hex-border), transparent 55%, var(--hex-border));
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+      }
+      #boot-splash .hex-icon svg {
+        width: 46%;
+        height: 46%;
+        color: var(--hex-border);
+        filter: drop-shadow(0 0 3px var(--hex-glow));
       }
 
-      #boot-splash .wordmark span {
-        background: linear-gradient(90deg, #f5c877, #B8791A 60%, #f5c877);
-        background-size: 200% auto;
+      #boot-splash .hex-tl { top: 10%; left: 3%; --hex-border: #f5c877; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 0s; }
+      #boot-splash .hex-tr { top: 10%; right: 3%; --hex-border: #7CA3E0; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 1.2s; }
+      #boot-splash .hex-bl { bottom: 10%; left: 3%; --hex-border: #D69B25; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 2.4s; }
+      #boot-splash .hex-br { bottom: 10%; right: 3%; --hex-border: #60a5fa; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 0.6s; }
+
+      @keyframes hex-float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+
+      #boot-splash .wordmark {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+      }
+
+      #boot-splash .word-main {
+        font-size: clamp(30px, 6vmin, 40px);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-align: center;
+        white-space: nowrap;
+        background: linear-gradient(100deg,
+          #f5c877 0%, #B8791A 18%, #f5e9c8 32%, #7CA3E0 48%,
+          #f5c877 64%, #60a5fa 80%, #f5c877 100%);
+        background-size: 300% auto;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        animation: boot-shine 3s linear infinite;
+        animation: boot-shine 4.5s linear infinite;
+        filter: drop-shadow(0 0 14px rgba(214, 155, 37, 0.35));
+      }
+
+      #boot-splash .word-tech {
+        font-size: clamp(12px, 2.4vmin, 15px);
+        font-weight: 800;
+        letter-spacing: 0.55em;
+        text-indent: 0.55em; /* offsets the trailing letter-spacing so the word optically centres */
+        text-transform: uppercase;
+        text-align: center;
+        background: linear-gradient(100deg, #7CA3E0 0%, #f5e9c8 35%, #f5c877 60%, #7CA3E0 100%);
+        background-size: 260% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: boot-shine 3.6s linear infinite reverse;
       }
 
       @keyframes boot-shine {
-        to { background-position: -200% center; }
-      }
-
-      #boot-splash .tagline {
-        position: relative;
-        margin-top: 10px;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        color: #8a93a6;
-        text-align: center;
+        to { background-position: -300% center; }
       }
 
       #boot-splash .bar-track {
@@ -251,8 +374,21 @@
         100% { left: 105%; }
       }
 
+      #boot-splash .percent {
+        position: relative;
+        margin-top: -14px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #D69B25;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        #boot-splash .grid-bg, #boot-splash .lamp, #boot-splash .ring, #boot-splash .mark-glow, #boot-splash .wordmark span, #boot-splash .bar-fill {
+        #boot-splash .grid-bg, #boot-splash .lamp, #boot-splash .rays, #boot-splash .orbit-rings,
+        #boot-splash .ring, #boot-splash .mark-glow, #boot-splash .word-main, #boot-splash .word-tech,
+        #boot-splash .bar-fill, #boot-splash .hex-icon {
           animation: none;
         }
       }
@@ -263,20 +399,65 @@
       <div id="boot-splash">
         <div class="lamp"></div>
         <div class="grid-bg"></div>
+        <div class="grid-bg grid-bg-2"></div>
+        <div class="rays"></div>
         <div class="vignette"></div>
-        <div class="mark-wrap">
-          <div class="ring"></div>
-          <div class="ring ring-2"></div>
-          <div class="mark-glow"></div>
-          <img class="mark-icon" src="/icon-192.png" alt="Sabush" />
+
+        <div class="orbit">
+          <svg class="orbit-rings spin-cw" viewBox="0 0 460 460" aria-hidden="true">
+            <circle cx="230" cy="230" r="212" fill="none" stroke="rgba(214,155,37,0.22)" stroke-width="1.4" stroke-dasharray="2 10" />
+            <circle cx="230" cy="230" r="212" class="comet-gold" fill="none" stroke="#f5c877" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 1316" />
+            <circle cx="230" cy="230" r="168" fill="none" stroke="rgba(96,165,250,0.18)" stroke-width="1" stroke-dasharray="1 8" />
+          </svg>
+          <svg class="orbit-rings spin-ccw" viewBox="0 0 460 460" aria-hidden="true">
+            <circle cx="230" cy="230" r="190" fill="none" stroke="rgba(44,99,184,0.2)" stroke-width="1.2" stroke-dasharray="1 14" />
+            <circle cx="230" cy="230" r="190" class="comet-blue" fill="none" stroke="#7CA3E0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="12 1182" />
+          </svg>
+
+          <div class="hex-icon hex-tl" title="Faturação">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h9l4 4v16H6z"/><path d="M14 2v5h5"/><path d="M9 13h7M9 17h5"/></svg>
+          </div>
+          <div class="hex-icon hex-tr" title="Relatórios">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V11"/><path d="M11 20V6"/><path d="M17 20v-9"/><path d="M3 20h18"/></svg>
+          </div>
+          <div class="hex-icon hex-bl" title="Inventário">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 7.5 12 12l9-4.5L12 3z"/><path d="M3 7.5V16.5L12 21l9-4.5V7.5"/><path d="M12 12v9"/></svg>
+          </div>
+          <div class="hex-icon hex-br" title="Vendas">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L20 8H6"/><circle cx="9" cy="20" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="20" r="1.4" fill="currentColor" stroke="none"/></svg>
+          </div>
+
+          <div class="mark-wrap">
+            <div class="ring"></div>
+            <div class="ring ring-2"></div>
+            <div class="mark-glow"></div>
+            <img class="mark-icon" src="/icon-192.png" alt="Sabush" />
+          </div>
         </div>
-        <div>
-          <div class="wordmark">SAB<span>USH</span></div>
-          <div class="tagline">A INICIALIZAR O SISTEMA...</div>
+
+        <div class="wordmark">
+          <div class="word-main">SABUSH</div>
+          <div class="word-tech">TECH</div>
         </div>
         <div class="bar-track"><div class="bar-fill"></div></div>
+        <div class="percent"><span id="boot-percent">0%</span></div>
       </div>
     </div>
+    <script>
+      // Purely cosmetic progress readout for the boot splash — eases toward (but
+      // never claims) 100%, since the splash is actually removed the instant
+      // React mounts and replaces #root.
+      (function () {
+        var el = document.getElementById('boot-percent');
+        if (!el) return;
+        var pct = 0;
+        var timer = setInterval(function () {
+          pct += (100 - pct) * 0.1 + 0.6;
+          if (pct >= 97) { pct = 97; clearInterval(timer); }
+          el.textContent = Math.round(pct) + '%';
+        }, 160);
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
