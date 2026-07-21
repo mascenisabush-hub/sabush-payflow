@@ -7,6 +7,109 @@
   --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* ===== Brand palette override =====
+     "Cool" status hues (info, danger, negative) all resolve to the navy scale.
+     "Warm" status hues (success, warning, positive) all resolve to the gold scale.
+     This replaces Tailwind's default blue/red/rose/orange/emerald/green/amber/yellow
+     palettes so every bg-/text-/border-/ring-/from-/via-/to- utility using them
+     renders in brand navy or brand gold instead of its native hue. */
+
+  --color-blue-50: #EAF0FB;
+  --color-blue-100: #D3E0F5;
+  --color-blue-200: #A8C2EA;
+  --color-blue-300: #7CA3E0;
+  --color-blue-400: #5085D5;
+  --color-blue-500: #2C63B8;
+  --color-blue-600: #1E4C94;
+  --color-blue-700: #14396F;
+  --color-blue-800: #0F2A56;
+  --color-blue-900: #0A1C38;
+  --color-blue-950: #06142A;
+
+  --color-red-50: var(--color-blue-50);
+  --color-red-100: var(--color-blue-100);
+  --color-red-200: var(--color-blue-200);
+  --color-red-300: var(--color-blue-300);
+  --color-red-400: var(--color-blue-400);
+  --color-red-500: var(--color-blue-500);
+  --color-red-600: var(--color-blue-600);
+  --color-red-700: var(--color-blue-700);
+  --color-red-800: var(--color-blue-800);
+  --color-red-900: var(--color-blue-900);
+  --color-red-950: var(--color-blue-950);
+
+  --color-rose-50: var(--color-blue-50);
+  --color-rose-100: var(--color-blue-100);
+  --color-rose-200: var(--color-blue-200);
+  --color-rose-300: var(--color-blue-300);
+  --color-rose-400: var(--color-blue-400);
+  --color-rose-500: var(--color-blue-500);
+  --color-rose-600: var(--color-blue-600);
+  --color-rose-700: var(--color-blue-700);
+  --color-rose-800: var(--color-blue-800);
+  --color-rose-900: var(--color-blue-900);
+  --color-rose-950: var(--color-blue-950);
+
+  --color-orange-50: var(--color-blue-50);
+  --color-orange-100: var(--color-blue-100);
+  --color-orange-200: var(--color-blue-200);
+  --color-orange-300: var(--color-blue-300);
+  --color-orange-400: var(--color-blue-400);
+  --color-orange-500: var(--color-blue-500);
+  --color-orange-600: var(--color-blue-600);
+  --color-orange-700: var(--color-blue-700);
+  --color-orange-800: var(--color-blue-800);
+  --color-orange-900: var(--color-blue-900);
+  --color-orange-950: var(--color-blue-950);
+
+  --color-emerald-50: #FBF3E0;
+  --color-emerald-100: #F7E6C2;
+  --color-emerald-200: #EFCD85;
+  --color-emerald-300: #E7B448;
+  --color-emerald-400: #D69B25;
+  --color-emerald-500: #B8791A;
+  --color-emerald-600: #8B6914;
+  --color-emerald-700: #6B4F0F;
+  --color-emerald-800: #4D390A;
+  --color-emerald-900: #332506;
+  --color-emerald-950: #1F1704;
+
+  --color-green-50: var(--color-emerald-50);
+  --color-green-100: var(--color-emerald-100);
+  --color-green-200: var(--color-emerald-200);
+  --color-green-300: var(--color-emerald-300);
+  --color-green-400: var(--color-emerald-400);
+  --color-green-500: var(--color-emerald-500);
+  --color-green-600: var(--color-emerald-600);
+  --color-green-700: var(--color-emerald-700);
+  --color-green-800: var(--color-emerald-800);
+  --color-green-900: var(--color-emerald-900);
+  --color-green-950: var(--color-emerald-950);
+
+  --color-amber-50: var(--color-emerald-50);
+  --color-amber-100: var(--color-emerald-100);
+  --color-amber-200: var(--color-emerald-200);
+  --color-amber-300: var(--color-emerald-300);
+  --color-amber-400: var(--color-emerald-400);
+  --color-amber-500: var(--color-emerald-500);
+  --color-amber-600: var(--color-emerald-600);
+  --color-amber-700: var(--color-emerald-700);
+  --color-amber-800: var(--color-emerald-800);
+  --color-amber-900: var(--color-emerald-900);
+  --color-amber-950: var(--color-emerald-950);
+
+  --color-yellow-50: var(--color-emerald-50);
+  --color-yellow-100: var(--color-emerald-100);
+  --color-yellow-200: var(--color-emerald-200);
+  --color-yellow-300: var(--color-emerald-300);
+  --color-yellow-400: var(--color-emerald-400);
+  --color-yellow-500: var(--color-emerald-500);
+  --color-yellow-600: var(--color-emerald-600);
+  --color-yellow-700: var(--color-emerald-700);
+  --color-yellow-800: var(--color-emerald-800);
+  --color-yellow-900: var(--color-emerald-900);
+  --color-yellow-950: var(--color-emerald-950);
 }
 
 :root {
@@ -175,63 +278,49 @@
   border-color: #1e293b !important;
 }
 
-/* Badges and primary light elements */
+/* Badges and primary light elements — navy family (info/danger) */
 .dark .bg-blue-50,
 .dark .bg-blue-150,
-.dark .bg-blue-100 {
-  background-color: rgba(37, 99, 235, 0.15) !important;
-}
-
-.dark .text-blue-600,
-.dark .text-blue-700 {
-  color: #60a5fa !important;
-}
-
-.dark .bg-emerald-50,
-.dark .bg-emerald-100 {
-  background-color: rgba(16, 185, 129, 0.15) !important;
-}
-.dark .text-emerald-600,
-.dark .text-emerald-700,
-.dark .text-emerald-800 {
-  color: #34d399 !important;
-}
-
+.dark .bg-blue-100,
 .dark .bg-rose-50,
 .dark .bg-rose-100,
 .dark .bg-red-50,
-.dark .bg-red-100 {
-  background-color: rgba(239, 68, 68, 0.15) !important;
+.dark .bg-red-100,
+.dark .bg-orange-50,
+.dark .bg-orange-100 {
+  background-color: rgba(44, 99, 184, 0.15) !important;
 }
+
+.dark .text-blue-600,
+.dark .text-blue-700,
 .dark .text-rose-600,
 .dark .text-rose-700,
 .dark .text-red-600,
-.dark .text-red-700 {
-  color: #f87171 !important;
+.dark .text-red-700,
+.dark .text-orange-600,
+.dark .text-orange-700,
+.dark .text-orange-800 {
+  color: #7ba7e8 !important;
 }
 
+/* Badges and primary light elements — gold family (success/warning) */
+.dark .bg-emerald-50,
+.dark .bg-emerald-100,
 .dark .bg-amber-50,
 .dark .bg-amber-100,
 .dark .bg-yellow-50,
 .dark .bg-yellow-100 {
-  background-color: rgba(245, 158, 11, 0.15) !important;
+  background-color: rgba(184, 121, 26, 0.18) !important;
 }
+.dark .text-emerald-600,
+.dark .text-emerald-700,
+.dark .text-emerald-800,
 .dark .text-amber-600,
 .dark .text-amber-700,
 .dark .text-amber-800,
 .dark .text-yellow-600,
 .dark .text-yellow-700 {
-  color: #fbbf24 !important;
-}
-
-.dark .bg-orange-50,
-.dark .bg-orange-100 {
-  background-color: rgba(216, 90, 48, 0.15) !important;
-}
-.dark .text-orange-600,
-.dark .text-orange-700,
-.dark .text-orange-800 {
-  color: #fb923c !important;
+  color: #e0ac4f !important;
 }
 
 /* Custom Dark-on-Dark Text Contrast Amends for Dark Mode */
