@@ -124,6 +124,9 @@
 
       /* A soft beam of light rising from the centre mark toward the top of the
          screen, matching the vertical light column in the reference. */
+      /* Beams of light converging on the centre mark from all four sides —
+         gold from the left/bottom, blue from the right/top — reinforcing the
+         "solar" feel from every direction, not just overhead. */
       #boot-splash .beam {
         position: absolute;
         top: 0;
@@ -131,8 +134,67 @@
         transform: translateX(-50%);
         width: 3px;
         height: 46%;
-        background: linear-gradient(to top, rgba(124, 179, 255, 0.55), rgba(124, 179, 255, 0.08) 60%, transparent);
+        background: linear-gradient(to top, rgba(124, 179, 255, 0.6), rgba(124, 179, 255, 0.08) 60%, transparent);
         filter: blur(2px);
+      }
+      #boot-splash .beam-bottom {
+        top: auto;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(245, 200, 119, 0.6), rgba(245, 200, 119, 0.08) 60%, transparent);
+      }
+      #boot-splash .beam-left {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        width: 46%;
+        height: 3px;
+        background: linear-gradient(to left, rgba(245, 200, 119, 0.6), rgba(245, 200, 119, 0.08) 60%, transparent);
+      }
+      #boot-splash .beam-right {
+        top: 50%;
+        left: auto;
+        right: 0;
+        transform: translateY(-50%);
+        width: 46%;
+        height: 3px;
+        background: linear-gradient(to right, rgba(124, 179, 255, 0.6), rgba(124, 179, 255, 0.08) 60%, transparent);
+      }
+
+      /* Soft sunburst flares glowing in from each corner, tinted gold on the
+         left and blue on the right, like sunlight spilling in from every edge
+         of the frame. */
+      #boot-splash .corner-flare {
+        position: absolute;
+        width: 60vmax;
+        height: 60vmax;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+      #boot-splash .corner-tl { top: -30vmax; left: -30vmax; background: radial-gradient(circle at 100% 100%, rgba(245, 200, 119, 0.28), transparent 60%); }
+      #boot-splash .corner-bl { bottom: -30vmax; left: -30vmax; background: radial-gradient(circle at 100% 0%, rgba(245, 200, 119, 0.28), transparent 60%); }
+      #boot-splash .corner-tr { top: -30vmax; right: -30vmax; background: radial-gradient(circle at 0% 100%, rgba(124, 179, 255, 0.26), transparent 60%); }
+      #boot-splash .corner-br { bottom: -30vmax; right: -30vmax; background: radial-gradient(circle at 0% 0%, rgba(124, 179, 255, 0.26), transparent 60%); }
+
+      /* Extra fine sunburst spokes fanning out from the core over the rings,
+         turning up the "shine" of the centre mark itself. */
+      #boot-splash .rays {
+        position: absolute;
+        width: clamp(340px, 58vmin, 560px);
+        height: clamp(340px, 58vmin, 560px);
+        border-radius: 50%;
+        background: repeating-conic-gradient(
+          from 0deg,
+          rgba(245, 200, 119, 0.14) 0deg 1.2deg,
+          transparent 1.2deg 9deg
+        );
+        mask-image: radial-gradient(circle, transparent 32%, black 50%, transparent 72%);
+        -webkit-mask-image: radial-gradient(circle, transparent 32%, black 50%, transparent 72%);
+        animation: boot-lamp-spin 46s linear infinite;
+        mix-blend-mode: screen;
+      }
+      @keyframes boot-lamp-spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
       }
 
       #boot-splash .vignette {
@@ -318,7 +380,7 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        #boot-splash .orbit-rings, #boot-splash .mark-glow, #boot-splash .hex-icon {
+        #boot-splash .orbit-rings, #boot-splash .mark-glow, #boot-splash .hex-icon, #boot-splash .rays {
           animation: none;
         }
       }
@@ -335,7 +397,15 @@
           <path d="M560,300 Q740,200 960,320 T1180,260" fill="none" stroke="#5B9CF0" stroke-width="1" stroke-dasharray="1 7" opacity="0.55" />
           <path d="M580,480 Q780,420 980,470 T1200,410" fill="none" stroke="#5B9CF0" stroke-width="1" stroke-dasharray="1 7" opacity="0.4" />
         </svg>
+        <div class="corner-flare corner-tl"></div>
+        <div class="corner-flare corner-tr"></div>
+        <div class="corner-flare corner-bl"></div>
+        <div class="corner-flare corner-br"></div>
+        <div class="rays"></div>
         <div class="beam"></div>
+        <div class="beam beam-bottom"></div>
+        <div class="beam beam-left"></div>
+        <div class="beam beam-right"></div>
         <div class="base-glow"></div>
         <div class="vignette"></div>
 
