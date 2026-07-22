@@ -65,6 +65,7 @@ import { getCountryPaymentMethods, PaymentMethodConfig } from '../lib/paymentMet
 import ManagerPINModal from './ManagerPINModal';
 import NumericKeypad from './NumericKeypad';
 import { useQuickSaleShortcuts } from '../hooks/useQuickSaleShortcuts';
+import { cascadeStockDeduction } from '../lib/stockDeduction';
 
 interface CartQuantityInputProps {
   item: any;
@@ -731,13 +732,10 @@ export default function POS() {
                 salesCount: (data.salesCount || 0) + item.quantity
               };
 
-              if (isBoxUnit(data, item.selectedUnit)) {
-                updates.stockCx = (data.stockCx || 0) - item.quantity;
-              } else if (isPackUnit(data, item.selectedUnit)) {
-                updates.stockEmb = (data.stockEmb || 0) - item.quantity;
-              } else {
-                updates.stockUn = (data.stockUn || 0) - item.quantity;
-              }
+              const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(data, item.selectedUnit, item.quantity);
+              updates.stockCx = stockCx;
+              updates.stockEmb = stockEmb;
+              updates.stockUn = stockUn;
 
               transaction.update(ref, updates);
             }
@@ -2509,13 +2507,10 @@ export default function POS() {
               salesCount: (data.salesCount || 0) + item.quantity
             };
 
-            if (isBoxUnit(data, item.selectedUnit)) {
-              updates.stockCx = (data.stockCx || 0) - item.quantity;
-            } else if (isPackUnit(data, item.selectedUnit)) {
-              updates.stockEmb = (data.stockEmb || 0) - item.quantity;
-            } else {
-              updates.stockUn = (data.stockUn || 0) - item.quantity;
-            }
+            const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(data, item.selectedUnit, item.quantity);
+            updates.stockCx = stockCx;
+            updates.stockEmb = stockEmb;
+            updates.stockUn = stockUn;
 
             transaction.update(ref, updates);
           }
@@ -2561,13 +2556,10 @@ export default function POS() {
             let stockEmb = p.stockEmb || 0;
             let stockUn = p.stockUn || 0;
 
-            if (isBoxUnit(p, cartItem.selectedUnit)) {
-              stockCx = Math.max(0, stockCx - cartItem.quantity);
-            } else if (isPackUnit(p, cartItem.selectedUnit)) {
-              stockEmb = Math.max(0, stockEmb - cartItem.quantity);
-            } else {
-              stockUn = Math.max(0, stockUn - cartItem.quantity);
-            }
+            const cascaded = cascadeStockDeduction(p, cartItem.selectedUnit, cartItem.quantity);
+            stockCx = Math.max(0, cascaded.stockCx);
+            stockEmb = Math.max(0, cascaded.stockEmb);
+            stockUn = Math.max(0, cascaded.stockUn);
 
             return {
               ...p,

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { db, storage, handleFirestoreError, OperationType } from '../lib/firebase';
 import { subscribeToCollection } from '../lib/firestoreCache';
-import { collection, query, where, onSnapshot, addDoc, serverTimestamp, getDocs, doc, updateDoc, increment, writeBatch } from 'firebase/firestore';
+import { collection, query, where, onSnapshot, addDoc, serverTimestamp, getDocs, getDoc, doc, updateDoc, increment, writeBatch } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
 import { Plus, Search, FileText, Download, Send, MoreVertical, Loader2, Sparkles, Link as LinkIcon, Trash2, Printer, Copy, Check, Share2, Eye, ZoomIn, ZoomOut, CheckCircle2, UserPlus, X, Edit2, LayoutGrid, List } from 'lucide-react';
 import { cn, formatDateInTimezone, formatDateTimeInTimezone } from '../lib/utils';
+import { cascadeStockDeduction } from '../lib/stockDeduction';
 import { toast } from 'sonner';
 import Skeleton from './ui/Skeleton';
 import { offlineDb } from '../lib/offlineDb';
@@ -1216,18 +1217,21 @@ export default function Invoices({ initialAction, onActionHandled }: InvoicesPro
             const qtyToDeduct = (Number(item.quantity) || 1) * (Number(item.unitMultiplier) || 1);
             const itemQty = Number(item.quantity) || 1;
             const unit = item.selectedUnit || 'un';
-            
+
+            // Read current bucket levels so we can cascade (break open Emb/Cx into loose
+            // units when the specific bucket being sold from is short) instead of blindly
+            // decrementing one bucket and letting it go negative — see src/lib/stockDeduction.ts
+            const prodSnap = await getDoc(prodRef);
+            const prodData = prodSnap.exists() ? prodSnap.data() : {};
+            const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(prodData, unit, itemQty);
+
             let updateFields: any = {
-              stockLevel: increment(-qtyToDeduct)
+              stockLevel: increment(-qtyToDeduct),
+              stockCx,
+              stockEmb,
+              stockUn
             };
-            if (unit === 'cx') {
-              updateFields.stockCx = increment(-itemQty);
-            } else if (unit === 'emb') {
-              updateFields.stockEmb = increment(-itemQty);
-            } else {
-              updateFields.stockUn = increment(-itemQty);
-            }
-            
+
             batch.update(prodRef, updateFields);
           }
         }
@@ -1986,16 +1990,15 @@ A equipa de ${businessData?.name || 'Sabush System'}
       // Reduce product stock in Inventário
       const prodRef = doc(db, `businesses/${profile.businessId}/products`, product.id);
       const unit = newItem.selectedUnit || 'un';
+      const freshProdSnap = await getDoc(prodRef);
+      const freshProdData = freshProdSnap.exists() ? freshProdSnap.data() : product;
+      const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(freshProdData, unit, qtyToAdd);
       let updateFields: any = {
-        stockLevel: increment(-qtyToAdd)
+        stockLevel: increment(-qtyToAdd),
+        stockCx,
+        stockEmb,
+        stockUn
       };
-      if (unit === 'cx') {
-        updateFields.stockCx = increment(-qtyToAdd);
-      } else if (unit === 'emb') {
-        updateFields.stockEmb = increment(-qtyToAdd);
-      } else {
-        updateFields.stockUn = increment(-qtyToAdd);
-      }
       await updateDoc(prodRef, updateFields);
 
       // Update customer outstanding balance

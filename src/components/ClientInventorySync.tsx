@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { collection, query, where, getDocs, doc, increment, serverTimestamp, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
+import { cascadeStockDeduction } from '../lib/stockDeduction';
 import { useAuth } from '../contexts/AuthContext';
 
 export default function ClientInventorySync() {
@@ -53,10 +54,14 @@ export default function ClientInventorySync() {
               const branchProductSnap = await getDoc(branchProductRef);
 
               if (branchProductSnap.exists()) {
-                // Decrement branch specific stock level
+                // Decrement branch specific stock level, cascading Emb/Cx into loose Un if needed
+                const branchProdData = branchProductSnap.data();
+                const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(branchProdData, 'un', qty);
                 await updateDoc(branchProductRef, {
                   stockLevel: increment(-qty),
-                  stockUn: increment(-qty),
+                  stockCx,
+                  stockEmb,
+                  stockUn,
                   updatedAt: serverTimestamp()
                 });
                 console.info(`[Client Sync] Deducted ${qty} of product ${productId} from branch ${branch.id}`);

@@ -4,6 +4,7 @@ import { collection, query, onSnapshot, doc, updateDoc, addDoc, serverTimestamp,
 import { useAuth } from '../contexts/AuthContext';
 import { ShoppingBag, Check, X, Clock, Package, MapPin, Phone, MessageSquare, ArrowRight, CheckCircle2, AlertTriangle, Trash2 } from 'lucide-react';
 import { cn } from '../lib/utils';
+import { cascadeStockDeduction } from '../lib/stockDeduction';
 import { toast } from 'sonner';
 import { format } from 'date-fns';
 import Skeleton from './ui/Skeleton';
@@ -113,10 +114,14 @@ export default function OrderManagement() {
           }
 
           const newStock = currentStock - item.quantity;
+          const prodDataForCascade = prodSnap.exists() ? prodSnap.data() : {};
+          const { stockCx, stockEmb, stockUn } = cascadeStockDeduction(prodDataForCascade, 'un', item.quantity);
 
           await updateDoc(prodRef, {
             stockLevel: increment(-item.quantity),
-            stockUn: increment(-item.quantity)
+            stockCx,
+            stockEmb,
+            stockUn
           });
 
           // Check low stock condition

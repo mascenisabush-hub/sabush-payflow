@@ -1955,6 +1955,72 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
     });
   };
 
+  // Repairs products whose stockCx/stockEmb/stockUn breakdown went negative (e.g. -10 Un) —
+  // a legacy symptom of sales deducting straight from one bucket without breaking open a
+  // sealed Caixa/Embalagem first. This borrows from the larger packaging into the negative
+  // bucket WITHOUT changing the product's true total stockLevel, it only re-distributes how
+  // that same total is split across Cx/Emb/Un.
+  const repairNegativeStockBuckets = (data: any) => {
+    let stockCx = Number(data.stockCx || 0);
+    let stockEmb = Number(data.stockEmb || 0);
+    let stockUn = Number(data.stockUn || 0);
+    const boxQty = Number(data.boxUnitQty || 10) || 10;
+    const packQty = Number(data.packUnitQty || 100) || 100;
+
+    while (stockUn < 0 && stockEmb > 0) {
+      stockEmb -= 1;
+      stockUn += packQty;
+    }
+    while (stockUn < 0 && stockCx > 0) {
+      stockCx -= 1;
+      stockUn += boxQty;
+    }
+    while (stockEmb < 0 && stockCx > 0) {
+      stockCx -= 1;
+      const embPerBox = Math.floor(boxQty / packQty) || 1;
+      stockEmb += embPerBox;
+    }
+
+    return { stockCx, stockEmb, stockUn };
+  };
+
+  const handleFixNegativeStockBuckets = async () => {
+    if (!profile?.businessId) return;
+    const broken = products.filter(p =>
+      Number(p.stockCx || 0) < 0 || Number(p.stockEmb || 0) < 0 || Number(p.stockUn || 0) < 0
+    );
+    if (broken.length === 0) {
+      toast.success("Nenhum produto com stock negativo por unidade encontrado. Tudo certo! ✅");
+      return;
+    }
+    executeWithManagerAuthorization(`corrigir ${broken.length} produto(s) com stock negativo por unidade`, async () => {
+      try {
+        const { updateDoc, doc } = await import('firebase/firestore');
+        let fixedCount = 0;
+        let stillNegativeCount = 0;
+        for (const p of broken) {
+          const repaired = repairNegativeStockBuckets(p);
+          await updateDoc(doc(db, `businesses/${profile.businessId}/products`, p.id), {
+            stockCx: repaired.stockCx,
+            stockEmb: repaired.stockEmb,
+            stockUn: repaired.stockUn,
+            updatedAt: serverTimestamp()
+          });
+          fixedCount++;
+          if (repaired.stockCx < 0 || repaired.stockEmb < 0 || repaired.stockUn < 0) stillNegativeCount++;
+        }
+        await logAction(profile.uid, profile.email, ActionType.UPDATE_PRODUCT, `Corrigido stock negativo por unidade em ${fixedCount} produto(s)`, profile.businessId);
+        if (stillNegativeCount > 0) {
+          toast.warning(`${fixedCount} produto(s) reorganizados. ${stillNegativeCount} continuam com défice real de stock (contagem física necessária).`);
+        } else {
+          toast.success(`${fixedCount} produto(s) corrigido(s) com sucesso! Stock reorganizado sem alterar a quantidade total.`);
+        }
+      } catch (error) {
+        toast.error("Erro ao corrigir stock negativo.");
+      }
+    });
+  };
+
   const handleCreateProduct = async () => {
     if (!profile?.businessId) return;
 
@@ -3710,15 +3776,24 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           </div>
           
           {/* Quick Filter Search inside Operations manager */}
-          <div className="w-full md:w-72 relative">
-            <input
-              type="text"
-              placeholder="Filtrar por SKU, Código ou Nome..."
-              value={manageSearch}
-              onChange={(e) => setManageSearch(e.target.value)}
-              className="w-full p-2.5 pl-9 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs focus:bg-white focus:ring-1 focus:ring-blue-550 transition-all font-sans font-medium text-slate-800"
-            />
-            <Search size={14} className="absolute left-3 top-3.5 text-slate-400" />
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full md:w-auto">
+            <button
+              onClick={handleFixNegativeStockBuckets}
+              title="Reorganiza Caixas/Embalagens/Unidades de produtos com stock negativo por unidade, sem alterar a quantidade total"
+              className="flex items-center justify-center gap-1.5 bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 px-3 py-2.5 rounded-xl transition-all font-black text-[10px] uppercase tracking-wider active:scale-95 shrink-0 whitespace-nowrap"
+            >
+              ⚠️ Corrigir Stock Negativo
+            </button>
+            <div className="w-full md:w-72 relative">
+              <input
+                type="text"
+                placeholder="Filtrar por SKU, Código ou Nome..."
+                value={manageSearch}
+                onChange={(e) => setManageSearch(e.target.value)}
+                className="w-full p-2.5 pl-9 bg-slate-50 border border-slate-200 rounded-xl outline-none text-xs focus:bg-white focus:ring-1 focus:ring-blue-550 transition-all font-sans font-medium text-slate-800"
+              />
+              <Search size={14} className="absolute left-3 top-3.5 text-slate-400" />
+            </div>
           </div>
         </div>
 
