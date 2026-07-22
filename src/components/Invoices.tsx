@@ -5,7 +5,7 @@ import { collection, query, where, onSnapshot, addDoc, serverTimestamp, getDocs,
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { Plus, Search, FileText, Download, Send, MoreVertical, Loader2, Sparkles, Link as LinkIcon, Trash2, Printer, Copy, Check, Share2, Eye, ZoomIn, ZoomOut, CheckCircle2, UserPlus, X, Edit2, LayoutGrid, List } from 'lucide-react';
+import { Plus, Search, FileText, Download, Send, MoreVertical, Loader2, Sparkles, Link as LinkIcon, Trash2, Printer, Copy, Check, Share2, Eye, ZoomIn, ZoomOut, CheckCircle2, UserPlus, X, Edit2, LayoutGrid, List, Clock, XCircle } from 'lucide-react';
 import { cn, formatDateInTimezone, formatDateTimeInTimezone } from '../lib/utils';
 import { cascadeStockDeduction } from '../lib/stockDeduction';
 import { toast } from 'sonner';
@@ -31,7 +31,7 @@ export default function Invoices({ initialAction, onActionHandled }: InvoicesPro
   const [isCreating, setIsCreating] = useState(false);
   const [invoiceViewMode, setInvoiceViewMode] = useState<'card' | 'list'>(() => {
     try {
-      return (localStorage.getItem('invoice_view_mode') as 'card' | 'list') || 'card';
+      return (localStorage.getItem('invoice_view_mode') as 'card' | 'list') || 'list';
     } catch {
       return 'card';
     }
@@ -524,16 +524,25 @@ export default function Invoices({ initialAction, onActionHandled }: InvoicesPro
   const filteredMetrics = useMemo(() => {
     let paid = 0;
     let pending = 0;
+    let canceledCount = 0;
     filteredInvoicesList.forEach(inv => {
       const status = (inv.status || '').toLowerCase();
       const total = inv.total || 0;
-      if (status === 'paid' || status === 'pago') {
-        paid += total;
-      } else if (status !== 'cancelled' && status !== 'cancelada' && status !== 'draft' && status !== 'rascunho') {
-        pending += total;
+      if (status === 'cancelled' || status === 'cancelada' || status === 'draft' || status === 'rascunho') {
+        canceledCount += 1;
+        return;
       }
+      const paidAmount = inv.amountPaid !== undefined ? inv.amountPaid : (status === 'paid' || status === 'pago') ? total : 0;
+      paid += paidAmount;
+      pending += Math.max(0, total - paidAmount);
     });
-    return { paid, pending };
+    return {
+      paid,
+      pending,
+      canceledCount,
+      totalCount: filteredInvoicesList.length,
+      totalGeral: paid + pending
+    };
   }, [filteredInvoicesList]);
 
   const uniqueOperators = Array.from(new Set(
@@ -2737,6 +2746,47 @@ A equipa de ${businessData?.name || 'Sabush System'}
       )}
 
       {activeTab === 'list' && !isCreating && (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in-50 duration-200">
+          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+              <FileText size={20} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Faturas</p>
+              <p className="text-xl font-extrabold text-slate-900 font-mono truncate">{filteredMetrics.totalCount}</p>
+            </div>
+          </div>
+          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+              <CheckCircle2 size={20} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Pago</p>
+              <p className="text-xl font-extrabold text-emerald-700 font-mono truncate">{formatCurrencyValue(filteredMetrics.paid, currency)}</p>
+            </div>
+          </div>
+          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              <Clock size={20} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Pendente</p>
+              <p className="text-xl font-extrabold text-amber-700 font-mono truncate">{formatCurrencyValue(filteredMetrics.pending, currency)}</p>
+            </div>
+          </div>
+          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
+              <XCircle size={20} />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Canceladas</p>
+              <p className="text-xl font-extrabold text-slate-900 font-mono truncate">{filteredMetrics.canceledCount}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {activeTab === 'list' && !isCreating && (
         <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center bg-white p-5 rounded-[28px] border border-slate-100 shadow-sm animate-in fade-in-50 duration-200">
           <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center flex-1">
             <div className="w-full lg:w-80 relative">
@@ -2962,15 +3012,18 @@ A equipa de ${businessData?.name || 'Sabush System'}
               ) : (
                 /* VIEW 2 — COMPACT LIST VIEW (table layout) */
                 <div className="overflow-x-auto">
-                  <div className="min-w-[850px] p-6">
+                  <div className="min-w-[1080px] p-6">
                     {/* Header Row */}
-                    <div className="grid grid-cols-[1.4fr_1fr_1fr_0.8fr_0.9fr_0.7fr] pb-4 border-b border-slate-100 text-[11px] font-black uppercase tracking-wider text-slate-400 select-none">
-                      <div>Invoice</div>
-                      <div>Customer</div>
-                      <div>Operator</div>
-                      <div>Date</div>
-                      <div className="text-right">Amount</div>
+                    <div className="grid grid-cols-[1.2fr_0.95fr_0.95fr_0.75fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] pb-4 border-b border-slate-100 text-[11px] font-black uppercase tracking-wider text-slate-400 select-none">
+                      <div>Nº da Fatura</div>
+                      <div>Cliente</div>
+                      <div>Operador</div>
+                      <div>Data</div>
+                      <div className="text-right">Total</div>
+                      <div className="text-right">Pago</div>
+                      <div className="text-right">Pendente</div>
                       <div className="text-center">Status</div>
+                      <div className="text-center">Ações</div>
                     </div>
 
                     {/* Data Rows */}
@@ -2978,10 +3031,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                       {paginatedInvoicesList.map((inv) => {
                         const customerName = customers.find(c => c.id === inv.customerId)?.name || inv.customerId || 'Walk-in';
                         const operatorTruncated = getTruncatedOperator(inv);
+                        const invStatus = (inv.status || '').toLowerCase();
+                        const isCanceledRow = invStatus === 'cancelled' || invStatus === 'cancelada' || invStatus === 'draft' || invStatus === 'rascunho';
+                        const paidAmt = isCanceledRow ? 0 : (inv.amountPaid !== undefined ? inv.amountPaid : (invStatus === 'paid' || invStatus === 'pago') ? (inv.total || 0) : 0);
+                        const pendingAmt = isCanceledRow ? 0 : Math.max(0, (inv.total || 0) - paidAmt);
                         return (
                           <div 
                             key={inv.id}
-                            className="grid grid-cols-[1.4fr_1fr_1fr_0.8fr_0.9fr_0.7fr] items-center py-4 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/30 transition-colors relative"
+                            className="grid grid-cols-[1.2fr_0.95fr_0.95fr_0.75fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] items-center py-4 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/30 transition-colors relative"
                           >
                             {/* Col 1: Invoice number + channel tag pill below */}
                             <div className="flex flex-col items-start gap-1">
@@ -3004,25 +3061,53 @@ A equipa de ${businessData?.name || 'Sabush System'}
                               {inv.createdAt?.seconds ? formatDateInTimezone(inv.createdAt, businessData?.timezone || profile?.timezone || 'Africa/Maputo') : 'Just now'}
                             </div>
 
-                            {/* Col 5: Amount right-aligned */}
-                            <div className="text-right text-slate-900 font-medium font-mono text-sm pr-4">
+                            {/* Col 5: Total right-aligned */}
+                            <div className="text-right text-slate-900 font-medium font-mono text-sm pr-2">
                               {formatCurrencyValue(inv.total || 0, inv.currency || currency || 'MZN')}
                             </div>
 
-                            {/* Col 6: Status badge + dots menu */}
-                            <div className="flex items-center justify-between pl-2 relative dots-menu-container">
-                              <div className="flex-1 flex justify-center">
-                                {renderViewStatusBadge(inv.status)}
-                              </div>
-                              
+                            {/* Col 6: Pago right-aligned */}
+                            <div className="text-right text-emerald-700 font-medium font-mono text-sm pr-2">
+                              {formatCurrencyValue(paidAmt, inv.currency || currency || 'MZN')}
+                            </div>
+
+                            {/* Col 7: Pendente right-aligned */}
+                            <div className="text-right text-amber-700 font-medium font-mono text-sm pr-4">
+                              {formatCurrencyValue(pendingAmt, inv.currency || currency || 'MZN')}
+                            </div>
+
+                            {/* Col 8: Status badge */}
+                            <div className="flex justify-center">
+                              {renderViewStatusBadge(inv.status)}
+                            </div>
+
+                            {/* Col 9: Inline actions — edit, print, and a "more" menu */}
+                            <div className="flex items-center justify-center gap-1 relative dots-menu-container">
+                              <button
+                                type="button"
+                                onClick={() => handleEditInvoiceClick(inv)}
+                                className="p-1.5 text-slate-400 hover:text-indigo-600 rounded-lg hover:bg-indigo-50 transition-all cursor-pointer flex items-center justify-center"
+                                title="Editar Fatura"
+                              >
+                                <Edit2 size={14} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => printInvoice(inv)}
+                                className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-all cursor-pointer flex items-center justify-center"
+                                title="Imprimir Fatura"
+                              >
+                                <Printer size={14} />
+                              </button>
+
                               <div className="relative">
                                 <button
                                   type="button"
                                   onClick={() => setActiveActionMenuId(activeActionMenuId === inv.id ? null : inv.id)}
-                                  className="p-2 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-all cursor-pointer flex items-center justify-center"
-                                  title="Ações"
+                                  className="p-1.5 text-slate-400 hover:text-slate-800 rounded-lg hover:bg-slate-100 transition-all cursor-pointer flex items-center justify-center"
+                                  title="Mais Ações"
                                 >
-                                  <MoreVertical size={16} />
+                                  <MoreVertical size={14} />
                                 </button>
 
                                 {activeActionMenuId === inv.id && (
@@ -3049,17 +3134,6 @@ A equipa de ${businessData?.name || 'Sabush System'}
                                     >
                                       <Download size={14} className="text-slate-400" />
                                       Descarregar PDF
-                                    </button>
-                                    <button
-                                      type="button"
-                                      onClick={() => {
-                                        printInvoice(inv);
-                                        setActiveActionMenuId(null);
-                                      }}
-                                      className="w-full text-left px-4 py-2 hover:bg-slate-50 text-xs font-bold text-slate-700 hover:text-slate-900 transition-colors flex items-center gap-2 cursor-pointer"
-                                    >
-                                      <Printer size={14} className="text-slate-400" />
-                                      Imprimir
                                     </button>
                                     <button
                                       type="button"
@@ -3141,6 +3215,34 @@ A equipa de ${businessData?.name || 'Sabush System'}
               </div>
             </>
           )}
+        </div>
+      )}
+
+      {activeTab === 'list' && !isCreating && !loading && (
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Legenda de Status</span>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase">Paga</span>
+              <span className="text-xs text-slate-400 font-medium">Fatura totalmente paga</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 text-[10px] font-black uppercase">Parcial</span>
+              <span className="text-xs text-slate-400 font-medium">Fatura parcialmente paga</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-full bg-orange-50 text-orange-700 text-[10px] font-black uppercase">Pendente</span>
+              <span className="text-xs text-slate-400 font-medium">Aguardando pagamento</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 text-[10px] font-black uppercase">Cancelada</span>
+              <span className="text-xs text-slate-400 font-medium">Fatura cancelada</span>
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center justify-between gap-4 lg:w-64 shrink-0">
+            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Total Geral</span>
+            <span className="text-lg font-extrabold text-slate-900 font-mono">{formatCurrencyValue(filteredMetrics.totalGeral, currency)}</span>
+          </div>
         </div>
       )}
 
