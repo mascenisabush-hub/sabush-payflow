@@ -972,8 +972,24 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, {
+      // Vite content-hashes everything under /assets (e.g. Dashboard-DwQuTwKP.js),
+      // so those files are safe to cache forever — a new deploy always produces
+      // new filenames, it never overwrites an old one in place.
+      // index.html (and the service worker file) must NEVER be cached, because
+      // it's the only thing that references those hashed filenames: a stale
+      // cached index.html after a deploy points at chunks that no longer exist
+      // on the server, causing "Failed to fetch dynamically imported module".
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('index.html') || filePath.endsWith('sw.js') || filePath.endsWith('service-worker.js')) {
+          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        } else if (filePath.includes(`${path.sep}assets${path.sep}`)) {
+          res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        }
+      }
+    }));
     app.get('*', (req, res) => {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
