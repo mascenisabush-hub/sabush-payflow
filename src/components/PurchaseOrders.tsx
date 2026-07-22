@@ -15,14 +15,26 @@ const getAvailableUnits = (p: any) => {
   const units = [
     { value: 'un', label: p.baseUnitLabel || p.unit || 'Un', multiplier: 1, name: p.baseUnitName || 'Unidade' }
   ];
-  if (p.hasMultiUnits || (p.boxUnitQty && Number(p.boxUnitQty) > 0)) {
+
+  // A box/pack unit only counts as "available" if the product was actually configured
+  // with it in Inventory (hasBoxUnit / hasPackUnit). boxUnitQty/packUnitQty alone are NOT
+  // reliable signals: several product-creation paths save placeholder values (10 / 100)
+  // for these fields even when the unit itself is disabled, which previously caused
+  // "Cx" and "Emb" to show up for products that only sell by "Un".
+  // hasMultiUnits is kept only as a fallback for older records saved before the
+  // hasBoxUnit/hasPackUnit flags existed.
+  const boxEnabled = typeof p.hasBoxUnit === 'boolean' ? p.hasBoxUnit : !!p.hasMultiUnits;
+  if (boxEnabled && Number(p.boxUnitQty) > 0) {
     const qty = Number(p.boxUnitQty) || 12;
     units.push({ value: 'cx', label: p.boxUnitLabel || 'Cx', multiplier: qty, name: p.boxUnitName || 'Caixa' });
   }
-  if (p.hasPackUnit || (p.packUnitQty && Number(p.packUnitQty) > 0)) {
+
+  const packEnabled = !!p.hasPackUnit;
+  if (packEnabled && Number(p.packUnitQty) > 0) {
     const qty = Number(p.packUnitQty) || 100;
     units.push({ value: 'emb', label: p.packUnitLabel || 'Emb', multiplier: qty, name: p.packUnitName || 'Embalagem' });
   }
+
   return units;
 };
 
@@ -182,6 +194,8 @@ export default function PurchaseOrders() {
         price: costPrice * 1.25,
         stockLevel: 0,
         hasMultiUnits: false,
+        hasBoxUnit: false,
+        hasPackUnit: false,
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp()
       };
@@ -457,14 +471,16 @@ export default function PurchaseOrders() {
         updatedAt: serverTimestamp()
       };
       
+      payload.hasBoxUnit = quickProduct.hasMultiUnits;
+      payload.hasPackUnit = quickProduct.hasMultiUnits && quickProduct.hasPackUnit;
+
       if (quickProduct.hasMultiUnits) {
         payload.boxUnitName = quickProduct.boxUnitName.trim() || 'Caixa';
         payload.boxUnitLabel = quickProduct.boxUnitLabel.trim() || 'Cx';
         payload.boxUnitQty = Number(quickProduct.boxUnitQty) || 12;
         payload.boxUnitCostPrice = Number(quickProduct.boxUnitCostPrice) || 0;
         payload.boxUnitPrice = Number(quickProduct.boxUnitPrice) || 0;
-        
-        payload.hasPackUnit = quickProduct.hasPackUnit;
+
         if (quickProduct.hasPackUnit) {
           payload.packUnitName = quickProduct.packUnitName.trim() || 'Embalagem';
           payload.packUnitLabel = quickProduct.packUnitLabel.trim() || 'Emb';
@@ -863,26 +879,26 @@ export default function PurchaseOrders() {
               exit={{ opacity: 0 }}
               className="w-full h-full flex flex-col bg-slate-50 overflow-hidden"
             >
-              {/* Part 1: Title & Settings up to Products List & Pricing Header */}
-              <div className="bg-slate-900 text-white flex flex-col shrink-0 border-b border-slate-800">
-                {/* Ultra compact Header */}
-                <div className="p-3 bg-slate-950 text-white flex justify-between items-center border-b border-slate-800 shrink-0">
-                  <div>
-                    <h3 className="text-sm font-black tracking-tight flex items-center gap-2">
-                      <span>🛒</span> {isPt ? "Entrada de Stock & Compra" : "Stock Purchase & Purchase Order"}
-                    </h3>
-                  </div>
-                  <button 
-                    type="button"
-                    onClick={handleDiscard} 
-                    className="p-1 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg transition-all cursor-pointer border-none"
-                  >
-                    <X size={14} />
-                  </button>
+              {/* Ultra compact Header - the only part that never scrolls */}
+              <div className="p-3 bg-slate-950 text-white flex justify-between items-center border-b border-slate-800 shrink-0">
+                <div>
+                  <h3 className="text-sm font-black tracking-tight flex items-center gap-2">
+                    <span>🛒</span> {isPt ? "Entrada de Stock & Compra" : "Stock Purchase & Purchase Order"}
+                  </h3>
                 </div>
+                <button 
+                  type="button"
+                  onClick={handleDiscard} 
+                  className="p-1 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg transition-all cursor-pointer border-none"
+                >
+                  <X size={14} />
+                </button>
+              </div>
 
-                {/* Settings & Info Body inside the 20% section */}
-                <div className="p-3 space-y-2.5">
+              {/* Single scrollable body: settings bar + products list scroll together so nothing gets cut off on short screens */}
+              <div className="flex-1 min-h-0 overflow-y-auto">
+                {/* Settings & Info Body */}
+                <div className="bg-slate-900 text-white p-3 space-y-2.5">
                   {/* Compact Top Settings Bar - takes minimum vertical space */}
                   <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-4 bg-slate-800/80 p-3 rounded-2xl border border-slate-700 text-xs shrink-0 shadow-sm text-slate-200">
                     {/* Fornecedor */}
@@ -1106,10 +1122,9 @@ export default function PurchaseOrders() {
                     </span>
                   </div>
                 </div>
-              </div>
 
-              {/* Part 2: Products scrollable area */}
-              <div className="flex-1 min-h-0 overflow-y-auto bg-slate-50 p-4 md:p-6 flex flex-col gap-4">
+                {/* Products area - no longer its own scroll container, it scrolls together with the settings above */}
+                <div className="min-h-full bg-slate-50 p-4 md:p-6 flex flex-col gap-4">
                 {newOrder.items.length > 0 ? (
                   <div className="bg-white rounded-2xl border border-slate-150 p-4 md:p-6 shadow-sm">
                     {/* Headers */}
@@ -1291,6 +1306,7 @@ export default function PurchaseOrders() {
                     </p>
                   </div>
                 )}
+                </div>
               </div>
 
               {/* Part 3: Total Investment & Actions Footer Bar */}
