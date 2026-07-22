@@ -6,7 +6,7 @@ import { offlineDb } from '../lib/offlineDb';
 import { collection, query, onSnapshot, addDoc, serverTimestamp, updateDoc, doc, deleteDoc, orderBy, limit } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { Plus, Search, Package, AlertTriangle, Edit2, Trash2, Tag, Barcode, DollarSign, Users, ShoppingBag, Sliders, Check, Loader2, ArrowRight, Download, RefreshCw, Grid, List, ShieldAlert, Lock, X, FileText, Camera, Sparkles, Upload, Printer, History, Calendar, Globe } from 'lucide-react';
+import { Plus, Search, Package, AlertTriangle, Edit2, Trash2, Tag, Barcode, DollarSign, Users, ShoppingBag, Sliders, Check, Loader2, ArrowRight, Download, RefreshCw, Grid, List, ShieldAlert, Lock, X, FileText, Camera, Sparkles, Upload, Printer, History, Calendar, Globe, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '../lib/utils';
 import { logAction, ActionType } from '../lib/logger';
@@ -1906,6 +1906,67 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
     );
   };
 
+  // Reusable "open full edit form" handler — populates newProduct from an
+  // existing product and switches to the add/edit tab. Shared by every
+  // product table/card in this file so there's a single source of truth for
+  // which fields the edit form expects.
+  const openProductEditor = (product: any) => {
+    setEditingProduct(product);
+    setActiveTab('add');
+    setNewProduct({
+      name: product.name || '',
+      sku: product.sku || '',
+      barcode: product.barcode || '',
+      unidadeDeCompra: product.unidadeDeCompra || '',
+      precoCustoUnidadeCompra: product.precoCustoUnidadeCompra !== undefined && product.precoCustoUnidadeCompra !== null ? product.precoCustoUnidadeCompra : '',
+      conversaoUnidades: product.conversaoUnidades !== undefined && product.conversaoUnidades !== null ? product.conversaoUnidades : '',
+      precoRetalhoUn: product.precoRetalhoUn !== undefined && product.precoRetalhoUn !== null ? product.precoRetalhoUn : (product.price || ''),
+      unidadesGrosso: (product.unidadesGrosso && product.unidadesGrosso.length > 0
+        ? product.unidadesGrosso
+        : (product.boxUnitPrice ? [{ unidade: product.boxUnitLabel || 'Cx', preco: product.boxUnitPrice }] : [{ unidade: 'Cx', preco: '' }])
+      ).map((u: any) => ({
+        unidade: u.unidade || '',
+        preco: u.preco !== undefined && u.preco !== null ? u.preco : '',
+        tiers: u.tiers || []
+      })),
+      tiersRetalho: product.tiersRetalho || [],
+      imageUrl: product.imageUrl || '',
+      price: product.price !== undefined && product.price !== null ? product.price : '',
+      onlinePrice: product.onlinePrice !== undefined && product.onlinePrice !== null ? product.onlinePrice : '',
+      costPrice: product.costPrice !== undefined && product.costPrice !== null ? product.costPrice : '',
+      availableOnline: product.availableOnline || false,
+      allowWholesale: product.allowWholesale || false,
+      wholesalePrice: product.wholesalePrice !== undefined && product.wholesalePrice !== null ? product.wholesalePrice : '',
+      description: product.description || '',
+      managerNotes: product.managerNotes || '',
+      stockLevel: product.stockLevel !== undefined && product.stockLevel !== null ? product.stockLevel : '',
+      stockCx: product.stockCx !== undefined && product.stockCx !== null ? product.stockCx : '',
+      stockEmb: product.stockEmb !== undefined && product.stockEmb !== null ? product.stockEmb : '',
+      stockUn: product.stockUn !== undefined && product.stockUn !== null ? product.stockUn : '',
+      lowStockThreshold: product.lowStockThreshold !== undefined && product.lowStockThreshold !== null ? product.lowStockThreshold : '',
+      category: product.category || '',
+      supplier: product.supplier || '',
+      tieredPrices: product.tieredPrices || [],
+      unitDiscountTiers: product.unitDiscountTiers || [],
+      hasMultiUnits: product.hasMultiUnits || false,
+      uomScheme: product.uomScheme || 'cx_emb_un',
+      boxUnitName: product.boxUnitName || 'Caixa',
+      boxUnitLabel: product.boxUnitLabel || 'Cx',
+      packUnitName: product.packUnitName || 'Embalagem',
+      packUnitLabel: product.packUnitLabel || 'Emb',
+      baseUnitName: product.baseUnitName || 'Unidade',
+      baseUnitLabel: product.baseUnitLabel || 'Un',
+      hasBoxUnit: product.hasBoxUnit || false,
+      boxUnitQty: product.boxUnitQty !== undefined && product.boxUnitQty !== null ? product.boxUnitQty : '',
+      boxUnitPrice: product.boxUnitPrice !== undefined && product.boxUnitPrice !== null ? product.boxUnitPrice : '',
+      boxUnitCostPrice: product.boxUnitCostPrice !== undefined && product.boxUnitCostPrice !== null ? product.boxUnitCostPrice : '',
+      hasPackUnit: product.hasPackUnit || false,
+      packUnitQty: product.packUnitQty !== undefined && product.packUnitQty !== null ? product.packUnitQty : '',
+      packUnitPrice: product.packUnitPrice !== undefined && product.packUnitPrice !== null ? product.packUnitPrice : '',
+      packUnitCostPrice: product.packUnitCostPrice !== undefined && product.packUnitCostPrice !== null ? product.packUnitCostPrice : ''
+    });
+  };
+
   const handleBulkDelete = async () => {
     if (!profile?.businessId || selectedIds.length === 0) return;
     executeWithManagerAuthorization(`remover permanentemente ${selectedIds.length} produtos em massa do inventário`, async () => {
@@ -1921,6 +1982,27 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
         toast.error("Failed to delete some products");
       }
     });
+  };
+
+  const handleDuplicateProduct = async (product: any) => {
+    if (!profile?.businessId) return;
+    try {
+      const { id, ...rest } = product;
+      await addDoc(collection(db, `businesses/${profile.businessId}/products`), {
+        ...rest,
+        name: `${product.name || 'Produto'} (Cópia)`,
+        sku: '',
+        barcode: '',
+        stockLevel: 0,
+        stockCx: 0,
+        stockEmb: 0,
+        stockUn: 0,
+        createdAt: new Date().toISOString(),
+      });
+      toast.success('Produto duplicado. Edite o novo artigo para ajustar SKU e stock.');
+    } catch (error) {
+      toast.error('Erro ao duplicar produto.');
+    }
   };
 
   const handleDeleteProduct = async (id: string, name: string) => {
@@ -3966,62 +4048,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           {/* Full Editing module */}
                           <button
                             type="button"
-                            onClick={() => {
-                              setEditingProduct(product);
-                              setActiveTab('add');
-                              setNewProduct({
-                                name: product.name || '',
-                                sku: product.sku || '',
-                                barcode: product.barcode || '',
-                                unidadeDeCompra: product.unidadeDeCompra || '',
-                                precoCustoUnidadeCompra: product.precoCustoUnidadeCompra !== undefined && product.precoCustoUnidadeCompra !== null ? product.precoCustoUnidadeCompra : '',
-                                conversaoUnidades: product.conversaoUnidades !== undefined && product.conversaoUnidades !== null ? product.conversaoUnidades : '',
-                                precoRetalhoUn: product.precoRetalhoUn !== undefined && product.precoRetalhoUn !== null ? product.precoRetalhoUn : (product.price || ''),
-                                unidadesGrosso: (product.unidadesGrosso && product.unidadesGrosso.length > 0 
-                                  ? product.unidadesGrosso 
-                                  : (product.boxUnitPrice ? [{ unidade: product.boxUnitLabel || 'Cx', preco: product.boxUnitPrice }] : [{ unidade: 'Cx', preco: '' }])
-                                ).map((u: any) => ({
-                                  unidade: u.unidade || '',
-                                  preco: u.preco !== undefined && u.preco !== null ? u.preco : '',
-                                  tiers: u.tiers || []
-                                })),
-                                tiersRetalho: product.tiersRetalho || [],
-                                imageUrl: product.imageUrl || '',
-                                price: product.price !== undefined && product.price !== null ? product.price : '',
-                                onlinePrice: product.onlinePrice !== undefined && product.onlinePrice !== null ? product.onlinePrice : '',
-                                costPrice: product.costPrice !== undefined && product.costPrice !== null ? product.costPrice : '',
-                                availableOnline: product.availableOnline || false,
-                                allowWholesale: product.allowWholesale || false,
-                                wholesalePrice: product.wholesalePrice !== undefined && product.wholesalePrice !== null ? product.wholesalePrice : '',
-                                description: product.description || '',
-                                managerNotes: product.managerNotes || '',
-                                stockLevel: product.stockLevel !== undefined && product.stockLevel !== null ? product.stockLevel : '',
-                                stockCx: product.stockCx !== undefined && product.stockCx !== null ? product.stockCx : '',
-                                stockEmb: product.stockEmb !== undefined && product.stockEmb !== null ? product.stockEmb : '',
-                                stockUn: product.stockUn !== undefined && product.stockUn !== null ? product.stockUn : '',
-                                lowStockThreshold: product.lowStockThreshold !== undefined && product.lowStockThreshold !== null ? product.lowStockThreshold : '',
-                                category: product.category || '',
-                                supplier: product.supplier || '',
-                                tieredPrices: product.tieredPrices || [],
-                                unitDiscountTiers: product.unitDiscountTiers || [],
-                                hasMultiUnits: product.hasMultiUnits || false,
-                                uomScheme: product.uomScheme || 'cx_emb_un',
-                                boxUnitName: product.boxUnitName || 'Caixa',
-                                boxUnitLabel: product.boxUnitLabel || 'Cx',
-                                packUnitName: product.packUnitName || 'Embalagem',
-                                packUnitLabel: product.packUnitLabel || 'Emb',
-                                baseUnitName: product.baseUnitName || 'Unidade',
-                                baseUnitLabel: product.baseUnitLabel || 'Un',
-                                hasBoxUnit: product.hasBoxUnit || false,
-                                boxUnitQty: product.boxUnitQty !== undefined && product.boxUnitQty !== null ? product.boxUnitQty : '',
-                                boxUnitPrice: product.boxUnitPrice !== undefined && product.boxUnitPrice !== null ? product.boxUnitPrice : '',
-                                boxUnitCostPrice: product.boxUnitCostPrice !== undefined && product.boxUnitCostPrice !== null ? product.boxUnitCostPrice : '',
-                                hasPackUnit: product.hasPackUnit || false,
-                                packUnitQty: product.packUnitQty !== undefined && product.packUnitQty !== null ? product.packUnitQty : '',
-                                packUnitPrice: product.packUnitPrice !== undefined && product.packUnitPrice !== null ? product.packUnitPrice : '',
-                                packUnitCostPrice: product.packUnitCostPrice !== undefined && product.packUnitCostPrice !== null ? product.packUnitCostPrice : ''
-                              });
-                            }}
+                            onClick={() => openProductEditor(product)}
                             className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-lg transition-colors cursor-pointer"
                             title="Editar Artigo"
                           >
@@ -6279,45 +6306,77 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
         <div className="bg-white rounded-2xl border border-slate-150 overflow-hidden shadow-sm">
           <div className="overflow-x-auto min-w-full">
             <table className="min-w-full divide-y divide-slate-100 font-sans text-left font-sans">
-              <thead className="bg-slate-50 text-[10px] font-black text-slate-400 uppercase tracking-wider select-none">
+              <thead className="bg-slate-50 text-[9.5px] font-black text-slate-400 uppercase tracking-wider select-none">
                 <tr>
-                  <th scope="col" className="py-3 px-5">Artigo / Detalhes</th>
-                  <th scope="col" className="py-3 px-4 w-32 text-right">Preço Venda</th>
-                  <th scope="col" className="py-3 px-4 w-28 text-right">Margem Lucro</th>
-                  <th scope="col" className="py-3 px-4 w-48 text-center">Stock Físico Registado</th>
-                  <th scope="col" className="py-3 px-4 w-40 text-center">Validade</th>
-                  <th scope="col" className="py-3 px-5 w-32 text-center">Acções</th>
+                  <th scope="col" className="py-2.5 px-3 w-9">
+                    <input
+                      type="checkbox"
+                      checked={paginatedProducts.length > 0 && paginatedProducts.every(p => selectedIds.includes(p.id))}
+                      onChange={() => {
+                        const pageIds = paginatedProducts.map(p => p.id);
+                        const allSelected = pageIds.every(id => selectedIds.includes(id));
+                        setSelectedIds(prev => allSelected ? prev.filter(id => !pageIds.includes(id)) : Array.from(new Set([...prev, ...pageIds])));
+                      }}
+                      className="w-3.5 h-3.5 rounded border-slate-300 cursor-pointer"
+                    />
+                  </th>
+                  <th scope="col" className="py-2.5 px-2 w-20">Código</th>
+                  <th scope="col" className="py-2.5 px-3 min-w-[200px]">Produto</th>
+                  <th scope="col" className="py-2.5 px-2 w-24">Categoria</th>
+                  <th scope="col" className="py-2.5 px-2 w-24 text-right">Custo Médio</th>
+                  <th scope="col" className="py-2.5 px-2 w-24 text-right">Preço Venda</th>
+                  <th scope="col" className="py-2.5 px-2 w-20 text-center">Estoque</th>
+                  <th scope="col" className="py-2.5 px-2 w-16 text-center">Est. Mín.</th>
+                  <th scope="col" className="py-2.5 px-2 w-28 text-right">Valor Total</th>
+                  <th scope="col" className="py-2.5 px-2 w-24 text-center">Status</th>
+                  <th scope="col" className="py-2.5 px-3 w-28 text-center">Ações</th>
                 </tr>
               </thead>
-              <tbody data-no-translate="true" className="divide-y divide-slate-100 bg-white no-translate">
-                {paginatedProducts.map((product) => {
+              <tbody data-no-translate="true" className="divide-y divide-slate-75 bg-white no-translate">
+                {paginatedProducts.map((product, idx) => {
                   const isSelected = selectedIds.includes(product.id);
-                  const isLowStock = product.stockLevel <= (product.lowStockThreshold || 5);
-                  
+                  const lowThreshold = product.lowStockThreshold || 5;
+                  const isLowStock = product.stockLevel > 0 && product.stockLevel <= lowThreshold;
+                  const isCritical = product.stockLevel > 0 && product.stockLevel <= Math.max(1, Math.floor(lowThreshold / 2));
+                  const isOut = product.stockLevel <= 0;
+                  const rowCode = `PROD-${String(startIndex + idx + 1).padStart(3, '0')}`;
+                  const rowValorTotal = (product.stockLevel || 0) * (product.costPrice || product.price || 0);
+
                   return (
-                    <tr 
+                    <tr
                       key={product.id}
                       onClick={() => setViewingProduct(product)}
-                      className="group transition-colors hover:bg-slate-50/80 cursor-pointer text-xs"
+                      className={cn("group transition-colors hover:bg-slate-50/80 cursor-pointer text-[11.5px]", isSelected && "bg-blue-50/50")}
                     >
+                      {/* Checkbox */}
+                      <td className="py-2 px-3" onClick={(e) => e.stopPropagation()}>
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => toggleSelect(product.id)}
+                          className="w-3.5 h-3.5 rounded border-slate-300 cursor-pointer"
+                        />
+                      </td>
+
+                      {/* Código */}
+                      <td className="py-2 px-2 font-mono text-slate-400 font-bold whitespace-nowrap">{rowCode}</td>
+
                       {/* Name, SKU and Barcode */}
-                      <td className="py-4 px-5">
+                      <td className="py-2 px-3">
                         <div className="space-y-0.5">
-                          <p className="font-bold text-slate-950 font-sans text-sm group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap">
+                          <p className="font-bold text-slate-950 font-sans group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap leading-tight">
                             {product.name}
                             {(() => {
                               const stats = getProductExpiryStats(product);
                               return getExpiryDot(stats);
                             })()}
                             {product.promotionActive && (
-                              <span className="bg-amber-500 text-white font-black text-[8px] px-1.5 py-0.5 rounded leading-none shrink-0 uppercase tracking-wider">PROMOÇÃO ACTIVA</span>
+                              <span className="bg-amber-500 text-white font-black text-[7.5px] px-1 py-0.5 rounded leading-none shrink-0 uppercase tracking-wider">PROMO</span>
                             )}
                           </p>
-                          <div className="flex items-center gap-2 text-[10.5px] text-slate-500 font-mono">
-                            {product.sku && <span className="bg-slate-100 px-1.5 py-0.5 rounded">SKU: {product.sku}</span>}
-                            {product.barcode ? (
-                              <span className="bg-slate-100 px-1.5 py-0.5 rounded flex items-center gap-0.5"><Barcode size={10} /> {product.barcode}</span>
-                            ) : (
+                          <div className="flex items-center gap-1.5 text-[9.5px] text-slate-400 font-mono">
+                            {product.sku && <span>SKU: {product.sku}</span>}
+                            {!product.barcode && (
                               <button
                                 type="button"
                                 onClick={async (e) => {
@@ -6337,77 +6396,87 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                                     toast.error("Erro ao gerar código de barras.");
                                   }
                                 }}
-                                className="bg-amber-100 hover:bg-amber-200 text-amber-800 block px-1.8 py-0.5 rounded text-[9.5px] font-black uppercase tracking-wider transition-colors cursor-pointer border border-amber-250 flex items-center gap-0.5"
+                                className="text-amber-700 hover:text-amber-900 font-black uppercase tracking-wider underline decoration-dotted"
                                 title="Gerar código de barras seguro"
                               >
-                                ⚙️ Gerar Barcode
+                                Gerar Barcode
                               </button>
                             )}
                           </div>
                         </div>
                       </td>
 
-                      {/* Selling price */}
-                      <td className="py-4 px-4 text-right font-bold text-blue-600 font-sans whitespace-nowrap">
-                        <div className="text-right">
-                          <span>{(product.price || 0).toLocaleString()} {currency}</span>
-                          {product.costPrice > 0 && (
-                            <span className="block text-[10px] text-slate-400 font-medium text-right">Custo: {product.costPrice.toLocaleString()} {currency}</span>
-                          )}
-                        </div>
+                      {/* Category */}
+                      <td className="py-2 px-2 text-slate-500 font-semibold whitespace-nowrap">{product.category || '—'}</td>
+
+                      {/* Custo Médio */}
+                      <td className="py-2 px-2 text-right font-mono text-slate-500 whitespace-nowrap">
+                        {product.costPrice > 0 ? `${Number(product.costPrice).toLocaleString()} ${currency}` : '—'}
                       </td>
 
-                      {/* Margin */}
-                      <td className="py-4 px-4 text-right font-sans">
-                        {product.price > 0 && product.costPrice > 0 ? (
-                          <span className="inline-block px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 text-[10px] font-black uppercase tracking-wider">
-                            {Math.max(0, Math.round(((product.price - product.costPrice) / product.price) * 105))}%
-                          </span>
-                        ) : (
-                          <span className="text-[10px] font-bold text-slate-400 italic">--</span>
+                      {/* Selling price */}
+                      <td className="py-2 px-2 text-right font-bold text-blue-600 font-mono whitespace-nowrap">
+                        {product.price > 0 ? `${Number(product.price).toLocaleString()} ${currency}` : (
+                          <span className="text-rose-600 text-[9.5px] font-black uppercase" title="Nenhum preço de venda definido">Sem preço</span>
                         )}
                       </td>
 
-                      {/* Stock levels and indicators */}
-                      <td className="py-4 px-4 text-center">
-                        <div className="flex flex-col items-center gap-1">
-                          <span className={cn(
-                            "px-2.5 py-0.5 rounded-full text-[10.5px] font-extrabold font-mono flex items-center gap-1 shrink-0",
-                            product.stockLevel <= 0 ? "bg-rose-50 border border-rose-250 text-rose-700" :
-                            isLowStock ? "bg-amber-50 border border-amber-250 text-amber-700 animate-pulse" :
-                            "bg-emerald-50 border border-emerald-250 text-emerald-800"
-                          )}>
-                            {product.stockLevel} {product.baseUnitLabel || 'Un'}
-                            {isLowStock && <AlertTriangle size={11} className="text-amber-500 shrink-0" />}
-                          </span>
-                          
-                          {/* Unit breakdown in tooltip or small text */}
-                          {(product.stockCx !== undefined || product.stockEmb !== undefined || product.stockUn !== undefined) && (
-                            <span className="text-[9px] text-slate-400 font-mono">
-                              ({product.stockCx || 0} Cx, {product.stockEmb || 0} Emb, {product.stockUn || 0} Un)
-                            </span>
-                          )}
-                        </div>
+                      {/* Stock */}
+                      <td className="py-2 px-2 text-center font-mono font-bold text-slate-700 whitespace-nowrap">
+                        {product.stockLevel} <span className="text-slate-400 font-semibold">{product.baseUnitLabel || 'Un'}</span>
                       </td>
 
-                      {/* Validade column value */}
-                      <td className="py-4 px-4 text-center font-sans">
-                        {(() => {
-                          const stats = getProductExpiryStats(product);
-                          return getExpiryBadge(stats.level, stats.daysLeft || 0, stats.nearestDate || '', stats.count);
-                        })()}
+                      {/* Estoque Mínimo */}
+                      <td className="py-2 px-2 text-center font-mono text-slate-400 whitespace-nowrap">{lowThreshold}</td>
+
+                      {/* Valor Total */}
+                      <td className="py-2 px-2 text-right font-mono font-semibold text-slate-600 whitespace-nowrap">
+                        {rowValorTotal.toLocaleString()} {currency}
+                      </td>
+
+                      {/* Status */}
+                      <td className="py-2 px-2 text-center">
+                        <span className={cn(
+                          "inline-block px-2 py-0.5 rounded-full text-[9.5px] font-black uppercase tracking-wide whitespace-nowrap",
+                          isOut ? "bg-rose-50 text-rose-700 border border-rose-150" :
+                          isCritical ? "bg-rose-50 text-rose-600 border border-rose-150" :
+                          isLowStock ? "bg-amber-50 text-amber-700 border border-amber-150" :
+                          "bg-emerald-50 text-emerald-700 border border-emerald-150"
+                        )}>
+                          {isOut ? 'Sem Stock' : isCritical ? 'Estoque Crítico' : isLowStock ? 'Estoque Baixo' : 'Em Estoque'}
+                        </span>
                       </td>
 
                       {/* Row actions */}
-                      <td className="py-4 px-5 text-center" onClick={(e) => e.stopPropagation()}>
-                        <div className="flex items-center justify-center">
+                      <td className="py-2 px-3 text-center" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex items-center justify-center gap-1">
                           <button
                             onClick={() => setViewingProduct(product)}
-                            className="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors cursor-pointer font-bold flex items-center gap-1 text-[10px] uppercase font-sans tracking-wide shadow-sm"
+                            className="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors cursor-pointer"
                             title="Ver Ficha de Detalhes"
                           >
                             <FileText size={12} />
-                            <span>Ver Ficha</span>
+                          </button>
+                          <button
+                            onClick={() => openProductEditor(product)}
+                            className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-lg transition-colors cursor-pointer"
+                            title="Editar Artigo"
+                          >
+                            <Edit2 size={12} />
+                          </button>
+                          <button
+                            onClick={() => handleDuplicateProduct(product)}
+                            className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-lg transition-colors cursor-pointer"
+                            title="Duplicar Artigo"
+                          >
+                            <Copy size={12} />
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProduct(product.id, product.name)}
+                            className="p-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg transition-colors cursor-pointer"
+                            title="Eliminar Artigo"
+                          >
+                            <Trash2 size={12} />
                           </button>
                         </div>
                       </td>
