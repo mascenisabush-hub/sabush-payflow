@@ -5,7 +5,7 @@ import {
   Store, BarChart3, Building, Truck, UserCheck, Settings, HelpCircle, 
   BookOpen, Search, Printer, ChevronRight, AlertTriangle, AlertCircle, 
   Check, ArrowUp, Menu, X, CheckSquare, Sparkles, ThumbsUp, Activity, Smartphone,
-  Download
+  Download, User, Bell, Languages, Brain, MessageSquare
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '../contexts/AuthContext';
@@ -83,6 +83,17 @@ function AnnotationArrow({ startX, startY, endX, endY, label, direction = 'down'
     </div>
   );
 }
+
+// Sections without a bespoke case in FeatureMockup fall through to `default`
+// and render nothing — this set lets the caller skip the "Maquete Visual"
+// label entirely for those, instead of showing an empty header.
+const SECTIONS_WITH_MOCKUP = new Set([
+  'inicio-rapido', 'sistema-pos', 'inventario', 'clientes', 'faturas',
+  'registar-pagamento', 'gestao-dividas', 'cotacoes', 'encomendas-online',
+  'despesas', 'fornecedores', 'ordens-compra', 'reports', 'equipa',
+  'configuracoes', 'resolucao-problemas', 'boas-praticas', 'portal-cliente',
+  'unidades-medida', 'termos-grupo'
+]);
 
 function FeatureMockup({ sectionId }: { sectionId: string }) {
   switch (sectionId) {
@@ -1374,6 +1385,119 @@ export default function SystemManual() {
         { type: 'tip', text: 'DICA: Treine os seus caixas para usarem o atalho Ctrl + K. Ao dominar a Paleta de Comandos, o tempo de atendimento ao balcão reduz-se drasticamente, permitindo despachar filas de clientes com extrema rapidez.' },
         { type: 'warning', text: 'AVISO: A fusão de contas de clientes e artigos de stock é uma ação definitiva e irreversível no banco de dados. Certifique-se sempre de selecionar o registo que deseja manter como principal antes de confirmar.' }
       ]
+    },
+    {
+      id: 'perfil-utilizador',
+      icon: User,
+      iconColor: 'text-cyan-400',
+      iconBg: 'bg-cyan-500/10',
+      title: '22. 👤 Perfil de Utilizador e Identidade Visual',
+      category: 'Conta',
+      summary: 'Edição de dados pessoais e da empresa, QR code para partilha da loja online e temas de cor personalizáveis.',
+      description: 'Cada utilizador possui uma área de conta pessoal separada das configurações gerais do negócio, onde gere os seus próprios dados, a identidade visual pública da empresa e o seu histórico de atividade.',
+      steps: [
+        { num: 1, title: 'Editar Dados Pessoais', desc: 'Atualize o seu nome, biografia curta e fotografia de avatar a partir do menu Perfil, acessível pelo ícone do utilizador.' },
+        { num: 2, title: 'Gerir Identidade da Empresa', desc: 'Carregue o logótipo oficial, confirme a morada e os dados públicos que aparecem nos documentos e na vitrine online.' },
+        { num: 3, title: 'Partilhar a Loja via QR Code', desc: 'Gere um QR Code instantâneo que aponta diretamente para a sua Vitrine Pública Sabush, pronto para imprimir em cartazes, recibos ou cartões de visita.' },
+        { num: 4, title: 'Escolher um Tema de Cor', desc: 'Selecione entre paletas como Cosmic Rose, Forest Emerald, Royal Indigo, Sabush Green ou Safi Amber para personalizar o visual da sua conta.' },
+        { num: 5, title: 'Consultar o Histórico de Atividade', desc: 'Reveja as suas próprias ações recentes no sistema para confirmar alterações realizadas.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: Imprima o QR Code do seu perfil e cole-o junto à caixa registadora — os clientes podem apontar a câmara do telemóvel e navegar imediatamente pelo seu catálogo online.' }
+      ]
+    },
+    {
+      id: 'notificacoes',
+      icon: Bell,
+      iconColor: 'text-orange-400',
+      iconBg: 'bg-orange-500/10',
+      title: '23. 🔔 Centro de Notificações em Tempo Real',
+      category: 'Geral',
+      summary: 'Alertas instantâneos de stock crítico, comprovativos de pagamento pendentes, cotações e novas encomendas online.',
+      description: 'O sino de notificações mantém toda a equipa a par dos eventos importantes do negócio assim que acontecem, sem precisar de estar a vigiar cada módulo manualmente.',
+      steps: [
+        { num: 1, title: 'Consultar Alertas Recebidos', desc: 'Clique no ícone de sino na barra lateral para abrir a lista de notificações mais recentes, ordenadas por hora de chegada.' },
+        { num: 2, title: 'Compreender os Gatilhos Automáticos', desc: 'As notificações são disparadas automaticamente quando: um cliente submete um comprovativo no Portal, o stock de um artigo atinge o limite crítico, uma cotação é aceite ou expira, ou chega uma nova encomenda pela Vitrine Pública.' },
+        { num: 3, title: 'Marcar como Lida', desc: 'Toque numa notificação para a marcar como lida e reduzir o contador visual pendente.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: Todos os utilizadores associados ao mesmo negócio recebem as notificações relevantes em simultâneo, o que ajuda a distribuir a carga de resposta entre a equipa.' }
+      ]
+    },
+    {
+      id: 'tradutor-interface',
+      icon: Languages,
+      iconColor: 'text-blue-400',
+      iconBg: 'bg-blue-500/10',
+      title: '24. 🌍 Tradutor Instantâneo da Interface',
+      category: 'Acessibilidade',
+      summary: 'Alterne toda a interface entre Português, Inglês e Swahili com um clique, sem afetar nomes de produtos ou SKUs.',
+      description: 'Pensado para equipas multilingues ou negócios com colaboradores estrangeiros, o Sabush ERP traduz instantaneamente todos os menus, rótulos e indicadores do painel para Inglês ou Swahili, mantendo os nomes comerciais dos seus produtos e categorias inalterados no idioma original em que foram cadastrados.',
+      steps: [
+        { num: 1, title: 'Selecionar o Idioma da Interface', desc: 'Clique na bandeira do idioma na barra lateral (🇲🇿 Português, 🇺🇸 English ou 🇰🇪 Swahili) para trocar instantaneamente todos os rótulos visíveis.' },
+        { num: 2, title: 'O que muda e o que permanece', desc: 'Menus, títulos de secções e indicadores do dashboard são traduzidos. Os nomes de produtos, SKUs e categorias que introduziu manualmente permanecem exatamente como os escreveu.' },
+        { num: 3, title: 'Ideal para Equipas e Filiais Diversas', desc: 'Útil para operadores de caixa ou gestores que preferem trabalhar noutro idioma, sem necessitar de contas ou configurações separadas.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: A tradução é instantânea e reversível — pode voltar a Português a qualquer momento sem perder nenhuma configuração.' }
+      ]
+    },
+    {
+      id: 'vitrine-publica',
+      icon: Store,
+      iconColor: 'text-purple-400',
+      iconBg: 'bg-purple-500/10',
+      title: '25. 🛍️ Vitrine Pública Sabush (Storefront)',
+      category: 'Vendas',
+      summary: 'A montra online que os seus clientes veem: catálogo navegável, encomenda direta ou pedido de cotação, e acompanhamento do estado do pedido.',
+      description: 'Distinta do painel de "Encomendas On-line" (onde o lojista gere os pedidos recebidos), a Vitrine Pública é a página voltada para o cliente final — o catálogo que ele navega, filtra por preço e usa para encomendar ou pedir orçamento diretamente do telemóvel.',
+      steps: [
+        { num: 1, title: 'Marcar Produtos como Disponíveis Online', desc: 'No Inventário, ative a opção de disponibilidade online em cada artigo para que ele apareça na vitrine pública.' },
+        { num: 2, title: 'Partilhar o Link ou QR Code da Loja', desc: 'Envie o link direto da sua vitrine ou o QR Code gerado no seu Perfil para que os clientes acedam ao catálogo sem instalar nada.' },
+        { num: 3, title: 'O Cliente Escolhe: Encomenda Direta ou Cotação Online', desc: 'O comprador pode finalizar uma Encomenda Direta ou solicitar uma Cotação Online para negociar antes de confirmar.' },
+        { num: 4, title: 'Acompanhamento do Estado do Pedido', desc: 'O cliente vê o estado evoluir em tempo real: Sob Revisão → Aceite/Confirmado → Pronto para Levantamento, ou Rejeitado com o motivo indicado pelo gestor.' },
+        { num: 5, title: 'Confirmação Automática via WhatsApp', desc: 'Após aprovação, o sistema pode gerar uma confirmação comercial automática enviada por WhatsApp ao cliente.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: Combine a Vitrine Pública com o QR Code do seu Perfil para transformar qualquer cartaz físico da loja num ponto de venda digital 24 horas por dia.' }
+      ]
+    },
+    {
+      id: 'painel-ia-mercado',
+      icon: Brain,
+      iconColor: 'text-violet-400',
+      iconBg: 'bg-violet-500/10',
+      title: '26. 🧠 Painel de Inteligência Artificial, Câmbio e Gráficos',
+      category: 'Análise',
+      summary: 'Relatório estratégico gerado por IA, câmbio paralelo e oficial de moedas regionais, e temas visuais personalizáveis para os gráficos do Dashboard.',
+      description: 'O Dashboard principal integra três ferramentas analíticas avançadas: o AI Advisor, que interpreta os seus dados recentes; o painel de Câmbio de Mercado, com cotações regionais; e a Consola de Gráficos, que permite adaptar a apresentação visual dos indicadores.',
+      steps: [
+        { num: 1, title: 'Gerar um Relatório Estratégico com AI Advisor', desc: 'Clique em "Gerar Relatório" no bloco AI Advisor do Dashboard. O sistema analisa as suas últimas faturas, despesas e artigos de inventário para sugerir ações concretas de melhoria de rentabilidade.' },
+        { num: 2, title: 'Consultar o Câmbio Regional (Market Rates)', desc: 'Veja as taxas oficiais e paralelas de câmbio para USD frente ao Metical (MZN) e outras moedas regionais como Rand (ZAR), Naira (NGN) e Xelim Queniano (KES), úteis para negócios com fornecedores internacionais.' },
+        { num: 3, title: 'Personalizar o Esquema Visual dos Gráficos', desc: 'Na Consola de Gráficos, escolha entre temas como "Clássico (Azul)" ou "Vibrante (Laranja)" para adaptar a leitura visual dos indicadores do Dashboard ao seu gosto ou ao da sua marca.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: Gere o relatório do AI Advisor no início de cada mês, em conjunto com a Revisão Financeira Mensal, para obter sugestões atualizadas antes de rever preços e margens.' }
+      ]
+    },
+    {
+      id: 'feedback-suporte',
+      icon: MessageSquare,
+      iconColor: 'text-slate-400',
+      iconBg: 'bg-slate-500/10',
+      title: '27. 💬 Feedback e Relato de Anomalias',
+      category: 'Suporte',
+      summary: 'Canal direto para reportar erros técnicos, sugerir melhorias ou elogiar a equipa Sabush, com classificação de gravidade.',
+      description: 'Complementa o canal de Resolução de Problemas: enquanto aquele é para dúvidas de utilização, este formulário envia o relato diretamente para a equipa de desenvolvimento Sabush Tech, com contexto técnico da sua conta.',
+      steps: [
+        { num: 1, title: 'Aceder ao Formulário de Feedback', desc: 'Clique em "Relatar Erro / Feedback" na barra lateral para abrir o formulário dedicado.' },
+        { num: 2, title: 'Escolher a Categoria', desc: 'Selecione entre Anomalia/Mau Funcionamento, Sugestão/Melhoria, Elogio/Crítica Construtiva ou Dúvida/Apoio.' },
+        { num: 3, title: 'Indicar a Gravidade (para Anomalias)', desc: 'Classifique o impacto: Sistema paralisado/Perda de dados, Funcionalidade bloqueada ou incorreta, Inconveniente mas com alternativa, ou Melhoria/dúvida simples — isto ajuda a equipa a priorizar corretamente.' },
+        { num: 4, title: 'Enviar e Acompanhar', desc: 'Submeta o relato; ele fica associado à sua conta e ao seu negócio para que a equipa de suporte tenha o contexto completo ao responder.' }
+      ],
+      boxes: [
+        { type: 'tip', text: 'DICA: Para falhas urgentes que impeçam a faturação (Sistema paralisado), combine o envio deste formulário com um contacto direto via WhatsApp para resposta mais rápida.' }
+      ]
     }
   ];
 
@@ -2038,14 +2162,17 @@ export default function SystemManual() {
  
                 <div className={`h-px ${theme === 'slate' ? 'bg-[#16253B]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'} my-3`} />
  
-                {/* Interactive Feature Mockup Canvas */}
-                <div className="space-y-2 text-left">
-                  <div className="text-[9px] font-mono font-black text-sky-500 uppercase tracking-widest flex items-center gap-1.5 select-none">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span>Maquete Visual e Apontadores de Detalhe • Sabush ERP</span>
+                {/* Interactive Feature Mockup Canvas — only shown for sections
+                    that have a bespoke visual; others skip straight to steps. */}
+                {SECTIONS_WITH_MOCKUP.has(activeSection.id) && (
+                  <div className="space-y-2 text-left">
+                    <div className="text-[9px] font-mono font-black text-sky-500 uppercase tracking-widest flex items-center gap-1.5 select-none">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      <span>Maquete Visual e Apontadores de Detalhe • Sabush ERP</span>
+                    </div>
+                    <FeatureMockup sectionId={activeSection.id} />
                   </div>
-                  <FeatureMockup sectionId={activeSection.id} />
-                </div>
+                )}
               </div>
             </div>
 
