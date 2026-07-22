@@ -6192,7 +6192,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           {showAiGenerator && (
             <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
               <div className="bg-white rounded-3xl max-w-sm w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
-                <div className="p-5 bg-slate-900 text-white flex items-center justify-between">
+                <div className="p-5 bg-blue-900 text-white flex items-center justify-between border-b-2 border-[#B8791A]/50">
                   <h4 className="font-bold flex items-center gap-2 text-sm">
                     <Sparkles className="text-amber-400 stroke-[2.5]" size={16} />
                     <span>Conceito Visual por IA</span>

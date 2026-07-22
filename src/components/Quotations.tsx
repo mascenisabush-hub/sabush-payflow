@@ -858,7 +858,7 @@ export default function Quotations() {
                className="relative bg-white w-full max-w-lg rounded-[32px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
              >
                 {/* Modal Header */}
-                <div className="bg-slate-900 text-white p-6 flex justify-between items-center">
+                <div className="bg-blue-900 text-white p-6 flex justify-between items-center border-b-2 border-[#B8791A]/50">
                    <div>
                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Revisão de Pedido de Orçamento</p>
                      <h3 className="text-lg font-black font-sans">{selectedQuotation.quotationNumber}</h3>

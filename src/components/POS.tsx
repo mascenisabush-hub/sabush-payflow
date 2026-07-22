@@ -3536,7 +3536,7 @@ export default function POS() {
     <div className="flex flex-col w-full h-full bg-[#F4F8FA] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
       
       {/* Quick Sale Keyboard Status & Buffer Bar */}
-      <div className="bg-[#1D1510] border border-orange-900/35 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
+      <div className="bg-blue-900 border border-[#B8791A]/50 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
         <div className="flex items-center gap-2">
           <span className="bg-[#B8791A] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
             <span className="shrink-0">⚡</span> QUICK
