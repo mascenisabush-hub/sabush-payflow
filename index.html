@@ -81,9 +81,9 @@
         justify-content: center;
         gap: 30px;
         background:
-          radial-gradient(circle at 14% 50%, rgba(214, 155, 37, 0.14), transparent 46%),
-          radial-gradient(circle at 86% 50%, rgba(44, 99, 184, 0.16), transparent 46%),
-          radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.08), transparent 60%),
+          radial-gradient(circle at 14% 50%, rgba(44, 99, 184, 0.20), transparent 46%),
+          radial-gradient(circle at 86% 50%, rgba(124, 163, 224, 0.16), transparent 46%),
+          radial-gradient(circle at 50% 100%, rgba(214, 155, 37, 0.06), transparent 60%),
           #050b17;
         overflow: hidden;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -95,8 +95,8 @@
         position: absolute;
         inset: -50%;
         background-image:
-          linear-gradient(rgba(214, 155, 37, 0.06) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(214, 155, 37, 0.06) 1px, transparent 1px);
+          linear-gradient(rgba(96, 165, 250, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(96, 165, 250, 0.08) 1px, transparent 1px);
         background-size: 42px 42px;
         animation: boot-grid-drift 22s linear infinite;
         mask-image: radial-gradient(circle at 50% 50%, transparent 26%, black 46%, transparent 78%);
@@ -104,8 +104,8 @@
       }
       #boot-splash .grid-bg.grid-bg-2 {
         background-image:
-          linear-gradient(rgba(96, 165, 250, 0.07) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(96, 165, 250, 0.07) 1px, transparent 1px);
+          linear-gradient(rgba(214, 155, 37, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(214, 155, 37, 0.05) 1px, transparent 1px);
         animation-direction: reverse;
         animation-duration: 28s;
         mask-image: radial-gradient(circle at 50% 50%, transparent 30%, black 50%, transparent 80%),
@@ -131,16 +131,16 @@
         background: conic-gradient(
           from 0deg,
           #2C63B8 0deg,
-          #7CA3E0 55deg,
-          #D69B25 130deg,
-          #f5c877 165deg,
-          #B8791A 200deg,
-          #6b3fa0 260deg,
-          #2C63B8 320deg,
+          #7CA3E0 70deg,
+          #eaf2ff 130deg,
+          #7CA3E0 170deg,
+          #2C63B8 220deg,
+          #D69B25 275deg,
+          #2C63B8 300deg,
           #2C63B8 360deg
         );
         filter: blur(95px) saturate(150%);
-        opacity: 0.34;
+        opacity: 0.36;
         animation: boot-lamp-spin 26s linear infinite;
         mix-blend-mode: screen;
       }
@@ -158,7 +158,7 @@
         border-radius: 50%;
         background: repeating-conic-gradient(
           from 0deg,
-          rgba(245, 200, 119, 0.16) 0deg 1.2deg,
+          rgba(210, 228, 255, 0.20) 0deg 1.2deg,
           transparent 1.2deg 9deg
         );
         mask-image: radial-gradient(circle, transparent 34%, black 52%, transparent 74%);
@@ -219,14 +219,14 @@
         inset: 0;
         border-radius: 50%;
         border: 3px solid transparent;
-        border-top-color: #B8791A;
-        border-right-color: rgba(184, 121, 26, 0.35);
+        border-top-color: #2C63B8;
+        border-right-color: rgba(44, 99, 184, 0.35);
         animation: boot-spin 1.3s linear infinite;
       }
 
       #boot-splash .ring.ring-2 {
         inset: 14%;
-        border-top-color: rgba(96, 165, 250, 0.85);
+        border-top-color: rgba(214, 155, 37, 0.85);
         border-right-color: transparent;
         animation: boot-spin-reverse 2.1s linear infinite;
       }
@@ -242,7 +242,7 @@
         position: absolute;
         inset: 18%;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(184, 121, 26, 0.4), transparent 70%);
+        background: radial-gradient(circle, rgba(44, 99, 184, 0.4), transparent 70%);
         animation: boot-pulse 2.4s ease-in-out infinite;
       }
 
@@ -295,10 +295,10 @@
         filter: drop-shadow(0 0 3px var(--hex-glow));
       }
 
-      #boot-splash .hex-tl { top: 10%; left: 3%; --hex-border: #f5c877; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 0s; }
-      #boot-splash .hex-tr { top: 10%; right: 3%; --hex-border: #7CA3E0; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 1.2s; }
-      #boot-splash .hex-bl { bottom: 10%; left: 3%; --hex-border: #D69B25; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 2.4s; }
-      #boot-splash .hex-br { bottom: 10%; right: 3%; --hex-border: #60a5fa; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 0.6s; }
+      #boot-splash .hex-tl { top: 10%; left: 3%; --hex-border: #7CA3E0; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 0s; }
+      #boot-splash .hex-tr { top: 10%; right: 3%; --hex-border: #eaf2ff; --hex-glow: rgba(124, 163, 224, 0.55); animation-delay: 1.2s; }
+      #boot-splash .hex-bl { bottom: 10%; left: 3%; --hex-border: #60a5fa; --hex-glow: rgba(44, 99, 184, 0.6); animation-delay: 2.4s; }
+      #boot-splash .hex-br { bottom: 10%; right: 3%; --hex-border: #D69B25; --hex-glow: rgba(214, 155, 37, 0.6); animation-delay: 0.6s; }
 
       @keyframes hex-float {
         0%, 100% { transform: translateY(0); }
@@ -321,14 +321,14 @@
         text-align: center;
         white-space: nowrap;
         background: linear-gradient(100deg,
-          #f5c877 0%, #B8791A 18%, #f5e9c8 32%, #7CA3E0 48%,
-          #f5c877 64%, #60a5fa 80%, #f5c877 100%);
+          #7CA3E0 0%, #2C63B8 18%, #eaf2ff 32%, #bcd6ff 48%,
+          #7CA3E0 64%, #f5c877 80%, #7CA3E0 100%);
         background-size: 300% auto;
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
         animation: boot-shine 4.5s linear infinite;
-        filter: drop-shadow(0 0 14px rgba(214, 155, 37, 0.35));
+        filter: drop-shadow(0 0 14px rgba(44, 99, 184, 0.35));
       }
 
       #boot-splash .word-tech {
@@ -338,7 +338,7 @@
         text-indent: 0.55em; /* offsets the trailing letter-spacing so the word optically centres */
         text-transform: uppercase;
         text-align: center;
-        background: linear-gradient(100deg, #7CA3E0 0%, #f5e9c8 35%, #f5c877 60%, #7CA3E0 100%);
+        background: linear-gradient(100deg, #eaf2ff 0%, #7CA3E0 35%, #2C63B8 60%, #eaf2ff 100%);
         background-size: 260% auto;
         -webkit-background-clip: text;
         background-clip: text;
@@ -365,7 +365,7 @@
         bottom: 0;
         width: 40%;
         border-radius: 999px;
-        background: linear-gradient(90deg, transparent, #B8791A, #f5c877, #B8791A, transparent);
+        background: linear-gradient(90deg, transparent, #2C63B8, #bcd6ff, #2C63B8, transparent);
         animation: boot-sweep 1.4s ease-in-out infinite;
       }
 
@@ -380,7 +380,7 @@
         font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.08em;
-        color: #D69B25;
+        color: #7CA3E0;
         text-align: center;
         font-variant-numeric: tabular-nums;
       }
@@ -405,13 +405,13 @@
 
         <div class="orbit">
           <svg class="orbit-rings spin-cw" viewBox="0 0 460 460" aria-hidden="true">
-            <circle cx="230" cy="230" r="212" fill="none" stroke="rgba(214,155,37,0.22)" stroke-width="1.4" stroke-dasharray="2 10" />
-            <circle cx="230" cy="230" r="212" class="comet-gold" fill="none" stroke="#f5c877" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 1316" />
-            <circle cx="230" cy="230" r="168" fill="none" stroke="rgba(96,165,250,0.18)" stroke-width="1" stroke-dasharray="1 8" />
+            <circle cx="230" cy="230" r="212" fill="none" stroke="rgba(44,99,184,0.22)" stroke-width="1.4" stroke-dasharray="2 10" />
+            <circle cx="230" cy="230" r="212" class="comet-blue" fill="none" stroke="#bcd6ff" stroke-width="3" stroke-linecap="round" stroke-dasharray="16 1316" />
+            <circle cx="230" cy="230" r="168" fill="none" stroke="rgba(214,155,37,0.14)" stroke-width="1" stroke-dasharray="1 8" />
           </svg>
           <svg class="orbit-rings spin-ccw" viewBox="0 0 460 460" aria-hidden="true">
-            <circle cx="230" cy="230" r="190" fill="none" stroke="rgba(44,99,184,0.2)" stroke-width="1.2" stroke-dasharray="1 14" />
-            <circle cx="230" cy="230" r="190" class="comet-blue" fill="none" stroke="#7CA3E0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="12 1182" />
+            <circle cx="230" cy="230" r="190" fill="none" stroke="rgba(124,163,224,0.22)" stroke-width="1.2" stroke-dasharray="1 14" />
+            <circle cx="230" cy="230" r="190" class="comet-gold" fill="none" stroke="#f5c877" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="12 1182" />
           </svg>
 
           <div class="hex-icon hex-tl" title="Faturação">
