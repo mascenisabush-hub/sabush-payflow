@@ -43,6 +43,37 @@ const getUnidadeDeCompraSuggestions = (name: string = '', category: string = '')
   return Array.from(new Set(all));
 };
 
+// Base/retail unit of measure suggestions — the unit a product is actually SOLD in at retail
+// (e.g. "Un", "Kg", "Litro", "Metro"...). Kept separate from purchase/wholesale unit suggestions
+// because a product's base sale unit is very often not "Un" (fabrics, drinks, cereals, etc.),
+// and previously this was hardcoded to "Un" everywhere, which is what let some products get
+// saved without any real preço de venda when the business didn't sell by the unit at all.
+const BASE_UNIT_SUGGESTIONS: string[] = [
+  'Un', 'Kg', 'g', 'Litro', 'ml', 'Metro', 'Cm', 'Par', 'Dúzia', 'Caixa', 'Pacote', 'Rolo', 'Folha', 'Peça'
+];
+
+const getBaseUnitSuggestions = (name: string = '', category: string = ''): string[] => {
+  const nameLower = (name || '').toLowerCase();
+  const categoryLower = (category || '').toLowerCase();
+  const suggestions: string[] = [];
+
+  if (nameLower.includes('arroz') || nameLower.includes('açúcar') || nameLower.includes('acucar') || nameLower.includes('farinha') || nameLower.includes('cimento') || nameLower.includes('ração') || nameLower.includes('racao')) {
+    suggestions.push('Kg', 'g');
+  }
+  if (nameLower.includes('água') || nameLower.includes('agua') || nameLower.includes('sumo') || nameLower.includes('óleo') || nameLower.includes('oleo') || nameLower.includes('leite') || categoryLower.includes('bebida')) {
+    suggestions.push('Litro', 'ml');
+  }
+  if (nameLower.includes('tecido') || nameLower.includes('capulana') || nameLower.includes('fio') || nameLower.includes('cabo')) {
+    suggestions.push('Metro', 'Cm');
+  }
+  if (nameLower.includes('sapato') || nameLower.includes('bota') || nameLower.includes('sandália') || nameLower.includes('sandalia') || nameLower.includes('meia')) {
+    suggestions.push('Par', 'Dúzia');
+  }
+
+  const all = [...suggestions, ...BASE_UNIT_SUGGESTIONS];
+  return Array.from(new Set(all));
+};
+
 const UOM_PRESETS = [
   {
     id: 'cx_emb_un',
@@ -774,6 +805,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
   const [isCreating, setIsCreating] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showUnidadeDeCompraDropdown, setShowUnidadeDeCompraDropdown] = useState(false);
+  const [showBaseUnitDropdown, setShowBaseUnitDropdown] = useState(false);
   const [activeGrossoDropdownIndex, setActiveGrossoDropdownIndex] = useState<number | null>(null);
   const [hasManuallyEditedCategory, setHasManuallyEditedCategory] = useState(false);
 
@@ -1965,6 +1997,22 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
     if (isNaN(parsedPrice) || parsedPrice < 0) {
       toast.error("Por favor, introduza um preço válido (igual ou superior a zero).");
+      return;
+    }
+
+    // GUARD AGAINST "PRODUTO SEM PREÇO DE VENDA": previously, if the user left the retail
+    // price empty (e.g. a product only sold by Caixa/Embalagem in Grosso), parsedPrice fell
+    // back to 0 and passed the check above silently — the product would be saved with no
+    // real preço de venda anywhere (retail = 0, no grosso price either), and nothing told
+    // the user. We now require at least ONE real price: retail (> 0) or at least one
+    // Grosso/Atacado unit price (> 0).
+    const hasRetailPrice = parsedPrice > 0;
+    const grossoRows = newProduct.unidadesGrosso || [];
+    const hasGrossoPrice = grossoRows.some(u => parseDecimalInput(u.preco) > 0 && (u.unidade || '').trim());
+    const hasWholesalePriceLegacy = newProduct.allowWholesale && parseDecimalInput(newProduct.wholesalePrice) > 0;
+
+    if (!hasRetailPrice && !hasGrossoPrice && !hasWholesalePriceLegacy) {
+      toast.error("Este produto ficaria sem nenhum Preço de Venda definido. Defina o Preço de Venda Retalho (por " + (newProduct.baseUnitLabel || 'Un') + ") ou pelo menos um preço de Venda por Grosso/Atacado.");
       return;
     }
 
@@ -3771,20 +3819,43 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                         {(product.costPrice || 0).toLocaleString()} {currency}
                       </td>
                       <td className="py-3 px-4 text-right">
-                        <div className="flex flex-col items-end">
-                          <span className="font-bold text-blue-600 font-mono">
-                            {(product.price || 0).toLocaleString()} {currency}
-                          </span>
-                          {product.allowWholesale && product.wholesalePrice !== undefined && Number(product.wholesalePrice) > 0 ? (
-                            <span className="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md font-black font-sans leading-none mt-1 shadow-sm border border-emerald-100" title="Disponível para venda de grosso">
-                              GROSSO: {Number(product.wholesalePrice).toLocaleString()} {currency}
-                            </span>
-                          ) : (
-                            <span className="text-[9px] text-slate-400 font-bold leading-none mt-1">
-                              Apenas Retalho
-                            </span>
-                          )}
-                        </div>
+                        {(() => {
+                          const hasRetail = Number(product.price || 0) > 0;
+                          const hasWholesaleLegacy = product.allowWholesale && Number(product.wholesalePrice || 0) > 0;
+                          const hasGrosso = (product.unidadesGrosso || []).some((u: any) => Number(u?.preco || 0) > 0);
+                          const hasAnyPrice = hasRetail || hasWholesaleLegacy || hasGrosso;
+
+                          if (!hasAnyPrice) {
+                            return (
+                              <div className="flex flex-col items-end">
+                                <span className="text-[11px] font-black text-rose-600 bg-rose-50 px-2 py-1 rounded-lg border border-rose-150" title="Nenhum preço de venda foi definido para este produto — edite o produto para corrigir">
+                                  ⚠️ Sem Preço de Venda
+                                </span>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <div className="flex flex-col items-end">
+                              <span className="font-bold text-blue-600 font-mono">
+                                {hasRetail ? `${Number(product.price).toLocaleString()} ${currency}` : '—'}
+                              </span>
+                              {hasWholesaleLegacy ? (
+                                <span className="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md font-black font-sans leading-none mt-1 shadow-sm border border-emerald-100" title="Disponível para venda de grosso">
+                                  GROSSO: {Number(product.wholesalePrice).toLocaleString()} {currency}
+                                </span>
+                              ) : hasGrosso ? (
+                                <span className="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-md font-black font-sans leading-none mt-1 shadow-sm border border-emerald-100" title="Disponível para venda de grosso">
+                                  GROSSO DISPONÍVEL
+                                </span>
+                              ) : (
+                                <span className="text-[9px] text-slate-400 font-bold leading-none mt-1">
+                                  Apenas Retalho
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })()}
                       </td>
 
                       {/* Status */}
@@ -4688,7 +4759,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
             {/* Conversão de Unidades */}
             <div className="md:col-span-2 relative">
               <label className="block text-sm font-medium text-slate-700 mb-0.5 text-left">
-                Quantas Unidades (Un) tem 1 {newProduct.unidadeDeCompra || 'Unidade de Compra'}?
+                Quantas Unidades ({newProduct.baseUnitLabel || 'Un'}) tem 1 {newProduct.unidadeDeCompra || 'Unidade de Compra'}?
               </label>
               <p className="text-[11px] text-slate-500 mb-1 text-left italic">
                 Relação de conversão para o stock retalho
@@ -4706,7 +4777,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               {/* Live calculation preview */}
               {Number(newProduct.precoCustoUnidadeCompra) > 0 && Number(newProduct.conversaoUnidades) > 0 && (
                 <div className="mt-1.5 text-xs text-blue-600 font-semibold text-left">
-                  1 {newProduct.unidadeDeCompra || 'Unidade'} ({Number(newProduct.precoCustoUnidadeCompra).toLocaleString()} {currency}) ÷ {newProduct.conversaoUnidades} Un = {(Number(newProduct.precoCustoUnidadeCompra) / Number(newProduct.conversaoUnidades)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} {currency} por Un
+                  1 {newProduct.unidadeDeCompra || 'Unidade'} ({Number(newProduct.precoCustoUnidadeCompra).toLocaleString()} {currency}) ÷ {newProduct.conversaoUnidades} {newProduct.baseUnitLabel || 'Un'} = {(Number(newProduct.precoCustoUnidadeCompra) / Number(newProduct.conversaoUnidades)).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} {currency} por {newProduct.baseUnitLabel || 'Un'}
                 </div>
               )}
             </div>
@@ -5208,16 +5279,61 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       <span>💊</span> Venda a Retalho (por Unidade)
                     </h5>
                     <p className="text-xs text-slate-400 mt-0.5">
-                      Defina o preço de venda por Unidade (Un) no modo Retalho
+                      Defina o preço de venda por {newProduct.baseUnitLabel || 'Un'} no modo Retalho
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end bg-slate-50 p-3 rounded-xl border border-slate-100">
-                    <div>
+                    <div className="relative">
                       <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Unidade</label>
-                      <div className="w-full p-2 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 text-xs font-black text-center select-none">
-                        Un
-                      </div>
+                      <input
+                        type="text"
+                        className="w-full p-2 bg-white border border-slate-200 rounded-xl text-slate-800 text-xs font-black text-center outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="Un"
+                        value={newProduct.baseUnitLabel || ''}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setNewProduct(prev => ({
+                            ...prev,
+                            baseUnitLabel: val,
+                            baseUnitName: val
+                          }));
+                        }}
+                        onFocus={() => setShowBaseUnitDropdown(true)}
+                        onBlur={() => setTimeout(() => setShowBaseUnitDropdown(false), 200)}
+                      />
+                      {showBaseUnitDropdown && (
+                        <div className="absolute top-full left-0 right-0 z-50 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg max-h-48 overflow-y-auto font-sans text-xs min-w-[140px]">
+                          {newProduct.baseUnitLabel?.trim() && !getBaseUnitSuggestions(newProduct.name, newProduct.category).some(u => u.toLowerCase() === newProduct.baseUnitLabel.trim().toLowerCase()) && (
+                            <button
+                              type="button"
+                              onMouseDown={() => {
+                                setNewProduct(prev => ({ ...prev, baseUnitLabel: prev.baseUnitLabel.trim(), baseUnitName: prev.baseUnitLabel.trim() }));
+                                setShowBaseUnitDropdown(false);
+                              }}
+                              className="w-full text-left px-3 py-2 hover:bg-blue-50 text-blue-600 font-bold flex items-center gap-1 border-b border-slate-100"
+                            >
+                              <Plus size={12} /> Usar: "{newProduct.baseUnitLabel}"
+                            </button>
+                          )}
+                          {getBaseUnitSuggestions(newProduct.name, newProduct.category).map(u => (
+                            <button
+                              key={u}
+                              type="button"
+                              onMouseDown={() => {
+                                setNewProduct(prev => ({ ...prev, baseUnitLabel: u, baseUnitName: u }));
+                                setShowBaseUnitDropdown(false);
+                              }}
+                              className={cn(
+                                "w-full text-left px-3 py-2 hover:bg-slate-50 text-slate-700 block truncate font-semibold",
+                                newProduct.baseUnitLabel === u && "bg-blue-50 text-blue-700"
+                              )}
+                            >
+                              {u}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <div className="sm:col-span-2">
                       <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Preço de Venda Retalho</label>
