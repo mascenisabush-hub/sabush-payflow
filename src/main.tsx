@@ -83,6 +83,21 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>,
 );
 
+// The stale-chunk reload guard above only allows one auto-reload attempt
+// before falling through to the error screen, to avoid an infinite reload
+// loop if the deployment itself is broken. But `sabush_chunk_reload_attempted`
+// lives in sessionStorage, which persists for the tab's whole lifetime — so
+// without this, a tab that recovers from one stale-chunk incident (e.g. an
+// earlier deploy) would refuse to auto-reload for a *second*, unrelated
+// incident later in the same session (e.g. after a subsequent deploy).
+// Once the app has rendered and stayed up for a few seconds, we know this
+// load succeeded, so it's safe to clear the guard and re-arm it for next time.
+if (typeof window !== 'undefined') {
+  window.setTimeout(() => {
+    sessionStorage.removeItem('sabush_chunk_reload_attempted');
+  }, 8000);
+}
+
 // Detect if we are in development, preview, or inside an iframe
 const isDevOrIframe = typeof window !== 'undefined' && (
   window.location.hostname.includes('localhost') ||
