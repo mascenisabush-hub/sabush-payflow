@@ -1,6 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { AuthProvider, useAuth, AuthLog } from './contexts/AuthContext';
-import Onboarding from './components/Onboarding';
 import AppLoadingScreen from './components/AppLoadingScreen';
 import WelcomeSplash from './components/WelcomeSplash';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -16,15 +15,23 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { auth, db } from './lib/firebase';
 import { collection, query, where, onSnapshot, doc, getDoc } from 'firebase/firestore';
 import { cn, getBrandTints } from './lib/utils';
-import { AccountStatusGate, TermsOfServiceGate, SubscriptionExpiredGate } from './components/Gating';
 import SubscriptionGate from './components/SubscriptionGate';
 import Notifications from './components/Notifications';
 import sabushLogo from './assets/images/sabush_logo_1779481915424.png';
-import SystemInterpreter from './components/SystemInterpreter';
-import GlobalSearch from './components/GlobalSearch';
 import { checkAndTriggerAutoBackup } from './utils/backupService';
-import { TermsModal } from './components/TermsModal';
-import LegalWarningModal from './components/LegalWarningModal';
+
+// Lazy load components not needed for first paint. These previously were
+// statically imported (some even wrapped in <Suspense>, which did nothing
+// without a real dynamic import), bloating the main entry bundle with code
+// only needed for edge cases: first-run onboarding, account-gate screens,
+// the AI system interpreter widget, and modals that are rarely/never open.
+const Onboarding = lazy(() => import('./components/Onboarding'));
+const AccountStatusGate = lazy(() => import('./components/Gating').then(m => ({ default: m.AccountStatusGate })));
+const TermsOfServiceGate = lazy(() => import('./components/Gating').then(m => ({ default: m.TermsOfServiceGate })));
+const SubscriptionExpiredGate = lazy(() => import('./components/Gating').then(m => ({ default: m.SubscriptionExpiredGate })));
+const SystemInterpreter = lazy(() => import('./components/SystemInterpreter'));
+const TermsModal = lazy(() => import('./components/TermsModal').then(m => ({ default: m.TermsModal })));
+const LegalWarningModal = lazy(() => import('./components/LegalWarningModal'));
 
 // Lazy load components
 const Dashboard = lazy(() => import('./components/Dashboard'));
@@ -2163,15 +2170,27 @@ function ProtectedApp() {
 
   if (user && !isSuperAdmin) {
     if (!hasAcceptedTerms) {
-      return <TermsOfServiceGate />;
+      return (
+        <Suspense fallback={<AppLoadingScreen message="A verificar Termos e Condições..." />}>
+          <TermsOfServiceGate />
+        </Suspense>
+      );
     }
     if (status !== 'active') {
-      return <AccountStatusGate status={status} />;
+      return (
+        <Suspense fallback={<AppLoadingScreen message="A verificar estado da conta..." />}>
+          <AccountStatusGate status={status} />
+        </Suspense>
+      );
     }
   }
 
   if (user && isLocked) {
-    return <SubscriptionExpiredGate />;
+    return (
+      <Suspense fallback={<AppLoadingScreen message="A verificar subscrição..." />}>
+        <SubscriptionExpiredGate />
+      </Suspense>
+    );
   }
 
   // Two Factor Authentication Gate
@@ -2494,16 +2513,18 @@ function ProtectedApp() {
 
       <ManagerAuthListener />
       <ClientInventorySync />
-      <SystemInterpreter />
       <Toaster position="top-right" expand={false} richColors />
-      <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} defaultTab={termsModalTab} />
-      <LegalWarningModal
-        isOpen={false} // Desativado o pop-up automático no login/ecrã por solicitação; as informações jurídicas de não certificação AT residem agora nos Termos e Condições e no Manual de Utilizador do Sistema.
-        readOnly={false}
-        businessId={profile?.businessId}
-        userId={user?.uid}
-        userName={profile?.displayName || profile?.name || user?.displayName}
-      />
+      <Suspense fallback={null}>
+        <SystemInterpreter />
+        <TermsModal isOpen={isTermsOpen} onClose={() => setIsTermsOpen(false)} defaultTab={termsModalTab} />
+        <LegalWarningModal
+          isOpen={false} // Desativado o pop-up automático no login/ecrã por solicitação; as informações jurídicas de não certificação AT residem agora nos Termos e Condições e no Manual de Utilizador do Sistema.
+          readOnly={false}
+          businessId={profile?.businessId}
+          userId={user?.uid}
+          userName={profile?.displayName || profile?.name || user?.displayName}
+        />
+      </Suspense>
     </div>
   );
 }
