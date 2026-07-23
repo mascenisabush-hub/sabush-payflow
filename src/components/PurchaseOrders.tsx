@@ -38,6 +38,20 @@ const getAvailableUnits = (p: any) => {
   return units;
 };
 
+// Common unit-of-measure suggestions offered when adding a brand new unit from the
+// stock-entry modal — mirrors the suggestions used in Inventory's product form.
+const NEW_UNIT_SUGGESTIONS = ['Saco', 'Fardo', 'Vol', 'Garrafa', 'Cx', 'Emb', 'Kg', 'Lt', 'Rolo', 'Palete'];
+
+// Tells us which slot (box/Caixa or pack/Embalagem) is free on a product to receive a brand
+// new custom unit of measure. Products only have two wholesale slots in the schema, so once
+// both are taken the user needs to edit the product in Inventory to free one up.
+const getFreeUnitSlot = (p: any): 'cx' | 'emb' | null => {
+  if (!p) return 'cx';
+  if (!p.hasBoxUnit) return 'cx';
+  if (!p.hasPackUnit) return 'emb';
+  return null;
+};
+
 export default function PurchaseOrders() {
   const { profile, businessData } = useAuth();
   const { t, i18n } = useTranslation();
@@ -59,6 +73,16 @@ export default function PurchaseOrders() {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [receivingOrder, setReceivingOrder] = useState<any | null>(null);
   const [receivingBatches, setReceivingBatches] = useState<Record<string, { batchNumber: string, expiryDate: string }>>({});
+
+  // Inline "add a new unit of measure" flow for a cart row — lets the user type a custom
+  // unit (e.g. 'Saco', 'Fardo', 'Vol') right here in the purchase, with suggestions, instead
+  // of being limited to whatever Un/Cx/Emb slots the product already has configured. When
+  // confirmed, it's saved back onto the product record (as its Caixa or Embalagem slot,
+  // whichever is free) so it also becomes available next time in Inventory and here.
+  const [addingUnitForIndex, setAddingUnitForIndex] = useState<number | null>(null);
+  const [newUnitLabel, setNewUnitLabel] = useState('');
+  const [newUnitQty, setNewUnitQty] = useState('');
+  const [showNewUnitSuggestions, setShowNewUnitSuggestions] = useState(false);
 
   const [quickSupplier, setQuickSupplier] = useState({
     name: '',
@@ -211,6 +235,58 @@ export default function PurchaseOrders() {
     } catch (err) {
       console.error(err);
       toast.error(isPt ? "Erro ao criar produto." : "Error creating product.");
+    }
+  };
+
+  const handleConfirmNewUnit = async (index: number) => {
+    const label = newUnitLabel.trim();
+    const qty = Number(newUnitQty);
+    if (!label) {
+      toast.error(isPt ? "Introduza um nome para a nova unidade." : "Enter a name for the new unit.");
+      return;
+    }
+    if (!qty || qty <= 0) {
+      toast.error(isPt ? "Introduza quantas Unidades (Un) equivalem a 1 " + label + "." : "Enter how many base Units equal 1 " + label + ".");
+      return;
+    }
+
+    const list = [...newOrder.items];
+    const item = list[index];
+    const selectedProd = products.find(p => p.id === item.productId);
+    const slot = getFreeUnitSlot(selectedProd);
+
+    if (!slot) {
+      toast.error(isPt
+        ? `Este produto já tem Caixa e Embalagem configuradas. Edite o produto no Inventário para libertar um espaço antes de adicionar "${label}".`
+        : `This product already has both wholesale slots (Box/Pack) configured. Edit it in Inventory to free one up before adding "${label}".`);
+      return;
+    }
+
+    try {
+      if (profile?.businessId && selectedProd?.id) {
+        const prodRef = doc(db, `businesses/${profile.businessId}/products`, selectedProd.id);
+        const updateFields: any = slot === 'cx'
+          ? { hasBoxUnit: true, boxUnitLabel: label, boxUnitName: label, boxUnitQty: qty }
+          : { hasPackUnit: true, packUnitLabel: label, packUnitName: label, packUnitQty: qty };
+        await updateDoc(prodRef, { ...updateFields, updatedAt: serverTimestamp() });
+
+        // Reflect the change locally so the dropdown immediately offers the new unit
+        setProducts(prev => prev.map(p => p.id === selectedProd.id ? { ...p, ...updateFields } : p));
+      }
+
+      list[index].selectedUnit = slot;
+      list[index].unitLabel = label;
+      list[index].multiplier = qty;
+      list[index].cost = (selectedProd?.costPrice || 0) * qty;
+      setNewOrder({ ...newOrder, items: list });
+
+      toast.success(isPt ? `Unidade "${label}" adicionada e guardada no produto!` : `Unit "${label}" added and saved to the product!`);
+      setAddingUnitForIndex(null);
+      setNewUnitLabel('');
+      setNewUnitQty('');
+    } catch (err) {
+      console.error(err);
+      toast.error(isPt ? "Erro ao guardar a nova unidade." : "Error saving the new unit.");
     }
   };
 
@@ -1175,45 +1251,125 @@ export default function PurchaseOrders() {
                                   setNewOrder({ ...newOrder, items: list });
                                 }}
                               />
-                              <select
-                                className="flex-1 min-w-[70px] max-w-[100px] p-1 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-[10px] font-bold outline-none cursor-pointer h-8"
-                                value={item.selectedUnit || 'un'}
-                                onChange={e => {
-                                  const list = [...newOrder.items];
-                                  const unitVal = e.target.value;
-                                  const units = getAvailableUnits(selectedProd);
-                                  const unitObj = units.find(u => u.value === unitVal) || units[0];
-                                  
-                                  list[index].selectedUnit = unitVal;
-                                  list[index].unitLabel = unitObj.label;
-                                  list[index].multiplier = unitObj.multiplier;
-                                  
-                                  // Update cost price based on selected unit
-                                  let cost = selectedProd?.costPrice || 0;
-                                  if (unitVal === 'cx' && selectedProd?.boxUnitCostPrice) {
-                                    cost = selectedProd.boxUnitCostPrice;
-                                  } else if (unitVal === 'emb' && selectedProd?.packUnitCostPrice) {
-                                    cost = selectedProd.packUnitCostPrice;
-                                  } else {
-                                    cost = (selectedProd?.costPrice || 0) * unitObj.multiplier;
-                                  }
-                                  list[index].cost = cost;
-                                  
-                                  const origCost = Number(selectedProd?.precoCustoUnidadeCompra) || 0;
-                                  list[index].updateCostInProduct = (cost !== origCost);
-                                  
-                                  setNewOrder({ ...newOrder, items: list });
-                                }}
-                              >
-                                {getAvailableUnits(selectedProd).map(u => (
-                                  <option key={u.value} value={u.value}>{u.label}</option>
-                                ))}
-                              </select>
+                              <div className="relative flex-1 min-w-[70px] max-w-[100px]">
+                                <select
+                                  className="w-full p-1 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 rounded-lg text-[10px] font-bold outline-none cursor-pointer h-8"
+                                  value={item.selectedUnit || 'un'}
+                                  onChange={e => {
+                                    const unitVal = e.target.value;
+
+                                    if (unitVal === '__add_new__') {
+                                      setAddingUnitForIndex(index);
+                                      setNewUnitLabel('');
+                                      setNewUnitQty('');
+                                      return;
+                                    }
+
+                                    const list = [...newOrder.items];
+                                    const units = getAvailableUnits(selectedProd);
+                                    const unitObj = units.find(u => u.value === unitVal) || units[0];
+
+                                    list[index].selectedUnit = unitVal;
+                                    list[index].unitLabel = unitObj.label;
+                                    list[index].multiplier = unitObj.multiplier;
+
+                                    // Update cost price based on selected unit
+                                    let cost = selectedProd?.costPrice || 0;
+                                    if (unitVal === 'cx' && selectedProd?.boxUnitCostPrice) {
+                                      cost = selectedProd.boxUnitCostPrice;
+                                    } else if (unitVal === 'emb' && selectedProd?.packUnitCostPrice) {
+                                      cost = selectedProd.packUnitCostPrice;
+                                    } else {
+                                      cost = (selectedProd?.costPrice || 0) * unitObj.multiplier;
+                                    }
+                                    list[index].cost = cost;
+
+                                    const origCost = Number(selectedProd?.precoCustoUnidadeCompra) || 0;
+                                    list[index].updateCostInProduct = (cost !== origCost);
+
+                                    setNewOrder({ ...newOrder, items: list });
+                                  }}
+                                >
+                                  {getAvailableUnits(selectedProd).map(u => (
+                                    <option key={u.value} value={u.value}>{u.label}</option>
+                                  ))}
+                                  {getFreeUnitSlot(selectedProd) && (
+                                    <option value="__add_new__">➕ {isPt ? "Nova Unidade..." : "New Unit..."}</option>
+                                  )}
+                                </select>
+
+                                {addingUnitForIndex === index && (
+                                  <>
+                                    <div className="fixed inset-0 z-40" onClick={() => setAddingUnitForIndex(null)} />
+                                    <div className="absolute top-[100%] left-0 mt-1 z-50 bg-white border border-slate-200 rounded-xl shadow-xl p-3 w-56 space-y-2">
+                                      <p className="text-[10px] font-black text-slate-500 uppercase tracking-wider">
+                                        {isPt ? "Nova Unidade de Medida" : "New Unit of Measure"}
+                                      </p>
+                                      <div className="relative">
+                                        <input
+                                          type="text"
+                                          autoFocus
+                                          placeholder={isPt ? "Ex: Saco, Fardo, Vol..." : "e.g. Saco, Fardo, Vol..."}
+                                          className="w-full p-1.5 border border-slate-200 rounded-lg text-xs font-bold outline-none focus:ring-1 focus:ring-blue-500"
+                                          value={newUnitLabel}
+                                          onChange={e => setNewUnitLabel(e.target.value)}
+                                          onFocus={() => setShowNewUnitSuggestions(true)}
+                                          onBlur={() => setTimeout(() => setShowNewUnitSuggestions(false), 200)}
+                                        />
+                                        {showNewUnitSuggestions && (
+                                          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-32 overflow-y-auto z-50 text-xs">
+                                            {NEW_UNIT_SUGGESTIONS.filter(u => u.toLowerCase().includes(newUnitLabel.toLowerCase())).map(u => (
+                                              <button
+                                                key={u}
+                                                type="button"
+                                                onMouseDown={() => setNewUnitLabel(u)}
+                                                className="w-full text-left px-2.5 py-1.5 hover:bg-slate-50 text-slate-700 font-semibold block"
+                                              >
+                                                {u}
+                                              </button>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </div>
+                                      <div>
+                                        <label className="text-[9px] font-bold text-slate-400 uppercase">
+                                          {isPt ? `Quantas Un = 1 ${newUnitLabel || 'unidade'}?` : `How many base Units = 1 ${newUnitLabel || 'unit'}?`}
+                                        </label>
+                                        <input
+                                          type="number"
+                                          min="1"
+                                          placeholder="Ex: 12"
+                                          className="w-full p-1.5 border border-slate-200 rounded-lg text-xs font-bold outline-none focus:ring-1 focus:ring-blue-500 font-mono"
+                                          value={newUnitQty}
+                                          onChange={e => setNewUnitQty(e.target.value)}
+                                        />
+                                      </div>
+                                      <div className="flex gap-1.5 pt-1">
+                                        <button
+                                          type="button"
+                                          onClick={() => handleConfirmNewUnit(index)}
+                                          className="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-black text-[10px] uppercase py-1.5 rounded-lg cursor-pointer border-none"
+                                        >
+                                          {isPt ? "Guardar" : "Save"}
+                                        </button>
+                                        <button
+                                          type="button"
+                                          onClick={() => setAddingUnitForIndex(null)}
+                                          className="px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-500 font-bold text-[10px] py-1.5 rounded-lg cursor-pointer border-none"
+                                        >
+                                          {isPt ? "Cancelar" : "Cancel"}
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
                             </div>
 
                             {/* Cost Price (editable, currency-prefixed) */}
                             <div className="relative">
                               <div className="absolute left-2 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-[9px] pointer-events-none">{currency}</div>
+
                               <input 
                                 type="number"
                                 min="0"
