@@ -950,8 +950,8 @@ export function printInvoiceHTML(
           background: white !important;
           color: #000 !important;
           font-family: 'Courier New', Courier, monospace !important;
-          font-size: ${isSmall ? '11px' : '13px'} !important;
-          line-height: 1.35 !important;
+          font-size: ${isSmall ? '13px' : '15px'} !important;
+          line-height: 1.45 !important;
           padding: ${isSmall ? '4px 6px' : '8px 12px'} !important;
           margin: 0 !important;
         }
@@ -969,7 +969,7 @@ export function printInvoiceHTML(
         .mb-1 { margin-bottom: 2px !important; }
         .mb-2 { margin-bottom: 4px !important; }
         .header-title {
-          font-size: ${isSmall ? '14px' : '18px'} !important;
+          font-size: ${isSmall ? '16px' : '20px'} !important;
           font-weight: bold !important;
           text-transform: uppercase !important;
           letter-spacing: 0.5px !important;
@@ -979,8 +979,8 @@ export function printInvoiceHTML(
           border-collapse: collapse !important;
         }
         .table th, .table td {
-          padding: 3px 0 !important;
-          font-size: ${isSmall ? '10px' : '12px'} !important;
+          padding: 4px 0 !important;
+          font-size: ${isSmall ? '12px' : '14px'} !important;
         }
         .details-label {
           display: inline-block !important;
@@ -992,23 +992,6 @@ export function printInvoiceHTML(
         .thanks-msg {
           margin-top: 15px !important;
           font-style: italic !important;
-        }
-        .legal-disclaimer {
-          border-top: 2px solid #000 !important;
-          border-bottom: 2px solid #000 !important;
-          margin: 8px 0 !important;
-          padding: 6px 4px !important;
-          text-align: center !important;
-          font-weight: 700 !important;
-          font-size: 11px !important;
-          line-height: 1.5 !important;
-          text-transform: uppercase !important;
-          letter-spacing: 0.3px !important;
-        }
-        .legal-disclaimer .title {
-          font-size: 12px !important;
-          font-weight: 900 !important;
-          margin-bottom: 4px !important;
         }
       }
     `;
@@ -1069,14 +1052,14 @@ export function printInvoiceHTML(
           <td align="right">- ${formattedAjusteGlobal}</td>
         </tr>
         ` : ''}
-        <tr class="total-row" style="font-size: ${isSmall ? '11px' : '13px'}; border-top: 1px dashed #000; border-bottom: 2px double #000;">
+        <tr class="total-row" style="font-size: ${isSmall ? '14px' : '16px'}; border-top: 1px dashed #000; border-bottom: 2px double #000;">
           <td>TOTAL GERAL:</td>
           <td align="right">${formattedTotal}</td>
         </tr>
       </table>
 
       <!-- Informational Breakdown Block requested by User -->
-      <table class="table" style="font-weight: normal; font-size: ${isSmall ? '9px' : '11px'}; margin-top: 4px; color: #000; font-family: 'Courier New', Courier, monospace;">
+      <table class="table" style="font-weight: normal; font-size: ${isSmall ? '11px' : '13px'}; margin-top: 4px; color: #000; font-family: 'Courier New', Courier, monospace;">
         <tr>
           <td>Produtos (sem IVA):</td>
           <td align="right">${formattedSemIva}</td>
@@ -1085,7 +1068,7 @@ export function printInvoiceHTML(
           <td>IVA incluído (${userTaxRate}%):</td>
           <td align="right">${formattedIvaValue}</td>
         </tr>
-        <tr class="total-row" style="font-weight: bold; font-size: ${isSmall ? '10px' : '11.5px'}; border-top: 1px dashed #000;">
+        <tr class="total-row" style="font-weight: bold; font-size: ${isSmall ? '12px' : '13.5px'}; border-top: 1px dashed #000;">
           <td>Total confirmed:</td>
           <td align="right">${formattedTotal}</td>
         </tr>
@@ -1098,7 +1081,7 @@ export function printInvoiceHTML(
 
       ${totalSavings > 0 ? `
       <div class="divider"></div>
-      <div style="font-family: 'Courier New', Courier, monospace; font-size: ${isSmall ? '10px' : '12px'}; line-height: 1.4;">
+      <div style="font-family: 'Courier New', Courier, monospace; font-size: ${isSmall ? '12px' : '14px'}; line-height: 1.4;">
         <div class="font-bold" style="text-align: center;">POUPANÇA DO CLIENTE</div>
         <table class="table" style="font-weight: normal;">
           <tr>
@@ -1124,19 +1107,6 @@ export function printInvoiceHTML(
         Sabush System ERP
       </div>
 
-      <div class="legal-disclaimer">
-        ================================<br>
-        <span class="title">AVISO LEGAL / LEGAL NOTICE</span><br>
-        ================================<br>
-        ESTE DOCUMENTO NÃO SERVE DE<br>
-        RECIBO FISCAL OFICIAL.<br>
-        Para efeitos fiscais, exija a<br>
-        sua Factura/Recibo nos termos<br>
-        do Regulamento do IVA de<br>
-        Moçambique (Lei nº 32/2007).<br>
-        ================================
-      </div>
-      
       <div style="height: 30px;"></div>
     `;
   } else {
