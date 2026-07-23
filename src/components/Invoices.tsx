@@ -2138,8 +2138,8 @@ A equipa de ${businessData?.name || 'Sabush System'}
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
+    <div className="space-y-3">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-3">
         <div>
           <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">
             <FileText className="text-blue-600" size={24} />
@@ -2746,49 +2746,39 @@ A equipa de ${businessData?.name || 'Sabush System'}
       )}
 
       {activeTab === 'list' && !isCreating && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-in fade-in-50 duration-200">
-          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-              <FileText size={20} />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Faturas</p>
-              <p className="text-xl font-extrabold text-slate-900 font-mono truncate">{filteredMetrics.totalCount}</p>
-            </div>
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 bg-white px-4 py-2.5 rounded-2xl border border-slate-100 shadow-sm animate-in fade-in-50 duration-200 text-sm">
+          <div className="flex items-center gap-1.5">
+            <FileText size={14} className="text-indigo-500 shrink-0" />
+            <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wide">Total</span>
+            <span className="font-extrabold text-slate-900 font-mono">{filteredMetrics.totalCount}</span>
           </div>
-          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-              <CheckCircle2 size={20} />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Pago</p>
-              <p className="text-xl font-extrabold text-emerald-700 font-mono truncate">{formatCurrencyValue(filteredMetrics.paid, currency)}</p>
-            </div>
+          <div className="w-px h-4 bg-slate-200" />
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 size={14} className="text-emerald-500 shrink-0" />
+            <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wide">Pago</span>
+            <span className="font-extrabold text-emerald-700 font-mono">{formatCurrencyValue(filteredMetrics.paid, currency)}</span>
           </div>
-          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
-              <Clock size={20} />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Total Pendente</p>
-              <p className="text-xl font-extrabold text-amber-700 font-mono truncate">{formatCurrencyValue(filteredMetrics.pending, currency)}</p>
-            </div>
+          <div className="w-px h-4 bg-slate-200" />
+          <div className="flex items-center gap-1.5">
+            <Clock size={14} className="text-amber-500 shrink-0" />
+            <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wide">Pendente</span>
+            <span className="font-extrabold text-amber-700 font-mono">{formatCurrencyValue(filteredMetrics.pending, currency)}</span>
           </div>
-          <div className="bg-white p-5 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-3">
-            <div className="w-11 h-11 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center shrink-0">
-              <XCircle size={20} />
-            </div>
-            <div className="min-w-0">
-              <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 truncate">Canceladas</p>
-              <p className="text-xl font-extrabold text-slate-900 font-mono truncate">{filteredMetrics.canceledCount}</p>
-            </div>
+          <div className="w-px h-4 bg-slate-200" />
+          <div className="flex items-center gap-1.5">
+            <XCircle size={14} className="text-rose-500 shrink-0" />
+            <span className="text-slate-400 font-bold text-[11px] uppercase tracking-wide">Canceladas</span>
+            <span className="font-extrabold text-slate-900 font-mono">{filteredMetrics.canceledCount}</span>
           </div>
+          <span className="ml-auto text-[11px] font-bold text-slate-400">
+            <span className="font-black text-slate-700">{filteredInvoicesList.length}</span> faturas encontradas
+          </span>
         </div>
       )}
 
       {activeTab === 'list' && !isCreating && (
-        <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center bg-white p-5 rounded-[28px] border border-slate-100 shadow-sm animate-in fade-in-50 duration-200">
-          <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center flex-1">
+        <div className="flex flex-col lg:flex-row gap-3 justify-between items-stretch lg:items-center bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm animate-in fade-in-50 duration-200">
+          <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center flex-1">
             <div className="w-full lg:w-80 relative">
               <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                 <Search size={16} />
@@ -2798,7 +2788,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 placeholder="Faturas, clientes ou operadores..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-semibold text-slate-800 transition-all placeholder:text-slate-400"
+                className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl focus:ring-2 focus:ring-indigo-500 outline-none text-sm font-semibold text-slate-800 transition-all placeholder:text-slate-400"
               />
             </div>
             
@@ -2876,27 +2866,6 @@ A equipa de ${businessData?.name || 'Sabush System'}
         </div>
       )}
 
-      {activeTab === 'list' && !isCreating && (
-        <div className="bg-slate-50/50 rounded-2xl border border-slate-100 p-4 flex flex-wrap items-center justify-between gap-4 font-sans text-xs text-slate-500 shadow-sm animate-in fade-in-50 duration-200">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="font-bold text-slate-400 uppercase tracking-wider text-[10px]">Resumo Filtrado:</span>
-            <div className="flex items-center gap-2 bg-emerald-50/60 border border-emerald-100/50 px-3 py-1.5 rounded-xl">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-semibold text-slate-500">Total Pago:</span>
-              <span className="font-extrabold text-emerald-700 font-mono">{formatCurrencyValue(filteredMetrics.paid, currency)}</span>
-            </div>
-            <div className="flex items-center gap-2 bg-amber-50/60 border border-amber-100/50 px-3 py-1.5 rounded-xl">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-              <span className="font-semibold text-slate-500">Total Pendente:</span>
-              <span className="font-extrabold text-amber-700 font-mono">{formatCurrencyValue(filteredMetrics.pending, currency)}</span>
-            </div>
-          </div>
-          <div className="text-[11px] text-slate-400 font-bold uppercase">
-            <span className="font-black text-slate-700">{filteredInvoicesList.length}</span> faturas encontradas
-          </div>
-        </div>
-      )}
-
       {loading ? (
         <div className="space-y-4">
           {[1, 2, 3, 4, 5].map((i) => (
@@ -2927,7 +2896,12 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     {paginatedInvoicesList.map((inv) => (
                       <div 
                         key={inv.id} 
-                        className="bg-white border-[0.5px] border-slate-200 rounded-[12px] p-5 flex flex-col justify-between gap-4 font-sans hover:border-slate-300 transition-colors"
+                        onClick={() => {
+                          setPreviewInvoiceData(inv);
+                          setIsPreviewOpen(true);
+                        }}
+                        className="bg-white border-[0.5px] border-slate-200 rounded-[12px] p-5 flex flex-col justify-between gap-4 font-sans hover:border-slate-300 hover:shadow-sm transition-all cursor-pointer"
+                        title="Ver e reimprimir fatura"
                       >
                         {/* Top section: invoice number and customer name on left, status on right */}
                         <div className="flex justify-between items-start gap-3">
@@ -2971,7 +2945,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           <div>
                             {renderChannelTag(inv.saleType)}
                           </div>
-                          <div className="flex items-center gap-3.5 text-slate-400">
+                          <div className="flex items-center gap-3.5 text-slate-400" onClick={(e) => e.stopPropagation()}>
                             <button 
                               onClick={() => openPaymentShareModal(inv)}
                               className="hover:text-indigo-600 transition-colors p-1 cursor-pointer"
@@ -3038,7 +3012,12 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         return (
                           <div 
                             key={inv.id}
-                            className="grid grid-cols-[1.2fr_0.95fr_0.95fr_0.75fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] items-center py-4 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/30 transition-colors relative"
+                            onClick={() => {
+                              setPreviewInvoiceData(inv);
+                              setIsPreviewOpen(true);
+                            }}
+                            className="grid grid-cols-[1.2fr_0.95fr_0.95fr_0.75fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] items-center py-4 border-b border-slate-100 last:border-b-0 hover:bg-slate-50/30 transition-colors relative cursor-pointer"
+                            title="Ver e reimprimir fatura"
                           >
                             {/* Col 1: Invoice number + channel tag pill below */}
                             <div className="flex flex-col items-start gap-1">
@@ -3082,7 +3061,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                             </div>
 
                             {/* Col 9: Inline actions — edit, print, and a "more" menu */}
-                            <div className="flex items-center justify-center gap-1 relative dots-menu-container">
+                            <div className="flex items-center justify-center gap-1 relative dots-menu-container" onClick={(e) => e.stopPropagation()}>
                               <button
                                 type="button"
                                 onClick={() => handleEditInvoiceClick(inv)}
