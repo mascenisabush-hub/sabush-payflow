@@ -932,11 +932,11 @@ export function printInvoiceHTML(
           display: none !important;
         }
       }
+      @page {
+        size: ${isSmall ? '58mm auto' : '80mm auto'};
+        margin: 0mm !important;
+      }
       @media print {
-        @page {
-          size: ${isSmall ? '58mm auto' : '80mm auto'};
-          margin: 0mm !important;
-        }
         body > :not(#print-only-container) {
           display: none !important;
         }
@@ -1146,6 +1146,10 @@ export function printInvoiceHTML(
         #print-only-container {
           display: none !important;
         }
+      }
+      @page {
+        size: A4;
+        margin: 12mm;
       }
       @media print {
         body > :not(#print-only-container) {
@@ -1469,11 +1473,11 @@ export function printPaymentReceiptHTML(
           display: none !important;
         }
       }
+      @page {
+        size: ${isSmall ? '58mm auto' : '80mm auto'};
+        margin: 0mm !important;
+      }
       @media print {
-        @page {
-          size: ${isSmall ? '58mm auto' : '80mm auto'};
-          margin: 0mm !important;
-        }
         body > :not(#print-only-container) {
           display: none !important;
         }
@@ -1614,6 +1618,10 @@ export function printPaymentReceiptHTML(
         #print-only-container {
           display: none !important;
         }
+      }
+      @page {
+        size: A4;
+        margin: 12mm;
       }
       @media print {
         body > :not(#print-only-container) {
@@ -2108,6 +2116,9 @@ export function downloadPaymentReceiptHTML(
       <title>Recibo #${receiptNum}</title>
       <style>
         ${styles}
+        @page {
+          ${isThermal ? `size: ${isSmall ? '58mm auto' : '80mm auto'}; margin: 0mm;` : `size: A4; margin: 12mm;`}
+        }
         @media print {
           .no-print { display: none !important; }
         }
@@ -2158,11 +2169,11 @@ export function printTestPageHTML(
           display: none !important;
         }
       }
+      @page {
+        size: ${isSmall ? '58mm auto' : '80mm auto'};
+        margin: 0mm !important;
+      }
       @media print {
-        @page {
-          size: ${isSmall ? '58mm auto' : '80mm auto'};
-          margin: 0mm !important;
-        }
         body > :not(#print-only-container) {
           display: none !important;
         }
@@ -2237,6 +2248,10 @@ export function printTestPageHTML(
         #print-only-container {
           display: none !important;
         }
+      }
+      @page {
+        size: A4;
+        margin: 12mm;
       }
       @media print {
         body > :not(#print-only-container) {
