@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8" />
+<title>Sabush Loading Screen Preview</title>
+<style>
+  html, body { margin:0; padding:0; height:100%; background:#050810; }
+  * { box-sizing: border-box; }
+
+  .als-root-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 18% 30%, rgba(0,229,255,0.28), transparent 50%),
+      radial-gradient(circle at 82% 70%, rgba(217,22,159,0.18), transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(0,180,255,0.20), transparent 65%),
+      radial-gradient(circle at 50% 100%, rgba(0,229,255,0.14), transparent 60%);
+  }
+  .als-grid {
+    position: absolute; inset: -50%;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.12) 1px, transparent 1px);
+    background-size: 42px 42px;
+    animation: grid-drift 18s linear infinite;
+    mask-image: radial-gradient(circle at 50% 45%, black 0%, transparent 70%);
+  }
+  @keyframes grid-drift { from { transform: translate(0,0);} to { transform: translate(42px,42px);} }
+  .als-vignette {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 32%, #050810 85%);
+  }
+
+  .als-ring-svg { position:absolute; inset:-40px; overflow:visible; }
+  .als-ring-svg.cw { animation: spin 22s linear infinite; }
+  .als-ring-svg.ccw { animation: spin-rev 30s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes spin-rev { to { transform: rotate(-360deg); } }
+
+  .als-ping {
+    position:absolute; inset:0; border-radius:50%;
+    border:2px solid rgba(0,229,255,0.85);
+    box-shadow: 0 0 18px rgba(0,229,255,0.6);
+    animation: ping 2.8s cubic-bezier(.2,.6,.4,1) infinite;
+  }
+  @keyframes ping { 0%{transform:scale(.55);opacity:1;} 100%{transform:scale(1.9);opacity:0;} }
+
+  .als-hub-glow {
+    position:absolute; inset:6px; border-radius:50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.75), rgba(217,22,159,0.3) 60%, transparent 78%);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.7;transform:scale(.94);} 50%{opacity:1;transform:scale(1.07);} }
+
+  .als-hex {
+    position:absolute; top:50%; left:50%;
+    width:64px; height:64px; margin:-32px;
+    clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+    background: linear-gradient(160deg,#0a1626,#050b14);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 0 36px rgba(0,229,255,0.75), 0 0 60px rgba(217,22,159,0.35);
+  }
+  .als-hex::before {
+    content:""; position:absolute; inset:0; clip-path:inherit; padding:1.6px;
+    background: linear-gradient(160deg,#00e5ff,#d9169f 55%,#00e5ff);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+  }
+  .als-hex-s { font-size:26px; font-weight:900; color:#ffffff; text-shadow:0 0 16px #00e5ff, 0 0 28px #00e5ff; }
+
+  .als-orbit-node {
+    position:absolute; top:50%; left:50%; width:38px; height:38px; margin:-19px;
+    clip-path: polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+    display:flex; align-items:center; justify-content:center;
+    background: linear-gradient(160deg,#0a1626,#050b14);
+    color: var(--node-c,#00e5ff);
+    filter: drop-shadow(0 0 8px var(--node-glow, rgba(0,229,255,0.6)));
+    animation: orbit 16s linear infinite;
+    font-size:14px;
+  }
+  .als-orbit-node::before {
+    content:""; position:absolute; inset:0; clip-path:inherit; padding:1.4px;
+    background: linear-gradient(160deg, var(--node-c,#00e5ff), transparent 55%, var(--node-c,#00e5ff));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+  }
+  @keyframes orbit { from{transform:rotate(0deg) translateX(78px) rotate(0deg);} to{transform:rotate(360deg) translateX(78px) rotate(-360deg);} }
+
+  .als-word-main {
+    font-family: Arial, sans-serif;
+    font-size: 30px; font-weight:900; letter-spacing:.12em; text-transform:uppercase;
+    background: linear-gradient(100deg,#00e5ff 0%,#e8fbff 25%,#d9169f 55%,#00e5ff 80%,#e8fbff 100%);
+    background-size: 300% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation: shine 4.5s linear infinite;
+  }
+  .als-word-tech {
+    font-family: Arial, sans-serif;
+    margin-top:2px; font-size:12px; font-weight:800; letter-spacing:.5em; text-indent:.5em; text-transform:uppercase;
+    background: linear-gradient(100deg,#d9169f 0%,#e8fbff 35%,#00e5ff 60%,#d9169f 100%);
+    background-size:260% auto; -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation: shine 3.6s linear infinite reverse;
+  }
+  @keyframes shine { to { background-position: -300% center; } }
+
+  .als-bar-fill {
+    position:absolute; top:0; bottom:0; width:40%; border-radius:999px;
+    background: linear-gradient(90deg, transparent, #00e5ff, #e8fbff, #d9169f, transparent);
+    animation: sweep 1.4s ease-in-out infinite;
+  }
+  @keyframes sweep { 0%{left:-45%;} 100%{left:105%;} }
+
+  .msg { font-family: Arial, sans-serif; margin-top:12px; font-size:12px; font-weight:600; color:#5fd8e8; text-align:center; animation: fade 1.6s ease-in-out infinite; }
+  @keyframes fade { 0%,100%{opacity:.5;} 50%{opacity:1;} }
+</style>
+</head>
+<body>
+<div style="height:100vh;width:100vw;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;background:#050810;">
+  <div class="als-root-bg"></div>
+  <div class="als-grid"></div>
+  <div class="als-vignette"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;z-index:10;">
+    <div style="position:relative;width:180px;height:180px;">
+      <svg class="als-ring-svg cw" viewBox="0 0 260 260">
+        <circle cx="130" cy="130" r="120" fill="none" stroke="rgba(0,229,255,0.25)" stroke-width="1.2" stroke-dasharray="2 9" />
+        <circle cx="130" cy="130" r="120" fill="none" stroke="#00e5ff" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="16 740" style="filter:drop-shadow(0 0 6px #00e5ff)" />
+      </svg>
+      <svg class="als-ring-svg ccw" viewBox="0 0 260 260">
+        <circle cx="130" cy="130" r="104" fill="none" stroke="rgba(217,22,159,0.2)" stroke-width="1" stroke-dasharray="1 12" />
+        <circle cx="130" cy="130" r="104" fill="none" stroke="#d9169f" stroke-width="2" stroke-linecap="round" stroke-dasharray="12 640" style="filter:drop-shadow(0 0 6px #d9169f)" />
+      </svg>
+
+      <div class="als-ping"></div>
+      <div class="als-ping" style="animation-delay:0.9s"></div>
+      <div class="als-ping" style="animation-delay:1.8s"></div>
+      <div class="als-hub-glow"></div>
+
+      <div class="als-orbit-node" style="--node-c:#00e5ff; --node-glow:rgba(0,229,255,0.6); animation-delay:0s;">&#128722;</div>
+      <div class="als-orbit-node" style="--node-c:#d9169f; --node-glow:rgba(217,22,159,0.6); animation-delay:-4s;">&#128202;</div>
+      <div class="als-orbit-node" style="--node-c:#e8fbff; --node-glow:rgba(232,251,255,0.5); animation-delay:-8s;">&#128179;</div>
+      <div class="als-orbit-node" style="--node-c:#5fd8e8; --node-glow:rgba(125,211,224,0.6); animation-delay:-12s;">&#9881;</div>
+
+      <div class="als-hex"><span class="als-hex-s">S</span></div>
+    </div>
+
+    <div style="text-align:center;">
+      <div class="als-word-main">SABUSH</div>
+      <div class="als-word-tech">TECH</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
