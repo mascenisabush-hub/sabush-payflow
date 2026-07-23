@@ -1913,6 +1913,30 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
   // product table/card in this file so there's a single source of truth for
   // which fields the edit form expects.
   const openProductEditor = (product: any) => {
+    // If this product's stock breakdown has a negative bucket (e.g. -10 Un) —
+    // a legacy symptom of old sales deducting from one bucket without breaking
+    // open a sealed Caixa/Embalagem first — repair it before showing the form,
+    // so the person never sees a confusing negative count. Total stock is
+    // unchanged; only how it's split across Cx/Emb/Un is corrected.
+    const hasNegativeBucket = Number(product.stockCx || 0) < 0 || Number(product.stockEmb || 0) < 0 || Number(product.stockUn || 0) < 0;
+    const stockToUse = hasNegativeBucket ? repairNegativeStockBuckets(product) : product;
+    if (hasNegativeBucket && profile?.businessId) {
+      (async () => {
+        try {
+          const { updateDoc, doc } = await import('firebase/firestore');
+          await updateDoc(doc(db, `businesses/${profile.businessId}/products`, product.id), {
+            stockCx: stockToUse.stockCx,
+            stockEmb: stockToUse.stockEmb,
+            stockUn: stockToUse.stockUn,
+            updatedAt: serverTimestamp()
+          });
+          toast.success('Stock físico reorganizado automaticamente (uma Caixa/Embalagem selada foi aberta) — a quantidade total não mudou.');
+        } catch {
+          // Non-fatal — the form still shows the corrected numbers even if the background save fails.
+        }
+      })();
+    }
+
     setEditingProduct(product);
     setActiveTab('add');
     setNewProduct({
@@ -1942,9 +1966,9 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
       description: product.description || '',
       managerNotes: product.managerNotes || '',
       stockLevel: product.stockLevel !== undefined && product.stockLevel !== null ? product.stockLevel : '',
-      stockCx: product.stockCx !== undefined && product.stockCx !== null ? product.stockCx : '',
-      stockEmb: product.stockEmb !== undefined && product.stockEmb !== null ? product.stockEmb : '',
-      stockUn: product.stockUn !== undefined && product.stockUn !== null ? product.stockUn : '',
+      stockCx: stockToUse.stockCx !== undefined && stockToUse.stockCx !== null ? stockToUse.stockCx : '',
+      stockEmb: stockToUse.stockEmb !== undefined && stockToUse.stockEmb !== null ? stockToUse.stockEmb : '',
+      stockUn: stockToUse.stockUn !== undefined && stockToUse.stockUn !== null ? stockToUse.stockUn : '',
       lowStockThreshold: product.lowStockThreshold !== undefined && product.lowStockThreshold !== null ? product.lowStockThreshold : '',
       category: product.category || '',
       supplier: product.supplier || '',
