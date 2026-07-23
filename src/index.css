@@ -122,6 +122,17 @@
   --brand-gold-light: #FBF3E0;
 }
 
+/* Make the whole system read bolder by default. font-weight is an inherited
+   CSS property, so this only affects text that doesn't already carry its own
+   explicit Tailwind weight utility (font-normal/medium/semibold/bold/black,
+   etc.) — those keep winning because a class selector is more specific than
+   this bare element selector. Everything else (plain <p>, <span>, <td>, form
+   labels, placeholder-weight text with no utility at all) steps up from the
+   browser's default 400 to 600. */
+html, body {
+  font-weight: 600;
+}
+
 /* Map existing blue Tailwind utilities to dynamic brand colors */
 .bg-blue-600, .bg-blue-500 {
   background-color: var(--brand-color) !important;
