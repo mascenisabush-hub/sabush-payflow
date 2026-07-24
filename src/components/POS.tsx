@@ -81,8 +81,7 @@ const CartQuantityInput: React.FC<CartQuantityInputProps> = ({ item, updateCartQ
     setLocalVal(item.quantity.toString());
   }, [item.quantity]);
 
-  const handleCommit = () => {
-    const parsed = parseFloat(localVal);
+  const commitQty = (parsed: number) => {
     if (isNaN(parsed) || parsed < 0) {
       setLocalVal(item.quantity.toString());
       toast.error("Quantidade inválida!");
@@ -97,6 +96,10 @@ const CartQuantityInput: React.FC<CartQuantityInputProps> = ({ item, updateCartQ
     updateCartQuantity(item.id, item.selectedUnit, parsed, true);
   };
 
+  const handleCommit = () => {
+    commitQty(parseFloat(localVal));
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.currentTarget.blur();
@@ -108,16 +111,34 @@ const CartQuantityInput: React.FC<CartQuantityInputProps> = ({ item, updateCartQ
   };
 
   return (
-    <input
-      type="number"
-      step="any"
-      value={localVal}
-      onChange={e => setLocalVal(e.target.value)}
-      onBlur={handleCommit}
-      onKeyDown={handleKeyDown}
-      onFocus={handleFocus}
-      className="w-[44px] h-[24px] text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-    />
+    <div className="flex items-center gap-0.5">
+      <button
+        type="button"
+        onClick={() => commitQty(Math.max(0, item.quantity - 1))}
+        className="w-5 h-6 flex items-center justify-center rounded-md bg-blue-50 hover:bg-blue-100 text-blue-700 transition-colors cursor-pointer shrink-0"
+        title="Diminuir quantidade"
+      >
+        <Minus size={10} className="stroke-[3]" />
+      </button>
+      <input
+        type="number"
+        step="any"
+        value={localVal}
+        onChange={e => setLocalVal(e.target.value)}
+        onBlur={handleCommit}
+        onKeyDown={handleKeyDown}
+        onFocus={handleFocus}
+        className="w-[38px] h-6 text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      />
+      <button
+        type="button"
+        onClick={() => commitQty(item.quantity + 1)}
+        className="w-5 h-6 flex items-center justify-center rounded-md bg-blue-50 hover:bg-blue-100 text-blue-700 transition-colors cursor-pointer shrink-0"
+        title="Aumentar quantidade"
+      >
+        <Plus size={10} className="stroke-[3]" />
+      </button>
+    </div>
   );
 };
 
@@ -127,6 +148,7 @@ interface CartItemRowProps {
   updateCartQuantity: (id: string, unit: string, qty: number, allowZero?: boolean) => void;
   handleRemoveClick: (id: string, unit: string) => void;
   onPriceClick: (item: any) => void;
+  isAlt?: boolean;
 }
 
 const CartItemRow = React.memo<CartItemRowProps>(({
@@ -134,31 +156,41 @@ const CartItemRow = React.memo<CartItemRowProps>(({
   prices,
   updateCartQuantity,
   handleRemoveClick,
-  onPriceClick
+  onPriceClick,
+  isAlt
 }) => {
   return (
     <div 
       className={cn(
-        "grid grid-cols-12 gap-2 items-center py-1 px-3 hover:bg-blue-50/40 transition-colors border-t-[0.5px] border-blue-100/50 first:border-t-0",
-        item.hasStockConflict ? "bg-rose-50 border-rose-250 hover:bg-rose-50/90" : ""
+        "grid grid-cols-12 gap-2 items-center py-1.5 px-3 transition-colors cursor-default",
+        item.hasStockConflict ? "bg-rose-50 hover:bg-rose-50/90" : isAlt ? "bg-slate-50/70 hover:bg-blue-50/50" : "bg-white hover:bg-blue-50/50"
       )}
     >
-      {/* Product Name & Details */}
-      <div className="col-span-5 flex flex-col text-left min-w-0 pr-1">
-        <span className="text-xs font-black text-blue-950 truncate leading-tight">
-          {item.name}
-        </span>
-        <span className="text-[9px] text-blue-600 font-mono font-bold mt-0.5">
-          Unidade: {item.selectedUnit}
-        </span>
-        {item.hasStockConflict && (
-          <span className="text-[9px] font-bold text-rose-600 flex items-center gap-1 mt-0.5 animate-pulse">
-            ⚠️ Apenas {item.availableStock} em stock!
+      {/* Product Image + Name & Details */}
+      <div className="col-span-5 flex items-center gap-2 text-left min-w-0 pr-1">
+        <div className="w-7 h-7 rounded-md bg-slate-100 border border-slate-150 shrink-0 overflow-hidden flex items-center justify-center">
+          {item.imageUrl ? (
+            <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+          ) : (
+            <Package size={12} className="text-slate-350" />
+          )}
+        </div>
+        <div className="flex flex-col min-w-0">
+          <span className="text-xs font-black text-blue-950 truncate leading-tight">
+            {item.name}
           </span>
-        )}
+          <span className="text-[9px] text-slate-400 font-mono font-bold mt-0.5 truncate">
+            {item.sku ? `SKU: ${item.sku}` : `Unidade: ${item.selectedUnit}`}
+          </span>
+          {item.hasStockConflict && (
+            <span className="text-[9px] font-bold text-rose-600 flex items-center gap-1 mt-0.5 animate-pulse">
+              ⚠️ Apenas {item.availableStock} em stock!
+            </span>
+          )}
+        </div>
       </div>
 
-      {/* Quantity Input Field */}
+      {/* Quantity Controls: [-] [editable input] [+] */}
       <div className="col-span-3 flex items-center justify-center">
         <CartQuantityInput 
           item={item} 
@@ -206,7 +238,8 @@ const CartItemRow = React.memo<CartItemRowProps>(({
     prevProps.item.manualDiscountValue === nextProps.item.manualDiscountValue &&
     prevProps.item.hasStockConflict === nextProps.item.hasStockConflict &&
     prevProps.prices.finalUnitPrice === nextProps.prices.finalUnitPrice &&
-    prevProps.prices.total === nextProps.prices.total
+    prevProps.prices.total === nextProps.prices.total &&
+    prevProps.isAlt === nextProps.isAlt
   );
 });
 
@@ -450,6 +483,7 @@ export default function POS() {
   // Customer Notes & Modals
   const [isQuickCustomerOpen, setIsQuickCustomerOpen] = useState(false);
   const [isBrowseCustomersOpen, setIsBrowseCustomersOpen] = useState(false);
+  const [showCustomerMenu, setShowCustomerMenu] = useState(false);
   const [customerSearch, setCustomerSearch] = useState('');
   const [newCustName, setNewCustName] = useState('');
   const [newCustPhone, setNewCustPhone] = useState('');
@@ -3537,260 +3571,166 @@ export default function POS() {
     <div className="flex flex-col w-full h-full bg-[#FFFFFF] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
       
       {/* ============================================================ */}
-      {/* POS HEADER — compact 3-row enterprise toolbar                */}
-      {/* Row 1: Search / Scanner / Quick Mode / Help / Shift           */}
-      {/* Row 2: Customer toolbar                                      */}
-      {/* Row 3: Operational status badges                             */}
+      {/* POS TOOLBAR — single compact row                              */}
+      {/* Search / Catalog / Scanner / Customer / Status badges         */}
       {/* ============================================================ */}
-      <div className="flex flex-col gap-1.5 shrink-0">
-
-        {/* ROW 1 — Search is the focal point */}
-        <div className="flex items-center gap-2 h-9">
-          {/* Main search field (~68% width) */}
-          <div className="relative h-full min-w-0" style={{ flex: '1 1 68%' }}>
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 pointer-events-none" size={15} />
-            <input
-              ref={searchInputRef}
-              type="text"
-              placeholder="Pesquisar por nome, código de barras ou SKU..."
-              value={searchTerm}
-              onChange={e => setSearchTerm(e.target.value)}
-              onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
-              className="w-full h-9 pl-9 pr-8 bg-white border border-slate-200 rounded-lg text-blue-900 placeholder-slate-400 text-[12.5px] outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all font-sans"
-            />
-            {searchTerm && (
-              <button
-                type="button"
-                onClick={() => setSearchTerm('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
-              >
-                <X size={13} />
-              </button>
-            )}
-
-            {/* Auto Dropdown listing matching search as types */}
-            {isSearchFocused && filteredSearchProducts.length > 0 && (
-              <div className="absolute left-0 right-0 top-10 bg-white text-blue-900 border border-slate-200 rounded-lg shadow-2xl z-50 max-h-[300px] overflow-y-auto overflow-x-hidden font-sans">
-                {filteredSearchProducts.map(p => (
-                  <div 
-                    key={p.id}
-                    onClick={() => {
-                      addToCart(p);
-                      setSearchTerm('');
-                    }}
-                    className="flex justify-between items-center px-3 py-2 hover:bg-blue-50/50 border-b border-blue-50 cursor-pointer transition-colors"
-                  >
-                    <div className="flex flex-col pr-2 min-w-0 flex-1">
-                      <span className="text-[11px] font-black truncate">{p.name}</span>
-                      <span className="text-[9px] text-blue-600 truncate">SKU: {p.sku || 'N/A'} | Barcode: {p.barcode || 'N/A'}</span>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <span className="text-[11px] font-bold text-amber-600">{(p.price || 0).toLocaleString()} MT</span>
-                      <span className="block text-[8px] text-blue-400 mt-0.5">Stock: {p.stockLevel || 0}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Scanner — prominent primary action */}
-          <button
-            type="button"
-            onClick={() => setIsCameraActive(!isCameraActive)}
-            className={cn(
-              "h-9 px-3 rounded-lg flex items-center gap-1.5 shrink-0 transition-all cursor-pointer relative font-sans",
-              isCameraActive ? "bg-[#D4AF37] text-white" : "bg-[#0B1F4D] text-white hover:opacity-90"
-            )}
-            title="Câmara Scanner"
-          >
-            <Camera size={15} />
-            <span className="hidden lg:inline text-[11px] font-bold">Scanner</span>
-            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-emerald-400" title="Modo USB escuta automática ativo" />
-          </button>
-
-          {/* Quick Mode toggle — buffer/keyboard scan status */}
-          <button
-            type="button"
-            onClick={() => setIsCheatSheetOpen(true)}
-            className={cn(
-              "h-9 px-2.5 rounded-lg flex items-center gap-1.5 shrink-0 transition-all cursor-pointer border font-sans",
-              inputBuffer ? "bg-[#D4AF37]/10 border-[#D4AF37]/40 text-[#B8952E]" : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
-            )}
-            title="Modo Rápido (digite SKU/QTD, Enter para confirmar)"
-          >
-            <Zap size={14} className={inputBuffer ? "text-[#D4AF37]" : ""} />
-            <span className="hidden xl:inline text-[10px] font-black uppercase tracking-wider">
-              {inputBuffer ? inputBuffer : 'Quick'}
-            </span>
-          </button>
-
-          {/* Help — icon button */}
-          <button
-            type="button"
-            onClick={() => setIsCheatSheetOpen(true)}
-            className="h-9 w-9 rounded-lg border border-slate-200 text-slate-500 hover:text-[#0B1F4D] hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer"
-            title="Ajuda / Atalhos de Teclado (?)"
-          >
-            <HelpCircle size={15} />
-          </button>
-
-          {/* Shift status — compact badge */}
-          <button
-            type="button"
-            onClick={() => {
-              setIsShiftModalOpen(true);
-              setIsClosingShiftForm(false);
-            }}
-            className={cn(
-              "h-9 px-2.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shrink-0 font-sans text-[10px] font-black uppercase tracking-wider",
-              currentShift ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100/70" : "bg-rose-50 text-rose-700 hover:bg-rose-100/70"
-            )}
-            title="Estado do Turno de Caixa"
-          >
-            <div className={cn("w-1.5 h-1.5 rounded-full", currentShift ? "bg-emerald-500 animate-pulse" : "bg-rose-500")} />
-            <span className="hidden md:inline">
-              {currentShift
-                ? new Date(currentShift.openedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                : "Fechado"}
-            </span>
-          </button>
-        </div>
-
-        {/* Quick Sale feedback strip — only visible while actively typing or right after an action */}
-        {(inputBuffer || lastActionMessage) && (
-          <div className="flex items-center gap-2 px-3 h-6 rounded-md bg-[#0B1F4D] text-white text-[10.5px] shrink-0 font-sans">
-            {inputBuffer ? (
-              <>
-                <span className="text-blue-300 font-medium">Comando:</span>
-                <span className="font-mono bg-white/10 text-white px-2 py-0.5 rounded text-[11px] font-black select-all tracking-wider">
-                  {inputBuffer}
-                </span>
-                <span className="text-[9.5px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
-                  [Enter: confirmar • Esc: limpar]
-                </span>
-              </>
-            ) : (
-              <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-                <span className="text-blue-300 font-medium">Última ação:</span>
-                <span>{lastActionMessage}</span>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* ROW 2 — Customer toolbar */}
-        <div className="flex items-center justify-between gap-2 h-9">
-          <div className="flex items-center gap-1.5 flex-1 min-w-0">
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest shrink-0 hidden sm:inline">Cliente</span>
-
+      <div className="flex items-center gap-2 h-10 shrink-0">
+        {/* Search (~65% width) — the focal point */}
+        <div className="relative h-full min-w-0" style={{ flex: '1 1 65%' }}>
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 pointer-events-none" size={15} />
+          <input
+            ref={searchInputRef}
+            type="text"
+            placeholder="Pesquisar produto por nome, código de barras ou SKU..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            onFocus={() => setIsSearchFocused(true)}
+            onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
+            className="w-full h-10 pl-9 pr-8 bg-white border border-slate-200 rounded-lg text-blue-900 placeholder-slate-400 text-[12.5px] outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all font-sans"
+          />
+          {searchTerm && (
             <button
               type="button"
-              onClick={() => setIsBrowseCustomersOpen(true)}
-              className="h-9 px-2.5 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/40 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold text-[#0B1F4D] shrink-0 min-w-0 max-w-[220px] font-sans"
+              onClick={() => setSearchTerm('')}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
             >
-              {selectedCustomerId === 'Walk-in' ? (
-                <span className="uppercase tracking-wide">Walk-in</span>
-              ) : (
-                <>
-                  <span className="truncate">{selectedCust?.name}</span>
-                  {selectedCust?.phone && (
-                    <span className="text-[10px] text-blue-500 font-medium hidden sm:inline shrink-0">({selectedCust?.phone})</span>
-                  )}
-                </>
-              )}
-              <ChevronDown size={12} className="text-slate-400 shrink-0" />
+              <X size={13} />
             </button>
+          )}
 
-            {selectedCustomerId !== 'Walk-in' && selectedCust?.outstandingBalance > 0 && (
-              <span className="bg-amber-50 text-amber-800 border border-amber-200 font-black text-[9px] uppercase px-1.5 py-1 rounded-md shrink-0 hidden sm:inline">
-                Dívida: {selectedCust.outstandingBalance.toLocaleString()} MT
-              </span>
+          {/* Auto Dropdown listing matching search as types */}
+          {isSearchFocused && filteredSearchProducts.length > 0 && (
+            <div className="absolute left-0 right-0 top-11 bg-white text-blue-900 border border-slate-200 rounded-lg shadow-2xl z-50 max-h-[300px] overflow-y-auto overflow-x-hidden font-sans">
+              {filteredSearchProducts.map(p => (
+                <div 
+                  key={p.id}
+                  onClick={() => {
+                    addToCart(p);
+                    setSearchTerm('');
+                  }}
+                  className="flex justify-between items-center px-3 py-2 hover:bg-blue-50/50 border-b border-blue-50 cursor-pointer transition-colors"
+                >
+                  <div className="flex flex-col pr-2 min-w-0 flex-1">
+                    <span className="text-[11px] font-black truncate">{p.name}</span>
+                    <span className="text-[9px] text-blue-600 truncate">SKU: {p.sku || 'N/A'} | Barcode: {p.barcode || 'N/A'}</span>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <span className="text-[11px] font-bold text-amber-600">{(p.price || 0).toLocaleString()} MT</span>
+                    <span className="block text-[8px] text-blue-400 mt-0.5">Stock: {p.stockLevel || 0}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Catalog — icon only */}
+        <button
+          type="button"
+          onClick={() => setIsCatalogOpen(true)}
+          className="h-10 w-10 rounded-lg border border-slate-200 text-[#0B1F4D] hover:bg-blue-50 flex items-center justify-center shrink-0 transition-all cursor-pointer"
+          title="Catálogo de Produtos"
+        >
+          <Package size={16} />
+        </button>
+
+        {/* Scanner — icon only, keeps camera-scan feature intact */}
+        <button
+          type="button"
+          onClick={() => setIsCameraActive(!isCameraActive)}
+          className={cn(
+            "h-10 w-10 rounded-lg flex items-center justify-center shrink-0 relative transition-all cursor-pointer",
+            isCameraActive ? "bg-[#D4AF37] text-white" : "border border-slate-200 text-[#0B1F4D] hover:bg-blue-50"
+          )}
+          title="Câmara Scanner (leitura de código de barras)"
+        >
+          <Camera size={16} />
+          <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-emerald-400" title="Modo USB escuta automática ativo" />
+        </button>
+
+        {/* Customer — single icon with popover */}
+        <div className="relative shrink-0">
+          <button
+            type="button"
+            onClick={() => setShowCustomerMenu(v => !v)}
+            className={cn(
+              "h-10 px-2.5 rounded-lg border flex items-center gap-1.5 transition-all cursor-pointer",
+              selectedCustomerId !== 'Walk-in' ? "border-[#D4AF37]/40 bg-[#D4AF37]/10 text-[#B8952E]" : "border-slate-200 text-[#0B1F4D] hover:bg-blue-50"
             )}
-
-            {selectedCustomerId !== 'Walk-in' && (
-              <button
-                onClick={() => {
-                  setSelectedCustomerId('Walk-in');
-                  setSaleMode('dinheiro');
-                }}
-                className="text-slate-400 hover:text-rose-600 transition-all p-1 rounded-full hover:bg-rose-50 shrink-0 cursor-pointer"
-                title="Desvincular Cliente"
-              >
-                <X size={12} />
-              </button>
-            )}
-
+            title="Cliente"
+          >
+            <User size={16} />
             {selectedCustomerId !== 'Walk-in' && selectedCust && (
-              <button
-                type="button"
-                onClick={() => setIsHistoryOpen(true)}
-                className="h-9 px-2 rounded-lg font-bold text-[10px] flex items-center gap-1 text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer shrink-0 font-sans"
-              >
-                <History size={13} />
-                <span className="hidden md:inline">Histórico</span>
-              </button>
+              <span className="text-[10px] font-bold max-w-[70px] truncate hidden sm:inline">{selectedCust.name}</span>
             )}
+          </button>
 
-            {/* Sale Mode (Dinheiro / Fiado / Parcial) */}
-            {selectedCustomerId !== 'Walk-in' && (
-              <div className="flex items-center bg-slate-50 p-0.5 rounded-lg border border-slate-200 h-9 shrink-0">
-                <button
-                  type="button"
-                  onClick={() => setSaleMode('dinheiro')}
-                  className={cn(
-                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+          {showCustomerMenu && (
+            <div className="absolute z-30 top-full mt-1.5 right-0 w-64 bg-white border border-slate-200 rounded-xl shadow-lg p-2 text-left font-sans">
+              <div className="px-2 pt-1 pb-1.5">
+                <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 block mb-1">Cliente Atual</span>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold text-[#0B1F4D] truncate">
+                    {selectedCustomerId === 'Walk-in' ? 'Walk-In' : selectedCust?.name}
+                  </span>
+                  {selectedCustomerId !== 'Walk-in' && selectedCust?.outstandingBalance > 0 && (
+                    <span className="text-[9px] font-black text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded shrink-0">
+                      Dívida: {selectedCust.outstandingBalance.toLocaleString()} MT
+                    </span>
                   )}
-                >
-                  Dinheiro
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSaleMode('credito')}
-                  className={cn(
-                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'credito' ? "bg-[#D4AF37] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
-                  )}
-                >
-                  Fiado
-                </button>
+                </div>
+              </div>
+              <div className="h-px bg-slate-100 my-1" />
+              {selectedCustomerId !== 'Walk-in' && (
                 <button
                   type="button"
                   onClick={() => {
-                    setSaleMode('parcial');
-                    setPartialAmountPaid('');
+                    setSelectedCustomerId('Walk-in');
+                    setSaleMode('dinheiro');
+                    setShowCustomerMenu(false);
                   }}
-                  className={cn(
-                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'parcial' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
-                  )}
+                  className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-50 text-xs font-bold text-slate-600 cursor-pointer transition-colors"
                 >
-                  Parcial
+                  Voltar para Walk-In
                 </button>
-              </div>
-            )}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setIsQuickCustomerOpen(true)}
-            className="h-9 px-3 rounded-lg bg-[#D4AF37] hover:bg-[#B8952E] text-white font-black text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shrink-0 font-sans border-none"
-          >
-            <Plus size={13} /> <span className="hidden sm:inline">Novo Cliente</span><span className="sm:hidden">Novo</span>
-          </button>
+              )}
+              {selectedCustomerId !== 'Walk-in' && selectedCust && (
+                <button
+                  type="button"
+                  onClick={() => { setIsHistoryOpen(true); setShowCustomerMenu(false); }}
+                  className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-slate-50 text-xs font-bold text-slate-600 cursor-pointer flex items-center gap-1.5 transition-colors"
+                >
+                  <History size={12} /> Histórico do Cliente
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => { setIsBrowseCustomersOpen(true); setShowCustomerMenu(false); }}
+                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-blue-50 text-xs font-bold text-blue-700 cursor-pointer flex items-center gap-1.5 transition-colors"
+              >
+                <Users size={12} /> Procurar Cliente
+              </button>
+              <button
+                type="button"
+                onClick={() => { setIsQuickCustomerOpen(true); setShowCustomerMenu(false); }}
+                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-[#D4AF37]/10 text-xs font-black text-[#B8952E] cursor-pointer flex items-center gap-1.5 transition-colors"
+              >
+                <Plus size={12} /> Adicionar Novo Cliente
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* ROW 3 — operational status badges (compact, hidden when not relevant) */}
-        <div className="flex items-center gap-1.5 h-6 overflow-x-auto no-scrollbar shrink-0">
-          {/* Connectivity */}
+        <div className="w-px h-6 bg-slate-200 shrink-0 hidden sm:block" />
+
+        {/* Status badges — compact, scrollable if space runs out */}
+        <div className="flex items-center gap-1.5 shrink-0 overflow-x-auto no-scrollbar max-w-[40%]">
           {isSyncing ? (
             <span className="h-6 px-2 bg-blue-50 text-blue-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
-              <RefreshCw size={9} className="animate-spin" /> A sincronizar
+              <RefreshCw size={9} className="animate-spin" /> Sinc.
             </span>
           ) : !isOnline ? (
-            <span className="h-6 px-2 bg-rose-50 text-rose-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 relative">
+            <span className="h-6 px-2 bg-rose-50 text-rose-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
               🔴 Offline
               {pendingSales.filter(s => s.status === 'pending').length > 0 && (
                 <span className="bg-rose-600 text-white font-extrabold px-1 rounded-full text-[8px]">
@@ -3805,7 +3745,7 @@ export default function POS() {
               className="h-6 px-2 bg-amber-50 hover:bg-amber-100/80 text-amber-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
               title="Sincronizar Vendas Pendentes"
             >
-              <RefreshCw size={9} /> {pendingSales.filter(s => s.status === 'pending').length} Pendentes
+              <RefreshCw size={9} /> {pendingSales.filter(s => s.status === 'pending').length} Pend.
             </button>
           ) : (
             <span className="h-6 px-2 bg-emerald-50 text-emerald-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
@@ -3813,23 +3753,18 @@ export default function POS() {
             </span>
           )}
 
-          {/* Shift open (only when open, closed state already shown prominently in Row 1) */}
-          {currentShift && (
-            <span className="h-6 px-2 bg-emerald-50 text-emerald-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
-              🟢 Turno Aberto
-            </span>
-          )}
-
-          {/* Catalog */}
           <button
             type="button"
-            onClick={() => setIsCatalogOpen(true)}
-            className="h-6 px-2 bg-blue-50 hover:bg-blue-100/80 text-blue-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
+            onClick={() => { setIsShiftModalOpen(true); setIsClosingShiftForm(false); }}
+            className={cn(
+              "h-6 px-2 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all",
+              currentShift ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100/70" : "bg-rose-50 text-rose-700 hover:bg-rose-100/70"
+            )}
+            title="Estado do Turno de Caixa"
           >
-            🔵 Catálogo
+            {currentShift ? '🟢 Turno Aberto' : '🔴 Turno Fechado'}
           </button>
 
-          {/* Sale channel — Retalho / Grosso */}
           <button
             type="button"
             onClick={() => handleToggleSaleType(saleType === 'retail' ? 'wholesale' : 'retail')}
@@ -3839,7 +3774,6 @@ export default function POS() {
             {saleType === 'retail' ? '🟡 Retalho' : '🟡 Grosso'}
           </button>
 
-          {/* Returns & Refunds */}
           <button
             type="button"
             onClick={() => setIsReturnModalOpen(true)}
@@ -3849,7 +3783,6 @@ export default function POS() {
             🔴 Devoluções
           </button>
 
-          {/* Failed sales needing review */}
           {pendingSales.filter(s => s.status === 'failed').length > 0 && (
             <button
               type="button"
@@ -3860,8 +3793,105 @@ export default function POS() {
               ⚠️ Rever ({pendingSales.filter(s => s.status === 'failed').length})
             </button>
           )}
+
+          <button
+            type="button"
+            onClick={() => setIsCheatSheetOpen(true)}
+            className="h-6 w-6 rounded-full text-slate-400 hover:text-[#0B1F4D] hover:bg-slate-50 flex items-center justify-center shrink-0 cursor-pointer transition-all"
+            title="Ajuda / Atalhos de Teclado (?)"
+          >
+            <HelpCircle size={13} />
+          </button>
         </div>
       </div>
+
+      {/* Quick Sale feedback strip — only visible while actively typing or right after an action */}
+      {(inputBuffer || lastActionMessage) && (
+        <div className="flex items-center gap-2 px-3 h-6 rounded-md bg-[#0B1F4D] text-white text-[10.5px] shrink-0 font-sans">
+          {inputBuffer ? (
+            <>
+              <span className="text-blue-300 font-medium">Comando:</span>
+              <span className="font-mono bg-white/10 text-white px-2 py-0.5 rounded text-[11px] font-black select-all tracking-wider">
+                {inputBuffer}
+              </span>
+              <span className="text-[9.5px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
+                [Enter: confirmar • Esc: limpar]
+              </span>
+            </>
+          ) : (
+            <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+              <span className="text-blue-300 font-medium">Última ação:</span>
+              <span>{lastActionMessage}</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* CAMERA SCANNER PANEL */}
+      <AnimatePresence>
+        {isCameraActive && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="bg-[#0B1F4D] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
+          >
+            <button 
+              onClick={() => setIsCameraActive(false)}
+              className="absolute top-2 right-2 p-1 rounded-full hover:bg-white/10 text-blue-200 hover:text-white transition-colors cursor-pointer"
+            >
+              <X size={14} />
+            </button>
+
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-amber-400 mb-2">Leitor de Câmara Integrado</h3>
+
+            {/* Viewfinder elements layout */}
+            <div className="relative w-72 h-36 bg-[#0B1F4D] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center">
+              <video id="scanner-preview" className="w-full h-full object-cover" playsInline />
+              
+              {/* Orange viewfinder corner brackets */}
+              <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-500 rounded-tl"></div>
+              <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-500 rounded-tr"></div>
+              <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-500 rounded-bl"></div>
+              <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-500 rounded-br"></div>
+
+              {/* Glowing vertical laser scan animation line */}
+              <div className="absolute left-4 right-4 h-0.5 bg-amber-400 rounded opacity-85 shadow-[0_0_6px_3px_rgba(249,115,22,0.5)] animate-bounce select-none pointer-events-none"></div>
+
+              {/* Live Scanner Banner updates */}
+              {detectionBanner && (
+                <div className="absolute bottom-2 left-2 right-2 bg-amber-500 text-blue-950 text-center text-[9px] font-extrabold uppercase py-0.5 rounded shadow-md animate-pulse">
+                  {detectionBanner}
+                </div>
+              )}
+            </div>
+
+            {/* Flash & Inputs controls */}
+            <div className="flex items-center gap-3 mt-2 w-72 justify-between">
+              {cameras.length > 1 && (
+                <select
+                  value={selectedCameraId}
+                  onChange={(e) => setSelectedCameraId(e.target.value)}
+                  className="bg-[#0B1F4D] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#EEF2FF] focus:border-amber-500 h-6"
+                >
+                  {cameras.map((d: any, idx) => (
+                    <option key={d.deviceId} value={d.deviceId}>Cam {idx + 1}</option>
+                  ))}
+                </select>
+              )}
+              
+              <button
+                type="button"
+                onClick={() => setIsFlashOn(!isFlashOn)}
+                className="h-6 px-2 bg-[#0B1F4D] hover:bg-[#0B1F4D] border border-blue-500/30 text-[#EEF2FF] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer"
+              >
+                <Zap size={10} className={cn(isFlashOn ? "text-amber-400 animate-pulse" : "text-white")} />
+                {isFlashOn ? 'Lanterna On' : 'Lanterna'}
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* CAMERA SCANNER PANEL */}
       <AnimatePresence>
@@ -3930,10 +3960,10 @@ export default function POS() {
       </AnimatePresence>
 
 {/* MAIN CONTENT AREA: EXPANDED CART PANEL (Takes full width) */}
-      <div className="flex-1 flex flex-col overflow-hidden min-h-0 min-w-0 mt-1">
+      <div className="flex-1 flex flex-col overflow-hidden min-h-0 min-w-0">
         
-        {/* EXPANDED CART PANEL - Cream themed background. Mobile: tabbed. Desktop (md+): permanent split view. */}
-        <div className="flex-1 bg-[#FFFFFF]/20 rounded-3xl border border-blue-200 flex flex-col overflow-hidden shadow-sm font-sans relative">
+        {/* EXPANDED CART PANEL - Mobile: tabbed. Desktop (md+): permanent split view. */}
+        <div className="flex-1 bg-white rounded-xl border border-slate-200 flex flex-col overflow-hidden shadow-sm font-sans relative">
           
 {/* PERSISTENT SUMMARY STRIP (Always visible) */}
           <div className="bg-white px-3 py-1.5 flex items-center justify-between shrink-0 border-b border-blue-200 select-none">
@@ -4005,57 +4035,49 @@ export default function POS() {
                     transition={{ duration: 0.15 }}
                     className="flex-1 flex flex-col min-h-0 overflow-hidden"
                   >
-{/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0B1F4D]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
-                    <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
-                    <div className="flex items-center gap-1">
-                      {/* Suspended carts list button */}
-                      <button
-                        type="button"
-                        onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#0B1F4D] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
-                        title="Ver vendas em espera"
-                      >
-                        <span>⏳ Em Espera</span>
-                        {suspendedCarts.length > 0 && (
-                          <span className="bg-amber-400 text-blue-950 text-[8px] font-black px-1 py-0.2 rounded-full leading-none animate-bounce">
-                            {suspendedCarts.length}
-                          </span>
-                        )}
-                      </button>
-
-                      {/* Put on hold button */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (cart.length === 0) {
-                            toast.error("O carrinho está vazio.");
-                            return;
-                          }
-                          setSuspenseCartLabel('');
-                          setIsSuspenseLabelModalOpen(true);
-                        }}
-                        disabled={cart.length === 0}
-                        className="px-2 py-1 bg-emerald-700 text-white hover:bg-emerald-850 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer border-none"
-                        title="Colocar venda em espera"
-                      >
-                        <span>➕ Suspender</span>
-                      </button>
-
-                      {/* Trash icon (🗑️) at the top right of this header to clear cart */}
-                      <button
-                        onClick={clearCart}
-                        disabled={cart.length === 0}
-                        title="Limpar de imediato toda a cesta"
-                        className="p-1 hover:bg-rose-100 text-blue-500 hover:text-rose-700 rounded-lg transition-all border border-transparent disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                      >
-                        <Trash2 size={12} />
-                      </button>
-                    </div>
+{/* Compact cart actions strip — icons only, no title label */}
+                  <div className="flex items-center justify-end gap-1 px-3 py-0.5 bg-blue-100/60 border-b border-blue-200/60 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setIsSuspendedModalOpen(true)}
+                      className="relative p-1 text-blue-500 hover:text-[#0B1F4D] hover:bg-blue-100 rounded-md transition-all cursor-pointer"
+                      title="Ver vendas em espera"
+                    >
+                      <History size={12} />
+                      {suspendedCarts.length > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-amber-400 text-blue-950 text-[7px] font-black px-1 rounded-full leading-tight animate-bounce">
+                          {suspendedCarts.length}
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (cart.length === 0) {
+                          toast.error("O carrinho está vazio.");
+                          return;
+                        }
+                        setSuspenseCartLabel('');
+                        setIsSuspenseLabelModalOpen(true);
+                      }}
+                      disabled={cart.length === 0}
+                      className="p-1 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                      title="Colocar venda em espera (Suspender)"
+                    >
+                      <span className="text-[11px] leading-none">⏸️</span>
+                    </button>
+                    <button
+                      onClick={clearCart}
+                      disabled={cart.length === 0}
+                      title="Limpar de imediato toda a cesta"
+                      className="p-1 hover:bg-rose-100 text-blue-400 hover:text-rose-700 rounded-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                    >
+                      <Trash2 size={12} />
+                    </button>
                   </div>
 
-                  {/* Column headers below cart header */}
-                  <div className="grid grid-cols-12 gap-1.5 px-3 py-1 bg-blue-100/60 border-b border-blue-200 select-none text-[10px] font-extrabold text-blue-800 uppercase tracking-wider shrink-0">
+                  {/* Column headers — matches CartItemRow's grid-cols-12 (5/3/2/2) exactly */}
+                  <div className="grid grid-cols-12 gap-2 px-3 py-1 bg-blue-100/60 border-b border-blue-200 select-none text-[9.5px] font-extrabold text-blue-800 uppercase tracking-wider shrink-0">
                     <div className="col-span-5 text-left">PRODUTO</div>
                     <div className="col-span-3 text-center">QTD</div>
                     <div className="col-span-2 text-right">PREÇO</div>
@@ -4063,7 +4085,7 @@ export default function POS() {
                   </div>
 
                   {/* Scrollable Cart Items List */}
-                  <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
+                  <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white">
                     {cart.length === 0 ? (
                       <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
                         <ShoppingCart size={32} className="text-[#D4AF37] mb-2 opacity-80" />
@@ -4073,13 +4095,14 @@ export default function POS() {
                         </span>
                       </div>
                     ) : (
-                      cart.map((item) => (
+                      cart.map((item, cartRowIdx) => (
                         <CartItemRow
                           key={`${item.id}-${item.selectedUnit}`}
                           item={item}
                           prices={getCartItemPricing(item)}
                           updateCartQuantity={updateCartQuantity}
                           handleRemoveClick={handleRemoveClick}
+                          isAlt={cartRowIdx % 2 === 1}
                           onPriceClick={(clickedItem) => {
                             setNumericKeypadItem(clickedItem);
                             setNumericKeypadMode('price');
@@ -4125,6 +4148,45 @@ export default function POS() {
                   </button>
 
                   
+{/* Sale Mode (Dinheiro / Fiado / Parcial) — visible when a customer is attached */}
+                  {selectedCustomerId !== 'Walk-in' && (
+                    <div className="flex items-center bg-white p-0.5 rounded-lg border border-blue-200 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setSaleMode('dinheiro')}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Dinheiro
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSaleMode('credito')}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'credito' ? "bg-[#D4AF37] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Fiado
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSaleMode('parcial');
+                          setPartialAmountPaid('');
+                        }}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'parcial' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Parcial
+                      </button>
+                    </div>
+                  )}
+
 {/* Breakdown details list */}
                   <div className="space-y-1 text-[11px] font-bold text-blue-900">
                     <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
@@ -4387,57 +4449,49 @@ export default function POS() {
           {/* DESKTOP (md+): permanent split view, cart always visible next to payment/total */}
           <div className="hidden md:flex flex-1 min-h-0 overflow-hidden">
             <div className="flex-[1.6] flex flex-col min-h-0 overflow-hidden border-r border-blue-200/60">
-{/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0B1F4D]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
-                    <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
-                    <div className="flex items-center gap-1">
-                      {/* Suspended carts list button */}
-                      <button
-                        type="button"
-                        onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#0B1F4D] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
-                        title="Ver vendas em espera"
-                      >
-                        <span>⏳ Em Espera</span>
-                        {suspendedCarts.length > 0 && (
-                          <span className="bg-amber-400 text-blue-950 text-[8px] font-black px-1 py-0.2 rounded-full leading-none animate-bounce">
-                            {suspendedCarts.length}
-                          </span>
-                        )}
-                      </button>
-
-                      {/* Put on hold button */}
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (cart.length === 0) {
-                            toast.error("O carrinho está vazio.");
-                            return;
-                          }
-                          setSuspenseCartLabel('');
-                          setIsSuspenseLabelModalOpen(true);
-                        }}
-                        disabled={cart.length === 0}
-                        className="px-2 py-1 bg-emerald-700 text-white hover:bg-emerald-850 rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer border-none"
-                        title="Colocar venda em espera"
-                      >
-                        <span>➕ Suspender</span>
-                      </button>
-
-                      {/* Trash icon (🗑️) at the top right of this header to clear cart */}
-                      <button
-                        onClick={clearCart}
-                        disabled={cart.length === 0}
-                        title="Limpar de imediato toda a cesta"
-                        className="p-1 hover:bg-rose-100 text-blue-500 hover:text-rose-700 rounded-lg transition-all border border-transparent disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-                      >
-                        <Trash2 size={12} />
-                      </button>
-                    </div>
+{/* Compact cart actions strip — icons only, no title label */}
+                  <div className="flex items-center justify-end gap-1 px-3 py-0.5 bg-blue-100/60 border-b border-blue-200/60 shrink-0">
+                    <button
+                      type="button"
+                      onClick={() => setIsSuspendedModalOpen(true)}
+                      className="relative p-1 text-blue-500 hover:text-[#0B1F4D] hover:bg-blue-100 rounded-md transition-all cursor-pointer"
+                      title="Ver vendas em espera"
+                    >
+                      <History size={12} />
+                      {suspendedCarts.length > 0 && (
+                        <span className="absolute -top-1 -right-1 bg-amber-400 text-blue-950 text-[7px] font-black px-1 rounded-full leading-tight animate-bounce">
+                          {suspendedCarts.length}
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (cart.length === 0) {
+                          toast.error("O carrinho está vazio.");
+                          return;
+                        }
+                        setSuspenseCartLabel('');
+                        setIsSuspenseLabelModalOpen(true);
+                      }}
+                      disabled={cart.length === 0}
+                      className="p-1 text-emerald-600 hover:text-emerald-800 hover:bg-emerald-50 rounded-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                      title="Colocar venda em espera (Suspender)"
+                    >
+                      <span className="text-[11px] leading-none">⏸️</span>
+                    </button>
+                    <button
+                      onClick={clearCart}
+                      disabled={cart.length === 0}
+                      title="Limpar de imediato toda a cesta"
+                      className="p-1 hover:bg-rose-100 text-blue-400 hover:text-rose-700 rounded-md transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+                    >
+                      <Trash2 size={12} />
+                    </button>
                   </div>
 
-                  {/* Column headers below cart header */}
-                  <div className="grid grid-cols-12 gap-1.5 px-3 py-1 bg-blue-100/60 border-b border-blue-200 select-none text-[10px] font-extrabold text-blue-800 uppercase tracking-wider shrink-0">
+                  {/* Column headers — matches CartItemRow's grid-cols-12 (5/3/2/2) exactly */}
+                  <div className="grid grid-cols-12 gap-2 px-3 py-1 bg-blue-100/60 border-b border-blue-200 select-none text-[9.5px] font-extrabold text-blue-800 uppercase tracking-wider shrink-0">
                     <div className="col-span-5 text-left">PRODUTO</div>
                     <div className="col-span-3 text-center">QTD</div>
                     <div className="col-span-2 text-right">PREÇO</div>
@@ -4445,7 +4499,7 @@ export default function POS() {
                   </div>
 
                   {/* Scrollable Cart Items List */}
-                  <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
+                  <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white">
                     {cart.length === 0 ? (
                       <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
                         <ShoppingCart size={32} className="text-[#D4AF37] mb-2 opacity-80" />
@@ -4455,13 +4509,14 @@ export default function POS() {
                         </span>
                       </div>
                     ) : (
-                      cart.map((item) => (
+                      cart.map((item, cartRowIdx) => (
                         <CartItemRow
                           key={`${item.id}-${item.selectedUnit}`}
                           item={item}
                           prices={getCartItemPricing(item)}
                           updateCartQuantity={updateCartQuantity}
                           handleRemoveClick={handleRemoveClick}
+                          isAlt={cartRowIdx % 2 === 1}
                           onPriceClick={(clickedItem) => {
                             setNumericKeypadItem(clickedItem);
                             setNumericKeypadMode('price');
@@ -4475,6 +4530,45 @@ export default function POS() {
                   
             </div>
             <div className="flex-1 max-w-[380px] min-w-[300px] flex flex-col min-h-0 overflow-y-auto p-2.5 space-y-2 bg-blue-50/20">
+{/* Sale Mode (Dinheiro / Fiado / Parcial) — visible when a customer is attached */}
+                  {selectedCustomerId !== 'Walk-in' && (
+                    <div className="flex items-center bg-white p-0.5 rounded-lg border border-blue-200 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setSaleMode('dinheiro')}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Dinheiro
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSaleMode('credito')}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'credito' ? "bg-[#D4AF37] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Fiado
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSaleMode('parcial');
+                          setPartialAmountPaid('');
+                        }}
+                        className={cn(
+                          "flex-1 px-2 py-1.5 rounded-md text-[9.5px] font-black uppercase tracking-wider transition-all cursor-pointer text-center",
+                          saleMode === 'parcial' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                        )}
+                      >
+                        Parcial
+                      </button>
+                    </div>
+                  )}
+
 {/* Breakdown details list */}
                   <div className="space-y-1 text-[11px] font-bold text-blue-900">
                     <div className="flex justify-between items-center bg-blue-50 px-2.5 py-1.5 rounded-lg border border-blue-100/50 text-blue-950 shadow-xs">
