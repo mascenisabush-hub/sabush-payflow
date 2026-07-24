@@ -35,8 +35,8 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           background-image: url('/loading/sabush-tech-concept.webp');
           background-size: cover;
           background-position: center 38%;
-          opacity: 0.4;
-          filter: saturate(1.15) brightness(0.85) blur(1.5px);
+          opacity: 0.62;
+          filter: saturate(1.15) brightness(0.95);
           animation: als-bg-drift 24s ease-in-out infinite alternate;
         }
         @keyframes als-bg-drift {
@@ -252,11 +252,11 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
         }
       `}</style>
 
-      <div className="als-bg-image" />
       <div className="als-root-bg" />
       <div className="als-lamp" />
       <div className="als-rays" />
       <div className="als-grid" />
+      <div className="als-bg-image" />
       <div className="als-vignette" />
       <div className={`als-arrival ${arrived ? 'als-arrival-in' : ''}`} />
       <div className="als-arrival-flash" />
