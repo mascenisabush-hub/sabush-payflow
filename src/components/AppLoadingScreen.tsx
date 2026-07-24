@@ -29,6 +29,24 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
   return (
     <div className="h-screen w-screen flex items-center justify-center overflow-hidden relative bg-[#0d0806]">
       <style>{`
+        .als-bg-image {
+          position: absolute;
+          inset: -3%;
+          background-image: url('/loading/sabush-tech-concept.webp');
+          background-size: cover;
+          background-position: center 38%;
+          opacity: 0.4;
+          filter: saturate(1.15) brightness(0.85) blur(1.5px);
+          animation: als-bg-drift 24s ease-in-out infinite alternate;
+        }
+        @keyframes als-bg-drift {
+          0% { transform: scale(1.04) translate(0, 0); }
+          100% { transform: scale(1.14) translate(-1.2%, -0.8%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .als-bg-image { animation: none; }
+        }
+
         .als-root-bg {
           position: absolute;
           inset: 0;
@@ -234,6 +252,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
         }
       `}</style>
 
+      <div className="als-bg-image" />
       <div className="als-root-bg" />
       <div className="als-lamp" />
       <div className="als-rays" />
