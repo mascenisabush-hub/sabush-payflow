@@ -3538,13 +3538,13 @@ export default function POS() {
       {/* Quick Sale Keyboard Status & Buffer Bar */}
       <div className="bg-blue-900 border border-[#D4AF37]/50 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
         <div className="flex items-center gap-2">
-          <span className="bg-[#D4AF37] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
+          <span className="bg-[#D4AF37] text-[#0B1F4D] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
             <span className="shrink-0">⚡</span> QUICK
           </span>
           {inputBuffer ? (
             <div className="flex items-center gap-2">
               <span className="text-blue-300 font-medium">Comando:</span>
-              <span className="font-mono bg-[#4A1B0C] text-[#FFFFFF] px-2 py-0.5 rounded text-xs font-black border border-[#D4AF37]/30 select-all tracking-wider">
+              <span className="font-mono bg-[#0B1F4D] text-[#FFFFFF] px-2 py-0.5 rounded text-xs font-black border border-[#D4AF37]/30 select-all tracking-wider">
                 {inputBuffer}
               </span>
               <span className="text-[10px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
@@ -3560,14 +3560,14 @@ export default function POS() {
             </div>
           ) : (
             <span className="text-blue-300 text-[10.5px] font-medium hidden md:inline truncate">
-              Digite SKU ou QTD (Ex: <code className="text-blue-200 bg-[#4A1B0C]/40 px-1 py-0.5 rounded font-mono">3x</code>). Pressione <strong className="text-orange-400 font-black font-mono">?</strong> para ajuda.
+              Digite SKU ou QTD (Ex: <code className="text-blue-200 bg-[#0B1F4D]/40 px-1 py-0.5 rounded font-mono">3x</code>). Pressione <strong className="text-amber-400 font-black font-mono">?</strong> para ajuda.
             </span>
           )}
         </div>
         <button
           type="button"
           onClick={() => setIsCheatSheetOpen(true)}
-          className="flex items-center gap-1 px-2 py-0.5 bg-[#4A1B0C] hover:bg-[#D4AF37] text-[#FFFFFF] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#D4AF37]/20 cursor-pointer h-6"
+          className="flex items-center gap-1 px-2 py-0.5 bg-[#0B1F4D] hover:bg-[#D4AF37] text-[#FFFFFF] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#D4AF37]/20 cursor-pointer h-6"
         >
           <span>⌨️ Atalhos [?]</span>
         </button>
@@ -3615,7 +3615,7 @@ export default function POS() {
                       <span className="text-[9px] text-blue-600 truncate">SKU: {p.sku || 'N/A'} | Barcode: {p.barcode || 'N/A'}</span>
                     </div>
                     <div className="text-right shrink-0">
-                      <span className="text-[11px] font-bold text-orange-600">{(p.price || 0).toLocaleString()} MT</span>
+                      <span className="text-[11px] font-bold text-amber-600">{(p.price || 0).toLocaleString()} MT</span>
                       <span className="block text-[8px] text-blue-400 mt-0.5">Stock: {p.stockLevel || 0}</span>
                     </div>
                   </div>
@@ -3767,20 +3767,20 @@ export default function POS() {
               <X size={14} />
             </button>
 
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-orange-400 mb-2">Leitor de Câmara Integrado</h3>
+            <h3 className="text-[10px] font-black uppercase tracking-widest text-amber-400 mb-2">Leitor de Câmara Integrado</h3>
 
             {/* Viewfinder elements layout */}
             <div className="relative w-72 h-36 bg-[#0B1F4D] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center">
               <video id="scanner-preview" className="w-full h-full object-cover" playsInline />
               
               {/* Orange viewfinder corner brackets */}
-              <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-orange-500 rounded-tl"></div>
-              <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-orange-500 rounded-tr"></div>
-              <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-orange-500 rounded-bl"></div>
-              <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-orange-500 rounded-br"></div>
+              <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-500 rounded-tl"></div>
+              <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-500 rounded-tr"></div>
+              <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-500 rounded-bl"></div>
+              <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-500 rounded-br"></div>
 
               {/* Glowing vertical laser scan animation line */}
-              <div className="absolute left-4 right-4 h-0.5 bg-orange-400 rounded opacity-85 shadow-[0_0_6px_3px_rgba(249,115,22,0.5)] animate-bounce select-none pointer-events-none"></div>
+              <div className="absolute left-4 right-4 h-0.5 bg-amber-400 rounded opacity-85 shadow-[0_0_6px_3px_rgba(249,115,22,0.5)] animate-bounce select-none pointer-events-none"></div>
 
               {/* Live Scanner Banner updates */}
               {detectionBanner && (
@@ -3796,7 +3796,7 @@ export default function POS() {
                 <select
                   value={selectedCameraId}
                   onChange={(e) => setSelectedCameraId(e.target.value)}
-                  className="bg-[#0B1F4D] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#EEF2FF] focus:border-orange-500 h-6"
+                  className="bg-[#0B1F4D] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#EEF2FF] focus:border-amber-500 h-6"
                 >
                   {cameras.map((d: any, idx) => (
                     <option key={d.deviceId} value={d.deviceId}>Cam {idx + 1}</option>
@@ -3969,7 +3969,7 @@ export default function POS() {
             </div>
             <div className="flex items-center gap-1.5">
               <span className="text-[10px] text-blue-600 font-black uppercase tracking-wider">TOTAL:</span>
-              <span className="font-mono text-sm font-black text-black">
+              <span className="font-mono text-sm font-black text-[#B8952E]">
                 {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT
               </span>
             </div>
@@ -4036,7 +4036,7 @@ export default function POS() {
                       <button
                         type="button"
                         onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
+                        className="relative px-2 py-1 bg-[#0B1F4D] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
                         title="Ver vendas em espera"
                       >
                         <span>⏳ Em Espera</span>
@@ -4120,7 +4120,7 @@ export default function POS() {
                       <button
                         type="button"
                         onClick={() => setActiveCartTab('payment')}
-                        className="w-full py-1.5 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
+                        className="w-full py-1.5 bg-[#D4AF37] hover:bg-[#B8952E] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
                       >
                         <span>Prosseguir para Pagamento</span>
                         <span>➡️</span>
@@ -4202,7 +4202,7 @@ export default function POS() {
                     {/* PROMINENT GRAND TOTAL TO BE ULTRA VISIBLE */}
                     <div className="flex justify-between items-center bg-white px-3 py-2.5 rounded-xl border border-blue-200 shadow-sm my-1.5 select-none">
                       <span className="text-[11px] font-black uppercase tracking-wider text-blue-600">TOTAL A PAGAR:</span>
-                      <span className="font-mono text-base font-black text-black">
+                      <span className="font-mono text-base font-black text-[#B8952E]">
                         {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT
                       </span>
                     </div>
@@ -4358,7 +4358,7 @@ export default function POS() {
                               className={cn(
                                 "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
                                 isSelected 
-                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
+                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-amber-50/25" 
                                   : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                               )}
                             >
@@ -4374,7 +4374,7 @@ export default function POS() {
                           className={cn(
                             "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
                             paymentMethod === 'card'
-                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
+                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-amber-50/25" 
                               : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                           )}
                         >
@@ -4390,7 +4390,7 @@ export default function POS() {
                     <button
                       onClick={checkOutTransaction}
                       disabled={isProcessing || cart.length === 0}
-                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#B8952E] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
                     >
                       {isProcessing ? (
                         <Loader2 size={13} className="animate-spin text-white" />
@@ -4418,7 +4418,7 @@ export default function POS() {
                       <button
                         type="button"
                         onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
+                        className="relative px-2 py-1 bg-[#0B1F4D] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
                         title="Ver vendas em espera"
                       >
                         <span>⏳ Em Espera</span>
@@ -4552,7 +4552,7 @@ export default function POS() {
                     {/* PROMINENT GRAND TOTAL TO BE ULTRA VISIBLE */}
                     <div className="flex justify-between items-center bg-white px-3 py-2.5 rounded-xl border border-blue-200 shadow-sm my-1.5 select-none">
                       <span className="text-[11px] font-black uppercase tracking-wider text-blue-600">TOTAL A PAGAR:</span>
-                      <span className="font-mono text-base font-black text-black">
+                      <span className="font-mono text-base font-black text-[#B8952E]">
                         {total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MT
                       </span>
                     </div>
@@ -4708,7 +4708,7 @@ export default function POS() {
                               className={cn(
                                 "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
                                 isSelected 
-                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
+                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-amber-50/25" 
                                   : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                               )}
                             >
@@ -4724,7 +4724,7 @@ export default function POS() {
                           className={cn(
                             "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
                             paymentMethod === 'card'
-                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
+                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-amber-50/25" 
                               : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                           )}
                         >
@@ -4740,7 +4740,7 @@ export default function POS() {
                     <button
                       onClick={checkOutTransaction}
                       disabled={isProcessing || cart.length === 0}
-                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#B8952E] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
                     >
                       {isProcessing ? (
                         <Loader2 size={13} className="animate-spin text-white" />
@@ -6716,7 +6716,7 @@ export default function POS() {
                   <div className="flex flex-col gap-1 p-2.5 bg-blue-50/20 rounded-xl border border-blue-100 col-span-2">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-black text-blue-950">Delete / F12 / Backspace</span>
-                      <span className="text-[9px] text-orange-600 font-black uppercase tracking-wider">sem buffer ativo</span>
+                      <span className="text-[9px] text-amber-600 font-black uppercase tracking-wider">sem buffer ativo</span>
                     </div>
                     <span className="text-[10px] text-blue-600 font-bold">Anular último item do carrinho</span>
                   </div>

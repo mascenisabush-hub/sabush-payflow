@@ -6,7 +6,7 @@ import { offlineDb } from '../lib/offlineDb';
 import { collection, query, onSnapshot, addDoc, serverTimestamp, updateDoc, doc, deleteDoc, orderBy, limit } from 'firebase/firestore';
 import { useAuth } from '../contexts/AuthContext';
 import { useTranslation } from 'react-i18next';
-import { Plus, Search, Package, AlertTriangle, Edit2, Trash2, Tag, Barcode, DollarSign, Users, ShoppingBag, Sliders, Check, Loader2, ArrowRight, Download, RefreshCw, Grid, List, ShieldAlert, Lock, X, FileText, Camera, Sparkles, Upload, Printer, History, Calendar, Globe, Copy, Filter, ChevronDown } from 'lucide-react';
+import { Plus, Search, Package, AlertTriangle, Edit2, Trash2, Tag, Barcode, DollarSign, Users, ShoppingBag, Sliders, Check, Loader2, ArrowRight, Download, RefreshCw, Grid, List, ShieldAlert, Lock, X, FileText, Camera, Sparkles, Upload, Printer, History, Calendar, Globe, Copy, Filter, ChevronDown, MoreHorizontal } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '../lib/utils';
 import { logAction, ActionType } from '../lib/logger';
@@ -990,6 +990,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [viewMode, setViewMode] = useState<'grid' | 'compact'>('compact');
   const [showBulkMenu, setShowBulkMenu] = useState(false);
+  const [openRowMenuId, setOpenRowMenuId] = useState<string | null>(null);
   const [showFilterPanel, setShowFilterPanel] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('name-asc');
@@ -3065,23 +3066,22 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3">
       {/* HEADER PRINCIPAL */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-100">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 pb-1.5 border-b border-slate-100">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <h2 className="text-2xl font-black text-slate-900 tracking-tight">{t('inventory')}</h2>
+            <h2 className="text-lg font-black text-slate-900 tracking-tight">{t('inventory')}</h2>
             {!isOnline && (
-              <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-2 py-0.5 rounded-lg font-black border border-amber-200 animate-pulse text-[10px] uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-2 py-0.5 rounded-lg font-black border border-amber-200 animate-pulse text-[9px] uppercase tracking-wider">
                 ● Offline Mode (Cached)
               </span>
             )}
           </div>
-          <p className="text-xs text-slate-500 mt-1">Gerencie stock físico, alertas de rutura, categorias e faça fusão de duplicados.</p>
         </div>
         
         {/* Modern Segmented Sub-Tab Control */}
-        <div className="flex bg-slate-105 p-1.5 rounded-2xl w-full md:w-auto overflow-x-auto min-w-[325px] border border-slate-205 shadow-inner bg-slate-100/60 gap-1">
+        <div className="flex bg-slate-105 p-1 rounded-xl w-full md:w-auto overflow-x-auto min-w-[325px] border border-slate-205 shadow-inner bg-slate-100/60 gap-1">
           <button
             type="button"
             onClick={() => {
@@ -3090,7 +3090,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'list' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3156,7 +3156,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'add' || isCreating || editingProduct 
                 ? "bg-gradient-to-r from-emerald-500 to-teal-650 text-white shadow-md shadow-emerald-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3173,7 +3173,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               findDuplicates();
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'manage' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-purple-600 to-indigo-650 text-white shadow-md shadow-purple-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3189,7 +3189,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'quebras' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-amber-500 to-rose-600 text-white shadow-md shadow-amber-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3205,7 +3205,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'etiquetas' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-md shadow-pink-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3221,7 +3221,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'validade' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-red-500 to-amber-600 text-white shadow-md shadow-red-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -3237,7 +3237,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               setEditingProduct(null);
             }}
             className={cn(
-              "flex-1 px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap",
+              "flex-1 px-2.5 py-1.5 rounded-lg text-[10.5px] font-black uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center justify-center gap-1 whitespace-nowrap",
               activeTab === 'movimentos' && !isCreating && !editingProduct 
                 ? "bg-gradient-to-r from-blue-600 to-indigo-650 text-white shadow-md shadow-blue-500/20 font-black scale-102" 
                 : "text-slate-500 hover:text-slate-800"
@@ -4228,64 +4228,44 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="space-y-6"
+          className="space-y-2.5"
         >
-          {/* RESUMO DO INVENTÁRIO — 4 cartões planos, sem moldura extra */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-2xl border border-slate-100">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Valor de Venda</span>
-              <p className="text-lg font-black text-slate-900 tracking-tight leading-none mt-1.5">
-                {totalCompanyStockValue.toLocaleString()} {currency}
+          {/* RESUMO DO INVENTÁRIO — faixa compacta de estatísticas */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="bg-white px-3 py-2 rounded-xl border border-slate-100 flex items-center justify-between gap-2">
+              <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Valor Venda</span>
+              <p className="text-xs font-black text-slate-900 tracking-tight leading-none whitespace-nowrap">
+                {(hasActiveFilters ? totalFilteredStockValue : totalCompanyStockValue).toLocaleString()} {currency}
               </p>
-              {hasActiveFilters && (
-                <span className="text-[9px] font-bold text-blue-600/80 mt-1 block">
-                  Filtrado: {totalFilteredStockValue.toLocaleString()} {currency}
-                </span>
-              )}
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-slate-100">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Valor de Custo</span>
-              <p className="text-lg font-black text-slate-900 tracking-tight leading-none mt-1.5">
-                {totalCompanyCostValue.toLocaleString()} {currency}
+            <div className="bg-white px-3 py-2 rounded-xl border border-slate-100 flex items-center justify-between gap-2">
+              <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Valor Custo</span>
+              <p className="text-xs font-black text-slate-900 tracking-tight leading-none whitespace-nowrap">
+                {(hasActiveFilters ? totalFilteredCostValue : totalCompanyCostValue).toLocaleString()} {currency}
               </p>
-              {hasActiveFilters && (
-                <span className="text-[9px] font-bold text-indigo-600/80 mt-1 block">
-                  Filtrado: {totalFilteredCostValue.toLocaleString()} {currency}
-                </span>
-              )}
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-slate-100">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Lucro Potencial</span>
-              <p className="text-lg font-black text-emerald-600 tracking-tight leading-none mt-1.5">
-                {totalCompanyPotentialProfit.toLocaleString()} {currency}
+            <div className="bg-white px-3 py-2 rounded-xl border border-slate-100 flex items-center justify-between gap-2">
+              <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Lucro Potencial</span>
+              <p className="text-xs font-black text-emerald-600 tracking-tight leading-none whitespace-nowrap">
+                {(hasActiveFilters ? (totalFilteredStockValue - totalFilteredCostValue) : totalCompanyPotentialProfit).toLocaleString()} {currency}
               </p>
-              {hasActiveFilters && (
-                <span className="text-[9px] font-bold text-emerald-700/80 mt-1 block">
-                  Filtrado: {(totalFilteredStockValue - totalFilteredCostValue).toLocaleString()} {currency}
-                </span>
-              )}
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-slate-100">
-              <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Artigos em Stock</span>
-              <p className="text-lg font-black text-slate-900 tracking-tight leading-none mt-1.5">
-                {totalCompanyItems.toLocaleString()} <span className="text-xs text-slate-400 font-bold">un.</span>
+            <div className="bg-white px-3 py-2 rounded-xl border border-slate-100 flex items-center justify-between gap-2">
+              <span className="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest leading-tight">Artigos</span>
+              <p className="text-xs font-black text-slate-900 tracking-tight leading-none whitespace-nowrap">
+                {(hasActiveFilters ? totalFilteredItems : totalCompanyItems).toLocaleString()} <span className="text-[10px] text-slate-400 font-bold">un.</span>
               </p>
-              {hasActiveFilters && (
-                <span className="text-[9px] font-bold text-amber-600/80 mt-1 block">
-                  Filtrado: {totalFilteredItems.toLocaleString()} un.
-                </span>
-              )}
             </div>
           </div>
 
           {/* TOOLBAR ÚNICA — contagem, pesquisa, Ações em Massa, Mais Filtros e alternador de vista, tudo numa só linha */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-bold text-slate-500 whitespace-nowrap">
-                {filteredProducts.length.toLocaleString()} {filteredProducts.length === 1 ? 'produto encontrado' : 'produtos encontrados'}
+              <span className="text-[11px] font-bold text-slate-500 whitespace-nowrap">
+                {filteredProducts.length.toLocaleString()} {filteredProducts.length === 1 ? 'produto' : 'produtos'}
               </span>
 
               {/* Ações em Massa */}
@@ -4293,7 +4273,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                 <button
                   type="button"
                   onClick={() => setShowBulkMenu(v => !v)}
-                  className="flex items-center gap-1.5 bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-3 py-2 rounded-xl transition-all font-bold text-xs cursor-pointer"
+                  className="flex items-center gap-1 bg-white border border-slate-200 hover:bg-slate-50 text-slate-600 px-2.5 py-1.5 rounded-lg transition-all font-bold text-[11px] cursor-pointer"
                 >
                   Ações em massa {selectedIds.length > 0 && <span className="text-blue-600">({selectedIds.length})</span>}
                   <ChevronDown size={13} className={cn("transition-transform", showBulkMenu && "rotate-180")} />
@@ -4347,11 +4327,11 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
 
             <div className="flex items-center gap-2 w-full md:w-auto">
               <div className="relative flex-1 md:w-72 font-sans">
-                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
                 <input
                   type="text"
                   placeholder="Pesquisar produto, SKU, código de barras..."
-                  className="w-full pl-9 pr-4 py-2 border border-slate-200 bg-white rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-xs font-bold font-sans text-slate-700"
+                  className="w-full pl-8 pr-3 py-1.5 border border-slate-200 bg-white rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-[11px] font-bold font-sans text-slate-700"
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                 />
@@ -4363,7 +4343,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   type="button"
                   onClick={() => setShowFilterPanel(v => !v)}
                   className={cn(
-                    "flex items-center gap-1.5 border px-3 py-2 rounded-xl transition-all font-bold text-xs cursor-pointer whitespace-nowrap",
+                    "flex items-center gap-1 border px-2.5 py-1.5 rounded-lg transition-all font-bold text-[11px] cursor-pointer whitespace-nowrap",
                     (selectedCategory !== 'all' || expiryFilterOnly)
                       ? "bg-blue-50 border-blue-200 text-blue-700"
                       : "bg-white border-slate-200 hover:bg-slate-50 text-slate-600"
@@ -4434,26 +4414,26 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                 )}
               </div>
 
-              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-xl shrink-0">
+              <div className="flex items-center gap-1 bg-slate-50 p-1 rounded-lg shrink-0">
                 <button
                   onClick={() => setViewMode('compact')}
                   className={cn(
-                    "p-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-center",
+                    "p-1 rounded-md transition-all cursor-pointer flex items-center justify-center",
                     viewMode === 'compact' ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                   )}
                   title="Lista Compacta (Melhor para Busca)"
                 >
-                  <List size={16} />
+                  <List size={14} />
                 </button>
                 <button
                   onClick={() => setViewMode('grid')}
                   className={cn(
-                    "p-1.5 rounded-lg transition-all cursor-pointer flex items-center justify-center",
+                    "p-1 rounded-md transition-all cursor-pointer flex items-center justify-center",
                     viewMode === 'grid' ? "bg-white text-blue-600 shadow-sm" : "text-slate-400 hover:text-slate-600"
                   )}
                   title="Cartões Expandidos"
                 >
-                  <Grid size={16} />
+                  <Grid size={14} />
                 </button>
               </div>
             </div>
@@ -6321,15 +6301,15 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="space-y-6"
+          className="space-y-2.5"
         >
           {viewMode === 'compact' ? (
-        <div className="bg-white rounded-2xl border border-slate-150 overflow-hidden shadow-sm">
+        <div className="bg-white rounded-xl border border-slate-150 overflow-hidden shadow-sm">
           <div className="overflow-x-auto min-w-full">
-            <table className="min-w-full divide-y divide-slate-100 font-sans text-left font-sans">
-              <thead className="bg-slate-50 text-[9.5px] font-black text-slate-400 uppercase tracking-wider select-none">
+            <table className="min-w-full font-sans text-left font-sans">
+              <thead className="bg-slate-50 text-[9px] font-black text-slate-400 uppercase tracking-wider select-none border-b border-slate-150">
                 <tr>
-                  <th scope="col" className="py-2.5 px-3 w-9">
+                  <th scope="col" className="py-1.5 px-3 w-9">
                     <input
                       type="checkbox"
                       checked={paginatedProducts.length > 0 && paginatedProducts.every(p => selectedIds.includes(p.id))}
@@ -6341,19 +6321,19 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       className="w-3.5 h-3.5 rounded border-slate-300 cursor-pointer"
                     />
                   </th>
-                  <th scope="col" className="py-2.5 px-2 w-20">Código</th>
-                  <th scope="col" className="py-2.5 px-3 min-w-[200px]">Produto</th>
-                  <th scope="col" className="py-2.5 px-2 w-24">Categoria</th>
-                  <th scope="col" className="py-2.5 px-2 w-24 text-right">Custo Médio</th>
-                  <th scope="col" className="py-2.5 px-2 w-24 text-right">Preço Venda</th>
-                  <th scope="col" className="py-2.5 px-2 w-20 text-center">Estoque</th>
-                  <th scope="col" className="py-2.5 px-2 w-16 text-center">Est. Mín.</th>
-                  <th scope="col" className="py-2.5 px-2 w-28 text-right">Valor Total</th>
-                  <th scope="col" className="py-2.5 px-2 w-24 text-center">Status</th>
-                  <th scope="col" className="py-2.5 px-3 w-28 text-center">Ações</th>
+                  <th scope="col" className="py-1.5 px-2 w-20">Código</th>
+                  <th scope="col" className="py-1.5 px-3 min-w-[200px]">Produto</th>
+                  <th scope="col" className="py-1.5 px-2 w-24">Categoria</th>
+                  <th scope="col" className="py-1.5 px-2 w-24 text-right">Custo Médio</th>
+                  <th scope="col" className="py-1.5 px-2 w-24 text-right">Preço Venda</th>
+                  <th scope="col" className="py-1.5 px-2 w-20 text-center">Estoque</th>
+                  <th scope="col" className="py-1.5 px-2 w-16 text-center">Est. Mín.</th>
+                  <th scope="col" className="py-1.5 px-2 w-28 text-right">Valor Total</th>
+                  <th scope="col" className="py-1.5 px-2 w-24 text-center">Status</th>
+                  <th scope="col" className="py-1.5 px-3 w-28 text-center">Ações</th>
                 </tr>
               </thead>
-              <tbody data-no-translate="true" className="divide-y divide-slate-75 bg-white no-translate">
+              <tbody data-no-translate="true" className="bg-white no-translate">
                 {paginatedProducts.map((product, idx) => {
                   const isSelected = selectedIds.includes(product.id);
                   const lowThreshold = product.lowStockThreshold || 5;
@@ -6367,10 +6347,13 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     <tr
                       key={product.id}
                       onClick={() => setViewingProduct(product)}
-                      className={cn("group transition-colors hover:bg-slate-50/80 cursor-pointer text-[11.5px]", isSelected && "bg-blue-50/50")}
+                      className={cn(
+                        "group transition-colors cursor-pointer text-[11px]",
+                        isSelected ? "bg-blue-50/60 hover:bg-blue-50" : idx % 2 === 1 ? "bg-slate-50/60 hover:bg-blue-50/40" : "bg-white hover:bg-blue-50/40"
+                      )}
                     >
                       {/* Checkbox */}
-                      <td className="py-2 px-3" onClick={(e) => e.stopPropagation()}>
+                      <td className="py-1.5 px-3" onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={isSelected}
@@ -6380,12 +6363,12 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       </td>
 
                       {/* Código */}
-                      <td className="py-2 px-2 font-mono text-slate-400 font-bold whitespace-nowrap">{rowCode}</td>
+                      <td className="py-1.5 px-2 font-mono text-slate-400 font-bold whitespace-nowrap">{rowCode}</td>
 
-                      {/* Name, SKU and Barcode */}
-                      <td className="py-2 px-3">
-                        <div className="space-y-0.5">
-                          <p className="font-bold text-slate-950 font-sans group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap leading-tight">
+                      {/* Name and SKU */}
+                      <td className="py-1.5 px-3">
+                        <div className="leading-tight">
+                          <p className="font-bold text-slate-950 font-sans group-hover:text-blue-600 transition-colors flex items-center gap-1.5 flex-wrap leading-tight truncate">
                             {product.name}
                             {(() => {
                               const stats = getProductExpiryStats(product);
@@ -6395,70 +6378,42 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                               <span className="bg-amber-500 text-white font-black text-[7.5px] px-1 py-0.5 rounded leading-none shrink-0 uppercase tracking-wider">PROMO</span>
                             )}
                           </p>
-                          <div className="flex items-center gap-1.5 text-[9.5px] text-slate-400 font-mono">
-                            {product.sku && <span>SKU: {product.sku}</span>}
-                            {!product.barcode && (
-                              <button
-                                type="button"
-                                onClick={async (e) => {
-                                  e.stopPropagation();
-                                  const businessId = profile?.businessId;
-                                  if (!businessId) {
-                                    toast.error("Erro: ID da empresa não detetado.");
-                                    return;
-                                  }
-                                  const generated = 'SAB-' + Math.floor(Math.random() * 9000000000 + 1000000000).toString();
-                                  try {
-                                    const { updateDoc, doc } = await import('firebase/firestore');
-                                    const prodRef = doc(db, `businesses/${businessId}/products`, product.id);
-                                    await updateDoc(prodRef, { barcode: generated });
-                                    toast.success(`Código de barras ${generated} gerado e salvo!`);
-                                  } catch (err) {
-                                    toast.error("Erro ao gerar código de barras.");
-                                  }
-                                }}
-                                className="text-amber-700 hover:text-amber-900 font-black uppercase tracking-wider underline decoration-dotted"
-                                title="Gerar código de barras seguro"
-                              >
-                                Gerar Barcode
-                              </button>
-                            )}
-                          </div>
+                          {product.sku && <span className="text-[9.5px] text-slate-400 font-mono">SKU: {product.sku}</span>}
                         </div>
                       </td>
 
                       {/* Category */}
-                      <td className="py-2 px-2 text-slate-500 font-semibold whitespace-nowrap">{product.category || '—'}</td>
+                      <td className="py-1.5 px-2 text-slate-500 font-semibold whitespace-nowrap">{product.category || '—'}</td>
 
                       {/* Custo Médio */}
-                      <td className="py-2 px-2 text-right font-mono text-slate-500 whitespace-nowrap">
+                      <td className="py-1.5 px-2 text-right font-mono text-slate-500 whitespace-nowrap">
                         {product.costPrice > 0 ? `${Number(product.costPrice).toLocaleString()} ${currency}` : '—'}
                       </td>
 
                       {/* Selling price */}
-                      <td className="py-2 px-2 text-right font-bold text-blue-600 font-mono whitespace-nowrap">
+                      <td className="py-1.5 px-2 text-right font-bold text-blue-600 font-mono whitespace-nowrap">
                         {product.price > 0 ? `${Number(product.price).toLocaleString()} ${currency}` : (
                           <span className="text-rose-600 text-[9.5px] font-black uppercase" title="Nenhum preço de venda definido">Sem preço</span>
                         )}
                       </td>
 
                       {/* Stock */}
-                      <td className="py-2 px-2 text-center font-mono font-bold text-slate-700 whitespace-nowrap">
+                      <td className="py-1.5 px-2 text-center font-mono font-bold text-slate-700 whitespace-nowrap">
                         {product.stockLevel} <span className="text-slate-400 font-semibold">{product.baseUnitLabel || 'Un'}</span>
                       </td>
 
                       {/* Estoque Mínimo */}
-                      <td className="py-2 px-2 text-center font-mono text-slate-400 whitespace-nowrap">{lowThreshold}</td>
+                      <td className="py-1.5 px-2 text-center font-mono text-slate-400 whitespace-nowrap">{lowThreshold}</td>
 
                       {/* Valor Total */}
-                      <td className="py-2 px-2 text-right font-mono font-semibold text-slate-600 whitespace-nowrap">
+                      <td className="py-1.5 px-2 text-right font-mono font-semibold text-slate-600 whitespace-nowrap">
                         {rowValorTotal.toLocaleString()} {currency}
                       </td>
 
                       {/* Status */}
-                      <td className="py-2 px-2 text-center">
+                      <td className="py-1.5 px-2 text-center">
                         <span className={cn(
-                          "inline-block px-2 py-0.5 rounded-full text-[9.5px] font-black uppercase tracking-wide whitespace-nowrap",
+                          "inline-block px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wide whitespace-nowrap",
                           isOut ? "bg-rose-50 text-rose-700 border border-rose-150" :
                           isCritical ? "bg-rose-50 text-rose-600 border border-rose-150" :
                           isLowStock ? "bg-amber-50 text-amber-700 border border-amber-150" :
@@ -6469,36 +6424,74 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                       </td>
 
                       {/* Row actions */}
-                      <td className="py-2 px-3 text-center" onClick={(e) => e.stopPropagation()}>
+                      <td className="py-1.5 px-3 text-center" onClick={(e) => e.stopPropagation()}>
                         <div className="flex items-center justify-center gap-1">
                           <button
                             onClick={() => setViewingProduct(product)}
-                            className="p-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-lg transition-colors cursor-pointer"
+                            className="p-1 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-colors cursor-pointer"
                             title="Ver Ficha de Detalhes"
                           >
-                            <FileText size={12} />
+                            <FileText size={11} />
                           </button>
                           <button
                             onClick={() => openProductEditor(product)}
-                            className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-lg transition-colors cursor-pointer"
+                            className="p-1 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-md transition-colors cursor-pointer"
                             title="Editar Artigo"
                           >
-                            <Edit2 size={12} />
+                            <Edit2 size={11} />
                           </button>
-                          <button
-                            onClick={() => handleDuplicateProduct(product)}
-                            className="p-1.5 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-lg transition-colors cursor-pointer"
-                            title="Duplicar Artigo"
-                          >
-                            <Copy size={12} />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteProduct(product.id, product.name)}
-                            className="p-1.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-lg transition-colors cursor-pointer"
-                            title="Eliminar Artigo"
-                          >
-                            <Trash2 size={12} />
-                          </button>
+                          <div className="relative" onClick={(e) => e.stopPropagation()}>
+                            <button
+                              onClick={() => setOpenRowMenuId(openRowMenuId === product.id ? null : product.id)}
+                              className="p-1 bg-slate-50 hover:bg-slate-100 text-slate-500 rounded-md transition-colors cursor-pointer"
+                              title="Mais ações"
+                            >
+                              <MoreHorizontal size={11} />
+                            </button>
+                            {openRowMenuId === product.id && (
+                              <div className="absolute z-20 top-full mt-1 right-0 w-44 bg-white border border-slate-150 rounded-lg shadow-lg py-1 text-[11px] font-bold text-slate-700">
+                                <button
+                                  type="button"
+                                  onClick={() => { handleDuplicateProduct(product); setOpenRowMenuId(null); }}
+                                  className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5"
+                                >
+                                  <Copy size={11} /> Duplicar
+                                </button>
+                                {!product.barcode && (
+                                  <button
+                                    type="button"
+                                    onClick={async () => {
+                                      const businessId = profile?.businessId;
+                                      if (!businessId) {
+                                        toast.error("Erro: ID da empresa não detetado.");
+                                        return;
+                                      }
+                                      const generated = 'SAB-' + Math.floor(Math.random() * 9000000000 + 1000000000).toString();
+                                      try {
+                                        const { updateDoc, doc } = await import('firebase/firestore');
+                                        const prodRef = doc(db, `businesses/${businessId}/products`, product.id);
+                                        await updateDoc(prodRef, { barcode: generated });
+                                        toast.success(`Código de barras ${generated} gerado e salvo!`);
+                                      } catch (err) {
+                                        toast.error("Erro ao gerar código de barras.");
+                                      }
+                                      setOpenRowMenuId(null);
+                                    }}
+                                    className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5"
+                                  >
+                                    <Barcode size={11} /> Gerar Código de Barras
+                                  </button>
+                                )}
+                                <button
+                                  type="button"
+                                  onClick={() => { handleDeleteProduct(product.id, product.name); setOpenRowMenuId(null); }}
+                                  className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5 text-rose-600"
+                                >
+                                  <Trash2 size={11} /> Eliminar
+                                </button>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </td>
                     </tr>
