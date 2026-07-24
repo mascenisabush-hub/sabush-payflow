@@ -5725,8 +5725,8 @@ export default function POS() {
 
       {/* 2. PROCESS RETURN & REFUND SCREEN MODAL */}
       {isReturnModalOpen && (
-        <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-200 rounded-[32px] max-w-5xl w-full h-[90vh] p-6 sm:p-8 shadow-2xl flex flex-col space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-100 bg-white flex flex-col">
+          <div className="w-full h-full p-4 sm:p-6 shadow-2xl flex flex-col space-y-3 relative animate-in fade-in duration-200">
             {/* Modal Header */}
             <button 
               type="button"
@@ -5739,14 +5739,14 @@ export default function POS() {
                 setAdjustmentAmount('');
                 setAdjustmentReason('');
               }}
-              className="absolute top-4 right-4 text-slate-400 hover:text-[#0B1F4D] p-2 hover:bg-slate-100 rounded-xl transition-all"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 text-slate-400 hover:text-[#0B1F4D] p-2 hover:bg-slate-100 rounded-xl transition-all"
             >
               <X size={20} />
             </button>
 
-            <div className="space-y-1.5 text-left shrink-0">
-              <h3 className="text-xl font-black text-[#0B1F4D] flex items-center gap-2">
-                <span className="text-2xl text-[#D4AF37]">🔄</span> Devoluções e Ajustes de Preço
+            <div className="space-y-1 text-left shrink-0 pr-10">
+              <h3 className="text-lg sm:text-xl font-black text-[#0B1F4D] flex items-center gap-2">
+                <span className="text-xl sm:text-2xl text-[#D4AF37]">🔄</span> Devoluções e Ajustes de Preço
               </h3>
               <p className="text-xs text-slate-500">
                 Selecione uma venda concluída para devolver artigos ao stock, ou aplicar um ajuste de preço sem alterar o stock.
@@ -5755,7 +5755,7 @@ export default function POS() {
             </div>
 
             {/* Split Panel Body */}
-            <div className="flex-1 flex flex-col md:flex-row gap-6 min-h-0 overflow-hidden">
+            <div className="flex-1 flex flex-col md:flex-row gap-4 min-h-0 overflow-hidden">
               {/* Left Side: Invoice Finder (40%) */}
               <div className="flex-1 md:flex-[0.4] bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col space-y-4 min-h-0">
                 <div className="space-y-1.5 text-left shrink-0">
@@ -5859,7 +5859,7 @@ export default function POS() {
                 {selectedInvoice ? (
                   <div className="flex-1 flex flex-col min-h-0">
                     {/* Invoice Meta Summary */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-white border border-slate-200 p-3.5 rounded-xl text-left text-xs mb-4 shrink-0">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-white border border-slate-200 p-3 rounded-xl text-left text-xs mb-3 shrink-0">
                       <div>
                         <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider block leading-none">ID Venda</span>
                         <span className="font-mono font-bold text-blue-950 block mt-1">#{selectedInvoice.id.toUpperCase()}</span>
@@ -5875,7 +5875,7 @@ export default function POS() {
                     </div>
 
                     {/* Mode Toggle: Stock Return vs Price Adjustment */}
-                    <div className="flex gap-2 mb-4 shrink-0">
+                    <div className="flex gap-2 mb-3 shrink-0">
                       <button
                         type="button"
                         onClick={() => setReturnMode('stock')}
