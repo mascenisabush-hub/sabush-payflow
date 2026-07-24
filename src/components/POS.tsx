@@ -168,11 +168,11 @@ const CartItemRow = React.memo<CartItemRowProps>(({
     >
       {/* Product Image + Name & Details */}
       <div className="col-span-5 flex items-center gap-2 text-left min-w-0 pr-1">
-        <div className="w-7 h-7 rounded-md bg-slate-100 border border-slate-150 shrink-0 overflow-hidden flex items-center justify-center">
+        <div className="w-7 h-7 rounded-md bg-slate-100 border border-slate-200 shrink-0 overflow-hidden flex items-center justify-center">
           {item.imageUrl ? (
             <img src={item.imageUrl} alt={item.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
           ) : (
-            <Package size={12} className="text-slate-350" />
+            <Package size={12} className="text-slate-300" />
           )}
         </div>
         <div className="flex flex-col min-w-0">
@@ -210,7 +210,7 @@ const CartItemRow = React.memo<CartItemRowProps>(({
           {(prices.finalUnitPrice).toLocaleString()}
         </span>
         {(item.overridePrice !== undefined || (item.manualDiscountValue && item.manualDiscountValue > 0)) && (
-          <span className="text-[7.5px] px-1 bg-amber-100 text-amber-850 rounded-sm font-black block mt-0.5 scale-90 origin-right">EDITADO</span>
+          <span className="text-[7.5px] px-1 bg-amber-100 text-amber-800 rounded-sm font-black block mt-0.5 scale-90 origin-right">EDITADO</span>
         )}
       </button>
 
@@ -3883,73 +3883,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsFlashOn(!isFlashOn)}
-                className="h-6 px-2 bg-[#0B1F4D] hover:bg-[#0B1F4D] border border-blue-500/30 text-[#EEF2FF] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer"
-              >
-                <Zap size={10} className={cn(isFlashOn ? "text-amber-400 animate-pulse" : "text-white")} />
-                {isFlashOn ? 'Lanterna On' : 'Lanterna'}
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* CAMERA SCANNER PANEL */}
-      <AnimatePresence>
-        {isCameraActive && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="bg-[#0B1F4D] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
-          >
-            <button 
-              onClick={() => setIsCameraActive(false)}
-              className="absolute top-2 right-2 p-1 rounded-full hover:bg-white/10 text-blue-200 hover:text-white transition-colors cursor-pointer"
-            >
-              <X size={14} />
-            </button>
-
-            <h3 className="text-[10px] font-black uppercase tracking-widest text-amber-400 mb-2">Leitor de Câmara Integrado</h3>
-
-            {/* Viewfinder elements layout */}
-            <div className="relative w-72 h-36 bg-[#0B1F4D] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center">
-              <video id="scanner-preview" className="w-full h-full object-cover" playsInline />
-              
-              {/* Orange viewfinder corner brackets */}
-              <div className="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-amber-500 rounded-tl"></div>
-              <div className="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-amber-500 rounded-tr"></div>
-              <div className="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-amber-500 rounded-bl"></div>
-              <div className="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-amber-500 rounded-br"></div>
-
-              {/* Glowing vertical laser scan animation line */}
-              <div className="absolute left-4 right-4 h-0.5 bg-amber-400 rounded opacity-85 shadow-[0_0_6px_3px_rgba(249,115,22,0.5)] animate-bounce select-none pointer-events-none"></div>
-
-              {/* Live Scanner Banner updates */}
-              {detectionBanner && (
-                <div className="absolute bottom-2 left-2 right-2 bg-amber-500 text-blue-950 text-center text-[9px] font-extrabold uppercase py-0.5 rounded shadow-md animate-pulse">
-                  {detectionBanner}
-                </div>
-              )}
-            </div>
-
-            {/* Flash & Inputs controls */}
-            <div className="flex items-center gap-3 mt-2 w-72 justify-between">
-              {cameras.length > 1 && (
-                <select
-                  value={selectedCameraId}
-                  onChange={(e) => setSelectedCameraId(e.target.value)}
-                  className="bg-[#0B1F4D] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#EEF2FF] focus:border-amber-500 h-6"
-                >
-                  {cameras.map((d: any, idx) => (
-                    <option key={d.deviceId} value={d.deviceId}>Cam {idx + 1}</option>
-                  ))}
-                </select>
-              )}
-              
-              <button
-                type="button"
-                onClick={() => setIsFlashOn(!isFlashOn)}
-                className="h-6 px-2 bg-[#0B1F4D] hover:bg-[#0B1F4D] border border-blue-500/30 text-[#EEF2FF] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer"
+                className="h-6 px-2 bg-[#0B1F4D] hover:bg-[#17306e] border border-blue-500/30 text-[#EEF2FF] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer transition-colors"
               >
                 <Zap size={10} className={cn(isFlashOn ? "text-amber-400 animate-pulse" : "text-white")} />
                 {isFlashOn ? 'Lanterna On' : 'Lanterna'}
@@ -4249,7 +4183,7 @@ export default function POS() {
 
                   {/* Customer Debt details / Partial input elements */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && saleMode !== 'dinheiro' && (
-                    <div className="bg-blue-50/50 border border-blue-150 p-2.5 rounded-lg text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-blue-50/50 border border-blue-100 p-2.5 rounded-lg text-[11px] font-sans space-y-2 text-left text-blue-900">
                       {saleMode === 'credito' && (
                         <div className="space-y-1">
                           <span className="text-blue-600 font-extrabold uppercase text-[8px] tracking-widest block">Dívida provisória:</span>
@@ -4304,7 +4238,7 @@ export default function POS() {
 
                   {/* Loyalty Points controls */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && (
-                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-150 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-100 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-1.5">
                           <span className="text-sm">🪙</span>
@@ -4368,7 +4302,7 @@ export default function POS() {
                                 "px-2 py-1 text-[8.5px] font-black uppercase tracking-wider rounded-lg border transition-all shrink-0 cursor-pointer h-7 leading-none flex items-center justify-center",
                                 redeemedPoints > 0
                                   ? "bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100"
-                                  : "bg-amber-500 border-amber-600 text-blue-950 hover:bg-amber-450"
+                                  : "bg-amber-500 border-amber-600 text-blue-950 hover:bg-amber-400"
                               )}
                             >
                               {redeemedPoints > 0 ? "Limpar" : "Máximo"}
@@ -4631,7 +4565,7 @@ export default function POS() {
 
                   {/* Customer Debt details / Partial input elements */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && saleMode !== 'dinheiro' && (
-                    <div className="bg-blue-50/50 border border-blue-150 p-2.5 rounded-lg text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-blue-50/50 border border-blue-100 p-2.5 rounded-lg text-[11px] font-sans space-y-2 text-left text-blue-900">
                       {saleMode === 'credito' && (
                         <div className="space-y-1">
                           <span className="text-blue-600 font-extrabold uppercase text-[8px] tracking-widest block">Dívida provisória:</span>
@@ -4686,7 +4620,7 @@ export default function POS() {
 
                   {/* Loyalty Points controls */}
                   {selectedCustomerId !== 'Walk-in' && selectedCust && (
-                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-150 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
+                    <div className="bg-gradient-to-br from-blue-50/60 to-amber-50/10 border border-blue-100 p-2.5 rounded-xl text-[11px] font-sans space-y-2 text-left text-blue-900">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-1.5">
                           <span className="text-sm">🪙</span>
@@ -4750,7 +4684,7 @@ export default function POS() {
                                 "px-2 py-1 text-[8.5px] font-black uppercase tracking-wider rounded-lg border transition-all shrink-0 cursor-pointer h-7 leading-none flex items-center justify-center",
                                 redeemedPoints > 0
                                   ? "bg-rose-50 border-rose-200 text-rose-700 hover:bg-rose-100"
-                                  : "bg-amber-500 border-amber-600 text-blue-950 hover:bg-amber-450"
+                                  : "bg-amber-500 border-amber-600 text-blue-950 hover:bg-amber-400"
                               )}
                             >
                               {redeemedPoints > 0 ? "Limpar" : "Máximo"}
@@ -4835,14 +4769,14 @@ export default function POS() {
           <div className="bg-white w-full max-w-md max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Controle do Turno de Caixa</h3>
-              <button onClick={() => setIsShiftModalOpen(false)} className="text-slate-450 hover:text-slate-800">
+              <button onClick={() => setIsShiftModalOpen(false)} className="text-slate-500 hover:text-slate-800">
                 <X size={16} />
               </button>
             </div>
 
             {currentShift ? (
               <div className="space-y-4 text-xs">
-                <div className="bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-250 leading-snug">
+                <div className="bg-emerald-50 text-emerald-800 p-3 rounded-xl border border-emerald-200 leading-snug">
                   <div className="font-extrabold uppercase text-[10px]">Turno Registado: #{currentShift.id.slice(-6).toUpperCase()}</div>
                   <div className="mt-1">Iniciado por: <span className="font-bold">{currentShift.cashierName}</span></div>
                   <div>Início: <span>{new Date(currentShift.openedAt).toLocaleTimeString()} {new Date(currentShift.openedAt).toLocaleDateString()}</span></div>
@@ -5087,7 +5021,7 @@ export default function POS() {
           <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-slate-800 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b pb-2">
               <h3 className="text-sm font-black uppercase tracking-widest text-slate-800">Registar Novo Cliente</h3>
-              <button onClick={() => setIsQuickCustomerOpen(false)} className="text-slate-450 hover:text-slate-800">
+              <button onClick={() => setIsQuickCustomerOpen(false)} className="text-slate-500 hover:text-slate-800">
                 <X size={16} />
               </button>
             </div>
@@ -5194,7 +5128,7 @@ export default function POS() {
                     className={cn(
                       "flex justify-between items-center p-3 rounded-xl border cursor-pointer transition-colors",
                       selectedCustomerId === c.id 
-                        ? "bg-blue-50 border-blue-350 text-blue-950 font-bold" 
+                        ? "bg-blue-50 border-blue-300 text-blue-950 font-bold" 
                         : "bg-blue-50/25 hover:bg-blue-50/60 border-blue-100/60 text-blue-800"
                     )}
                   >
@@ -5272,7 +5206,7 @@ export default function POS() {
           <div className="bg-white w-full max-w-4xl h-[85vh] rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200 flex flex-col">
             <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2 flex-shrink-0">
               <div className="flex items-center gap-2">
-                <Package className="text-blue-650" size={18} />
+                <Package className="text-blue-600" size={18} />
                 <h3 className="text-sm font-black uppercase tracking-widest text-blue-950">Catálogo de Artigos do ERP</h3>
               </div>
               <button onClick={() => setIsCatalogOpen(false)} className="text-blue-400 hover:text-blue-900">
@@ -5480,7 +5414,7 @@ export default function POS() {
                   autoFocus
                   required
                   placeholder={`Ex: Cliente #${suspendedCarts.length + 1}`}
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                   value={suspenseCartLabel}
                   onChange={e => setSuspenseCartLabel(e.target.value)}
                 />
@@ -5490,13 +5424,13 @@ export default function POS() {
                 <button 
                   type="button"
                   onClick={() => setIsSuspenseLabelModalOpen(false)}
-                  className="flex-1 py-3.5 bg-slate-800 hover:bg-slate-750 text-slate-350 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
+                  className="flex-1 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
                 >
                   Cancelar
                 </button>
                 <button 
                   type="submit"
-                  className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-550 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-emerald-600/10"
+                  className="flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-emerald-600/10"
                 >
                   Confirmar Suspensão
                 </button>
@@ -5541,12 +5475,12 @@ export default function POS() {
                   return (
                     <div 
                       key={sc.id} 
-                      className="bg-slate-950/40 border border-slate-850 hover:border-slate-800 p-4.5 rounded-[24px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
+                      className="bg-slate-950/40 border border-slate-800 hover:border-slate-800 p-4.5 rounded-[24px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 transition-all"
                     >
                       <div className="text-left space-y-1">
                         <div className="flex items-center gap-2">
                           <span className="font-extrabold text-white text-sm">{sc.label}</span>
-                          <span className="bg-slate-800 text-slate-350 text-[9px] font-mono font-black px-2 py-0.5 rounded-full">
+                          <span className="bg-slate-800 text-slate-300 text-[9px] font-mono font-black px-2 py-0.5 rounded-full">
                             {itemsCount} {itemsCount === 1 ? 'item' : 'itens'}
                           </span>
                         </div>
@@ -5567,7 +5501,7 @@ export default function POS() {
                           <button
                             type="button"
                             onClick={() => handleRetrieveSuspendedCart(sc)}
-                            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-550 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm shadow-emerald-600/10"
+                            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm shadow-emerald-600/10"
                             title="Recuperar venda ativa"
                           >
                             Recuperar
@@ -5592,7 +5526,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsSuspendedModalOpen(false)}
-                className="w-full py-3.5 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
+                className="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
               >
                 Fechar Painel
               </button>
@@ -5622,7 +5556,7 @@ export default function POS() {
               </p>
             </div>
 
-            <div className="bg-slate-950/60 border border-slate-850 p-4.5 rounded-2xl font-sans text-xs text-slate-300 space-y-3 select-none">
+            <div className="bg-slate-950/60 border border-slate-800 p-4.5 rounded-2xl font-sans text-xs text-slate-300 space-y-3 select-none">
               <div className="flex justify-between">
                 <span>Limite Autorizado:</span>
                 <span className="font-bold text-white font-mono">{(selectedCust.creditLimit || 500).toLocaleString()} MT</span>
@@ -5658,14 +5592,14 @@ export default function POS() {
                   setIsCreditLimitModalOpen(false);
                   setIsManagerPINOpen(true);
                 }}
-                className="w-full py-3.5 bg-amber-600 hover:bg-amber-550 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-amber-600/10 flex items-center justify-center gap-2"
+                className="w-full py-3.5 bg-amber-600 hover:bg-amber-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-amber-600/10 flex items-center justify-center gap-2"
               >
                 <Lock size={14} /> Autorizar com PIN do Gerente
               </button>
               <button
                 type="button"
                 onClick={() => setIsCreditLimitModalOpen(false)}
-                className="w-full py-3.5 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
+                className="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
               >
                 Cancelar Venda a Crédito
               </button>
@@ -5699,7 +5633,7 @@ export default function POS() {
             </div>
 
             {/* Item details card */}
-            <div className="bg-slate-950/60 border border-slate-850 p-4 rounded-2xl text-left font-sans text-xs space-y-2 select-none">
+            <div className="bg-slate-950/60 border border-slate-800 p-4 rounded-2xl text-left font-sans text-xs space-y-2 select-none">
               <div className="flex justify-between items-start">
                 <span className="text-slate-400">Produto:</span>
                 <span className="font-bold text-slate-100 max-w-[200px] text-right truncate">{voidItem.name}</span>
@@ -5708,8 +5642,8 @@ export default function POS() {
                 <span className="text-slate-400">Quantidade:</span>
                 <span className="font-mono font-bold text-slate-200">{voidItem.quantity} {voidItem.selectedUnit}</span>
               </div>
-              <div className="flex justify-between pt-1 border-t border-slate-850 text-sm">
-                <span className="text-slate-450 font-medium">Valor Total:</span>
+              <div className="flex justify-between pt-1 border-t border-slate-800 text-sm">
+                <span className="text-slate-500 font-medium">Valor Total:</span>
                 <span className="font-mono font-black text-[#D4AF37]">
                   {(getCartItemPricing(voidItem).total).toLocaleString()} MT
                 </span>
@@ -5739,7 +5673,7 @@ export default function POS() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Código de Motivo</label>
                 <select 
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                   value={voidReason}
                   onChange={(e) => setVoidReason(e.target.value)}
                 >
@@ -5757,7 +5691,7 @@ export default function POS() {
                     type="text"
                     required
                     placeholder="Ex: Embalagem danificada pelo cliente"
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                     value={customVoidReason}
                     onChange={(e) => setCustomVoidReason(e.target.value)}
                   />
@@ -5773,14 +5707,14 @@ export default function POS() {
                   setIsVoidReasonModalOpen(false);
                   setVoidItem(null);
                 }}
-                className="flex-1 py-3 bg-slate-800 hover:bg-slate-750 text-slate-350 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
+                className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center"
               >
                 Cancelar
               </button>
               <button 
                 type="button"
                 onClick={() => executeVoidItem(false)}
-                className="flex-1 py-3 bg-rose-600 hover:bg-rose-550 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-rose-600/10"
+                className="flex-1 py-3 bg-rose-600 hover:bg-rose-500 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center shadow-lg shadow-rose-600/10"
               >
                 Anular Artigo
               </button>
@@ -5823,12 +5757,12 @@ export default function POS() {
             {/* Split Panel Body */}
             <div className="flex-1 flex flex-col md:flex-row gap-6 min-h-0 overflow-hidden">
               {/* Left Side: Invoice Finder (40%) */}
-              <div className="flex-1 md:flex-[0.4] bg-slate-950/40 border border-slate-850 rounded-2xl p-4 flex flex-col space-y-4 min-h-0">
+              <div className="flex-1 md:flex-[0.4] bg-slate-950/40 border border-slate-800 rounded-2xl p-4 flex flex-col space-y-4 min-h-0">
                 <div className="space-y-1.5 text-left shrink-0">
                   <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Pesquisar Fatura</label>
                   <div className="flex gap-2">
                     <div className="relative flex-1">
-                      <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-550" />
+                      <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                       <input 
                         type="text"
                         placeholder="ID Fatura, Cliente..."
@@ -5843,7 +5777,7 @@ export default function POS() {
                     <button
                       type="button"
                       onClick={handleSearchInvoice}
-                      className="px-4 bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                      className="px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer"
                     >
                       Pesquisar
                     </button>
@@ -5892,7 +5826,7 @@ export default function POS() {
                             "p-3.5 rounded-xl text-left border cursor-pointer transition-all flex flex-col space-y-1.5",
                             isActive 
                               ? "bg-[#D4AF37]/10 border-[#D4AF37] shadow-sm" 
-                              : "bg-slate-900/60 border-slate-850 hover:border-slate-800"
+                              : "bg-slate-900/60 border-slate-800 hover:border-slate-800"
                           )}
                         >
                           <div className="flex justify-between items-center">
@@ -5900,15 +5834,15 @@ export default function POS() {
                             <span className="font-mono text-xs font-extrabold text-amber-500">{(inv.total || 0).toLocaleString()} MT</span>
                           </div>
                           
-                          <div className="flex justify-between text-[10px] text-slate-450 font-medium">
+                          <div className="flex justify-between text-[10px] text-slate-500 font-medium">
                             <span className="truncate max-w-[120px]">
                               {inv.customerName || inv.customerId || 'Cliente Geral'}
                             </span>
                             <span>{new Date(inv.date).toLocaleDateString()}</span>
                           </div>
 
-                          <div className="flex justify-between items-center pt-1 border-t border-slate-850/60 text-[9px]">
-                            <span className="bg-slate-800/80 text-slate-350 px-1.5 py-0.5 rounded-md font-mono">
+                          <div className="flex justify-between items-center pt-1 border-t border-slate-800/60 text-[9px]">
+                            <span className="bg-slate-800/80 text-slate-300 px-1.5 py-0.5 rounded-md font-mono">
                               {itemsCount} {itemsCount === 1 ? 'item' : 'itens'}
                             </span>
                             <span className="font-bold text-slate-400 uppercase tracking-widest">{inv.paymentMethod}</span>
@@ -5921,11 +5855,11 @@ export default function POS() {
               </div>
 
               {/* Right Side: Return Calculator (60%) */}
-              <div className="flex-1 md:flex-[0.6] bg-slate-950/20 border border-slate-850 rounded-2xl p-4 flex flex-col min-h-0">
+              <div className="flex-1 md:flex-[0.6] bg-slate-950/20 border border-slate-800 rounded-2xl p-4 flex flex-col min-h-0">
                 {selectedInvoice ? (
                   <div className="flex-1 flex flex-col min-h-0">
                     {/* Invoice Meta Summary */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-slate-950/60 border border-slate-850 p-3.5 rounded-xl text-left text-xs mb-4 shrink-0">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl text-left text-xs mb-4 shrink-0">
                       <div>
                         <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider block leading-none">ID Venda</span>
                         <span className="font-mono font-bold text-slate-200 block mt-1">#{selectedInvoice.id.toUpperCase()}</span>
@@ -5973,7 +5907,7 @@ export default function POS() {
                         <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-1 shrink-0">
                           Ajuste de Preço — sem alteração de stock
                         </div>
-                        <p className="text-[10px] text-slate-450 text-left mb-4 shrink-0">
+                        <p className="text-[10px] text-slate-500 text-left mb-4 shrink-0">
                           Use esta opção para corrigir um valor cobrado incorrectamente (ex: erro de preço, cobrança a mais). O cliente mantém o(s) artigo(s) — o stock NÃO é alterado.
                         </p>
 
@@ -6043,7 +5977,7 @@ export default function POS() {
 
                         <div className="mt-5 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
                           <div className="text-left w-full sm:w-auto">
-                            <span className="text-[10px] text-slate-450 uppercase tracking-widest block font-black leading-none">Total a Ajustar</span>
+                            <span className="text-[10px] text-slate-500 uppercase tracking-widest block font-black leading-none">Total a Ajustar</span>
                             <span className="text-2xl font-mono font-black text-amber-500 block mt-1.5 leading-none">
                               {(Number(adjustmentAmount) || 0).toLocaleString()} MT
                             </span>
@@ -6053,7 +5987,7 @@ export default function POS() {
                             type="button"
                             disabled={isProcessingAdjustment || !(Number(adjustmentAmount) > 0) || !adjustmentReason.trim()}
                             onClick={() => executePriceAdjustment(false)}
-                            className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-450 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                            className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
                           >
                             {isProcessingAdjustment ? (
                               <>
@@ -6089,7 +6023,7 @@ export default function POS() {
                               "p-3.5 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left transition-all",
                               isSelected 
                                 ? "bg-amber-950/10 border-amber-800/80" 
-                                : "bg-slate-900/40 border-slate-850"
+                                : "bg-slate-900/40 border-slate-800"
                             )}
                           >
                             <div className="space-y-1">
@@ -6114,7 +6048,7 @@ export default function POS() {
                                       [itemKey]: Math.max(0, qtyToReturn - 1)
                                     }));
                                   }}
-                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-850 text-slate-400 transition-colors cursor-pointer"
+                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-800 text-slate-400 transition-colors cursor-pointer"
                                 >
                                   <Minus size={12} className="stroke-[2.5]" />
                                 </button>
@@ -6144,7 +6078,7 @@ export default function POS() {
                                       [itemKey]: Math.min(item.quantity, qtyToReturn + 1)
                                     }));
                                   }}
-                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-850 text-slate-400 transition-colors cursor-pointer"
+                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-800 text-slate-400 transition-colors cursor-pointer"
                                 >
                                   <Plus size={12} className="stroke-[2.5]" />
                                 </button>
@@ -6211,7 +6145,7 @@ export default function POS() {
                     {/* Grand Refund Amount Summary and Action button */}
                     <div className="mt-5 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
                       <div className="text-left w-full sm:w-auto">
-                        <span className="text-[10px] text-slate-450 uppercase tracking-widest block font-black leading-none">Total Reembolso</span>
+                        <span className="text-[10px] text-slate-500 uppercase tracking-widest block font-black leading-none">Total Reembolso</span>
                         <span className="text-2xl font-mono font-black text-amber-500 block mt-1.5 leading-none">
                           {selectedInvoice.items.reduce((acc: number, item: any) => acc + (item.price * (returnQuantities[`${item.id}-${item.selectedUnit}`] || 0)), 0).toLocaleString()} MT
                         </span>
@@ -6221,7 +6155,7 @@ export default function POS() {
                         type="button"
                         disabled={isProcessingReturn || selectedInvoice.items.reduce((acc: number, item: any) => acc + (item.price * (returnQuantities[`${item.id}-${item.selectedUnit}`] || 0)), 0) <= 0}
                         onClick={() => executeRefund(false)}
-                        className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-450 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
                       >
                         {isProcessingReturn ? (
                           <>
@@ -6243,7 +6177,7 @@ export default function POS() {
                   <div className="flex-1 flex flex-col items-center justify-center text-slate-500 p-8 space-y-3 select-none">
                     <div className="text-5xl">📄</div>
                     <p className="text-xs font-black uppercase tracking-widest text-slate-400">Nenhuma Fatura Selecionada</p>
-                    <p className="text-xs text-slate-450 max-w-xs text-center leading-normal">
+                    <p className="text-xs text-slate-500 max-w-xs text-center leading-normal">
                       Selecione uma fatura a partir da lista à esquerda ou pesquise pelo identificador único para iniciar a devolução de artigos.
                     </p>
                   </div>
@@ -6262,7 +6196,7 @@ export default function POS() {
             <button 
               type="button"
               onClick={() => setIsReviewModalOpen(false)}
-              className="absolute top-4 right-4 text-slate-450 hover:text-slate-700 p-2 hover:bg-slate-100 rounded-xl transition-all cursor-pointer"
+              className="absolute top-4 right-4 text-slate-500 hover:text-slate-700 p-2 hover:bg-slate-100 rounded-xl transition-all cursor-pointer"
             >
               <X size={20} />
             </button>
@@ -6283,9 +6217,9 @@ export default function POS() {
                   <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
                     <div>
                       <span className="text-xs font-black text-rose-950">Fatura: #{sale.invoiceData?.invoiceNumber || sale.id}</span>
-                      <span className="text-[10px] text-slate-505 block">Registada em: {new Date(sale.createdAt).toLocaleString()}</span>
+                      <span className="text-[10px] text-slate-500 block">Registada em: {new Date(sale.createdAt).toLocaleString()}</span>
                     </div>
-                    <span className="px-2.5 py-1 bg-rose-100 text-rose-850 text-[9px] font-bold rounded-lg uppercase tracking-wider self-start sm:self-auto">
+                    <span className="px-2.5 py-1 bg-rose-100 text-rose-800 text-[9px] font-bold rounded-lg uppercase tracking-wider self-start sm:self-auto">
                       Falha de Stock
                     </span>
                   </div>
@@ -6355,7 +6289,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(false)}
-                className="px-5 py-2.5 bg-slate-900 hover:bg-slate-850 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer"
+                className="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer"
               >
                 Fechar Painel
               </button>
@@ -6421,7 +6355,7 @@ export default function POS() {
                         "py-2 px-3 text-[10px] font-bold rounded-lg border uppercase transition-all cursor-pointer text-center",
                         overrideItemDiscountType === type
                           ? "bg-amber-500 border-amber-600 text-blue-950 font-black"
-                          : "bg-blue-50/20 border-blue-200 text-blue-800 hover:border-blue-350"
+                          : "bg-blue-50/20 border-blue-200 text-blue-800 hover:border-blue-300"
                       )}
                     >
                       {type === 'none' ? 'Sem Desconto' : type === 'percent' ? 'Percentual (%)' : 'Fixo (MT)'}
@@ -6494,7 +6428,7 @@ export default function POS() {
                   toast.success("Preço / Desconto gravado com sucesso!");
                   setIsItemOverrideModalOpen(false);
                 }}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-450 text-blue-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer border-none"
+                className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-blue-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer border-none"
               >
                 Gravar
               </button>
@@ -6539,7 +6473,7 @@ export default function POS() {
                         "py-2 px-3 text-[10px] font-bold rounded-lg border uppercase transition-all cursor-pointer text-center",
                         editCartDiscountType === type
                           ? "bg-amber-500 border-amber-600 text-blue-950 font-black"
-                          : "bg-blue-50/20 border-blue-200 text-blue-800 hover:border-blue-350"
+                          : "bg-blue-50/20 border-blue-200 text-blue-800 hover:border-blue-300"
                       )}
                     >
                       {type === 'none' ? 'Sem Desconto' : type === 'percent' ? 'Percentual (%)' : 'Fixo (MT)'}
@@ -6626,7 +6560,7 @@ export default function POS() {
 
                   setIsCartDiscountModalOpen(false);
                 }}
-                className="flex-1 py-3 bg-amber-500 hover:bg-amber-450 text-blue-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer border-none"
+                className="flex-1 py-3 bg-amber-500 hover:bg-amber-400 text-blue-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer border-none"
               >
                 Aplicar
               </button>
