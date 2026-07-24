@@ -2020,10 +2020,10 @@ Sabush System ERP`;
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 pos-root">
         
         {/* Card 1: Vendas a Retalho */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
-            <span className="text-[10px] font-black text-blue-200 uppercase tracking-widest opacity-100">
+            <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest opacity-100">
               🛍️ Vendas a Retalho
             </span>
             <span className="text-[9px] font-extrabold bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-lg uppercase tracking-wider">
@@ -2033,25 +2033,25 @@ Sabush System ERP`;
           
           <div className="space-y-1 relative z-10">
             <p className="text-2xl md:text-3xl font-black tracking-tight text-white">
-              {filteredChartAndMetricData.metrics.retail.toLocaleString()} <span className="text-sm font-medium text-blue-200">{currency}</span>
+              {filteredChartAndMetricData.metrics.retail.toLocaleString()} <span className="text-sm font-medium text-slate-300">{currency}</span>
             </p>
             
             {/* Trend percentage comparative */}
-            <div className="flex items-center gap-1 text-[11px] font-extrabold text-blue-100 mt-1">
+            <div className={cn("flex items-center gap-1 text-[11px] font-extrabold mt-1", channelTrends.retail >= 0 ? "text-emerald-400" : "text-rose-400")}>
               {channelTrends.retail >= 0 ? (
-                <ArrowUpRight size={13} className="text-blue-100 shrink-0" />
+                <ArrowUpRight size={13} className="shrink-0" />
               ) : (
-                <ArrowDownRight size={13} className="text-blue-100 shrink-0" />
+                <ArrowDownRight size={13} className="shrink-0" />
               )}
-              <span className="text-blue-100">
+              <span>
                 {channelTrends.retail >= 0 ? "+" : ""}{channelTrends.retail}%
               </span>
-              <span className="text-blue-100">vs mês anterior</span>
+              <span className="text-slate-400 font-semibold">vs mês anterior</span>
             </div>
           </div>
 
           {/* Sparkline micro path */}
-          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-blue-900/20 p-1 border border-white/5">
+          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-black/20 p-1 border border-white/5">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sparklineData} margin={{ top: 2, bottom: 2, left: 2, right: 2 }}>
                 <Line type="monotone" dataKey="retail" stroke="#FFFFFF" strokeWidth={1.8} dot={false} />
@@ -2061,10 +2061,10 @@ Sabush System ERP`;
         </div>
 
         {/* Card 2: Vendas por Grosso */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#0A1C38] via-[#0F5C56] to-[#178F82] text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        <div className="relative overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-slate-950 text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
-            <span className="text-[10px] font-black text-blue-100 uppercase tracking-widest opacity-100">
+            <span className="text-[10px] font-black text-slate-300 uppercase tracking-widest opacity-100">
               📦 Vendas por Grosso
             </span>
             <span className="text-[9px] font-extrabold bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-lg uppercase tracking-wider">
@@ -2074,23 +2074,23 @@ Sabush System ERP`;
           
           <div className="space-y-1 relative z-10">
             <p className="text-2xl md:text-3xl font-black tracking-tight text-white">
-              {filteredChartAndMetricData.metrics.wholesale.toLocaleString()} <span className="text-sm font-medium text-white/80">{currency}</span>
+              {filteredChartAndMetricData.metrics.wholesale.toLocaleString()} <span className="text-sm font-medium text-slate-300">{currency}</span>
             </p>
             
-            <div className="flex items-center gap-1 text-[11px] font-extrabold text-white/90 mt-1">
+            <div className={cn("flex items-center gap-1 text-[11px] font-extrabold mt-1", channelTrends.wholesale >= 0 ? "text-emerald-400" : "text-rose-400")}>
               {channelTrends.wholesale >= 0 ? (
-                <ArrowUpRight size={13} className="text-white shrink-0" />
+                <ArrowUpRight size={13} className="shrink-0" />
               ) : (
-                <ArrowDownRight size={13} className="text-white shrink-0" />
+                <ArrowDownRight size={13} className="shrink-0" />
               )}
-              <span className="text-white/90">
+              <span>
                 {channelTrends.wholesale >= 0 ? "+" : ""}{channelTrends.wholesale}%
               </span>
-              <span className="text-white/80">vs mês anterior</span>
+              <span className="text-slate-400 font-semibold">vs mês anterior</span>
             </div>
           </div>
 
-          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-blue-900/20 p-1 border border-white/5">
+          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-black/20 p-1 border border-white/5">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sparklineData} margin={{ top: 2, bottom: 2, left: 2, right: 2 }}>
                 <Line type="monotone" dataKey="wholesale" stroke="#FFFFFF" strokeWidth={1.8} dot={false} />
@@ -2099,11 +2099,11 @@ Sabush System ERP`;
           </div>
         </div>
 
-        {/* Card 3: Vendas a Dinheiro */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 via-amber-600 to-yellow-600 text-white rounded-[28px] p-6 shadow-md border border-white/5">
+        {/* Card 3: Vendas a Dinheiro — the one highlighted/accent card in this row */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-orange-700 to-amber-800 text-white rounded-[28px] p-6 shadow-md border border-white/5">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-8 -mt-8 pointer-events-none blur-xl" />
           <div className="flex justify-between items-center mb-4 relative z-10">
-            <span className="text-[10px] font-black text-amber-100 uppercase tracking-widest opacity-100">
+            <span className="text-[10px] font-black text-orange-100 uppercase tracking-widest opacity-100">
               💵 Vendas a Dinheiro
             </span>
             <span className="text-[9px] font-extrabold bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-lg uppercase tracking-wider">
@@ -2113,23 +2113,23 @@ Sabush System ERP`;
           
           <div className="space-y-1 relative z-10">
             <p className="text-2xl md:text-3xl font-black tracking-tight text-white">
-              {filteredChartAndMetricData.metrics.cashSales.toLocaleString()} <span className="text-sm font-medium text-amber-100">{currency}</span>
+              {filteredChartAndMetricData.metrics.cashSales.toLocaleString()} <span className="text-sm font-medium text-orange-100">{currency}</span>
             </p>
             
-            <div className="flex items-center gap-1 text-[11px] font-extrabold text-amber-100 mt-1">
+            <div className={cn("flex items-center gap-1 text-[11px] font-extrabold mt-1", channelTrends.cash >= 0 ? "text-emerald-200" : "text-rose-200")}>
               {channelTrends.cash >= 0 ? (
-                <ArrowUpRight size={13} className="text-amber-100 shrink-0" />
+                <ArrowUpRight size={13} className="shrink-0" />
               ) : (
-                <ArrowDownRight size={13} className="text-amber-100 shrink-0" />
+                <ArrowDownRight size={13} className="shrink-0" />
               )}
-              <span className="text-amber-100">
+              <span>
                 {channelTrends.cash >= 0 ? "+" : ""}{channelTrends.cash}%
               </span>
-              <span className="text-amber-100">vs mês anterior</span>
+              <span className="text-orange-200">vs mês anterior</span>
             </div>
           </div>
 
-          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-amber-900/20 p-1 border border-white/5">
+          <div className="h-10 mt-6 relative z-10 overflow-hidden rounded-lg bg-black/20 p-1 border border-white/5">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={sparklineData} margin={{ top: 2, bottom: 2, left: 2, right: 2 }}>
                 <Line type="monotone" dataKey="cash" stroke="#FFFFFF" strokeWidth={1.8} dot={false} />
@@ -3025,10 +3025,10 @@ Sabush System ERP`;
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           
           {/* Box 1: Retail Sales */}
-          <div className="p-5 rounded-2xl bg-[#F0FDF4]/30 border border-emerald-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-150 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black text-emerald-805 uppercase tracking-widest leading-none">🛍️ Vendas a Retalho</span>
-              <span className="text-[9px] font-black bg-emerald-50 text-emerald-700 border border-emerald-100 px-2 py-0.5 rounded-lg font-mono">RETAIL</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">🛍️ Vendas a Retalho</span>
+              <span className="text-[9px] font-black bg-slate-100 text-slate-600 border border-slate-200 px-2 py-0.5 rounded-lg font-mono">RETAIL</span>
             </div>
             
             <div className="space-y-2">
@@ -3042,16 +3042,16 @@ Sabush System ERP`;
               </div>
               <div className="flex justify-between text-xs pt-1">
                 <span className="text-slate-600 font-bold">Acumulado Total:</span>
-                <span className="font-black text-emerald-705">{(metrics.retailSales || 0).toLocaleString()} {currency}</span>
+                <span className="font-black text-slate-900">{(metrics.retailSales || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
           </div>
 
           {/* Box 2: Wholesale Sales */}
-          <div className="p-5 rounded-2xl bg-[#FFFBEB]/40 border border-amber-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-150 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black text-amber-805 uppercase tracking-widest leading-none">📦 Vendas por Grosso</span>
-              <span className="text-[9px] font-black bg-amber-50 text-amber-700 border border-amber-100 px-2 py-0.5 rounded-lg font-mono">WHOLESALE</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">📦 Vendas por Grosso</span>
+              <span className="text-[9px] font-black bg-slate-100 text-slate-600 border border-slate-200 px-2 py-0.5 rounded-lg font-mono">WHOLESALE</span>
             </div>
             
             <div className="space-y-2">
@@ -3065,16 +3065,16 @@ Sabush System ERP`;
               </div>
               <div className="flex justify-between text-xs pt-1">
                 <span className="text-slate-600 font-bold">Acumulado Total:</span>
-                <span className="font-black text-amber-705">{(metrics.wholesaleSales || 0).toLocaleString()} {currency}</span>
+                <span className="font-black text-slate-900">{(metrics.wholesaleSales || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
           </div>
 
           {/* Box 3: Cash Sales */}
-          <div className="p-5 rounded-2xl bg-[#EFF6FF]/30 border border-blue-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-slate-50 border border-slate-150 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-black text-blue-805 uppercase tracking-widest leading-none">💵 Vendas a Dinheiro</span>
-              <span className="text-[9px] font-black bg-blue-50 text-blue-700 border border-blue-100 px-2 py-0.5 rounded-lg font-mono">CASH FLOW</span>
+              <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest leading-none">💵 Vendas a Dinheiro</span>
+              <span className="text-[9px] font-black bg-slate-100 text-slate-600 border border-slate-200 px-2 py-0.5 rounded-lg font-mono">CASH FLOW</span>
             </div>
             
             <div className="space-y-2">
@@ -3088,7 +3088,7 @@ Sabush System ERP`;
               </div>
               <div className="flex justify-between text-xs pt-1">
                 <span className="text-slate-600 font-bold">Acumulado Total:</span>
-                <span className="font-black text-blue-705">{(metrics.cashSales || 0).toLocaleString()} {currency}</span>
+                <span className="font-black text-slate-900">{(metrics.cashSales || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
           </div>
