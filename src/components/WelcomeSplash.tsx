@@ -96,6 +96,26 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 35%, #06142A 82%);
         }
 
+        /* Same animated concept-art backdrop used on AppLoadingScreen, so the
+           hand-off from loading screen to welcome splash feels continuous
+           rather than like two different designs. Sits above the lamp/rays
+           (which use mix-blend-mode: screen and would otherwise wash it out)
+           but below the vignette, which still darkens the edges. */
+        .ws-bg-image {
+          position: absolute;
+          inset: -3%;
+          background-image: url('/loading/sabush-tech-concept.webp');
+          background-size: cover;
+          background-position: center 38%;
+          opacity: 0.55;
+          filter: saturate(1.15) brightness(0.95);
+          animation: ws-bg-drift 24s ease-in-out infinite alternate;
+        }
+        @keyframes ws-bg-drift {
+          0% { transform: scale(1.04) translate(0, 0); }
+          100% { transform: scale(1.14) translate(-1.2%, -0.8%); }
+        }
+
         /* Faint rotating sunburst rays, matching the boot splash and loading screen */
         .ws-rays {
           position: absolute;
@@ -285,6 +305,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
 
         @media (prefers-reduced-motion: reduce) {
           .ws-lamp, .ws-rays, .ws-ring-svg, .ws-orbit-node { animation: none; opacity: 1; }
+          .ws-bg-image { animation: none; }
           .ws-wordmark { animation: ws-word-in 0.4s both; }
           .ws-spark { display: none; }
         }
@@ -292,6 +313,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
 
       <div className="ws-lamp" />
       <div className="ws-rays" />
+      <div className="ws-bg-image" />
       <div className="ws-vignette" />
 
       {[...Array(14)].map((_, i) => (
