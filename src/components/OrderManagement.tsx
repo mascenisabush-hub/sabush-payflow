@@ -434,7 +434,7 @@ export default function OrderManagement() {
           <div className="text-xs font-semibold text-slate-500 font-sans">
             Mostrando <span className="font-extrabold text-slate-900">{Math.min(orders.length, startIndex + 1)}</span> a{" "}
             <span className="font-extrabold text-slate-900">{Math.min(orders.length, endIndex)}</span> de{" "}
-            <span className="font-extrabold text-[#111827]">{orders.length}</span> encomendas
+            <span className="font-extrabold text-[#111111]">{orders.length}</span> encomendas
           </div>
           <div className="flex items-center gap-1.5 self-end sm:self-auto">
             <button

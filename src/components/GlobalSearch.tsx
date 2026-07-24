@@ -571,7 +571,7 @@ export default function GlobalSearch({ setCurrentTab }: GlobalSearchProps) {
 
                     {quickViewItem.data.description && (
                       <div className="p-3 border border-slate-100 bg-amber-50/20 text-slate-600 rounded-xl text-xs font-semibold leading-relaxed">
-                        <span className="block font-black text-[8px] tracking-widest text-[#d97706] mb-1 font-mono uppercase">Observações / Descrição</span>
+                        <span className="block font-black text-[8px] tracking-widest text-[#D4AF37] mb-1 font-mono uppercase">Observações / Descrição</span>
                         {quickViewItem.data.description}
                       </div>
                     )}

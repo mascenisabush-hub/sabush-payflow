@@ -47,7 +47,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           align-items: center;
           justify-content: center;
           overflow: hidden;
-          background: radial-gradient(ellipse at 50% 40%, #0F274C 0%, #06142A 62%, #030a16 100%);
+          background: radial-gradient(ellipse at 50% 40%, #0B1F4D 0%, #081536 62%, #0B1F4D 100%);
           animation: ws-fade-in 0.6s ease-out both;
         }
         .ws-root.ws-closing {
@@ -72,13 +72,13 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           transform: translate(-50%, -50%);
           background: conic-gradient(
             from 0deg,
-            #2C63B8 0deg,
-            #B8791A 70deg,
-            #D69B25 130deg,
-            #7CA3E0 190deg,
-            #6b3fa0 250deg,
-            #2C63B8 310deg,
-            #2C63B8 360deg
+            #2563EB 0deg,
+            #D4AF37 70deg,
+            #DEC26B 130deg,
+            #93B4F5 190deg,
+            #D4AF37 250deg,
+            #2563EB 310deg,
+            #2563EB 360deg
           );
           filter: blur(90px) saturate(140%);
           opacity: 0.4;
@@ -93,7 +93,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
         .ws-vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 35%, #06142A 82%);
+          background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 35%, #081536 82%);
         }
 
         /* Same animated concept-art backdrop used on AppLoadingScreen, so the
@@ -148,7 +148,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           align-items: center;
           justify-content: center;
           font-size: 15px;
-          background: linear-gradient(160deg, #0d1e3a, #071224);
+          background: linear-gradient(160deg, #0B1F4D, #0B1F4D);
           filter: drop-shadow(0 0 8px var(--node-glow, rgba(184,121,26,0.6)));
           opacity: 0;
           animation: ws-orbit 17s linear infinite, ws-node-in 0.5s 0.5s ease-out forwards;
@@ -159,7 +159,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           inset: 0;
           clip-path: inherit;
           padding: 1.3px;
-          background: linear-gradient(160deg, var(--node-c, #f5c877), transparent 55%, var(--node-c, #f5c877));
+          background: linear-gradient(160deg, var(--node-c, #F0DBA0), transparent 55%, var(--node-c, #F0DBA0));
           -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -219,7 +219,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           font-size: clamp(2.4rem, 7vw, 3.8rem);
           letter-spacing: 0.02em;
           line-height: 1.05;
-          background: linear-gradient(100deg, #E7B448 0%, #F4E3B0 18%, #D69B25 32%, #7CA3E0 55%, #E7B448 78%, #F4E3B0 92%, #D69B25 100%);
+          background: linear-gradient(100deg, #DEC26B 0%, #E9CC85 18%, #DEC26B 32%, #93B4F5 55%, #DEC26B 78%, #E9CC85 92%, #DEC26B 100%);
           background-size: 260% 100%;
           -webkit-background-clip: text;
           background-clip: text;
@@ -239,7 +239,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           margin-top: 14px;
           font-size: clamp(1.15rem, 3.2vw, 1.5rem);
           font-weight: 700;
-          color: #F4F8FA;
+          color: #FFFFFF;
           opacity: 0;
           animation: ws-rise-in 0.6s 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
@@ -247,7 +247,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
         .ws-tagline {
           margin-top: 10px;
           font-size: clamp(0.95rem, 2.4vw, 1.05rem);
-          color: #A8C2EA;
+          color: #93B4F5;
           max-width: 460px;
           line-height: 1.55;
           opacity: 0;
@@ -272,8 +272,8 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           font-weight: 700;
           font-size: 0.95rem;
           letter-spacing: 0.01em;
-          color: #06142A;
-          background: linear-gradient(120deg, #D69B25, #E7B448 45%, #D69B25 100%);
+          color: #081536;
+          background: linear-gradient(120deg, #DEC26B, #DEC26B 45%, #DEC26B 100%);
           border: none;
           cursor: pointer;
           box-shadow: 0 8px 30px rgba(184, 121, 26, 0.45), 0 0 0 1px rgba(255,255,255,0.08) inset;
@@ -300,7 +300,7 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
           animation: ws-rise-in 0.6s 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
         .ws-skip:hover {
-          color: #E7B448;
+          color: #DEC26B;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -334,23 +334,23 @@ export default function WelcomeSplash({ lang = 'pt', onFinish }: WelcomeSplashPr
         <div className="ws-mark-wrap">
           <svg className="ws-ring-svg cw" viewBox="0 0 168 168" aria-hidden="true">
             <circle cx="84" cy="84" r="80" fill="none" stroke="rgba(214,155,37,0.2)" strokeWidth="1.2" strokeDasharray="2 9" />
-            <circle cx="84" cy="84" r="80" fill="none" stroke="#f5c877" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="14 488" style={{ filter: 'drop-shadow(0 0 6px #f5c877)' }} />
+            <circle cx="84" cy="84" r="80" fill="none" stroke="#F0DBA0" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="14 488" style={{ filter: 'drop-shadow(0 0 6px #F0DBA0)' }} />
           </svg>
           <svg className="ws-ring-svg ccw" viewBox="0 0 168 168" aria-hidden="true">
             <circle cx="84" cy="84" r="68" fill="none" stroke="rgba(44,99,184,0.2)" strokeWidth="1" strokeDasharray="1 12" />
-            <circle cx="84" cy="84" r="68" fill="none" stroke="#7CA3E0" strokeWidth="2" strokeLinecap="round" strokeDasharray="10 417" style={{ filter: 'drop-shadow(0 0 6px #7CA3E0)' }} />
+            <circle cx="84" cy="84" r="68" fill="none" stroke="#93B4F5" strokeWidth="2" strokeLinecap="round" strokeDasharray="10 417" style={{ filter: 'drop-shadow(0 0 6px #93B4F5)' }} />
           </svg>
 
-          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#f5c877', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#f5c877', animationDelay: '0s, 0.5s' }}>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#F0DBA0', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#F0DBA0', animationDelay: '0s, 0.5s' }}>
             <ShoppingCart size={15} />
           </div>
-          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#7CA3E0', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#7CA3E0', animationDelay: '-4.25s, 0.65s' }}>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#93B4F5', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#93B4F5', animationDelay: '-4.25s, 0.65s' }}>
             <Package size={15} />
           </div>
-          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#D69B25', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#D69B25', animationDelay: '-8.5s, 0.8s' }}>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#DEC26B', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', color: '#DEC26B', animationDelay: '-8.5s, 0.8s' }}>
             <Receipt size={15} />
           </div>
-          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#60a5fa', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#60a5fa', animationDelay: '-12.75s, 0.95s' }}>
+          <div className="ws-orbit-node" style={{ ['--node-c' as any]: '#93B4F5', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', color: '#93B4F5', animationDelay: '-12.75s, 0.95s' }}>
             <BarChart3 size={15} />
           </div>
 

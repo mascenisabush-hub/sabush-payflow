@@ -956,7 +956,7 @@ export default function PurchaseOrders() {
               className="w-full h-full flex flex-col bg-slate-50 overflow-hidden"
             >
               {/* Ultra compact Header - the only part that never scrolls */}
-              <div className="p-3 bg-blue-900 text-white flex justify-between items-center border-b-2 border-[#B8791A]/50 shrink-0">
+              <div className="p-3 bg-blue-900 text-white flex justify-between items-center border-b-2 border-[#D4AF37]/50 shrink-0">
                 <div>
                   <h3 className="text-sm font-black tracking-tight flex items-center gap-2">
                     <span>🛒</span> {isPt ? "Entrada de Stock & Compra" : "Stock Purchase & Purchase Order"}
@@ -1466,7 +1466,7 @@ export default function PurchaseOrders() {
               </div>
 
               {/* Part 3: Total Investment & Actions Footer Bar */}
-              <div className="py-4 bg-blue-900 text-white px-6 border-t-2 border-[#B8791A]/50 flex items-center justify-between gap-4 shrink-0 shadow-xl">
+              <div className="py-4 bg-blue-900 text-white px-6 border-t-2 border-[#D4AF37]/50 flex items-center justify-between gap-4 shrink-0 shadow-xl">
                 <div className="flex items-center gap-3">
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{isPt ? "INVESTIMENTO TOTAL DE COMPRA:" : "TOTAL INVESTMENT:"}</span>
                   <span className="text-xl md:text-2xl font-black text-emerald-400 font-mono">
@@ -1709,7 +1709,7 @@ export default function PurchaseOrders() {
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               className="bg-white w-full max-w-lg rounded-[32px] shadow-2xl overflow-hidden border border-slate-200"
             >
-              <div className="p-6 md:p-8 bg-blue-900 text-white flex justify-between items-center border-b-2 border-[#B8791A]/50">
+              <div className="p-6 md:p-8 bg-blue-900 text-white flex justify-between items-center border-b-2 border-[#D4AF37]/50">
                 <div>
                   <h3 className="text-lg font-black tracking-tight">{isPt ? "💵 Registar Pagamento Fornecedor" : "💵 Record Supplier Payment"}</h3>
                   <p className="text-blue-200 text-xs mt-1">

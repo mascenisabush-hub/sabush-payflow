@@ -213,11 +213,11 @@ export default function Onboarding() {
 
   return (
     <div 
-      style={{ background: 'linear-gradient(135deg, #B8791A 0%, #3B6D11 100%)', minHeight: '100vh' }}
+      style={{ background: 'linear-gradient(135deg, #D4AF37 0%, #3B6D11 100%)', minHeight: '100vh' }}
       className="w-full text-slate-100 flex items-center justify-center p-4 md:p-8 font-sans overflow-y-auto relative antialiased selection:bg-orange-500 selection:text-white"
     >
       {/* Background overlay shapes */}
-      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#178F82]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-10 w-96 h-96 bg-[#2563EB]/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
 
       <div 
@@ -231,7 +231,7 @@ export default function Onboarding() {
         className="w-full max-w-5xl shadow-2xl overflow-hidden flex flex-col md:flex-row relative z-10 my-6 animate-in fade-in duration-300"
       >
         {/* LEFT PANEL */}
-        <div className="w-full md:w-80 bg-[#0F172A]/40 border-b md:border-b-0 md:border-r border-white/10 p-6 flex flex-col justify-between shrink-0">
+        <div className="w-full md:w-80 bg-[#111111]/40 border-b md:border-b-0 md:border-r border-white/10 p-6 flex flex-col justify-between shrink-0">
           <div>
             <div className="flex items-center gap-2 mb-6 pointer-events-none">
               <Zap className="text-[#639922] animate-pulse" size={24} />
@@ -261,10 +261,10 @@ export default function Onboarding() {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-[#1f294d]/60 mt-6 md:mt-0 flex items-center justify-between">
+          <div className="pt-6 border-t border-[#0B1F4D]/60 mt-6 md:mt-0 flex items-center justify-between">
             <button 
               onClick={logout}
-              className="text-slate-400 hover:text-white text-[10px] font-black uppercase tracking-widest bg-[#151a3a]/40 hover:bg-[#1a214b] p-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer w-full justify-center border border-[#222c54]/60"
+              className="text-slate-400 hover:text-white text-[10px] font-black uppercase tracking-widest bg-[#0B1F4D]/40 hover:bg-[#0B1F4D] p-3 rounded-xl transition-all flex items-center gap-2 cursor-pointer w-full justify-center border border-[#0B1F4D]/60"
             >
               <LogOut size={12} />
               Terminar Sessão
@@ -298,13 +298,13 @@ export default function Onboarding() {
                     setShowCountryChoices(true);
                   }}
                   onFocus={() => setShowCountryChoices(true)}
-                  className="w-full p-4 bg-[#0C2624] border border-[#1f294d] rounded-2xl text-xs text-white outline-none focus:ring-2 focus:ring-blue-500 font-bold"
+                  className="w-full p-4 bg-[#0B1F4D] border border-[#0B1F4D] rounded-2xl text-xs text-white outline-none focus:ring-2 focus:ring-blue-500 font-bold"
                 />
                 <Globe size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" />
               </div>
 
               {showCountryChoices && (
-                <div className="absolute left-0 right-0 mt-2 max-h-56 overflow-y-auto bg-[#0d122b] border border-[#1f294d] rounded-2xl shadow-xl z-50 divide-y divide-[#1f294d]/50 custom-scrollbar">
+                <div className="absolute left-0 right-0 mt-2 max-h-56 overflow-y-auto bg-[#0B1F4D] border border-[#0B1F4D] rounded-2xl shadow-xl z-50 divide-y divide-[#0B1F4D]/50 custom-scrollbar">
                   {AFRICAN_COUNTRIES.filter(c => 
                     c.name.toLowerCase().includes(searchCountryQuery.toLowerCase()) ||
                     c.code.toLowerCase().includes(searchCountryQuery.toLowerCase())
@@ -334,7 +334,7 @@ export default function Onboarding() {
                     >
                       <span className="text-lg">{c.flag}</span>
                       <span className="font-bold">{c.name}</span>
-                      <span className="ml-auto text-[10px] font-mono font-bold text-slate-400 tracking-wider bg-[#1a214b] px-2 py-0.5 rounded uppercase">{c.currencyCode}</span>
+                      <span className="ml-auto text-[10px] font-mono font-bold text-slate-400 tracking-wider bg-[#0B1F4D] px-2 py-0.5 rounded uppercase">{c.currencyCode}</span>
                     </button>
                   ))}
                   {AFRICAN_COUNTRIES.filter(c => 
@@ -359,7 +359,7 @@ export default function Onboarding() {
                 </h4>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="p-3 bg-[#0d122b] border border-[#1f294d]/60 rounded-xl">
+                  <div className="p-3 bg-[#0B1F4D] border border-[#0B1F4D]/60 rounded-xl">
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Idioma Principal</p>
                     <p className="text-xs font-extrabold text-white mt-1">
                       {regionalLanguage === 'pt' ? 'Português' :
@@ -370,24 +370,24 @@ export default function Onboarding() {
                     </p>
                   </div>
                   
-                  <div className="p-3 bg-[#0d122b] border border-[#1f294d]/60 rounded-xl">
+                  <div className="p-3 bg-[#0B1F4D] border border-[#0B1F4D]/60 rounded-xl">
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Moeda & Símbolo</p>
                     <p className="text-xs font-extrabold text-white mt-1">{regionalCurrency} ({regionalCurrencySymbol})</p>
                   </div>
 
-                  <div className="p-3 bg-[#0d122b] border border-[#1f294d]/60 rounded-xl">
+                  <div className="p-3 bg-[#0B1F4D] border border-[#0B1F4D]/60 rounded-xl">
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Imposto Padrão</p>
                     <p className="text-xs font-extrabold text-white mt-1">{regionalTaxLabel} {regionalTaxRate}%</p>
                   </div>
 
-                  <div className="p-3 bg-[#0d122b] border border-[#1f294d]/60 rounded-xl">
+                  <div className="p-3 bg-[#0B1F4D] border border-[#0B1F4D]/60 rounded-xl">
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Formato / Prefixo</p>
                     <p className="text-xs font-extrabold text-white mt-1">{regionalPhoneCode} ({regionalDateFormat})</p>
                   </div>
                 </div>
 
                 {/* Overrides / Customization */}
-                <div className="border-t border-[#1f294d]/50 pt-4 space-y-3">
+                <div className="border-t border-[#0B1F4D]/50 pt-4 space-y-3">
                   <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider leading-none">Ajustar Definições Recomendadas (Opcional)</p>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -400,7 +400,7 @@ export default function Onboarding() {
                           setRegionalLanguage(lang);
                           i18n.changeLanguage(lang);
                         }}
-                        className="w-full p-2.5 bg-[#0e132e] border border-[#1f294d] rounded-xl text-xs text-white outline-none font-bold focus:ring-2 focus:ring-blue-500/30"
+                        className="w-full p-2.5 bg-[#0B1F4D] border border-[#0B1F4D] rounded-xl text-xs text-white outline-none font-bold focus:ring-2 focus:ring-blue-500/30"
                       >
                         <option value="pt">Português (PT)</option>
                         <option value="en">English (EN)</option>
@@ -417,7 +417,7 @@ export default function Onboarding() {
                         type="text"
                         value={regionalCurrency}
                         onChange={(e) => setRegionalCurrency(e.target.value.toUpperCase())}
-                        className="w-full p-2.5 bg-[#0e132e] border border-[#1f294d] rounded-xl text-xs text-white outline-none font-bold text-center uppercase focus:ring-2 focus:ring-blue-500/30"
+                        className="w-full p-2.5 bg-[#0B1F4D] border border-[#0B1F4D] rounded-xl text-xs text-white outline-none font-bold text-center uppercase focus:ring-2 focus:ring-blue-500/30"
                       />
                     </div>
 
@@ -427,7 +427,7 @@ export default function Onboarding() {
                         type="text"
                         value={regionalCurrencySymbol}
                         onChange={(e) => setRegionalCurrencySymbol(e.target.value)}
-                        className="w-full p-2.5 bg-[#0e132e] border border-[#1f294d] rounded-xl text-xs text-white outline-none font-bold text-center focus:ring-2 focus:ring-blue-500/30"
+                        className="w-full p-2.5 bg-[#0B1F4D] border border-[#0B1F4D] rounded-xl text-xs text-white outline-none font-bold text-center focus:ring-2 focus:ring-blue-500/30"
                       />
                     </div>
 
@@ -437,7 +437,7 @@ export default function Onboarding() {
                         type="text"
                         value={regionalPhoneCode}
                         onChange={(e) => setRegionalPhoneCode(e.target.value)}
-                        className="w-full p-2.5 bg-[#0e132e] border border-[#1f294d] rounded-xl text-xs text-white outline-none font-bold text-center text-blue-400 focus:ring-2 focus:ring-blue-500/30"
+                        className="w-full p-2.5 bg-[#0B1F4D] border border-[#0B1F4D] rounded-xl text-xs text-white outline-none font-bold text-center text-blue-400 focus:ring-2 focus:ring-blue-500/30"
                       />
                     </div>
                   </div>
@@ -461,7 +461,7 @@ export default function Onboarding() {
                             className={`px-3 py-1.5 text-[10px] font-black uppercase tracking-wider rounded-xl border transition-all cursor-pointer ${
                               isChecked 
                                 ? 'bg-blue-600/20 border-blue-500/50 text-blue-400 shadow-lg'
-                                : 'bg-[#151a37]/50 border-[#1f294d] text-slate-400 hover:text-white'
+                                : 'bg-[#0B1F4D]/50 border-[#0B1F4D] text-slate-400 hover:text-white'
                             }`}
                           >
                             {option}
@@ -502,7 +502,7 @@ export default function Onboarding() {
           </div>
 
           {/* Navigation Control buttons at the bottom */}
-          <div className="border-t border-[#1f294d] pt-6 mt-8 flex flex-row justify-end items-center gap-4 shrink-0">
+          <div className="border-t border-[#0B1F4D] pt-6 mt-8 flex flex-row justify-end items-center gap-4 shrink-0">
             <button
               type="button"
               disabled={loading || !termsAccepted || !selectedCountry}

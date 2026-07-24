@@ -835,7 +835,7 @@ export default function Storefront({ businessId, onClose }: StorefrontProps) {
                     className="bg-white border rounded-[32px] overflow-hidden shadow-md"
                   >
                     {/* Header bar */}
-                    <div className="bg-blue-900 p-6 text-white flex justify-between items-center border-b-2 border-[#B8791A]/50">
+                    <div className="bg-blue-900 p-6 text-white flex justify-between items-center border-b-2 border-[#D4AF37]/50">
                        <div>
                           <p className="text-[10px] font-black uppercase tracking-wider text-slate-400">
                             {trackedOrder.type === 'quotation' ? 'Cotação Online' : trackedOrder.type === 'invoice' ? 'Factura Oficial' : 'Encomenda Direta'}

@@ -392,7 +392,7 @@ export default function Settings() {
     businessName: businessData?.name || profile?.name || '',
     businessAddress: businessData?.address || profile?.address || '',
     logoUrl: businessData?.logoUrl || profile?.logoUrl || '',
-    brandColor: businessData?.brandColor || profile?.brandColor || '#178F82',
+    brandColor: businessData?.brandColor || profile?.brandColor || '#2563EB',
     paymentTerms: businessData?.paymentTerms || profile?.paymentTerms || '',
     paymentInstructions: businessData?.paymentInstructions || profile?.paymentInstructions || '',
     currency: businessData?.currency || profile?.currency || 'USD',
@@ -1212,13 +1212,13 @@ export default function Settings() {
                   
                   <div className="flex flex-wrap gap-2 items-center">
                     {[
-                      { hex: '#178F82', label: 'Sabush Green' },
+                      { hex: '#2563EB', label: 'Sabush Green' },
                       { hex: '#10b981', label: 'Emerald' },
-                      { hex: '#06b6d4', label: 'Teal Dream' },
-                      { hex: '#f97316', label: 'Ochre Orange' },
+                      { hex: '#2563EB', label: 'Teal Dream' },
+                      { hex: '#D4AF37', label: 'Ochre Orange' },
                       { hex: '#ef4444', label: 'Crimson' },
-                      { hex: '#8b5cf6', label: 'Royal' },
-                      { hex: '#475569', label: 'Slate Carbon' },
+                      { hex: '#93B4F5', label: 'Royal' },
+                      { hex: '#6B7280', label: 'Slate Carbon' },
                     ].map(preset => (
                       <button
                         key={preset.hex}
@@ -1247,7 +1247,7 @@ export default function Settings() {
                     <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-100 bg-white">
                       <input 
                         type="color" 
-                        value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#178F82'} 
+                        value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#2563EB'} 
                         onChange={e => {
                           const hex = e.target.value;
                           setFormData(prev => ({ ...prev, brandColor: hex }));
@@ -1276,7 +1276,7 @@ export default function Settings() {
                           }
                         }}
                         className="w-16 text-[10px] font-mono font-bold uppercase outline-none rounded p-1 text-slate-800"
-                        placeholder="#178F82"
+                        placeholder="#2563EB"
                       />
                     </div>
                   </div>
@@ -1494,14 +1494,14 @@ export default function Settings() {
                       <label className="text-[10px] uppercase font-black text-slate-400 tracking-wider font-mono">Predefined Brand Palettes</label>
                       <div className="grid grid-cols-2 gap-2.5">
                         {[
-                          { hex: '#178F82', label: 'Sabush Green' },
+                          { hex: '#2563EB', label: 'Sabush Green' },
                           { hex: '#10b981', label: 'Emerald Green' },
-                          { hex: '#06b6d4', label: 'Teal Dream' },
-                          { hex: '#f97316', label: 'Ochre Orange' },
+                          { hex: '#2563EB', label: 'Teal Dream' },
+                          { hex: '#D4AF37', label: 'Ochre Orange' },
                           { hex: '#ef4444', label: 'Crimson Red' },
-                          { hex: '#8b5cf6', label: 'Royal Purple' },
-                          { hex: '#475569', label: 'Slate Carbon' },
-                          { hex: '#ec4899', label: 'Rose Bouquet' },
+                          { hex: '#93B4F5', label: 'Royal Purple' },
+                          { hex: '#6B7280', label: 'Slate Carbon' },
+                          { hex: '#E9CC85', label: 'Rose Bouquet' },
                         ].map(preset => {
                           const isSelected = formData.brandColor.toLowerCase() === preset.hex.toLowerCase();
                           return (
@@ -1541,7 +1541,7 @@ export default function Settings() {
                         <div className="relative">
                           <input 
                             type="color" 
-                            value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#178F82'} 
+                            value={formData.brandColor.startsWith('#') && formData.brandColor.length === 7 ? formData.brandColor : '#2563EB'} 
                             onChange={e => {
                               const hex = e.target.value;
                               setFormData(prev => ({ ...prev, brandColor: hex }));
@@ -1572,12 +1572,12 @@ export default function Settings() {
                               }
                             }}
                             className="w-full px-4 py-2.5 outline-none rounded-xl border border-slate-200 text-sm font-mono font-extrabold uppercase bg-white text-slate-800 focus:ring-2 focus:ring-blue-500"
-                            placeholder="#178F82"
+                            placeholder="#2563EB"
                           />
                         </div>
                       </div>
                       <p className="text-[10px] text-slate-400 font-semibold leading-relaxed font-sans">
-                        Input any 6-digit hex color format (e.g. #7c3aed). The system compiles high-contrast hover shades and safe overlay tints automatically.
+                        Input any 6-digit hex color format (e.g. #D4AF37). The system compiles high-contrast hover shades and safe overlay tints automatically.
                       </p>
                     </div>
                   </div>
@@ -2090,9 +2090,9 @@ export default function Settings() {
                     </div>
 
                     {/* Right Column: Interactive Diagnostic Output Logger console */}
-                    <div className="lg:col-span-7 flex flex-col h-[420px] border border-slate-800 bg-[#070b13] rounded-3xl overflow-hidden shadow-inner">
+                    <div className="lg:col-span-7 flex flex-col h-[420px] border border-slate-800 bg-[#0B1F4D] rounded-3xl overflow-hidden shadow-inner">
                       {/* Terminal header */}
-                      <div className="bg-[#0b1220] border-b border-slate-800/80 px-4 py-3 flex items-center justify-between shrink-0 font-mono text-[10px]">
+                      <div className="bg-[#0B1F4D] border-b border-slate-800/80 px-4 py-3 flex items-center justify-between shrink-0 font-mono text-[10px]">
                         <div className="flex items-center gap-2">
                           <div className="flex gap-1">
                             <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
@@ -2104,7 +2104,7 @@ export default function Settings() {
                         <button
                           type="button"
                           onClick={() => setTestLogs([{ timestamp: new Date().toLocaleTimeString(), type: 'info', message: 'Consola resetada por administrador. Pronto para novo disparo.' }])}
-                          className="px-2.5 py-1 text-slate-400 hover:text-white font-bold bg-[#0d172a] hover:bg-[#12203b] border border-slate-850 rounded-lg transition-all cursor-pointer text-[9px]"
+                          className="px-2.5 py-1 text-slate-400 hover:text-white font-bold bg-[#0B1F4D] hover:bg-[#0B1F4D] border border-slate-850 rounded-lg transition-all cursor-pointer text-[9px]"
                         >
                           Limpar Consola
                         </button>
@@ -2183,7 +2183,7 @@ export default function Settings() {
                       </div>
 
                       {/* Footer Info of terminal */}
-                      <div className="bg-[#05090f] border-t border-slate-800 px-4 py-2 flex items-center justify-between shrink-0 font-mono text-[9px] text-slate-500">
+                      <div className="bg-[#0B1F4D] border-t border-slate-800 px-4 py-2 flex items-center justify-between shrink-0 font-mono text-[9px] text-slate-500">
                         <span>ESTADO: {isTestingWhatsApp ? 'A EXECUTAR...' : 'A GUARDAR COMANDO'}</span>
                         <span>MOCKING PROTOCOL: {testSandboxMode ? 'SANDBOX ACTIVE' : 'LIVE API'}</span>
                       </div>
@@ -2227,7 +2227,7 @@ export default function Settings() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-2">
                 {/* Left Column: Template Editor UI */}
                 <div className="lg:col-span-7 space-y-6">
-                  <div className="bg-[#FCFBF9] p-6 rounded-[32px] border border-slate-150 shadow-sm space-y-6">
+                  <div className="bg-[#FFFFFF] p-6 rounded-[32px] border border-slate-150 shadow-sm space-y-6">
                     {/* Tab Selection */}
                     <div>
                       <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-wider font-sans mb-3">Selecionar Tipo de Template</h4>
@@ -2339,7 +2339,7 @@ export default function Settings() {
 
                 {/* Right Column: WhatsApp Mockup Live Balloon Preview */}
                 <div className="lg:col-span-5 space-y-6">
-                  <div className="bg-slate-950 p-5 rounded-[32px] border border-slate-800 space-y-4 relative shadow-xl overflow-hidden min-h-[480px] flex flex-col justify-between" style={{ backgroundImage: 'radial-gradient(#1e293b 1.2px, transparent 0)', backgroundSize: '20px 20px' }}>
+                  <div className="bg-slate-950 p-5 rounded-[32px] border border-slate-800 space-y-4 relative shadow-xl overflow-hidden min-h-[480px] flex flex-col justify-between" style={{ backgroundImage: 'radial-gradient(#111111 1.2px, transparent 0)', backgroundSize: '20px 20px' }}>
                     
                     {/* Phone/WhatsApp Status Bar Header */}
                     <div className="space-y-3 shrink-0">
@@ -2372,11 +2372,11 @@ export default function Settings() {
                     {/* Chat Bubble Balloon (Takes remaining space) */}
                     <div className="flex-1 flex flex-col justify-start pt-4">
                       <div className="flex justify-start">
-                        <div className="bg-[#056162] text-white p-4 rounded-3xl rounded-tl-none max-w-[95%] text-left relative shadow-md border border-[#0d5558] space-y-2 transition-all">
+                        <div className="bg-[#2563EB] text-white p-4 rounded-3xl rounded-tl-none max-w-[95%] text-left relative shadow-md border border-[#2563EB] space-y-2 transition-all">
                           <div className="text-[11.5px] leading-relaxed whitespace-pre-wrap font-sans">
                             {getMockPreviewText(activePreviewTab === 'invoice' ? formData.invoiceTemplate : activePreviewTab === 'reminder' ? formData.reminderTemplate : formData.lowStockTemplate)}
                           </div>
-                          <div className="text-[8px] font-bold text-[#b5cbca] text-right mt-1.5 select-none font-mono flex items-center justify-end gap-1">
+                          <div className="text-[8px] font-bold text-[#93B4F5] text-right mt-1.5 select-none font-mono flex items-center justify-end gap-1">
                             <span>12:28</span>
                             <span className="text-sky-455 font-bold">✓✓</span>
                           </div>
@@ -2393,7 +2393,7 @@ export default function Settings() {
                       <div className="flex-1 bg-slate-800 py-1.5 px-3 rounded-full text-slate-400 text-[10px] text-left">
                         Mensagem escrita automaticamente...
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-[#128C7E] flex items-center justify-center text-white text-xs shadow">
+                      <div className="w-7 h-7 rounded-full bg-[#2563EB] flex items-center justify-center text-white text-xs shadow">
                         🎤
                       </div>
                     </div>
@@ -2435,7 +2435,7 @@ export default function Settings() {
                 </div>
 
                 {/* Add Branch Card */}
-                <div className="p-6 bg-[#FCFBF9] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
+                <div className="p-6 bg-[#FFFFFF] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
                   <div>
                     <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-wider font-sans">Registar Nova Filial</h4>
                     <p className="text-xs text-slate-500 mt-1 leading-relaxed font-semibold">
@@ -3176,7 +3176,7 @@ export default function Settings() {
             <fieldset disabled={!isSystemAdmin} className="space-y-8 animate-in fade-in duration-300">
               <div>
                 <h3 className="text-lg font-bold text-slate-900 font-sans">Segurança & Conectividade de Faturação</h3>
-                <p className="text-sm text-[#8B735F] font-semibold">
+                <p className="text-sm text-[#6B7280] font-semibold">
                   Controle a proteção de dados do negócio, PINs de colaboradores, e configure o desempenho móvel para internet lenta.
                 </p>
               </div>
@@ -3223,7 +3223,7 @@ export default function Settings() {
               </div>
 
               {/* Mobile Optimization & Connectivity Panel */}
-              <div className="p-6 bg-[#FAF7F2] rounded-[32px] border border-[#E9E1D2] space-y-6">
+              <div className="p-6 bg-[#F8F9FA] rounded-[32px] border border-[#F8F9FA] space-y-6">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 bg-slate-900 text-white rounded-2xl flex items-center justify-center shadow-lg">
                     <Wifi size={20} />
@@ -3235,7 +3235,7 @@ export default function Settings() {
                 </div>
 
                 {/* Connection Protocol Toggle (WebSockets vs Long Polling) */}
-                <div className="p-4 bg-white rounded-2xl border border-[#E9E1D2]/50 space-y-3">
+                <div className="p-4 bg-white rounded-2xl border border-[#F8F9FA]/50 space-y-3">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <p className="font-extrabold text-slate-800 text-xs uppercase tracking-wider mb-1 font-sans">Protocolo de Ligação Local (Firestore Channel)</p>
@@ -3252,7 +3252,7 @@ export default function Settings() {
                         checked={!forceLongPolling} 
                         onChange={e => setForceLongPolling(!e.target.checked)}
                       />
-                      <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F274C]"></div>
+                      <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0B1F4D]"></div>
                     </label>
                   </div>
                   
@@ -3273,7 +3273,7 @@ export default function Settings() {
                 </div>
 
                 {/* Cache-First Mode Toggle */}
-                <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-[#E9E1D2]/50">
+                <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-[#F8F9FA]/50">
                   <div className="flex-1 pr-6">
                     <p className="font-bold text-slate-800 text-xs uppercase tracking-wider font-sans">Modo Instantâneo (Cache-First Offline Reads)</p>
                     <p className="text-xs text-slate-500 mt-1 leading-relaxed font-semibold">
@@ -3287,14 +3287,14 @@ export default function Settings() {
                       checked={cacheFirstMode} 
                       onChange={e => setCacheFirstMode(e.target.checked)}
                     />
-                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0F274C]"></div>
+                    <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0B1F4D]"></div>
                   </label>
                 </div>
 
                 {/* IndexedDB database indicators */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                  <div className="p-4 bg-white rounded-xl border border-[#E9E1D2]/40 text-xs flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0F274C] flex items-center justify-center self-start">
+                  <div className="p-4 bg-white rounded-xl border border-[#F8F9FA]/40 text-xs flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#0B1F4D] flex items-center justify-center self-start">
                       <Database size={16} />
                     </div>
                     <div>
@@ -3304,14 +3304,14 @@ export default function Settings() {
                     </div>
                   </div>
 
-                  <div className="p-4 bg-white rounded-xl border border-[#E9E1D2]/40 text-xs flex items-center gap-3">
+                  <div className="p-4 bg-white rounded-xl border border-[#F8F9FA]/40 text-xs flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-750 flex items-center justify-center self-start">
                       <Globe size={16} />
                     </div>
                     <div>
                       <p className="font-black text-slate-700 uppercase tracking-tight font-sans">Otimização Móvel</p>
                       <p className="text-[10px] text-slate-400 font-bold leading-none mt-0.5">Compactador de tráfego móvel</p>
-                      <p className="text-[10px] text-[#8B735F] font-black mt-1">✓ Compressão Base64 ativada</p>
+                      <p className="text-[10px] text-[#6B7280] font-black mt-1">✓ Compressão Base64 ativada</p>
                     </div>
                   </div>
                 </div>
@@ -3832,7 +3832,7 @@ export default function Settings() {
               </div>
 
               {/* Lighthouse Compliance & PWA Optimization Checklist */}
-              <div className="p-6 bg-[#FCFBF9] rounded-[32px] border border-slate-150 space-y-4">
+              <div className="p-6 bg-[#FFFFFF] rounded-[32px] border border-slate-150 space-y-4">
                 <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-wider font-sans">Certificação Google Lighthouse PWA</h4>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -3940,7 +3940,7 @@ export default function Settings() {
               </div>
 
               {/* Backup Info & Automatic Scheduling Settings Card */}
-              <div className="p-6 bg-[#FCFBF9] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
+              <div className="p-6 bg-[#FFFFFF] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
                 <div>
                   <h4 className="font-extrabold text-slate-800 text-sm uppercase tracking-wider font-sans">Agendamento de Backups Automáticos</h4>
                   <p className="text-xs text-slate-500 mt-1 leading-relaxed font-semibold">
@@ -4124,9 +4124,9 @@ export default function Settings() {
                   </p>
                 </div>
 
-                <div className="p-6 bg-[#FCFBF9] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
+                <div className="p-6 bg-[#FFFFFF] rounded-[32px] border border-slate-150 shadow-sm space-y-6">
                   <div>
-                    <h4 className="font-extrabold text-[#B8791A] text-sm uppercase tracking-wider font-sans">Estado do Consentimento</h4>
+                    <h4 className="font-extrabold text-[#D4AF37] text-sm uppercase tracking-wider font-sans">Estado do Consentimento</h4>
                     {legalAcknowledgement?.acknowledged ? (
                       <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-emerald-50 border border-emerald-150 rounded-2xl">
                         <div className="flex items-center gap-3">

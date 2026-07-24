@@ -83,7 +83,7 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
           {/* Active Schema indicator */}
           <div className="flex items-center gap-2 self-start lg:self-center">
             <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700">
-              Esquema Ativo: <span className="text-[#B8791A] font-extrabold">{chartSchema === 'classic' ? 'CLÁSSICO' : chartSchema === 'vibrant' ? 'VIBRANTE' : chartSchema.toUpperCase()}</span>
+              Esquema Ativo: <span className="text-[#D4AF37] font-extrabold">{chartSchema === 'classic' ? 'CLÁSSICO' : chartSchema === 'vibrant' ? 'VIBRANTE' : chartSchema.toUpperCase()}</span>
             </span>
           </div>
         </div>
@@ -197,14 +197,14 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                       </linearGradient>
                     </defs>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
-                    <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                    <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                    <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                    <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
                     <YAxis yAxisId="right" orientation="right" axisLine={false} tickLine={false} tick={{ fill: schemaColors[chartSchema].warning, fontSize: 10 }} unit="%" domain={[0, 100]} />
                     <Tooltip 
-                      contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #ffffff15', borderRadius: '12px', color: '#fff' }}
+                      contentStyle={{ backgroundColor: '#111111', border: '1px solid #ffffff15', borderRadius: '12px', color: '#fff' }}
                       itemStyle={{ color: '#fff' }}
                     />
-                    <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '10px', color: '#94a3b8' }} />
+                    <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '10px', color: '#9CA3AF' }} />
                     <Bar yAxisId="left" dataKey="sales" name="Receita Bruta" fill={schemaColors[chartSchema].primary} radius={[4, 4, 0, 0]} barSize={16} />
                     <Bar yAxisId="left" dataKey="expenses" name="Despesa Comercial" fill={schemaColors[chartSchema].danger} radius={[4, 4, 0, 0]} barSize={16} />
                     <Line yAxisId="right" type="monotone" dataKey="margin" name="Margem Real %" stroke={schemaColors[chartSchema].warning} strokeWidth={3} dot={{ r: 4, stroke: schemaColors[chartSchema].warning, fill: '#fff' }} />
@@ -226,9 +226,9 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                   <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <LineChart data={weeklySalesTrends}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '12px', color: '#fff' }} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <Tooltip contentStyle={{ backgroundColor: '#111111', border: 'none', borderRadius: '12px', color: '#fff' }} />
                       <Line 
                         type="monotone" 
                         dataKey="sales" 
@@ -253,9 +253,9 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                   <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <ComposedChart data={filteredChartAndMetricData.chartData}>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
-                      <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '12px', color: '#fff' }} />
+                      <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <YAxis yAxisId="left" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <Tooltip contentStyle={{ backgroundColor: '#111111', border: 'none', borderRadius: '12px', color: '#fff' }} />
                       <Bar yAxisId="left" dataKey="sales" name="Receita" fill={schemaColors[chartSchema].primary} radius={[3, 3, 0, 0]} barSize={12} />
                       <Bar yAxisId="left" dataKey="expenses" name="Despesa" fill={schemaColors[chartSchema].danger} radius={[3, 3, 0, 0]} barSize={12} />
                     </ComposedChart>
@@ -280,9 +280,9 @@ export const ChartConsole: React.FC<ChartConsoleProps> = ({
                         </linearGradient>
                       </defs>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff08" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <Tooltip contentStyle={{ backgroundColor: '#0f172a', border: 'none', borderRadius: '12px', color: '#fff' }} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#9CA3AF', fontSize: 10 }} />
+                      <Tooltip contentStyle={{ backgroundColor: '#111111', border: 'none', borderRadius: '12px', color: '#fff' }} />
                       <Area type="monotone" dataKey="Entradas (In)" stroke={schemaColors[chartSchema].secondary} strokeWidth={2.5} fillOpacity={1} fill="url(#colorLightIn)" />
                     </AreaChart>
                   </ResponsiveContainer>

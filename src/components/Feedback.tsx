@@ -491,21 +491,21 @@ export default function Feedback() {
 
             {/* Information Context panel */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-[#FAF7F2] p-6 md:p-8 rounded-[35px] border border-[#E9E1D2] space-y-4">
-                <h3 className="text-sm font-black text-[#5C4D3C] uppercase tracking-wider">Como tratamos o seu reporte?</h3>
-                <div className="space-y-4 text-xs font-bold leading-relaxed text-[#7C6C5C]">
+              <div className="bg-[#F8F9FA] p-6 md:p-8 rounded-[35px] border border-[#F8F9FA] space-y-4">
+                <h3 className="text-sm font-black text-[#D4AF37] uppercase tracking-wider">Como tratamos o seu reporte?</h3>
+                <div className="space-y-4 text-xs font-bold leading-relaxed text-[#D4AF37]">
                   <p>Todos os relatórios são categorizados e analisados de forma direta pelo nosso serviço de apoio ao cliente e integrados com as nossas auditorias internas de software.</p>
                   <p>Damos prioridade absoluta a problemas críticos que limitem a sua faturação (como dificuldades operacionais no POS ou geração tributária de faturas).</p>
                   <p>Acompanhe o progresso de resolução das suas sugestões diretamente na aba <span className="text-blue-600 font-extrabold cursor-pointer" onClick={() => setActiveSegment('list')}>"Meus Reportes"</span>.</p>
                 </div>
                 
-                <div className="pt-4 border-t border-[#E9E1D2] flex items-center gap-3">
+                <div className="pt-4 border-t border-[#F8F9FA] flex items-center gap-3">
                   <div className="w-8 h-8 rounded-xl bg-orange-100/60 text-orange-600 flex items-center justify-center">
                     <AlertTriangle size={18} />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase text-[#5C4D3C]">Prevenção de Inatividade</h4>
-                    <p className="text-[9px] text-[#8C7C6C] font-semibold">Os relatos obsoletos são arquivados para manter a integridade da plataforma.</p>
+                    <h4 className="text-[10px] font-black uppercase text-[#D4AF37]">Prevenção de Inatividade</h4>
+                    <p className="text-[9px] text-[#D4AF37] font-semibold">Os relatos obsoletos são arquivados para manter a integridade da plataforma.</p>
                   </div>
                 </div>
               </div>

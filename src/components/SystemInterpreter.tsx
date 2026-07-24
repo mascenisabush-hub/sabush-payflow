@@ -738,7 +738,7 @@ export default function SystemInterpreter() {
                         className="space-y-4"
                       >
                         {/* Interactive UI card */}
-                        <div className="p-5 rounded-2xl bg-[#0e1424] border border-blue-500/20 space-y-4 shadow-xl relative overflow-hidden">
+                        <div className="p-5 rounded-2xl bg-[#0B1F4D] border border-blue-500/20 space-y-4 shadow-xl relative overflow-hidden">
                           <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 blur-xl rounded-full" />
                           
                           <div>
@@ -759,7 +759,7 @@ export default function SystemInterpreter() {
                                 {aiGuide.vocabulary.map((vocab, i) => (
                                   <div key={i} className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-xs">
                                     <div className="flex items-center justify-between mb-1 gap-2 flex-wrap">
-                                      <span className="font-extrabold text-[#8FB0AC] line-through decoration-red-500/20">{vocab.original}</span>
+                                      <span className="font-extrabold text-[#9CA3AF] line-through decoration-red-500/20">{vocab.original}</span>
                                       <span className="font-black text-blue-400 bg-blue-600/10 px-2 py-0.5 rounded flex items-center gap-1.5">
                                         <Volume2 size={10} /> {vocab.translated}
                                       </span>

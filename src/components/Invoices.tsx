@@ -2229,7 +2229,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
           <div className="flex flex-wrap gap-6 items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
             <div>
               <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5">Canal de Pagamento</label>
-              <div className="flex bg-[#e2e8f0] p-1 rounded-xl w-fit">
+              <div className="flex bg-[#E5E7EB] p-1 rounded-xl w-fit">
                 <button 
                   type="button"
                   onClick={() => setNewInvoice({...newInvoice, paymentType: 'cash'})}
@@ -2263,7 +2263,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
             <div>
               <label className="block text-xs font-black text-slate-500 uppercase tracking-widest mb-1.5">Segmento de Venda</label>
-              <div className="flex bg-[#e2e8f0] p-1 rounded-xl w-fit">
+              <div className="flex bg-[#E5E7EB] p-1 rounded-xl w-fit">
                 <button 
                   type="button"
                   onClick={() => setNewInvoice({...newInvoice, saleType: 'retail'})}
@@ -2737,7 +2737,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             </button>
             <button 
               onClick={handleAttemptSaveInvoice}
-              className="px-6 py-2 bg-[#0f172a] text-white font-black hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 rounded-xl"
+              className="px-6 py-2 bg-[#111111] text-white font-black hover:bg-slate-800 transition-colors shadow-lg shadow-slate-900/10 rounded-xl"
             >
               {editingInvoiceId ? "Guardar Retificação / Alterações" : "Save Invoice"}
             </button>
@@ -3143,7 +3143,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   <div className="text-xs font-semibold text-slate-500 font-sans">
                     Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredInvoicesList.length, startIndexInvoices + 1)}</span> a{" "}
                     <span className="font-extrabold text-slate-900">{Math.min(filteredInvoicesList.length, endIndexInvoices)}</span> de{" "}
-                    <span className="font-extrabold text-[#111827]">{filteredInvoicesList.length}</span> faturas
+                    <span className="font-extrabold text-[#111111]">{filteredInvoicesList.length}</span> faturas
                   </div>
                   <div className="flex items-center gap-1.5 self-end sm:self-auto">
                     <button
@@ -3509,7 +3509,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   <div className="text-xs font-semibold text-slate-500 font-sans">
                     Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredInvoicesManageList.length, startIndexManage + 1)}</span> a{" "}
                     <span className="font-extrabold text-slate-900">{Math.min(filteredInvoicesManageList.length, endIndexManage)}</span> de{" "}
-                    <span className="font-extrabold text-[#111827]">{filteredInvoicesManageList.length}</span> faturas
+                    <span className="font-extrabold text-[#111111]">{filteredInvoicesManageList.length}</span> faturas
                   </div>
                   <div className="flex items-center gap-1.5 self-end sm:self-auto">
                     <button
@@ -3658,31 +3658,31 @@ A equipa de ${businessData?.name || 'Sabush System'}
               <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-[20px] flex items-center justify-center mb-1">
                 <Share2 size={24} />
               </div>
-              <h3 className="text-xl font-bold text-[#1D1510] font-sans">Ecrã de Pagamento Online</h3>
+              <h3 className="text-xl font-bold text-[#111111] font-sans">Ecrã de Pagamento Online</h3>
               <p className="text-slate-500 text-xs">Gere e partilha links de faturação segura para os teus clientes.</p>
             </div>
 
             {/* Quick Invoice Info */}
-            <div className="bg-[#FAF7F2] border border-[#E9E1D2] p-5 rounded-[22px] flex flex-col gap-2.5 mb-6">
+            <div className="bg-[#F8F9FA] border border-[#F8F9FA] p-5 rounded-[22px] flex flex-col gap-2.5 mb-6">
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Fatura Nº:</span>
+                <span className="font-bold text-[#6B7280] uppercase tracking-wider">Fatura Nº:</span>
                 <span className="font-mono font-black text-slate-800">#{selectedInvoiceForShare.invoiceNumber}</span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Cliente:</span>
+                <span className="font-bold text-[#6B7280] uppercase tracking-wider">Cliente:</span>
                 <span className="font-extrabold text-slate-800">
                   {customers.find(c => c.id === selectedInvoiceForShare.customerId)?.name || selectedInvoiceForShare.customerId || 'Walk-in'}
                 </span>
               </div>
               <div className="flex justify-between items-center text-xs">
-                <span className="font-bold text-[#8B735F] uppercase tracking-wider">Valor total:</span>
-                <span className="font-black text-[#0F274C]">{(selectedInvoiceForShare.total || 0).toLocaleString()} {currency}</span>
+                <span className="font-bold text-[#6B7280] uppercase tracking-wider">Valor total:</span>
+                <span className="font-black text-[#0B1F4D]">{(selectedInvoiceForShare.total || 0).toLocaleString()} {currency}</span>
               </div>
             </div>
 
             {/* Link Copy form */}
             <div className="space-y-2 mb-6">
-              <label className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest block">Link Seguro de Pagamento</label>
+              <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block">Link Seguro de Pagamento</label>
               <div className="flex gap-2">
                 <input 
                   type="text" 
@@ -3692,7 +3692,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 />
                 <button
                   onClick={handleCopyLinkFromModal}
-                  className="px-4 py-2 bg-[#1D1510] hover:bg-[#2F231B] text-white text-xs font-black rounded-xl uppercase tracking-wider transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 bg-[#111111] hover:bg-[#0B1F4D] text-white text-xs font-black rounded-xl uppercase tracking-wider transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
                 >
                   {copied ? (
                     <>
@@ -3712,7 +3712,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
             {/* Direct WhatsApp Action */}
             <div className="space-y-4 border-t border-slate-100 pt-6">
               <div className="flex items-center justify-between">
-                <label className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest block">Enviar via WhatsApp</label>
+                <label className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest block">Enviar via WhatsApp</label>
                 <span className={cn(
                   "text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full",
                   clientPhone ? "bg-emerald-50 text-emerald-600" : "bg-amber-50 text-amber-600"
@@ -3723,13 +3723,13 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
               <div className="space-y-2.5">
                 <div className="relative">
-                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#8B735F]">Enviar para:</span>
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-[#6B7280]">Enviar para:</span>
                   <input 
                     type="tel"
                     placeholder="Ex: +258 840000000"
                     value={clientPhone}
                     onChange={(e) => setClientPhone(e.target.value)}
-                    className="w-full pl-24 pr-3.5 py-3 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#B8791A]"
+                    className="w-full pl-24 pr-3.5 py-3 bg-[#F8F9FA] border border-[#F8F9FA] rounded-2xl outline-none text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#D4AF37]"
                   />
                 </div>
 
@@ -3737,14 +3737,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   value={whatsappMessage}
                   onChange={(e) => setWhatsappMessage(e.target.value)}
                   rows={4}
-                  className="w-full p-4 bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl outline-none text-xs text-slate-700 leading-relaxed font-semibold focus:ring-2 focus:ring-[#B8791A]"
+                  className="w-full p-4 bg-[#F8F9FA] border border-[#F8F9FA] rounded-2xl outline-none text-xs text-slate-700 leading-relaxed font-semibold focus:ring-2 focus:ring-[#D4AF37]"
                   placeholder="Mensagem rápida do WhatsApp..."
                 />
               </div>
 
               <button
                 onClick={handleSendWhatsAppDirect}
-                className="w-full py-4 bg-[#0F274C] hover:bg-[#093025] active:bg-[#062018] text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0F274C]/15"
+                className="w-full py-4 bg-[#0B1F4D] hover:bg-[#0B1F4D] active:bg-[#0B1F4D] text-white rounded-2xl font-black text-xs uppercase tracking-widest transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-[#0B1F4D]/15"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.458 5.704 1.46h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -3795,11 +3795,11 @@ A equipa de ${businessData?.name || 'Sabush System'}
         }
 
         return (
-          <div className="fixed inset-0 bg-[#090b11]/80 backdrop-blur-md z-[200] flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 bg-[#0B1F4D]/80 backdrop-blur-md z-[200] flex items-center justify-center p-4 overflow-y-auto">
             <div className="bg-white rounded-[32px] border border-slate-200 outline-none shadow-2xl w-full max-w-4xl overflow-hidden animate-in zoom-in-95 duration-200">
               
               {/* Header */}
-              <div className="bg-blue-900 text-white p-6 flex justify-between items-center border-b-2 border-[#B8791A]/50">
+              <div className="bg-blue-900 text-white p-6 flex justify-between items-center border-b-2 border-[#D4AF37]/50">
                 <div className="flex items-center gap-3 font-sans">
                   <div className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-black text-lg">
                     📊
@@ -4127,10 +4127,10 @@ A equipa de ${businessData?.name || 'Sabush System'}
           : formatDateInTimezone(new Date(), businessData?.timezone || profile?.timezone || 'Africa/Maputo');
 
         return (
-          <div className="fixed inset-0 bg-[#090C16]/80 backdrop-blur-md z-[150] flex flex-col h-screen w-screen overflow-hidden select-none animate-in fade-in duration-200 block" id="invoice-preview-modal">
+          <div className="fixed inset-0 bg-[#0B1F4D]/80 backdrop-blur-md z-[150] flex flex-col h-screen w-screen overflow-hidden select-none animate-in fade-in duration-200 block" id="invoice-preview-modal">
             
             {/* Control Bar Header */}
-            <div className="bg-[#081F1E] border-b border-[#16253B] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
+            <div className="bg-[#0B1F4D] border-b border-[#0B1F4D] p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-emerald-600 flex items-center justify-center text-white">
                   <Eye size={18} />
@@ -4144,7 +4144,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                       </span>
                     )}
                   </h3>
-                  <p className="text-[10px] font-bold text-[#8FB0AC] tracking-tight uppercase">
+                  <p className="text-[10px] font-bold text-[#9CA3AF] tracking-tight uppercase">
                     Layout interactivo da factura em tempo real
                   </p>
                 </div>
@@ -4158,20 +4158,20 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     type="button"
                     onClick={() => setShowFormatConfig(!showFormatConfig)}
                     className={cn(
-                      "px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 bg-[#10302E] border border-[#1C4340] text-white hover:bg-[#1C4340]",
-                      showFormatConfig && "border-blue-500 text-blue-400 bg-[#1D2748]"
+                      "px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 bg-[#0B1F4D] border border-[#2563EB] text-white hover:bg-[#2563EB]",
+                      showFormatConfig && "border-blue-500 text-blue-400 bg-[#0B1F4D]"
                     )}
                     title="Configurar Formato de Impressão"
                   >
                     <span>⚙️ Configurar Formato de Impressão</span>
-                    <span className="text-[10px] bg-[#163D3B] text-[#8FB0AC] px-1.5 py-0.5 rounded font-mono font-bold lowercase">
+                    <span className="text-[10px] bg-[#2563EB] text-[#9CA3AF] px-1.5 py-0.5 rounded font-mono font-bold lowercase">
                       {previewFormat === 'A4' ? 'a4' : previewFormat === 'thermal_80mm' ? '80mm' : '58mm'}
                     </span>
                   </button>
 
                   {showFormatConfig && (
-                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#081F1E] border border-[#16253B] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
-                      <p className="text-[10px] font-black uppercase tracking-widest text-[#8FB0AC]">Formato de Impressão</p>
+                    <div className="absolute top-full mt-2 left-0 md:left-auto md:right-0 bg-[#0B1F4D] border border-[#0B1F4D] rounded-2xl p-4 w-72 shadow-2xl z-[200] flex flex-col gap-3 font-sans animate-in slide-in-from-top-2 duration-150 text-left">
+                      <p className="text-[10px] font-black uppercase tracking-widest text-[#9CA3AF]">Formato de Impressão</p>
                       
                       <div className="flex flex-col gap-1.5">
                         <button
@@ -4183,7 +4183,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'A4' ? "bg-blue-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
+                            previewFormat === 'A4' ? "bg-blue-600 text-white" : "text-[#9CA3AF] hover:bg-[#0B1F4D] hover:text-white"
                           )}
                         >
                           <span>📄 A4 Padrão (PDF)</span>
@@ -4199,7 +4199,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'thermal_80mm' ? "bg-emerald-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
+                            previewFormat === 'thermal_80mm' ? "bg-emerald-600 text-white" : "text-[#9CA3AF] hover:bg-[#0B1F4D] hover:text-white"
                           )}
                         >
                           <span>📠 Rolo Térmico 80mm</span>
@@ -4215,7 +4215,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           }}
                           className={cn(
                             "w-full px-3 py-2 rounded-xl text-xs font-bold text-left transition-all flex items-center justify-between cursor-pointer",
-                            previewFormat === 'thermal_58mm' ? "bg-emerald-600 text-white" : "text-[#8FB0AC] hover:bg-[#10302E] hover:text-white"
+                            previewFormat === 'thermal_58mm' ? "bg-emerald-600 text-white" : "text-[#9CA3AF] hover:bg-[#0B1F4D] hover:text-white"
                           )}
                         >
                           <span>📠 Rolo Térmico 58mm</span>
@@ -4223,7 +4223,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         </button>
                       </div>
 
-                      <div className="border-t border-[#16253B] pt-2 mt-1 text-[9px] text-[#8FB0AC]/80 flex items-start gap-1 leading-snug">
+                      <div className="border-t border-[#0B1F4D] pt-2 mt-1 text-[9px] text-[#9CA3AF]/80 flex items-start gap-1 leading-snug">
                         <span>💡</span>
                         <p>Selecionar um formato guarda automaticamente a preferência nas configurações da empresa.</p>
                       </div>
@@ -4232,10 +4232,10 @@ A equipa de ${businessData?.name || 'Sabush System'}
                 </div>
 
                 {/* Zoom Controls */}
-                <div className="flex items-center gap-2 bg-[#10302E] px-3 py-2 rounded-xl border border-[#1C4340]">
+                <div className="flex items-center gap-2 bg-[#0B1F4D] px-3 py-2 rounded-xl border border-[#2563EB]">
                   <button
                     onClick={() => setPreviewZoom(prev => Math.max(50, prev - 10))}
-                    className="p-1 hover:bg-[#1C4340] rounded text-[#8FB0AC] hover:text-white cursor-pointer"
+                    className="p-1 hover:bg-[#2563EB] rounded text-[#9CA3AF] hover:text-white cursor-pointer"
                     title="Diminuir Zoom"
                   >
                     <ZoomOut size={16} />
@@ -4245,7 +4245,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </span>
                   <button
                     onClick={() => setPreviewZoom(prev => Math.min(150, prev + 10))}
-                    className="p-1 hover:bg-[#1C4340] rounded text-[#8FB0AC] hover:text-white cursor-pointer"
+                    className="p-1 hover:bg-[#2563EB] rounded text-[#9CA3AF] hover:text-white cursor-pointer"
                     title="Aumentar Zoom"
                   >
                     <ZoomIn size={16} />
@@ -4278,7 +4278,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     setIsPreviewOpen(false);
                     setPreviewInvoiceData(null);
                   }}
-                  className="p-2.5 bg-[#163D3B] hover:bg-rose-600 text-[#8FB0AC] hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
+                  className="p-2.5 bg-[#2563EB] hover:bg-rose-600 text-[#9CA3AF] hover:text-white rounded-xl transition-all cursor-pointer flex items-center justify-center"
                   title="Fechar Visualização"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -4289,10 +4289,10 @@ A equipa de ${businessData?.name || 'Sabush System'}
             </div>
 
             {/* Central Split Layout Area */}
-            <div className="flex-1 overflow-hidden flex flex-col md:flex-row bg-[#080B16]">
+            <div className="flex-1 overflow-hidden flex flex-col md:flex-row bg-[#0B1F4D]">
               
               {/* Left Side: Document Canvas (Interactive zoom & preview) */}
-              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#16253B]">
+              <div className="flex-1 overflow-y-auto p-4 md:p-8 flex items-start justify-center custom-scrollbar border-r border-[#0B1F4D]">
                 <div 
                   style={{ transform: `scale(${previewZoom / 100})`, transformOrigin: 'top center' }}
                   className="transition-transform duration-100 ease-out"
@@ -4301,7 +4301,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     /* ================== STANDARD A4 BLOCK PREVIEW ================== */
                     <div 
                       id="preview-a4-sheet"
-                      className="bg-white text-[#1E293B] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6)] border border-slate-250 w-[800px] min-h-[1130px] p-12 flex flex-col justify-between rounded-sm relative text-[258_device] select-text"
+                      className="bg-white text-[#111111] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6)] border border-slate-250 w-[800px] min-h-[1130px] p-12 flex flex-col justify-between rounded-sm relative text-[258_device] select-text"
                     >
                       
                       {/* Visual Stamp / Live Indicator */}
@@ -4313,13 +4313,13 @@ A equipa de ${businessData?.name || 'Sabush System'}
                       <div className="space-y-10">
                         
                         {/* MIDNIGHT HEADER BAND */}
-                        <div className="bg-[#0f172a] -mx-12 -mt-12 p-8 text-white flex justify-between items-center rounded-t-sm">
+                        <div className="bg-[#111111] -mx-12 -mt-12 p-8 text-white flex justify-between items-center rounded-t-sm">
                           <div className="space-y-1">
                             <h4 className="text-xl font-black tracking-tight uppercase">{companyInfo.name.toUpperCase()}</h4>
                             <p className="text-[10px] font-bold text-slate-300 tracking-widest">FACTURA COMERCIAL</p>
                           </div>
                           <div className="text-right leading-tight">
-                            <h4 className="text-lg font-mono font-extrabold text-[#B8791A]">
+                            <h4 className="text-lg font-mono font-extrabold text-[#D4AF37]">
                               {inv.invoiceNumber}
                             </h4>
                             <div className="text-[10px] text-slate-300 font-semibold space-y-0.5 mt-1">
@@ -4368,7 +4368,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                             <table className="w-full text-left border-collapse text-xs">
                               <thead>
-                                <tr className="bg-[#0f172a] text-white">
+                                <tr className="bg-[#111111] text-white">
                                   <th className="p-4 font-black">Produto</th>
                                   <th className="p-4 font-black text-center w-20">Qtd</th>
                                   <th className="p-4 font-black text-right w-36">Preço/Unit</th>
@@ -4438,7 +4438,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                             <div className="h-px bg-slate-100 my-2" />
 
-                            <div className="flex justify-between items-center bg-[#0f172a] p-3 -mx-4 rounded-xl text-white">
+                            <div className="flex justify-between items-center bg-[#111111] p-3 -mx-4 rounded-xl text-white">
                               <span className="uppercase font-black tracking-widest text-[11px] text-slate-300">TOTAL FACTURA:</span>
                               <span className="font-mono font-black text-lg text-emerald-400">
                                 {grandTotalAmount.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT
@@ -4471,7 +4471,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                     <div 
                       id="preview-thermal-ticket"
                       className={cn(
-                        "bg-[#FFFFFE] text-[#1E293B] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6)] border border-slate-350 flex flex-col rounded-md font-mono select-text transition-all",
+                        "bg-[#FFFFFF] text-[#111111] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6)] border border-slate-350 flex flex-col rounded-md font-mono select-text transition-all",
                         previewFormat === 'thermal_58mm' ? "w-[240px] text-[10px] p-3.5 gap-4" : "w-[320px] text-[11px] p-6 gap-6"
                       )}
                     >
@@ -4512,7 +4512,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                               "leading-tight space-y-0.5 text-left",
                               item.reverted && "opacity-50 line-through"
                             )}>
-                              <div data-no-translate="true" translate="no" className="font-extrabold text-[#0f172a] truncate no-translate notranslate">
+                              <div data-no-translate="true" translate="no" className="font-extrabold text-[#111111] truncate no-translate notranslate">
                                 {item.name || item.description || 'Artigo'}
                                 {item.reverted && <span className="text-[8px] text-rose-600 ml-1 font-black leading-none">[REVERTIDO]</span>}
                               </div>
@@ -4554,18 +4554,18 @@ A equipa de ${businessData?.name || 'Sabush System'}
               </div>
 
               {/* Right Side: ERP Control Panel / Sidebar */}
-              <div className="w-full md:w-[380px] bg-[#0E1325] border-t md:border-t-0 md:border-l border-[#16253B] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
+              <div className="w-full md:w-[380px] bg-[#0B1F4D] border-t md:border-t-0 md:border-l border-[#0B1F4D] overflow-y-auto p-5 space-y-6 flex flex-col shrink-0 text-left text-slate-200 custom-scrollbar font-sans">
                 
                 <div className="space-y-5 flex-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
+                    <h4 className="text-xs font-black uppercase text-[#9CA3AF] tracking-widest flex items-center gap-1.5">
                       <span>🛠️ Gestão de Fatura</span>
                     </h4>
                     {getStatusBadge(inv.status)}
                   </div>
 
                   {/* Summary Box */}
-                  <div className="bg-[#0C2624] rounded-xl p-4 border border-[#16253B] space-y-2">
+                  <div className="bg-[#0B1F4D] rounded-xl p-4 border border-[#0B1F4D] space-y-2">
                     <div className="flex justify-between text-xs">
                       <span className="text-slate-400">Total Fatura:</span>
                       <span className="font-mono font-black text-white">{grandTotalAmount.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
@@ -4613,7 +4613,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                   {/* ITEM REVERSAL (REVERTER ITEM) */}
                   <div className="space-y-2.5">
-                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
+                    <h5 className="text-[11px] font-black uppercase text-[#9CA3AF] tracking-widest flex items-center gap-1.5">
                       <span>↩️ Reverter Artigos Individualmente</span>
                     </h5>
                     <p className="text-[10px] text-slate-400 font-medium">Devolve itens selecionados ao inventário, ajustando o valor total e o saldo.</p>
@@ -4626,7 +4626,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                           <div 
                             key={i} 
                             className={cn(
-                              "bg-[#131936] p-2.5 rounded-xl border border-[#202951] flex items-center justify-between text-xs transition-opacity duration-250",
+                              "bg-[#0B1F4D] p-2.5 rounded-xl border border-[#0B1F4D] flex items-center justify-between text-xs transition-opacity duration-250",
                               item.reverted && "opacity-50"
                             )}
                           >
@@ -4662,8 +4662,8 @@ A equipa de ${businessData?.name || 'Sabush System'}
 
                   {/* ADD PRODUCT TO EXISTING INVOICE (ADICIONAR ITEM) */}
                   {inv.status !== 'paid' && inv.status !== 'cancelled' && (
-                    <div className="space-y-3 pt-2 border-t border-[#16253B]">
-                      <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest">
+                    <div className="space-y-3 pt-2 border-t border-[#0B1F4D]">
+                      <h5 className="text-[11px] font-black uppercase text-[#9CA3AF] tracking-widest">
                         ➕ Adicionar Artigo à Fatura
                       </h5>
                       <p className="text-[10px] text-slate-400 font-medium leading-tight">Adicione produtos do inventário imediatamente, atualizando o stock e saldo devedor.</p>
@@ -4672,14 +4672,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         <input
                           type="text"
                           placeholder="Pesquise por nome do produto..."
-                          className="w-full px-3 py-2 bg-[#0C2624] border border-[#16253B] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
+                          className="w-full px-3 py-2 bg-[#0B1F4D] border border-[#0B1F4D] rounded-xl text-xs text-white placeholder-slate-450 focus:ring-2 focus:ring-blue-500 outline-none font-medium"
                           value={invoiceItemSearch}
                           onChange={e => setInvoiceItemSearch(e.target.value)}
                         />
                       </div>
 
                       {invoiceItemSearch && (
-                        <div className="bg-[#0C2624] border border-[#16253B] hover:shadow-2xl rounded-xl divide-y divide-[#16253B]/60 max-h-40 overflow-y-auto custom-scrollbar">
+                        <div className="bg-[#0B1F4D] border border-[#0B1F4D] hover:shadow-2xl rounded-xl divide-y divide-[#0B1F4D]/60 max-h-40 overflow-y-auto custom-scrollbar">
                           {filteredInvoiceItemSearchProducts
                             .map((p, idx) => (
                               <button
@@ -4689,7 +4689,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                                   handleAddProductToExistingInvoice(p);
                                   setInvoiceItemSearch('');
                                 }}
-                                className="w-full p-2 text-left hover:bg-[#1D2748] transition-colors flex items-center justify-between text-[11px] cursor-pointer"
+                                className="w-full p-2 text-left hover:bg-[#0B1F4D] transition-colors flex items-center justify-between text-[11px] cursor-pointer"
                               >
                                 <div className="min-w-0 flex-1 pr-2">
                                   <p className="font-extrabold text-white truncate">{p.name}</p>
@@ -4710,14 +4710,14 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   )}
 
                   {/* HISTÓRICO DE AMORTIZAÇÕES */}
-                  <div className="pt-4 border-t border-[#16253B] space-y-3">
-                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
+                  <div className="pt-4 border-t border-[#0B1F4D] space-y-3">
+                    <h5 className="text-[11px] font-black uppercase text-[#9CA3AF] tracking-widest flex items-center gap-1.5">
                       <span>💰 Histórico de Amortizações</span>
                     </h5>
                     <p className="text-[10px] text-slate-400 font-medium">Lista de pagamentos e amortizações efetuadas para esta fatura.</p>
                     
                     {invoicePayments.length === 0 ? (
-                      <div className="bg-[#0C2624] p-3 rounded-xl border border-[#16253B]/60 text-center text-[10px] text-slate-400 font-bold">
+                      <div className="bg-[#0B1F4D] p-3 rounded-xl border border-[#0B1F4D]/60 text-center text-[10px] text-slate-400 font-bold">
                         Nenhuma amortização efetuada ainda.
                       </div>
                     ) : (
@@ -4725,7 +4725,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         {invoicePayments.map((pay: any, idx: number) => {
                           const payDate = pay.date ? formatDateInTimezone(new Date(pay.date), businessData?.timezone || profile?.timezone || 'Africa/Maputo') : 'N/A';
                           return (
-                            <div key={pay.id || idx} className="bg-[#0C2624] p-3 rounded-xl border border-[#16253B]/60 space-y-2">
+                            <div key={pay.id || idx} className="bg-[#0B1F4D] p-3 rounded-xl border border-[#0B1F4D]/60 space-y-2">
                               <div className="flex justify-between items-center text-xs">
                                 <span className="font-extrabold text-white font-mono">
                                   #{pay.id ? pay.id.slice(-6).toUpperCase() : `PAG-${idx}`}
@@ -4774,12 +4774,12 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
 
                   {/* AUDIT TIMELINE (RASTO DE AUDITORIA) */}
-                  <div className="pt-4 border-t border-[#16253B] space-y-3">
-                    <h5 className="text-[11px] font-black uppercase text-[#8FB0AC] tracking-widest flex items-center gap-1.5">
+                  <div className="pt-4 border-t border-[#0B1F4D] space-y-3">
+                    <h5 className="text-[11px] font-black uppercase text-[#9CA3AF] tracking-widest flex items-center gap-1.5">
                       <span>📋 Rasto de Auditoria</span>
                     </h5>
                     
-                    <div className="border-l border-[#1C4340] ml-2 pl-3.5 space-y-3 font-mono text-[9px] leading-relaxed max-h-44 overflow-y-auto custom-scrollbar">
+                    <div className="border-l border-[#2563EB] ml-2 pl-3.5 space-y-3 font-mono text-[9px] leading-relaxed max-h-44 overflow-y-auto custom-scrollbar">
                       {[
                         {
                           timestamp: inv.date || (inv.createdAt?.toDate ? inv.createdAt.toDate().toISOString() : new Date().toISOString()),
@@ -4792,7 +4792,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                         <div key={idx} className="relative">
                           {/* Circle indicator on the line */}
                           <div className={cn(
-                            "absolute -left-[19.5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-[#0E1325]",
+                            "absolute -left-[19.5px] top-1 w-2.5 h-2.5 rounded-full border-2 border-[#0B1F4D]",
                             log.actionType === 'EMISSÃO' ? "bg-emerald-500" :
                             log.actionType === 'CANCELLED' ? "bg-rose-500" :
                             log.actionType === 'ITEM_REVERTED' ? "bg-amber-500" : "bg-blue-500"
@@ -4807,7 +4807,7 @@ A equipa de ${businessData?.name || 'Sabush System'}
                   </div>
                 </div>
 
-                <div className="text-[9px] text-[#8FB0AC]/40 font-mono text-center pt-4 select-none">
+                <div className="text-[9px] text-[#9CA3AF]/40 font-mono text-center pt-4 select-none">
                   SABUSH ERP PRO • VISUALIZADOR SEGURO
                 </div>
 

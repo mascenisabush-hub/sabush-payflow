@@ -861,7 +861,7 @@ export default function Customers() {
                 <div className="text-xs font-semibold text-slate-500 font-sans">
                   Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredCustomers.length, startIndex + 1)}</span> a{" "}
                   <span className="font-extrabold text-slate-900">{Math.min(filteredCustomers.length, endIndex)}</span> de{" "}
-                  <span className="font-extrabold text-[#111827]">{filteredCustomers.length}</span> clientes
+                  <span className="font-extrabold text-[#111111]">{filteredCustomers.length}</span> clientes
                 </div>
                 <div className="flex items-center gap-1.5 self-end sm:self-auto">
                   <button
@@ -1067,7 +1067,7 @@ export default function Customers() {
                     <div className="text-xs font-semibold text-slate-500 font-sans">
                       Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredCustomers.length, startIndex + 1)}</span> a{" "}
                       <span className="font-extrabold text-slate-900">{Math.min(filteredCustomers.length, endIndex)}</span> de{" "}
-                      <span className="font-extrabold text-[#111827]">{filteredCustomers.length}</span> clientes
+                      <span className="font-extrabold text-[#111111]">{filteredCustomers.length}</span> clientes
                     </div>
                     <div className="flex items-center gap-1.5 self-end sm:self-auto">
                       <button
@@ -1271,7 +1271,7 @@ export default function Customers() {
                                 setMainCustomerId(match.customer1.id);
                                 setTargetCustomerId(match.customer2.id);
                               }}
-                              className="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-[#1D1510] font-black text-[9px] uppercase tracking-wider rounded-lg transition-transform active:scale-95 cursor-pointer"
+                              className="px-2.5 py-1 bg-amber-500 hover:bg-amber-600 text-[#111111] font-black text-[9px] uppercase tracking-wider rounded-lg transition-transform active:scale-95 cursor-pointer"
                             >
                               Selecionar
                             </button>
@@ -1425,7 +1425,7 @@ export default function Customers() {
                     <button
                       type="button"
                       onClick={() => setViewingLoyaltyCustomer(selectedCustomer)}
-                      className="flex items-center gap-1 bg-[#1D1510] hover:bg-black text-[#FCFAF6] px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                      className="flex items-center gap-1 bg-[#111111] hover:bg-black text-[#FFFFFF] px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
                       title="Gerar Cartão Digital de Fidelização"
                     >
                       <QrCode size={10} /> QR Code
@@ -1813,39 +1813,39 @@ export default function Customers() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-[#FAF7F2] border border-[#E9E1D2] w-full max-w-sm rounded-[36px] shadow-2xl p-6 relative text-left"
+              className="bg-[#F8F9FA] border border-[#F8F9FA] w-full max-w-sm rounded-[36px] shadow-2xl p-6 relative text-left"
             >
               <button 
                 onClick={() => setViewingLoyaltyCustomer(null)}
-                className="absolute top-4 right-4 p-2 bg-[#E9E1D2]/40 text-[#1D1510] hover:bg-[#E9E1D2]/80 transition-all rounded-full cursor-pointer border-0"
+                className="absolute top-4 right-4 p-2 bg-[#F8F9FA]/40 text-[#111111] hover:bg-[#F8F9FA]/80 transition-all rounded-full cursor-pointer border-0"
               >
                 <X size={14} />
               </button>
 
               <div className="text-center mb-4">
-                <span className="text-[10px] font-black text-[#8B735F] uppercase tracking-widest font-sans">CARTÃO DE FIDELIZAÇÃO</span>
-                <h4 className="text-lg font-black text-[#1D1510] font-sans mt-0.5 leading-tight">Sabush Club Premium</h4>
+                <span className="text-[10px] font-black text-[#6B7280] uppercase tracking-widest font-sans">CARTÃO DE FIDELIZAÇÃO</span>
+                <h4 className="text-lg font-black text-[#111111] font-sans mt-0.5 leading-tight">Sabush Club Premium</h4>
               </div>
 
               {/* High elegance Loyalty Card */}
-              <div className="bg-gradient-to-br from-[#1D1510] via-[#35261C] to-[#120D0A] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#E9E1D2]/25">
+              <div className="bg-gradient-to-br from-[#111111] via-[#0B1F4D] to-[#0B1F4D] rounded-2xl p-5 shadow-lg relative overflow-hidden h-44 flex flex-col justify-between text-white border border-[#F8F9FA]/25">
                 {/* Decorative Pattern Background */}
-                <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#FAF7F2_1px,transparent_1px)] [background-size:16px_16px]" />
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none bg-[radial-gradient(#F8F9FA_1px,transparent_1px)] [background-size:16px_16px]" />
 
                 <div className="flex justify-between items-start z-10">
                   <div>
-                    <span className="text-[8px] tracking-widest text-[#E9E1D2] font-black uppercase font-mono">MEMBRO DESDE {new Date().getFullYear()}</span>
+                    <span className="text-[8px] tracking-widest text-[#F8F9FA] font-black uppercase font-mono">MEMBRO DESDE {new Date().getFullYear()}</span>
                     <h5 className="text-sm font-black tracking-tight leading-tight mt-0.5 font-sans filter drop-shadow">
                       {viewingLoyaltyCustomer.name}
                     </h5>
-                    <p className="text-[9px] font-medium font-mono text-[#E9E1D2]/70 leading-none mt-1">ID: {viewingLoyaltyCustomer.id?.slice(0, 8).toUpperCase()}</p>
+                    <p className="text-[9px] font-medium font-mono text-[#F8F9FA]/70 leading-none mt-1">ID: {viewingLoyaltyCustomer.id?.slice(0, 8).toUpperCase()}</p>
                   </div>
                   <span className={cn(
                     "text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full",
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "bg-violet-550/30 text-violet-300 border border-violet-500/30" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 500  ? "bg-amber-500/20 text-amber-300 border border-amber-500/25" :
                     (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 100  ? "bg-blue-500/20 text-blue-300 border border-blue-500/25" :
-                    "bg-[#8B735F]/20 text-[#FAF7F2] border border-[#8B735F]/30"
+                    "bg-[#6B7280]/20 text-[#F8F9FA] border border-[#6B7280]/30"
                   )}>
                     {(viewingLoyaltyCustomer.loyaltyPoints || 0) >= 1000 ? "👑 Platina" :
                      (viewingLoyaltyCustomer.loyaltyPoints || 0) >= 500  ? "🌟 Ouro" :
@@ -1857,19 +1857,19 @@ export default function Customers() {
 
                 <div className="flex justify-between items-end z-10">
                   <div>
-                    <span className="text-[8px] tracking-widest text-[#E9E1D2]/60 font-black uppercase block">SALDO ACUMULADO</span>
+                    <span className="text-[8px] tracking-widest text-[#F8F9FA]/60 font-black uppercase block">SALDO ACUMULADO</span>
                     <span className="text-xl font-bold font-mono text-indigo-300">
-                      {(viewingLoyaltyCustomer.loyaltyPoints || 0).toLocaleString()} <span className="text-xs text-[#E9E1D2]/70 font-sans font-bold">pts</span>
+                      {(viewingLoyaltyCustomer.loyaltyPoints || 0).toLocaleString()} <span className="text-xs text-[#F8F9FA]/70 font-sans font-bold">pts</span>
                     </span>
                   </div>
                   <div className="bg-white/10 px-2 py-1.5 rounded-lg border border-white/5 flex items-center gap-1">
-                    <span className="text-[8px] font-black uppercase tracking-wider text-[#E9E1D2]">SABUSH CLUB</span>
+                    <span className="text-[8px] font-black uppercase tracking-wider text-[#F8F9FA]">SABUSH CLUB</span>
                   </div>
                 </div>
               </div>
 
               {/* Dynamic QR block */}
-              <div className="mt-5 bg-white p-5 rounded-[28px] border border-[#E9E1D2]/60 flex flex-col items-center shadow-sm">
+              <div className="mt-5 bg-white p-5 rounded-[28px] border border-[#F8F9FA]/60 flex flex-col items-center shadow-sm">
                 <div className="w-28 h-28 flex flex-col gap-[2px] p-2.5 bg-slate-50 border border-slate-100 rounded-2xl relative overflow-hidden shadow-inner font-sans">
                   {getLoyaltyQRGrid(viewingLoyaltyCustomer.id).map((row, rIdx) => (
                     <div key={rIdx} className="flex gap-[2px] flex-1">
@@ -1885,7 +1885,7 @@ export default function Customers() {
                 <span className="text-[9px] font-black text-slate-400 tracking-wider inline-block mt-3 uppercase font-mono">
                   CLI-{viewingLoyaltyCustomer.phone || viewingLoyaltyCustomer.id?.slice(0, 10).toUpperCase()}
                 </span>
-                <p className="text-[10px] text-[#8B735F] font-bold text-center mt-2 font-sans leading-snug px-3">
+                <p className="text-[10px] text-[#6B7280] font-bold text-center mt-2 font-sans leading-snug px-3">
                   Apresente este código no leitor de caixa (POS) para acumular ou resgatar pontos da sua conta.
                 </p>
               </div>
@@ -1896,7 +1896,7 @@ export default function Customers() {
                   onClick={() => {
                     window.print();
                   }}
-                  className="w-full flex items-center justify-center gap-1 bg-[#1D1510] hover:bg-black text-white text-[10.5px] font-black uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer shadow-sm border-0"
+                  className="w-full flex items-center justify-center gap-1 bg-[#111111] hover:bg-black text-white text-[10.5px] font-black uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer shadow-sm border-0"
                 >
                   🖨️ Imprimir
                 </button>
@@ -1904,7 +1904,7 @@ export default function Customers() {
                   onClick={() => {
                     toast.success("Link do Cartão copiado para envio via WhatsApp!");
                   }}
-                  className="w-full flex items-center justify-center gap-1 bg-white hover:bg-slate-50 text-[#1D1510] text-[10.5px] font-[#1D1510] uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer border border-[#E9E1D2]"
+                  className="w-full flex items-center justify-center gap-1 bg-white hover:bg-slate-50 text-[#111111] text-[10.5px] font-[#111111] uppercase tracking-widest py-3 rounded-2xl transition-all cursor-pointer border border-[#F8F9FA]"
                 >
                   🔗 Copiar Link
                 </button>

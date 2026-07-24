@@ -152,7 +152,7 @@ export default function Billing() {
       ],
       color: 'from-slate-800 to-slate-950 text-white',
       textColor: 'text-slate-900',
-      badgeColor: 'bg-[#B8791A] text-white border-none'
+      badgeColor: 'bg-[#D4AF37] text-white border-none'
     },
     enterprise: {
       name: 'Enterprise',
@@ -408,12 +408,12 @@ https://sabush-system.web.app/super-admin`;
   return (
     <div className="p-4 md:p-8 space-y-10 max-w-7xl mx-auto font-sans" id="billing_system_module">
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-[#FAF7F2] pb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 border-b border-[#F8F9FA] pb-8">
         <div>
           <span className="text-[10px] font-black uppercase text-emerald-600 tracking-widest bg-emerald-50 px-2.5 py-1 rounded-md">Assinatura Oficial</span>
-          <h1 className="text-4xl font-black text-[#1D1510] tracking-tight mt-2 flex items-center gap-2">
+          <h1 className="text-4xl font-black text-[#111111] tracking-tight mt-2 flex items-center gap-2">
             <span>Gestão & Facturação</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#B8791A]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]" />
           </h1>
           <p className="text-slate-500 font-medium text-sm leading-relaxed mt-1">
             Escolha o plano ideal para a dimensão operativa do seu negócio e expanda conforme crescer.
@@ -491,7 +491,7 @@ https://sabush-system.web.app/super-admin`;
                   <div className="font-extrabold capitalize text-slate-900">{latestProof.plan}</div>
 
                   <div className="text-slate-400 font-bold uppercase tracking-wide text-[10px]">Valor Pago:</div>
-                  <div className="font-extrabold text-[#B8791A]">{latestProof.amount} MZN</div>
+                  <div className="font-extrabold text-[#D4AF37]">{latestProof.amount} MZN</div>
 
                   <div className="text-slate-400 font-bold uppercase tracking-wide text-[10px]">Método:</div>
                   <div className="font-extrabold capitalize text-slate-700">
@@ -551,7 +551,7 @@ https://sabush-system.web.app/super-admin`;
                   setSelectedPlanTier(latestProof.plan);
                   setIsInstructionModalOpen(true);
                 }}
-                className="px-6 py-2.5 bg-[#B8791A] hover:bg-[#b03d1e] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2"
+                className="px-6 py-2.5 bg-[#D4AF37] hover:bg-[#b03d1e] text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2"
               >
                 <UploadCloud size={14} /> Corrigir e Re-submeter
               </button>
@@ -606,7 +606,7 @@ https://sabush-system.web.app/super-admin`;
               >
                 {/* Popularity/Current Active Badges */}
                 {tier === 'pro' && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#B8791A] text-white px-4 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#D4AF37] text-white px-4 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">
                     RECOMENDADO / MAIS POPULAR
                   </span>
                 )}
@@ -711,7 +711,7 @@ https://sabush-system.web.app/super-admin`;
 
             {/* Simulated Payments Gateway */}
             <div className="space-y-4">
-              <label className="block text-xs font-black uppercase tracking-widest text-[#8B735F]">
+              <label className="block text-xs font-black uppercase tracking-widest text-[#6B7280]">
                 2. Selecione o Canal Requerido
               </label>
               
@@ -798,7 +798,7 @@ https://sabush-system.web.app/super-admin`;
         {/* SIDEBAR BILLING INFO */}
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-slate-50/70 border border-slate-100 p-6 md:p-8 rounded-[40px] space-y-8 text-left">
-            <h3 className="text-xs font-black uppercase text-[#8B735F] tracking-widest flex items-center gap-2.5">
+            <h3 className="text-xs font-black uppercase text-[#6B7280] tracking-widest flex items-center gap-2.5">
               <History size={15} className="text-blue-600" /> Histórico de Transações
             </h3>
             
@@ -832,26 +832,26 @@ https://sabush-system.web.app/super-admin`;
             <div className="pt-6 border-t border-slate-150">
               <button 
                 onClick={() => toast.info("Canal de atendimento: Envie um e-mail com os seus dados corporativos para mascenisabush@gmail.com")}
-                className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-[#1D1510] transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-[#111111] transition-colors cursor-pointer"
               >
                 <HelpCircle size={13} /> Precisa de suporte financeiro?
               </button>
             </div>
           </div>
 
-          <div className="bg-[#FAF7F2] border border-[#E9E1D2] p-6 md:p-8 rounded-[40px] space-y-4 text-left relative overflow-hidden">
-            <div className="absolute top-0 right-0 -mr-6 -mt-6 opacity-5 pointer-events-none text-[#B8791A]">
+          <div className="bg-[#F8F9FA] border border-[#F8F9FA] p-6 md:p-8 rounded-[40px] space-y-4 text-left relative overflow-hidden">
+            <div className="absolute top-0 right-0 -mr-6 -mt-6 opacity-5 pointer-events-none text-[#D4AF37]">
               <Sparkles size={120} />
             </div>
-            <h4 className="text-[#B8791A] font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5">
+            <h4 className="text-[#D4AF37] font-black text-[10px] uppercase tracking-widest flex items-center gap-1.5">
               <Sparkles size={12} className="animate-pulse" /> Suporte Empresarial África
             </h4>
-            <p className="text-[#8B735F] font-bold text-xs leading-normal">
+            <p className="text-[#6B7280] font-bold text-xs leading-normal">
               Possui múltiplos armazéns operacionais em território moçambicano ou necessita de integração API via bancos nacionais Moza ou Standard? Conecte seu ERP em larga escala.
             </p>
             <button 
               onClick={() => toast.success("Notificação enviada! O seu gestor de conta entrará em contacto.")}
-              className="text-[#1D1510] text-xs font-black flex items-center gap-1.5 group hover:text-[#B8791A] transition-colors cursor-pointer"
+              className="text-[#111111] text-xs font-black flex items-center gap-1.5 group hover:text-[#D4AF37] transition-colors cursor-pointer"
             >
               <span>Falar com Vendas</span> 
               <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />

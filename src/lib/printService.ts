@@ -436,7 +436,7 @@ export function printInvoiceHTML(
           body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px;
-            color: #1e293b;
+            color: #111111;
             line-height: 1.4;
             margin: 0;
             padding: 24px;
@@ -448,21 +448,21 @@ export function printInvoiceHTML(
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #0A1C38;
+            border-bottom: 2px solid #0B1F4D;
             padding-bottom: 8px;
             margin-bottom: 12px;
           }
           .doc-title {
             font-size: 18px;
             font-weight: 800;
-            color: #0A1C38;
+            color: #0B1F4D;
             letter-spacing: 0.5px;
             margin: 0;
           }
           .invoice-origin {
             font-size: 8px;
             text-transform: uppercase;
-            color: #64748b;
+            color: #6B7280;
             font-weight: bold;
             letter-spacing: 1px;
           }
@@ -475,7 +475,7 @@ export function printInvoiceHTML(
             margin-bottom: 16px;
           }
           .issuer-details h1 {
-            color: #0f172a;
+            color: #111111;
             font-weight: 800;
             font-size: 18px;
             margin: 0 0 4px 0;
@@ -483,13 +483,13 @@ export function printInvoiceHTML(
           }
           .issuer-meta {
             font-size: 10px;
-            color: #475569;
+            color: #6B7280;
             line-height: 1.4;
           }
           
           .invoice-meta-box {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
+            background-color: #F8F9FA;
+            border: 1px solid #E5E7EB;
             border-radius: 6px;
             padding: 10px;
           }
@@ -500,16 +500,16 @@ export function printInvoiceHTML(
           .meta-table td {
             font-size: 10px;
             padding: 2px 0;
-            color: #334155;
+            color: #0B1F4D;
           }
           .meta-table td.label {
             font-weight: bold;
-            color: #475569;
+            color: #6B7280;
           }
           .meta-table td.value {
             text-align: right;
             font-weight: 700;
-            color: #0f172a;
+            color: #111111;
           }
 
           /* Dual Party Grid */
@@ -520,12 +520,12 @@ export function printInvoiceHTML(
             margin-bottom: 16px;
           }
           .party-card {
-            border: 1px solid #cbd5e1;
+            border: 1px solid #E5E7EB;
             border-radius: 6px;
             overflow: hidden;
           }
           .party-header {
-            background-color: #0A1C38;
+            background-color: #0B1F4D;
             color: #ffffff;
             font-weight: 800;
             font-size: 8.5px;
@@ -537,12 +537,12 @@ export function printInvoiceHTML(
             padding: 10px;
             min-height: 64px;
             font-size: 10px;
-            color: #1e293b;
+            color: #111111;
           }
           .party-body strong {
             display: block;
             font-size: 11px;
-            color: #0f172a;
+            color: #111111;
             margin-bottom: 4px;
           }
 
@@ -557,19 +557,19 @@ export function printInvoiceHTML(
             text-transform: uppercase;
             font-weight: bold;
             color: #ffffff;
-            background-color: #0A1C38;
-            border: 1px solid #0A1C38;
+            background-color: #0B1F4D;
+            border: 1px solid #0B1F4D;
             padding: 6px 8px;
             text-align: left;
           }
           .items-table td {
-            border: 1px solid #cbd5e1;
+            border: 1px solid #E5E7EB;
             padding: 6px 8px;
             font-size: 10px;
-            color: #0f172a;
+            color: #111111;
           }
           .items-table tr:nth-child(even) {
-            background-color: #f8fafc;
+            background-color: #F8F9FA;
           }
           .items-table .text-center { text-align: center; }
           .items-table .text-right { text-align: right; }
@@ -589,45 +589,45 @@ export function printInvoiceHTML(
             gap: 10px;
           }
           .compact-box {
-            border: 1px solid #cbd5e1;
+            border: 1px solid #E5E7EB;
             border-radius: 6px;
             padding: 8px;
-            background-color: #f8fafc;
+            background-color: #F8F9FA;
           }
           .compact-box h4 {
             margin: 0 0 4px 0;
             font-size: 9px;
             text-transform: uppercase;
-            color: #0A1C38;
+            color: #0B1F4D;
             font-weight: 800;
-            border-bottom: 1px solid #cbd5e1;
+            border-bottom: 1px solid #E5E7EB;
             padding-bottom: 3px;
           }
           .compact-box p {
             margin: 0;
             font-size: 9.5px;
-            color: #334155;
+            color: #0B1F4D;
             line-height: 1.35;
           }
           
           /* Words Box */
           .words-container {
-            border: 1px dashed #0A1C38;
-            background-color: #eff6ff;
+            border: 1px dashed #0B1F4D;
+            background-color: #FFFFFF;
             border-radius: 6px;
             padding: 8px;
           }
           .words-title {
             font-size: 9px;
             font-weight: 800;
-            color: #0A1C38;
+            color: #0B1F4D;
             text-transform: uppercase;
             margin-bottom: 4px;
           }
           .words-value {
             font-size: 10px;
             font-weight: bold;
-            color: #0f172a;
+            color: #111111;
             font-style: italic;
           }
 
@@ -641,20 +641,20 @@ export function printInvoiceHTML(
           .financials-table {
             width: 100%;
             border-collapse: collapse;
-            border: 1px solid #cbd5e1;
+            border: 1px solid #E5E7EB;
             border-radius: 6px;
             overflow: hidden;
           }
           .financials-table td {
             font-size: 10px;
             padding: 5px 8px;
-            color: #334155;
+            color: #0B1F4D;
           }
           .financials-table tr {
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid #F8F9FA;
           }
           .financials-table tr.total-row {
-            background-color: #0A1C38;
+            background-color: #0B1F4D;
             color: #ffffff;
             font-weight: bold;
             font-size: 11px;
@@ -668,11 +668,11 @@ export function printInvoiceHTML(
           
           /* Authorized Signatory Block */
           .signatory-box {
-            border: 1px solid #cbd5e1;
+            border: 1px solid #E5E7EB;
             border-radius: 6px;
             padding: 12px;
             text-align: center;
-            background-color: #f8fafc;
+            background-color: #F8F9FA;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -681,25 +681,25 @@ export function printInvoiceHTML(
           .signatory-title {
             font-size: 9px;
             font-weight: bold;
-            color: #475569;
+            color: #6B7280;
             text-transform: uppercase;
           }
           .signature-line {
-            border-top: 1px dashed #94a3b8;
+            border-top: 1px dashed #9CA3AF;
             margin: 40px auto 4px auto;
             width: 80%;
           }
           .signature-sub {
             font-size: 8px;
-            color: #64748b;
+            color: #6B7280;
           }
 
           .footer-note {
             text-align: center;
             font-size: 9px;
-            color: #94a3b8;
+            color: #9CA3AF;
             margin-top: 32px;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #E5E7EB;
             padding-top: 12px;
           }
         </style>
@@ -759,7 +759,7 @@ export function printInvoiceHTML(
             <div class="party-body" style="font-size: 9.5px;">
               <strong>Local de Fornecimento / Entrega</strong>
               <div>${invoice.deliveryAddress || 'Mesma do Cliente / Levantamento no Ponto de Venda'}</div>
-              <div style="margin-top: 4px; color: #64748b; font-size: 8.5px">Agradecemos o vosso negócio de imediato. Por favor, conserve esta factura para efeitos de garantia ou devoluções.</div>
+              <div style="margin-top: 4px; color: #6B7280; font-size: 8.5px">Agradecemos o vosso negócio de imediato. Por favor, conserve esta factura para efeitos de garantia ou devoluções.</div>
             </div>
           </div>
         </div>
@@ -795,11 +795,11 @@ export function printInvoiceHTML(
               
               return `
                 <tr>
-                  <td class="text-center font-bold" style="color: #64748b;">${serialNo}</td>
+                  <td class="text-center font-bold" style="color: #6B7280;">${serialNo}</td>
                   <td style="font-weight: 500;">${name}</td>
                   <td class="text-center" style="font-weight: bold;">${qtyNum}</td>
                   <td class="text-right">${formattedPrice}</td>
-                  <td class="text-right" style="color: ${lineDiscount > 0 ? '#10b981' : '#64748b'}; font-weight: ${lineDiscount > 0 ? 'bold' : 'normal'};">${formattedLineDiscount}</td>
+                  <td class="text-right" style="color: ${lineDiscount > 0 ? '#10b981' : '#6B7280'}; font-weight: ${lineDiscount > 0 ? 'bold' : 'normal'};">${formattedLineDiscount}</td>
                   <td class="text-center">17%</td>
                   <td class="text-right" style="font-weight: bold;">${totalCost}</td>
                 </tr>
@@ -848,7 +848,7 @@ export function printInvoiceHTML(
                 <td align="right" style="font-weight: 500;">${formattedSubtotal}</td>
               </tr>
               ${(invoice.globalAjuste || 0) > 0 ? `
-              <tr style="color: #0A1C38; font-weight: bold;">
+              <tr style="color: #0B1F4D; font-weight: bold;">
                 <td>Ajuste / Desconto Global:</td>
                 <td align="right">- ${formattedAjusteGlobal}</td>
               </tr>
@@ -860,28 +860,28 @@ export function printInvoiceHTML(
             </table>
 
             <!-- Informational Breakdown Block requested by User -->
-            <table class="financials-table" style="font-weight: normal; margin-top: 4px; border: 1px dashed #cbd5e1; border-radius: 4px;">
+            <table class="financials-table" style="font-weight: normal; margin-top: 4px; border: 1px dashed #E5E7EB; border-radius: 4px;">
               <tr>
-                <td style="font-size: 9.5px; color: #475569;">Produtos (sem IVA):</td>
+                <td style="font-size: 9.5px; color: #6B7280;">Produtos (sem IVA):</td>
                 <td align="right" style="font-size: 9.5px; font-weight: 500;">${formattedSemIva}</td>
               </tr>
               <tr>
-                <td style="font-size: 9.5px; color: #475569;">IVA incluído (${userTaxRate}%):</td>
+                <td style="font-size: 9.5px; color: #6B7280;">IVA incluído (${userTaxRate}%):</td>
                 <td align="right" style="font-size: 9.5px; font-weight: 500;">${formattedIvaValue}</td>
               </tr>
-              <tr style="font-weight: bold; background-color: #f8fafc; border-top: 1px solid #cbd5e1;">
-                <td style="font-size: 10px; color: #0A1C38;">Total confirmado:</td>
-                <td align="right" style="font-size: 10px; color: #0A1C38;">${formattedTotal}</td>
+              <tr style="font-weight: bold; background-color: #F8F9FA; border-top: 1px solid #E5E7EB;">
+                <td style="font-size: 10px; color: #0B1F4D;">Total confirmado:</td>
+                <td align="right" style="font-size: 10px; color: #0B1F4D;">${formattedTotal}</td>
               </tr>
               ${(invoice.outstandingBalance || 0) <= 0 ? `
-              <tr style="background-color: #eff6ff;">
-                <td colspan="2" style="font-weight: bold; text-align: center; color: #0A1C38; font-size: 9.5px; padding: 4px;">Cash Sales</td>
+              <tr style="background-color: #FFFFFF;">
+                <td colspan="2" style="font-weight: bold; text-align: center; color: #0B1F4D; font-size: 9.5px; padding: 4px;">Cash Sales</td>
               </tr>
               ` : ''}
             </table>
 
             ${totalSavings > 0 ? `
-            <div style="font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.4; border: 1px solid #10b981; background-color: #f0fdf4; border-radius: 6px; padding: 10px;">
+            <div style="font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.4; border: 1px solid #10b981; background-color: #FFFFFF; border-radius: 6px; padding: 10px;">
               <div style="font-weight: bold; text-align: center; margin-bottom: 4px; color: #15803d;">POUPANÇA DO CLIENTE</div>
               <div style="display: flex; justify-content: space-between; color: #166534;">
                 <span>Preço de tabela (máx.):</span>
@@ -1132,7 +1132,7 @@ export function printInvoiceHTML(
           top: 0 !important;
           width: 100% !important;
           background: white !important;
-          color: #334155 !important;
+          color: #0B1F4D !important;
           font-family: Arial, sans-serif !important;
           font-size: 13px !important;
           line-height: 1.5 !important;
@@ -1142,12 +1142,12 @@ export function printInvoiceHTML(
         .invoice-header {
           display: flex !important;
           justify-content: space-between !important;
-          border-bottom: 2px solid #e2e8f0 !important;
+          border-bottom: 2px solid #E5E7EB !important;
           padding-bottom: 20px !important;
           margin-bottom: 30px !important;
         }
         .logo-box h1 {
-          color: #1e293b !important;
+          color: #111111 !important;
           font-weight: 800 !important;
           font-size: 24px !important;
           margin: 0 0 4px 0 !important;
@@ -1158,13 +1158,13 @@ export function printInvoiceHTML(
         }
         .title-area h2 {
           font-size: 18px !important;
-          color: #0f172a !important;
+          color: #111111 !important;
           margin: 0 0 6px 0 !important;
           font-weight: 700 !important;
         }
         .meta-info {
           font-size: 12px !important;
-          color: #64748b !important;
+          color: #6B7280 !important;
         }
         .columns-grid {
           display: grid !important;
@@ -1176,14 +1176,14 @@ export function printInvoiceHTML(
           font-size: 12px !important;
           font-weight: 800 !important;
           text-transform: uppercase !important;
-          color: #475569 !important;
+          color: #6B7280 !important;
           margin: 0 0 10px 0 !important;
-          border-bottom: 1px solid #e2e8f0 !important;
+          border-bottom: 1px solid #E5E7EB !important;
           padding-bottom: 4px !important;
         }
         .col-details {
           font-size: 12px !important;
-          color: #1e293b !important;
+          color: #111111 !important;
         }
         .col-details strong {
           display: block !important;
@@ -1199,15 +1199,15 @@ export function printInvoiceHTML(
           font-size: 11px !important;
           text-transform: uppercase !important;
           font-weight: 800 !important;
-          color: #475569 !important;
-          background-color: #f8fafc !important;
-          border-top: 1px solid #cbd5e1 !important;
-          border-bottom: 2px solid #cbd5e1 !important;
+          color: #6B7280 !important;
+          background-color: #F8F9FA !important;
+          border-top: 1px solid #E5E7EB !important;
+          border-bottom: 2px solid #E5E7EB !important;
           padding: 10px !important;
           text-align: left !important;
         }
         .items-table td {
-          border-bottom: 1px solid #f1f5f9 !important;
+          border-bottom: 1px solid #F8F9FA !important;
           padding: 10px !important;
           font-size: 12px !important;
         }
@@ -1225,7 +1225,7 @@ export function printInvoiceHTML(
           font-size: 12px !important;
         }
         .financials-table .total-row {
-          background-color: #0f172a !important;
+          background-color: #111111 !important;
           color: #ffffff !important;
           font-weight: bold !important;
           font-size: 14px !important;
@@ -1234,8 +1234,8 @@ export function printInvoiceHTML(
           padding: 10px !important;
         }
         .bank-instructions {
-          background-color: #f8fafc !important;
-          border: 1px dashed #cbd5e1 !important;
+          background-color: #F8F9FA !important;
+          border: 1px dashed #E5E7EB !important;
           border-radius: 8px !important;
           padding: 15px !important;
           font-size: 11px !important;
@@ -1244,14 +1244,14 @@ export function printInvoiceHTML(
         .bank-instructions h4 {
           margin: 0 0 5px 0 !important;
           font-weight: bold !important;
-          color: #1e293b !important;
+          color: #111111 !important;
         }
         .footer-section {
           margin-top: 60px !important;
           text-align: center !important;
           font-size: 11px !important;
-          color: #94a3b8 !important;
-          border-top: 1px solid #cbd5e1 !important;
+          color: #9CA3AF !important;
+          border-top: 1px solid #E5E7EB !important;
           padding-top: 20px !important;
         }
       }
@@ -1329,7 +1329,7 @@ export function printInvoiceHTML(
             <td align="right" style="font-weight: 500;">${formattedSubtotal}</td>
           </tr>
           ${(invoice.globalAjuste || 0) > 0 ? `
-          <tr style="color: #0A1C38; font-weight: bold;">
+          <tr style="color: #0B1F4D; font-weight: bold;">
             <td>Ajuste / Desconto Global:</td>
             <td align="right">- ${formattedAjusteGlobal}</td>
           </tr>
@@ -1343,31 +1343,31 @@ export function printInvoiceHTML(
 
       <!-- Informational Breakdown Block requested by User -->
       <div style="margin-bottom: 20px; max-width: 300px; margin-left: auto;">
-        <table class="financials-table" style="font-weight: normal; border: 1px dashed #cbd5e1; border-radius: 4px; width: 100%;">
+        <table class="financials-table" style="font-weight: normal; border: 1px dashed #E5E7EB; border-radius: 4px; width: 100%;">
           <tr>
-            <td style="font-size: 11px; padding: 4px 10px; color: #475569;">Produtos (sem IVA):</td>
+            <td style="font-size: 11px; padding: 4px 10px; color: #6B7280;">Produtos (sem IVA):</td>
             <td align="right" style="font-size: 11px; padding: 4px 10px; font-weight: 500;">${formattedSemIva}</td>
           </tr>
           <tr>
-            <td style="font-size: 11px; padding: 4px 10px; color: #475569;">IVA incluído (${userTaxRate}%):</td>
+            <td style="font-size: 11px; padding: 4px 10px; color: #6B7280;">IVA incluído (${userTaxRate}%):</td>
             <td align="right" style="font-size: 11px; padding: 4px 10px; font-weight: 500;">${formattedIvaValue}</td>
           </tr>
-          <tr style="font-weight: bold; background-color: #f8fafc; border-top: 1px solid #cbd5e1;">
-            <td style="font-size: 11px; padding: 6px 10px; color: #0A1C38;">Total confirmado:</td>
-            <td align="right" style="font-size: 11px; padding: 6px 10px; color: #0A1C38;">${formattedTotal}</td>
+          <tr style="font-weight: bold; background-color: #F8F9FA; border-top: 1px solid #E5E7EB;">
+            <td style="font-size: 11px; padding: 6px 10px; color: #0B1F4D;">Total confirmado:</td>
+            <td align="right" style="font-size: 11px; padding: 6px 10px; color: #0B1F4D;">${formattedTotal}</td>
           </tr>
           ${(invoice.outstandingBalance || 0) <= 0 ? `
-          <tr style="background-color: #eff6ff;">
-            <td colspan="2" style="font-weight: bold; text-align: center; color: #0A1C38; font-size: 10px; padding: 4px;">Cash Sales</td>
+          <tr style="background-color: #FFFFFF;">
+            <td colspan="2" style="font-weight: bold; text-align: center; color: #0B1F4D; font-size: 10px; padding: 4px;">Cash Sales</td>
           </tr>
           ` : ''}
         </table>
       </div>
 
       ${totalSavings > 0 ? `
-      <div style="font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.4; margin-top: 15px; margin-bottom: 15px; max-width: 320px; margin-left: auto; border: 1px dashed #cbd5e1; padding: 10px; border-radius: 4px;">
+      <div style="font-family: 'Courier New', Courier, monospace; font-size: 11px; line-height: 1.4; margin-top: 15px; margin-bottom: 15px; max-width: 320px; margin-left: auto; border: 1px dashed #E5E7EB; padding: 10px; border-radius: 4px;">
         <div style="font-weight: bold; text-align: center; margin-bottom: 5px;">POUPANÇA DO CLIENTE</div>
-        <div style="border-top: 1px dashed #cbd5e1; margin: 4px 0;"></div>
+        <div style="border-top: 1px dashed #E5E7EB; margin: 4px 0;"></div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
           <span>Preço de tabela (máx.):</span>
           <span>${totalHighest.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
@@ -1376,11 +1376,11 @@ export function printInvoiceHTML(
           <span>Preço cobrado:</span>
           <span>${totalCharged.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT</span>
         </div>
-        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0A1C38; margin-top: 5px;">
+        <div style="display: flex; justify-content: space-between; font-weight: bold; color: #0B1F4D; margin-top: 5px;">
           <span>Desconto total:</span>
           <span>&minus; ${totalSavings.toLocaleString('pt-MZ', { minimumFractionDigits: 2 })} MT &nbsp;(${discountPercent.toFixed(1)}%)</span>
         </div>
-        <div style="border-top: 1px dashed #cbd5e1; margin: 4px 0;"></div>
+        <div style="border-top: 1px dashed #E5E7EB; margin: 4px 0;"></div>
       </div>
       ` : ''}
 
@@ -1394,7 +1394,7 @@ export function printInvoiceHTML(
         Obrigado pela sua preferência! - Sabush System ERP
       </div>
 
-      <div style="margin-top: 25px; background-color: #fef3c7; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 12px; text-align: center; color: #78350f; font-family: sans-serif;">
+      <div style="margin-top: 25px; background-color: #E9CC85; border: 1.5px solid #D4AF37; border-radius: 8px; padding: 12px; text-align: center; color: #D4AF37; font-family: sans-serif;">
         <strong style="font-size: 11.5px; display: block; margin-bottom: 4px; text-transform: uppercase; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">⚠️ AVISO LEGAL — ESTE DOCUMENTO NÃO SERVE DE RECIBO FISCAL OFICIAL</strong>
         <div style="font-size: 10px; line-height: 1.4; font-family: Arial, Helvetica, sans-serif;">
           Para efeitos fiscais, exija a sua Factura/Recibo nos termos do Regulamento do IVA de Moçambique (Lei nº 32/2007).<br>
@@ -1604,7 +1604,7 @@ export function printPaymentReceiptHTML(
           top: 0 !important;
           width: 100% !important;
           background: white !important;
-          color: #334155 !important;
+          color: #0B1F4D !important;
           font-family: Arial, sans-serif !important;
           font-size: 13px !important;
           line-height: 1.5 !important;
@@ -1614,12 +1614,12 @@ export function printPaymentReceiptHTML(
         .invoice-header {
           display: flex !important;
           justify-content: space-between !important;
-          border-bottom: 2px solid #e2e8f0 !important;
+          border-bottom: 2px solid #E5E7EB !important;
           padding-bottom: 20px !important;
           margin-bottom: 30px !important;
         }
         .logo-box h1 {
-          color: #1e293b !important;
+          color: #111111 !important;
           font-weight: 800 !important;
           font-size: 24px !important;
           margin: 0 0 4px 0 !important;
@@ -1630,17 +1630,17 @@ export function printPaymentReceiptHTML(
         }
         .title-area h2 {
           font-size: 18px !important;
-          color: #0f172a !important;
+          color: #111111 !important;
           margin: 0 0 6px 0 !important;
           font-weight: 700 !important;
         }
         .meta-info {
           font-size: 12px !important;
-          color: #64748b !important;
+          color: #6B7280 !important;
         }
         .rec-card {
-          background-color: #f8fafc !important;
-          border: 1px solid #e2e8f0 !important;
+          background-color: #F8F9FA !important;
+          border: 1px solid #E5E7EB !important;
           border-radius: 16px !important;
           padding: 24px !important;
           margin-bottom: 30px !important;
@@ -1652,14 +1652,14 @@ export function printPaymentReceiptHTML(
         }
         .rec-item {
           font-size: 13px !important;
-          color: #475569 !important;
+          color: #6B7280 !important;
         }
         .rec-item strong {
-          color: #0f172a !important;
+          color: #111111 !important;
         }
         .amount-highlight {
           grid-column: span 2 !important;
-          background-color: #f0fdf4 !important;
+          background-color: #FFFFFF !important;
           border: 1px solid #bbf7d0 !important;
           border-radius: 12px !important;
           padding: 16px !important;
@@ -1678,8 +1678,8 @@ export function printPaymentReceiptHTML(
           margin-top: 80px !important;
           text-align: center !important;
           font-size: 11px !important;
-          color: #94a3b8 !important;
-          border-top: 1px solid #cbd5e1 !important;
+          color: #9CA3AF !important;
+          border-top: 1px solid #E5E7EB !important;
           padding-top: 20px !important;
         }
       }
@@ -1734,7 +1734,7 @@ export function printPaymentReceiptHTML(
       </div>
 
       <div style="display: flex; justify-content: flex-end; font-size: 14px; font-weight: bold; padding: 10px 24px;">
-        <span style="color: #64748b; margin-right: 20px;">Diferença de Saldo Pendente (Saldo Devedor actual):</span>
+        <span style="color: #6B7280; margin-right: 20px;">Diferença de Saldo Pendente (Saldo Devedor actual):</span>
         <span style="color: #ef4444; font-family: monospace;">${formattedBalance}</span>
       </div>
 
@@ -1742,7 +1742,7 @@ export function printPaymentReceiptHTML(
         Este recibo serve de comprovativo oficial de liquidação de saldo devedor. gerado pelo Sabush System ERP.
       </div>
 
-      <div style="margin-top: 25px; background-color: #fef3c7; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 12px; text-align: center; color: #78350f; font-family: sans-serif;">
+      <div style="margin-top: 25px; background-color: #E9CC85; border: 1.5px solid #D4AF37; border-radius: 8px; padding: 12px; text-align: center; color: #D4AF37; font-family: sans-serif;">
         <strong style="font-size: 11.5px; display: block; margin-bottom: 4px; text-transform: uppercase; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">⚠️ AVISO LEGAL — ESTE DOCUMENTO NÃO SERVE DE RECIBO FISCAL OFICIAL</strong>
         <div style="font-size: 10px; line-height: 1.4; font-family: Arial, Helvetica, sans-serif;">
           Para efeitos fiscais, exija a sua Factura/Recibo nos termos do Regulamento do IVA de Moçambique (Lei nº 32/2007).<br>
@@ -1918,27 +1918,27 @@ export function downloadPaymentReceiptHTML(
   } else {
     styles = `
       body {
-        background-color: #f8fafc;
-        color: #334155;
+        background-color: #F8F9FA;
+        color: #0B1F4D;
         font-family: Arial, sans-serif;
         font-size: 13px;
         line-height: 1.5;
         padding: 40px;
         margin: 40px auto;
         max-width: 800px;
-        border: 1px solid #e2e8f0;
+        border: 1px solid #E5E7EB;
         border-radius: 20px;
         box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
       }
       .invoice-header {
         display: flex;
         justify-content: space-between;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid #E5E7EB;
         padding-bottom: 20px;
         margin-bottom: 30px;
       }
       .logo-box h1 {
-        color: #1e293b;
+        color: #111111;
         font-weight: 800;
         font-size: 24px;
         margin: 0 0 4px 0;
@@ -1949,17 +1949,17 @@ export function downloadPaymentReceiptHTML(
       }
       .title-area h2 {
         font-size: 18px;
-        color: #0f172a;
+        color: #111111;
         margin: 0 0 6px 0;
         font-weight: 700;
       }
       .meta-info {
         font-size: 12px;
-        color: #64748b;
+        color: #6B7280;
       }
       .rec-card {
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
+        background-color: #F8F9FA;
+        border: 1px solid #E5E7EB;
         border-radius: 16px;
         padding: 24px;
         margin-bottom: 30px;
@@ -1971,14 +1971,14 @@ export function downloadPaymentReceiptHTML(
       }
       .rec-item {
         font-size: 13px;
-        color: #475569;
+        color: #6B7280;
       }
       .rec-item strong {
-        color: #0f172a;
+        color: #111111;
       }
       .amount-highlight {
         grid-column: span 2;
-        background-color: #f0fdf4;
+        background-color: #FFFFFF;
         border: 1px solid #bbf7d0;
         border-radius: 12px;
         padding: 16px;
@@ -1997,8 +1997,8 @@ export function downloadPaymentReceiptHTML(
         margin-top: 80px;
         text-align: center;
         font-size: 11px;
-        color: #94a3b8;
-        border-top: 1px solid #cbd5e1;
+        color: #9CA3AF;
+        border-top: 1px solid #E5E7EB;
         padding-top: 20px;
       }
       @media print {
@@ -2060,7 +2060,7 @@ export function downloadPaymentReceiptHTML(
       </div>
 
       <div style="display: flex; justify-content: flex-end; font-size: 14px; font-weight: bold; padding: 10px 24px;">
-        <span style="color: #64748b; margin-right: 20px;">Diferença de Saldo Pendente (Saldo Devedor actual):</span>
+        <span style="color: #6B7280; margin-right: 20px;">Diferença de Saldo Pendente (Saldo Devedor actual):</span>
         <span style="color: #ef4444; font-family: monospace;">${formattedBalance}</span>
       </div>
 
@@ -2068,7 +2068,7 @@ export function downloadPaymentReceiptHTML(
         Este recibo serve de comprovativo oficial de liquidação de saldo devedor. gerado pelo Sabush System ERP.
       </div>
 
-      <div style="margin-top: 25px; background-color: #fef3c7; border: 1.5px solid #f59e0b; border-radius: 8px; padding: 12px; text-align: center; color: #78350f; font-family: sans-serif;">
+      <div style="margin-top: 25px; background-color: #E9CC85; border: 1.5px solid #D4AF37; border-radius: 8px; padding: 12px; text-align: center; color: #D4AF37; font-family: sans-serif;">
         <strong style="font-size: 11.5px; display: block; margin-bottom: 4px; text-transform: uppercase; font-weight: bold; font-family: Arial, Helvetica, sans-serif;">⚠️ AVISO LEGAL — ESTE DOCUMENTO NÃO SERVE DE RECIBO FISCAL OFICIAL</strong>
         <div style="font-size: 10px; line-height: 1.4; font-family: Arial, Helvetica, sans-serif;">
           Para efeitos fiscais, exija a sua Factura/Recibo nos termos do Regulamento do IVA de Moçambique (Lei nº 32/2007).<br>
@@ -2095,9 +2095,9 @@ export function downloadPaymentReceiptHTML(
       </style>
     </head>
     <body>
-      <div class="no-print" style="max-width: 800px; margin: 20px auto; padding: 12px 24px; background-color: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; color: #1e40af; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-family: sans-serif; font-size: 13px;">
+      <div class="no-print" style="max-width: 800px; margin: 20px auto; padding: 12px 24px; background-color: #FFFFFF; border: 1px solid #93B4F5; border-radius: 12px; color: #2563EB; font-weight: bold; display: flex; justify-content: space-between; align-items: center; font-family: sans-serif; font-size: 13px;">
         <span>📄 Este é o ficheiro de impressão do seu recibo. Pode salvá-lo ou imprimi-lo sem restrições.</span>
-        <button onclick="window.print()" style="background-color: #178F82; color: white; border: none; padding: 8px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;">Imprimir Agora (Ctrl+P)</button>
+        <button onclick="window.print()" style="background-color: #2563EB; color: white; border: none; padding: 8px 18px; border-radius: 8px; font-weight: bold; cursor: pointer;">Imprimir Agora (Ctrl+P)</button>
       </div>
       ${contentHtml}
     </body>
@@ -2230,22 +2230,22 @@ export function printTestPageHTML(
         #print-only-container {
           display: block !important;
           background: white !important;
-          color: #334155 !important;
+          color: #0B1F4D !important;
           font-family: system-ui, -apple-system, sans-serif !important;
           padding: 40px !important;
           margin: 0 !important;
         }
       }
       .test-card {
-        border: 2px solid #e2e8f0;
+        border: 2px solid #E5E7EB;
         border-radius: 16px;
         padding: 32px;
         max-width: 650px;
         margin: 40px auto;
-        background: #f8fafc;
+        background: #F8F9FA;
       }
       .test-header {
-        border-bottom: 2px solid #cbd5e1;
+        border-bottom: 2px solid #E5E7EB;
         padding-bottom: 16px;
         margin-bottom: 24px;
         text-align: center;
@@ -2255,47 +2255,47 @@ export function printTestPageHTML(
     contentHtml = `
       <div class="test-card">
         <div class="test-header">
-          <h1 style="margin: 0; font-size: 24px; color: #0A1C38;">SABUSH SYSTEM ERP</h1>
-          <p style="margin: 4px 0 0; color: #64748b; font-size: 14px;">Página de Teste da Impressora Comercial</p>
+          <h1 style="margin: 0; font-size: 24px; color: #0B1F4D;">SABUSH SYSTEM ERP</h1>
+          <p style="margin: 4px 0 0; color: #6B7280; font-size: 14px;">Página de Teste da Impressora Comercial</p>
         </div>
         <div style="margin-bottom: 24px;">
-          <h3 style="color: #334155; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">Detalhes do Equipamento e Conexão</h3>
+          <h3 style="color: #0B1F4D; border-bottom: 1px solid #E5E7EB; padding-bottom: 8px;">Detalhes do Equipamento e Conexão</h3>
           <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; width: 180px; color: #475569;">Empresa:</td>
-              <td style="padding: 8px 0; color: #1e293b;">${businessName}</td>
+              <td style="padding: 8px 0; font-weight: bold; width: 180px; color: #6B7280;">Empresa:</td>
+              <td style="padding: 8px 0; color: #111111;">${businessName}</td>
             </tr>
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Tipo de Template:</td>
-              <td style="padding: 8px 0; color: #1e293b;">Standard A4 Sheet</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #6B7280;">Tipo de Template:</td>
+              <td style="padding: 8px 0; color: #111111;">Standard A4 Sheet</td>
             </tr>
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Interface / Canal:</td>
-              <td style="padding: 8px 0; color: #1e293b;">${printerInterface === 'system' ? 'DIALOGO DO SISTEMA' : printerInterface === 'usb_cable' ? 'CABO USB / PORTA LOCAL' : printerInterface === 'bluetooth' ? 'BLUETOOTH SEM FIOS' : 'REDE WI-FI / IP NETWORK'}</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #6B7280;">Interface / Canal:</td>
+              <td style="padding: 8px 0; color: #111111;">${printerInterface === 'system' ? 'DIALOGO DO SISTEMA' : printerInterface === 'usb_cable' ? 'CABO USB / PORTA LOCAL' : printerInterface === 'bluetooth' ? 'BLUETOOTH SEM FIOS' : 'REDE WI-FI / IP NETWORK'}</td>
             </tr>
             ${printerInterface === 'wifi_network' ? `
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Endereço de Rede IP:</td>
-              <td style="padding: 8px 0; color: #1e293b; font-family: monospace;">${printerIpAddress || '192.168.1.100'}:${printerPort || '9100'}</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #6B7280;">Endereço de Rede IP:</td>
+              <td style="padding: 8px 0; color: #111111; font-family: monospace;">${printerIpAddress || '192.168.1.100'}:${printerPort || '9100'}</td>
             </tr>` : ''}
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Data do Teste:</td>
-              <td style="padding: 8px 0; color: #1e293b;">${new Date().toLocaleString('pt-MZ')}</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #6B7280;">Data do Teste:</td>
+              <td style="padding: 8px 0; color: #111111;">${new Date().toLocaleString('pt-MZ')}</td>
             </tr>
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #475569;">Resultado:</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #6B7280;">Resultado:</td>
               <td style="padding: 8px 0; color: #10b981; font-weight: bold;">✓ SUCESSO - TOTALMENTE OPERATIVO</td>
             </tr>
           </table>
         </div>
-        <div style="background-color: #f1f5f9; padding: 16px; border-radius: 8px; font-size: 13px; color: #475569;">
+        <div style="background-color: #F8F9FA; padding: 16px; border-radius: 8px; font-size: 13px; color: #6B7280;">
           <p style="margin: 0; font-weight: bold;">Recomendação de Conexão:</p>
           <ul style="margin: 8px 0 0; padding-left: 20px; line-height: 1.5;">
             <li>Para conexões de <strong>Cabo USB ou Bluetooth</strong>: Certifique-se de que a impressora está instalada no sistema operativo e selecionada na lista que aparece a seguir no diálogo de impressão do navegador.</li>
             <li>Para conexões em <strong>Rede Wi-Fi / IP</strong>: Certifique-se de que a impressora de rede está ligada na mesma subrede local e o IP inserido corresponde ao IP fixado nas configurações físicas do equipamento.</li>
           </ul>
         </div>
-        <div style="text-align: center; margin-top: 32px; font-size: 11px; color: #94a3b8;">
+        <div style="text-align: center; margin-top: 32px; font-size: 11px; color: #9CA3AF;">
           SABUSH SYSTEM ERP • Todos os direitos reservados.
         </div>
       </div>

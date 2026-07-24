@@ -603,7 +603,7 @@ export default function Suppliers() {
           <div className="text-xs font-semibold text-slate-500 font-sans">
             Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredSuppliers.length, startIndex + 1)}</span> a{" "}
             <span className="font-extrabold text-slate-900">{Math.min(filteredSuppliers.length, endIndex)}</span> de{" "}
-            <span className="font-extrabold text-[#111827]">{filteredSuppliers.length}</span> fornecedores
+            <span className="font-extrabold text-[#111111]">{filteredSuppliers.length}</span> fornecedores
           </div>
           <div className="flex items-center gap-1.5 self-end sm:self-auto">
             <button

@@ -291,7 +291,7 @@ const getExpiryDot = (stats: any) => {
     return <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0 animate-ping" title="Crítico (Até 7 dias)" style={{ backgroundColor: '#E24B4A' }} />;
   }
   if (stats.level === 'warning') {
-    return <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0" title="Aviso (Até 30 dias)" style={{ backgroundColor: '#EF9F27' }} />;
+    return <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0" title="Aviso (Até 30 dias)" style={{ backgroundColor: '#D4AF37' }} />;
   }
   if (stats.level === 'valid') {
     return <span className="inline-block w-2.5 h-2.5 bg-emerald-500 rounded-full shrink-0" title="Válido" />;
@@ -321,7 +321,7 @@ const getExpiryBadge = (level: string, days: number, dateStr: string, count: num
   }
   if (level === 'warning') {
     return (
-      <span className="text-white font-black px-2 py-0.5 rounded font-mono text-[9px] uppercase inline-block leading-normal" style={{ backgroundColor: '#EF9F27' }}>
+      <span className="text-white font-black px-2 py-0.5 rounded font-mono text-[9px] uppercase inline-block leading-normal" style={{ backgroundColor: '#D4AF37' }}>
         ⚠️ AVISO ({days}d | {formattedDate}){plusLotesLabel}
       </span>
     );
@@ -1222,8 +1222,8 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
   const [showSku, setShowSku] = useState(true);
   const [showCategory, setShowCategory] = useState(true);
   const [customStoreName, setCustomStoreName] = useState('');
-  const [tagBorderColor, setTagBorderColor] = useState('#4f46e5'); // Indigo default
-  const [tagAccentColor, setTagAccentColor] = useState('#facc15'); // Yellow promo default
+  const [tagBorderColor, setTagBorderColor] = useState('#2563EB'); // Indigo default
+  const [tagAccentColor, setTagAccentColor] = useState('#D4AF37'); // Yellow promo default
   const [tagColumns, setTagColumns] = useState<number>(3);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
   const [isUpdatingStock, setIsUpdatingStock] = useState(false);
@@ -6240,7 +6240,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           {showAiGenerator && (
             <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
               <div className="bg-white rounded-3xl max-w-sm w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-in zoom-in-95 duration-200 border border-slate-100">
-                <div className="p-5 bg-blue-900 text-white flex items-center justify-between border-b-2 border-[#B8791A]/50">
+                <div className="p-5 bg-blue-900 text-white flex items-center justify-between border-b-2 border-[#D4AF37]/50">
                   <h4 className="font-bold flex items-center gap-2 text-sm">
                     <Sparkles className="text-amber-400 stroke-[2.5]" size={16} />
                     <span>Conceito Visual por IA</span>
@@ -6727,7 +6727,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
               <div className="text-xs font-semibold text-slate-500 font-sans">
                 Mostrando <span className="font-extrabold text-slate-900">{Math.min(filteredProducts.length, startIndex + 1)}</span> a{" "}
                 <span className="font-extrabold text-slate-900">{Math.min(filteredProducts.length, endIndex)}</span> de{" "}
-                <span className="font-extrabold text-[#111827]">{filteredProducts.length}</span> artigos
+                <span className="font-extrabold text-[#111111]">{filteredProducts.length}</span> artigos
               </div>
               <div className="flex items-center gap-1.5 self-end sm:self-auto">
                 <button
@@ -7181,7 +7181,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
           className="space-y-6 animate-fade-in"
         >
           {/* Bento Header Callout */}
-          <div className="bg-[#081F1E] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#16253B]">
+          <div className="bg-[#0B1F4D] text-white rounded-3xl p-6 relative overflow-hidden shadow-xl border border-[#0B1F4D]">
             <div className="absolute top-0 right-0 w-80 h-80 bg-indigo-500/10 blur-3xl rounded-full translate-x-20 -translate-y-20" />
             <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1 text-left font-sans">
@@ -7407,7 +7407,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                         className={cn(
                           "p-3 rounded-2xl border text-left select-none cursor-pointer transition-all flex flex-col gap-1.5",
                           tagTemplate === 'modern' 
-                            ? "bg-[#081F1E] border-slate-800 text-white font-sans" 
+                            ? "bg-[#0B1F4D] border-slate-800 text-white font-sans" 
                             : "bg-white hover:bg-slate-50 border-slate-200"
                         )}
                       >
@@ -7519,7 +7519,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                   <div className="space-y-1.5 text-left leading-none font-sans">
                     <label className="text-[9px] uppercase font-black text-slate-400 tracking-wider block">Tema e Cor do Contorno</label>
                     <div className="flex items-center gap-2 pt-1 select-none">
-                      {['#4f46e5', '#3b82f6', '#10b981', '#ef4444', '#1e293b'].map((color) => (
+                      {['#2563EB', '#2563EB', '#10b981', '#ef4444', '#111111'].map((color) => (
                         <button
                           key={color}
                           type="button"
@@ -7581,7 +7581,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                     {/* Badge template styled title */}
                     <div className="mb-2">
                       <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest inline-block mr-1 font-mono">TÍTULO:</span>
-                      <h5 className="text-sm font-extrabold text-[#081F1E] tracking-tight leading-snug line-clamp-1">Produto de Amostra Premium</h5>
+                      <h5 className="text-sm font-extrabold text-[#0B1F4D] tracking-tight leading-snug line-clamp-1">Produto de Amostra Premium</h5>
                       {showCategory && (
                         <span className="text-[8px] uppercase font-black font-mono tracking-widest text-indigo-600 bg-indigo-50 border border-indigo-100 px-1.5 py-0.5 rounded mt-1 inline-block">
                           Bebidas / Mercearia
@@ -9121,7 +9121,7 @@ export default function Inventory({ initialAction, onActionHandled }: InventoryP
                           .price {
                             font-size: 13px;
                             font-weight: 900;
-                            color: #178F82;
+                            color: #2563EB;
                             margin-bottom: 4px;
                           }
                           svg {

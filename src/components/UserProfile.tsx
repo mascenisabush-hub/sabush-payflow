@@ -53,10 +53,10 @@ const THEME_PRESETS = [
 ];
 
 const THEME_HEX_COLORS: Record<string, string> = {
-  blue: '#178F82',
+  blue: '#2563EB',
   emerald: '#059669',
-  indigo: '#4f46e5',
-  amber: '#d97706',
+  indigo: '#2563EB',
+  amber: '#D4AF37',
   rose: '#e11d48',
 };
 
@@ -331,8 +331,8 @@ export default function UserProfile() {
   useEffect(() => {
     if (!profile?.businessId) return;
     const qrColor = qrColorOption === 'brand' 
-      ? (THEME_HEX_COLORS[formData.themeColor] || '#0f172a')
-      : '#000000';
+      ? (THEME_HEX_COLORS[formData.themeColor] || '#111111')
+      : '#0B1F4D';
     QRCode.toDataURL(storefrontUrl, {
       width: 600,
       margin: 2,
@@ -615,15 +615,15 @@ export default function UserProfile() {
                 </div>
 
                 {/* 2-Factor Authentication Advanced Settings Card */}
-                <div className="bg-[#1D1510] p-6 rounded-3xl text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 mt-6 border border-amber-900/10">
+                <div className="bg-[#111111] p-6 rounded-3xl text-white shadow-xl flex flex-col md:flex-row items-center justify-between gap-5 mt-6 border border-amber-900/10">
                   <div className="flex items-start gap-4 text-left">
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center shrink-0 border border-white/10">
                       <Lock className="text-amber-400" size={20} />
                     </div>
                     <div className="space-y-1">
                       <p className="text-[10px] font-black uppercase tracking-wider text-amber-400 font-mono">Segurança Corporativa</p>
-                      <h4 className="font-extrabold text-[#FDFAF7] text-sm font-sans">Autenticação de Dois Fatores (2FA)</h4>
-                      <p className="text-[10px] text-[#C4B2A6] leading-relaxed font-semibold max-w-lg">
+                      <h4 className="font-extrabold text-[#FFFFFF] text-sm font-sans">Autenticação de Dois Fatores (2FA)</h4>
+                      <p className="text-[10px] text-[#E9CC85] leading-relaxed font-semibold max-w-lg">
                         Proteja sua conta contra acessos não autorizados. Quando ativado, será exigido um código único de segurança para validar novas sessões de login no Sabush ERP.
                       </p>
                     </div>
@@ -635,7 +635,7 @@ export default function UserProfile() {
                       checked={formData.twoFactorEnabled || false}
                       onChange={e => setFormData({...formData, twoFactorEnabled: e.target.checked})}
                     />
-                    <div className="w-9 h-5 bg-[#3a2f26] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
+                    <div className="w-9 h-5 bg-[#D4AF37] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
                   </label>
                 </div>
 

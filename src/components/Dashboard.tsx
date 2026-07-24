@@ -28,32 +28,32 @@ const data = [
 
 export const schemaColors = {
   classic: {
-    primary: '#0A1C38', // Brand Blue
+    primary: '#0B1F4D', // Brand Blue
     secondary: '#10b981', // Semantic Green
-    warning: '#f59e0b', // Semantic Amber
+    warning: '#D4AF37', // Semantic Amber
     danger: '#ef4444', // Semantic Red
-    glow: 'rgba(26, 115, 196, 0.1)',
+    glow: 'rgba(37, 99, 235, 0.1)',
   },
   neon: {
-    primary: '#0A1C38', // Brand Blue (redirected for safe fallback)
+    primary: '#0B1F4D', // Brand Blue (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
-    warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
+    warning: '#D4AF37', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
-    glow: 'rgba(26, 115, 196, 0.1)',
+    glow: 'rgba(37, 99, 235, 0.1)',
   },
   cyberpunk: {
-    primary: '#B8791A', // Brand Orange (redirected for safe fallback)
+    primary: '#D4AF37', // Brand Orange (redirected for safe fallback)
     secondary: '#10b981', // Semantic Green (redirected for safe fallback)
-    warning: '#f59e0b', // Semantic Amber (redirected for safe fallback)
+    warning: '#D4AF37', // Semantic Amber (redirected for safe fallback)
     danger: '#ef4444', // Semantic Red (redirected for safe fallback)
-    glow: 'rgba(216, 90, 48, 0.15)',
+    glow: 'rgba(212, 175, 55, 0.15)',
   },
   vibrant: {
-    primary: '#B8791A', // Brand Orange
+    primary: '#D4AF37', // Brand Orange
     secondary: '#10b981', // Semantic Green
-    warning: '#f59e0b', // Semantic Amber
+    warning: '#D4AF37', // Semantic Amber
     danger: '#ef4444', // Semantic Red
-    glow: 'rgba(216, 90, 48, 0.12)',
+    glow: 'rgba(212, 175, 55, 0.12)',
   }
 };
 
@@ -2210,13 +2210,13 @@ Sabush System ERP`;
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={vendasChartToggle === 'mensal' ? twelveMonthSalesTrend : filteredChartAndMetricData.chartData}>
                 <CartesianGrid strokeDasharray="3 3" opacity={0.1} />
-                <XAxis dataKey="name" fontSize={9} fontStyle="bold" stroke="#94a3b8" />
-                <YAxis fontSize={9} fontStyle="bold" stroke="#94a3b8" />
+                <XAxis dataKey="name" fontSize={9} fontStyle="bold" stroke="#9CA3AF" />
+                <YAxis fontSize={9} fontStyle="bold" stroke="#9CA3AF" />
                 <Tooltip 
                   formatter={(val) => [`${Number(val).toLocaleString()} MZN`, "Vendas"]} 
-                  contentStyle={{ backgroundColor: "#0F172A", color: "#FFF", borderRadius: "12px", border: "none", fontSize: "11px" }}
+                  contentStyle={{ backgroundColor: "#111111", color: "#FFF", borderRadius: "12px", border: "none", fontSize: "11px" }}
                 />
-                <Bar dataKey={vendasChartToggle === 'mensal' ? 'vendas' : 'sales'} fill="#3B82F6" radius={[6, 6, 0, 0]} />
+                <Bar dataKey={vendasChartToggle === 'mensal' ? 'vendas' : 'sales'} fill="#2563EB" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -2234,9 +2234,9 @@ Sabush System ERP`;
               <PieChart>
                 <Pie
                   data={[
-                    { name: 'Retalho', value: filteredChartAndMetricData.metrics.retail, color: '#3B82F6' },
-                    { name: 'Grosso', value: filteredChartAndMetricData.metrics.wholesale, color: '#8B5CF6' },
-                    { name: 'A Dinheiro', value: filteredChartAndMetricData.metrics.cashSales, color: '#F59E0B' },
+                    { name: 'Retalho', value: filteredChartAndMetricData.metrics.retail, color: '#2563EB' },
+                    { name: 'Grosso', value: filteredChartAndMetricData.metrics.wholesale, color: '#93B4F5' },
+                    { name: 'A Dinheiro', value: filteredChartAndMetricData.metrics.cashSales, color: '#D4AF37' },
                   ]}
                   cx="50%"
                   cy="50%"
@@ -2245,9 +2245,9 @@ Sabush System ERP`;
                   paddingAngle={4}
                   dataKey="value"
                 >
-                  <Cell fill="#3B82F6" />
-                  <Cell fill="#8B5CF6" />
-                  <Cell fill="#F59E0B" />
+                  <Cell fill="#2563EB" />
+                  <Cell fill="#93B4F5" />
+                  <Cell fill="#D4AF37" />
                 </Pie>
                 <Tooltip formatter={(value) => `${Number(value).toLocaleString()} MZN`} />
               </PieChart>
@@ -2675,18 +2675,18 @@ Sabush System ERP`;
             <AreaChart data={sixMonthSalesTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorVendas6m" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#178F82" stopOpacity={0.2}/>
-                  <stop offset="95%" stopColor="#178F82" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#2563EB" stopOpacity={0.2}/>
+                  <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorFaturas6m" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#818cf8" stopOpacity={0.1}/>
-                  <stop offset="95%" stopColor="#818cf8" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#93B4F5" stopOpacity={0.1}/>
+                  <stop offset="95%" stopColor="#93B4F5" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#F8F9FA" vertical={false} />
               <XAxis 
                 dataKey="name" 
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2694,7 +2694,7 @@ Sabush System ERP`;
               />
               <YAxis 
                 yAxisId="left"
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2704,7 +2704,7 @@ Sabush System ERP`;
               <YAxis 
                 yAxisId="right"
                 orientation="right"
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2713,13 +2713,13 @@ Sabush System ERP`;
               />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#1e293b', 
+                  backgroundColor: '#111111', 
                   borderRadius: '16px', 
                   border: 'none',
                   boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                   padding: '12px'
                 }}
-                labelStyle={{ color: '#f8fafc', fontWeight: 800, fontSize: '11px', textTransform: 'uppercase', marginBottom: '4px' }}
+                labelStyle={{ color: '#F8F9FA', fontWeight: 800, fontSize: '11px', textTransform: 'uppercase', marginBottom: '4px' }}
                 itemStyle={{ fontSize: '12px', padding: '2px 0' }}
                 formatter={(value: any, name: string) => {
                   if (name === "vendas") return [`${Number(value).toLocaleString()} ${currency}`, "Total Vendas"];
@@ -2732,7 +2732,7 @@ Sabush System ERP`;
                 type="monotone" 
                 dataKey="vendas" 
                 name="vendas"
-                stroke="#178F82" 
+                stroke="#2563EB" 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorVendas6m)" 
@@ -2742,7 +2742,7 @@ Sabush System ERP`;
                 type="monotone" 
                 dataKey="faturas" 
                 name="faturas"
-                stroke="#818cf8" 
+                stroke="#93B4F5" 
                 strokeWidth={2} 
                 fillOpacity={1} 
                 fill="url(#colorFaturas6m)" 
@@ -2807,7 +2807,7 @@ Sabush System ERP`;
               <span 
                 className="w-2.5 h-2.5 rounded block shadow-sm"
                 style={{ 
-                  backgroundColor: schemaColors[chartSchema]?.primary || '#178F82',
+                  backgroundColor: schemaColors[chartSchema]?.primary || '#2563EB',
                   boxShadow: `0 2px 4px ${schemaColors[chartSchema]?.glow || 'rgba(37, 99, 235, 0.2)'}`
                 }}
               />
@@ -2831,18 +2831,18 @@ Sabush System ERP`;
             <AreaChart data={last7DaysInvoicingTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorFaturacao7d" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={schemaColors[chartSchema]?.primary || '#178F82'} stopOpacity={0.25}/>
-                  <stop offset="95%" stopColor={schemaColors[chartSchema]?.primary || '#178F82'} stopOpacity={0}/>
+                  <stop offset="5%" stopColor={schemaColors[chartSchema]?.primary || '#2563EB'} stopOpacity={0.25}/>
+                  <stop offset="95%" stopColor={schemaColors[chartSchema]?.primary || '#2563EB'} stopOpacity={0}/>
                 </linearGradient>
                 <linearGradient id="colorCount7d" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor={schemaColors[chartSchema]?.secondary || '#10b981'} stopOpacity={0.15}/>
                   <stop offset="95%" stopColor={schemaColors[chartSchema]?.secondary || '#10b981'} stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#F8F9FA" vertical={false} />
               <XAxis 
                 dataKey="name" 
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2850,7 +2850,7 @@ Sabush System ERP`;
               />
               <YAxis 
                 yAxisId="left"
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2860,7 +2860,7 @@ Sabush System ERP`;
               <YAxis 
                 yAxisId="right"
                 orientation="right"
-                stroke="#94a3b8" 
+                stroke="#9CA3AF" 
                 fontSize={10} 
                 fontWeight={700}
                 tickLine={false} 
@@ -2869,13 +2869,13 @@ Sabush System ERP`;
               />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#1e293b', 
+                  backgroundColor: '#111111', 
                   borderRadius: '16px', 
                   border: 'none',
                   boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                   padding: '12px'
                 }}
-                labelStyle={{ color: '#f8fafc', fontWeight: 800, fontSize: '11px', textTransform: 'uppercase', marginBottom: '4px' }}
+                labelStyle={{ color: '#F8F9FA', fontWeight: 800, fontSize: '11px', textTransform: 'uppercase', marginBottom: '4px' }}
                 itemStyle={{ fontSize: '12px', padding: '2px 0' }}
                 formatter={(value: any, name: string) => {
                   if (name === "faturacao") return [`${Number(value).toLocaleString()} ${currency}`, "Volume Faturado"];
@@ -2889,7 +2889,7 @@ Sabush System ERP`;
                 type="monotone" 
                 dataKey="faturacao" 
                 name="faturacao"
-                stroke={schemaColors[chartSchema]?.primary || '#178F82'} 
+                stroke={schemaColors[chartSchema]?.primary || '#2563EB'} 
                 strokeWidth={3} 
                 fillOpacity={1} 
                 fill="url(#colorFaturacao7d)" 
@@ -3094,7 +3094,7 @@ Sabush System ERP`;
           </div>
 
           {/* Box 4: Credit / Debts */}
-          <div className="p-5 rounded-2xl bg-[#FEF2F2]/40 border border-rose-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-[#FFFFFF]/40 border border-rose-100 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-black text-rose-805 uppercase tracking-widest leading-none">⚠️ Crédito & Dívidas Activas</span>
               <span className="text-[9px] font-black bg-rose-50 text-rose-700 border border-rose-100 px-2 py-0.5 rounded-lg font-mono">DEBTORS</span>
@@ -3117,7 +3117,7 @@ Sabush System ERP`;
           </div>
 
           {/* Box 5: Operating Expenses */}
-          <div className="p-5 rounded-2xl bg-[#FDF4FF]/40 border border-fuchsia-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-[#FFFFFF]/40 border border-fuchsia-100 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-black text-fuchsia-800 uppercase tracking-widest leading-none">🧾 Despesas Operacionais</span>
               <span className="text-[9px] font-black bg-fuchsia-50 text-fuchsia-700 border border-fuchsia-100 px-2 py-0.5 rounded-lg font-mono">EXPENSES</span>
@@ -3140,7 +3140,7 @@ Sabush System ERP`;
           </div>
 
           {/* Box 6: Estimated Profit */}
-          <div className="p-5 rounded-2xl bg-[#F0FDFA]/40 border border-teal-100 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-[#FFFFFF]/40 border border-teal-100 flex flex-col justify-between space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-[10px] font-black text-teal-800 uppercase tracking-widest leading-none">📈 Lucro Estimado</span>
               <span className="text-[9px] font-black bg-teal-50 text-teal-700 border border-teal-100 px-2 py-0.5 rounded-lg font-mono">NET INCOME</span>
@@ -3286,7 +3286,7 @@ Sabush System ERP`;
                 <h3 className="text-md font-black text-slate-900 tracking-tight flex items-center gap-2">
                   <span>Margem Bruta (COGS)</span>
                 </h3>
-                <span className="text-[9px] font-black uppercase tracking-widest text-[#0F274C] bg-[#0F274C]/10 px-2 py-0.5 rounded border border-[#0F274C]/20">
+                <span className="text-[9px] font-black uppercase tracking-widest text-[#0B1F4D] bg-[#0B1F4D]/10 px-2 py-0.5 rounded border border-[#0B1F4D]/20">
                   REAL-TIME GP
                 </span>
               </div>
@@ -3294,14 +3294,14 @@ Sabush System ERP`;
             </div>
 
             {/* Overall margin metric */}
-            <div className="bg-[#FAF7F2] border border-[#EADCC6]/60 rounded-2xl p-4 flex items-center justify-between">
+            <div className="bg-[#F8F9FA] border border-[#E9CC85]/60 rounded-2xl p-4 flex items-center justify-between">
               <div>
                 <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Margem Média Geral</p>
                 <p className="text-2xl font-black text-slate-900 mt-1">
                   {overallMargin.toFixed(1)}% <span className="text-xs font-medium text-slate-500">GPM</span>
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-xl bg-[#0F274C]/10 flex items-center justify-center font-black text-[#0F274C]">
+              <div className="w-10 h-10 rounded-xl bg-[#0B1F4D]/10 flex items-center justify-center font-black text-[#0B1F4D]">
                 %
               </div>
             </div>
@@ -3315,7 +3315,7 @@ Sabush System ERP`;
 
                 if (cat.margin >= 45) {
                   badgeColor = "bg-emerald-50 text-emerald-700 border-emerald-100";
-                  barColor = "bg-[#0F274C]";
+                  barColor = "bg-[#0B1F4D]";
                   ratingLabel = "Excelente";
                 } else if (cat.margin >= 25) {
                   badgeColor = "bg-amber-50 text-amber-700 border-amber-100";

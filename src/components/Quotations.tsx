@@ -858,7 +858,7 @@ export default function Quotations() {
                className="relative bg-white w-full max-w-lg rounded-[32px] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
              >
                 {/* Modal Header */}
-                <div className="bg-blue-900 text-white p-6 flex justify-between items-center border-b-2 border-[#B8791A]/50">
+                <div className="bg-blue-900 text-white p-6 flex justify-between items-center border-b-2 border-[#D4AF37]/50">
                    <div>
                      <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Revisão de Pedido de Orçamento</p>
                      <h3 className="text-lg font-black font-sans">{selectedQuotation.quotationNumber}</h3>
@@ -1153,7 +1153,7 @@ export default function Quotations() {
                      </button>
                      <button 
                        onClick={() => handleUpdateQuotationPrices(selectedQuotation)}
-                       className="flex-1 py-3 bg-blue-650 hover:bg-blue-600 bg-[#174FA3] text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-1"
+                       className="flex-1 py-3 bg-blue-650 hover:bg-blue-600 bg-[#2563EB] text-white rounded-xl text-xs font-black uppercase tracking-widest transition-all shadow-md flex items-center justify-center gap-1"
                      >
                         <Send size={16} /> Gravar Preços e Notificar
                      </button>

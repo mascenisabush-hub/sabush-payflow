@@ -11,7 +11,7 @@ import { ResponsiveContainer, PieChart as ReChartsPieChart, Pie, Cell, Tooltip, 
 import ManagerPINModal from './ManagerPINModal';
 
 const DEFAULT_CATEGORIES = ['Operational', 'Salary', 'Supplies', 'Marketing', 'Utilities', 'Rent'];
-const COLORS = ['#3b82f6', '#10b981', '#6366f1', '#8b5cf6', '#06b6d4', '#f59e0b', '#ec4899', '#f43f5e'];
+const COLORS = ['#2563EB', '#10b981', '#93B4F5', '#93B4F5', '#2563EB', '#D4AF37', '#E9CC85', '#f43f5e'];
 
 export default function Expenses() {
   const { profile, businessData } = useAuth();
@@ -515,27 +515,27 @@ export default function Expenses() {
             <div className="flex-1 h-[200px] mt-6">
               <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                 <BarChart data={monthlyTrendData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F8F9FA" />
                   <XAxis 
                     dataKey="month" 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 'bold' }} 
+                    tick={{ fill: '#9CA3AF', fontSize: 10, fontWeight: 'bold' }} 
                   />
                   <YAxis 
                     axisLine={false} 
                     tickLine={false} 
-                    tick={{ fill: '#94a3b8', fontSize: 10, fontWeight: 'bold' }} 
+                    tick={{ fill: '#9CA3AF', fontSize: 10, fontWeight: 'bold' }} 
                     tickFormatter={(value) => value >= 1000 ? `${(value / 1000).toLocaleString()}k` : value}
                   />
                   <Tooltip 
                     formatter={(value: any) => [`${Number(value).toLocaleString()} ${currency}`, 'Despesas']}
                     contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 10px 15px -3px rgb(0 0 0 / 0.1)', fontSize: '11px', fontWeight: 'bold' }}
-                    cursor={{ fill: '#f8fafc' }}
+                    cursor={{ fill: '#F8F9FA' }}
                   />
                   <Bar 
                     dataKey="amount" 
-                    fill="#3b82f6" 
+                    fill="#2563EB" 
                     radius={[6, 6, 0, 0]} 
                     maxBarSize={32}
                   />
@@ -808,7 +808,7 @@ export default function Expenses() {
                 <div className="text-xs font-semibold text-slate-500 font-sans">
                   Mostrando <span className="font-extrabold text-slate-900">{Math.min(expenses.length, startIndex + 1)}</span> a{" "}
                   <span className="font-extrabold text-slate-900">{Math.min(expenses.length, endIndex)}</span> de{" "}
-                  <span className="font-extrabold text-[#111827]">{expenses.length}</span> despesas
+                  <span className="font-extrabold text-[#111111]">{expenses.length}</span> despesas
                 </div>
                 <div className="flex items-center gap-1.5 self-end sm:self-auto">
                   <button

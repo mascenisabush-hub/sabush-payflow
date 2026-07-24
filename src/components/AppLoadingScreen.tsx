@@ -27,7 +27,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
   }, []);
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center overflow-hidden relative bg-[#0d0806]">
+    <div className="h-screen w-screen flex items-center justify-center overflow-hidden relative bg-[#0B1F4D]">
       <style>{`
         .als-bg-image {
           position: absolute;
@@ -63,8 +63,8 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           transform: translate(-50%, -50%);
           background: conic-gradient(
             from 0deg,
-            #D69B25 0deg, #f5e9c8 55deg, #f5c877 130deg, #eaf2ff 165deg,
-            #D69B25 200deg, #B8791A 260deg, #D69B25 320deg, #D69B25 360deg
+            #DEC26B 0deg, #E9CC85 55deg, #F0DBA0 130deg, #FFFFFF 165deg,
+            #DEC26B 200deg, #D4AF37 260deg, #DEC26B 320deg, #DEC26B 360deg
           );
           filter: blur(90px) saturate(150%);
           opacity: 0.32;
@@ -136,7 +136,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
         .als-vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 34%, #0d0806 82%);
+          background: radial-gradient(ellipse at 50% 45%, transparent 0%, transparent 34%, #0B1F4D 82%);
         }
 
         /* Comet rings behind the hub: a short bright arc riding a rotating ring
@@ -183,8 +183,8 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(160deg, #0d1e3a, #071224);
-          color: var(--node-c, #f5c877);
+          background: linear-gradient(160deg, #0B1F4D, #0B1F4D);
+          color: var(--node-c, #F0DBA0);
           filter: drop-shadow(0 0 8px var(--node-glow, rgba(184,121,26,0.6)));
           animation: als-orbit 16s linear infinite;
         }
@@ -194,7 +194,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           inset: 0;
           clip-path: inherit;
           padding: 1.4px;
-          background: linear-gradient(160deg, var(--node-c, #f5c877), transparent 55%, var(--node-c, #f5c877));
+          background: linear-gradient(160deg, var(--node-c, #F0DBA0), transparent 55%, var(--node-c, #F0DBA0));
           -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
           -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -209,7 +209,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           font-weight: 900;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          background: linear-gradient(100deg, #f5c877 0%, #D69B25 18%, #fff6e2 32%, #f5e9c8 48%, #f5c877 64%, #7CA3E0 80%, #f5c877 100%);
+          background: linear-gradient(100deg, #F0DBA0 0%, #DEC26B 18%, #FFFFFF 32%, #E9CC85 48%, #F0DBA0 64%, #93B4F5 80%, #F0DBA0 100%);
           background-size: 300% auto;
           -webkit-background-clip: text;
           background-clip: text;
@@ -223,7 +223,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           letter-spacing: 0.5em;
           text-indent: 0.5em;
           text-transform: uppercase;
-          background: linear-gradient(100deg, #f5c877 0%, #fff6e2 35%, #D69B25 60%, #f5c877 100%);
+          background: linear-gradient(100deg, #F0DBA0 0%, #FFFFFF 35%, #DEC26B 60%, #F0DBA0 100%);
           background-size: 260% auto;
           -webkit-background-clip: text;
           background-clip: text;
@@ -237,7 +237,7 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           top: 0; bottom: 0;
           width: 40%;
           border-radius: 999px;
-          background: linear-gradient(90deg, transparent, #D69B25, #fff6e2, #D69B25, transparent);
+          background: linear-gradient(90deg, transparent, #DEC26B, #FFFFFF, #DEC26B, transparent);
           animation: als-sweep 1.4s ease-in-out infinite;
         }
         @keyframes als-sweep {
@@ -265,11 +265,11 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
         <div className="relative" style={{ width: 168, height: 168 }}>
           <svg className="als-ring-svg cw" viewBox="0 0 232 232" aria-hidden="true">
             <circle cx="116" cy="116" r="108" fill="none" stroke="rgba(214,155,37,0.28)" strokeWidth="1.2" strokeDasharray="2 9" />
-            <circle cx="116" cy="116" r="108" fill="none" stroke="#f5e9c8" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="14 664" style={{ filter: 'drop-shadow(0 0 6px #f5c877)' }} />
+            <circle cx="116" cy="116" r="108" fill="none" stroke="#E9CC85" strokeWidth="2.4" strokeLinecap="round" strokeDasharray="14 664" style={{ filter: 'drop-shadow(0 0 6px #F0DBA0)' }} />
           </svg>
           <svg className="als-ring-svg ccw" viewBox="0 0 232 232" aria-hidden="true">
             <circle cx="116" cy="116" r="94" fill="none" stroke="rgba(214,155,37,0.18)" strokeWidth="1" strokeDasharray="1 12" />
-            <circle cx="116" cy="116" r="94" fill="none" stroke="#D69B25" strokeWidth="2" strokeLinecap="round" strokeDasharray="10 580" style={{ filter: 'drop-shadow(0 0 6px #D69B25)' }} />
+            <circle cx="116" cy="116" r="94" fill="none" stroke="#DEC26B" strokeWidth="2" strokeLinecap="round" strokeDasharray="10 580" style={{ filter: 'drop-shadow(0 0 6px #DEC26B)' }} />
           </svg>
 
           <div className="als-ping" />
@@ -278,16 +278,16 @@ export default function AppLoadingScreen({ message = 'A carregar o sistema...' }
           <div className="als-hub-glow" />
 
           {/* Orbiting module hex-badges: Vendas, Stock, Faturas, Relatórios */}
-          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#f5c877', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', animationDelay: '0s' }}>
+          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#F0DBA0', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', animationDelay: '0s' }}>
             <ShoppingCart size={15} />
           </div>
-          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#eaf2ff', ['--node-glow' as any]: 'rgba(214,155,37,0.5)', animationDelay: '-4s' }}>
+          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#FFFFFF', ['--node-glow' as any]: 'rgba(214,155,37,0.5)', animationDelay: '-4s' }}>
             <Package size={15} />
           </div>
-          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#D69B25', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', animationDelay: '-8s' }}>
+          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#DEC26B', ['--node-glow' as any]: 'rgba(214,155,37,0.6)', animationDelay: '-8s' }}>
             <Receipt size={15} />
           </div>
-          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#7CA3E0', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', animationDelay: '-12s' }}>
+          <div className="als-orbit-node" style={{ ['--node-c' as any]: '#93B4F5', ['--node-glow' as any]: 'rgba(44,99,184,0.6)', animationDelay: '-12s' }}>
             <BarChart3 size={15} />
           </div>
 

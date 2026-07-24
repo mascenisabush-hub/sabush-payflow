@@ -67,12 +67,12 @@ function DailyTasks() {
         onClick={() => {
           setIsOpen(!isOpen);
         }}
-        className="relative p-2 rounded-xl bg-[#11305C] hover:bg-[#173F73] text-white/80 hover:text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer w-9 h-9 border border-white/10"
+        className="relative p-2 rounded-xl bg-[#0B1F4D] hover:bg-[#0B1F4D] text-white/80 hover:text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer w-9 h-9 border border-white/10"
         title="Objetivos do Dia"
       >
         <ListChecks size={16} />
         {completedCount > 0 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#B8791A] text-white rounded-full text-[9px] font-black flex items-center justify-center leading-none shadow-md animate-pulse">
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#D4AF37] text-white rounded-full text-[9px] font-black flex items-center justify-center leading-none shadow-md animate-pulse">
             {completedCount}
           </span>
         )}
@@ -87,19 +87,19 @@ function DailyTasks() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
               transition={{ duration: 0.15 }}
-              className="absolute right-0 bottom-12 md:bottom-auto md:top-12 mt-2 w-80 bg-[#11305C] border border-white/15 rounded-2xl shadow-xl overflow-hidden z-50 p-5 text-left text-white"
+              className="absolute right-0 bottom-12 md:bottom-auto md:top-12 mt-2 w-80 bg-[#0B1F4D] border border-white/15 rounded-2xl shadow-xl overflow-hidden z-50 p-5 text-left text-white"
             >
               <div className="flex justify-between items-center mb-4">
                 <span className="text-[10px] font-black uppercase text-white/60 tracking-wider">Objetivos de Hoje</span>
-                <span className="text-[9px] font-extrabold bg-[#B8791A]/20 text-[#B8791A] px-2.5 py-1 rounded-full uppercase tracking-widest">
+                <span className="text-[9px] font-extrabold bg-[#D4AF37]/20 text-[#D4AF37] px-2.5 py-1 rounded-full uppercase tracking-widest">
                   {completedCount}/{tasks.length} Concluídos
                 </span>
               </div>
 
               <div className="mb-4">
-                <div className="w-full bg-[#041615] h-1.5 rounded-full overflow-hidden">
+                <div className="w-full bg-[#0B1F4D] h-1.5 rounded-full overflow-hidden">
                   <motion.div
-                    className="bg-[#B8791A] h-full rounded-full"
+                    className="bg-[#D4AF37] h-full rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: `${progressPercent}%` }}
                     transition={{ type: 'spring', stiffness: 80 }}
@@ -114,7 +114,7 @@ function DailyTasks() {
                       type="checkbox"
                       checked={task.completed}
                       onChange={() => toggleTask(task.id)}
-                      className="mt-0.5 rounded border-white/20 bg-[#041615] text-[#B8791A] focus:ring-[#B8791A]/20 focus:ring-offset-[#11305C] focus:ring-2 w-4 h-4 cursor-pointer"
+                      className="mt-0.5 rounded border-white/20 bg-[#0B1F4D] text-[#D4AF37] focus:ring-[#D4AF37]/20 focus:ring-offset-[#0B1F4D] focus:ring-2 w-4 h-4 cursor-pointer"
                     />
                     <span className={cn(task.completed ? "text-white/40 line-through" : "text-white font-bold")}>
                       {task.label}
@@ -219,45 +219,45 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
 
   // Specific high contrast bright colors for Navy sidebar icons
   const iconColors: Record<string, string> = {
-    dashboard: 'text-[#3B82F6]',     // Electric Blue
-    reports: 'text-[#8B5CF6]',       // Violet / Purple
+    dashboard: 'text-[#2563EB]',     // Electric Blue
+    reports: 'text-[#93B4F5]',       // Violet / Purple
     pos: 'text-[#10B981]',           // Green
-    online_orders: 'text-[#F59E0B]', // Gold
-    invoices: 'text-[#06B6D4]',      // Cyan
-    payments: 'text-[#F59E0B]',      // Gold/Amber
+    online_orders: 'text-[#D4AF37]', // Gold
+    invoices: 'text-[#2563EB]',      // Cyan
+    payments: 'text-[#D4AF37]',      // Gold/Amber
     credit: 'text-[#EF4444]',        // Red
-    quotations: 'text-[#EC4899]',    // Pink
-    inventory: 'text-[#F59E0B]',     // Gold/Amber
-    purchase_orders: 'text-[#6366F1]',// Indigo
+    quotations: 'text-[#E9CC85]',    // Pink
+    inventory: 'text-[#D4AF37]',     // Gold/Amber
+    purchase_orders: 'text-[#93B4F5]',// Indigo
     customers: 'text-[#84CC16]',     // Lime
     expenses: 'text-[#F43F5E]',      // Rose
-    suppliers: 'text-[#D946EF]',     // Fuchsia
-    staff: 'text-[#14B8A6]',         // Teal
-    feedback: 'text-[#E2E8F0]',      // Slate Light
-    manual: 'text-[#38BDF8]',        // Sky
-    settings: 'text-[#94A3B8]',      // Slate Medium
-    super_admin: 'text-[#A855F7]',   // Purple Light
+    suppliers: 'text-[#E9CC85]',     // Fuchsia
+    staff: 'text-[#2563EB]',         // Teal
+    feedback: 'text-[#E5E7EB]',      // Slate Light
+    manual: 'text-[#2563EB]',        // Sky
+    settings: 'text-[#9CA3AF]',      // Slate Medium
+    super_admin: 'text-[#E9CC85]',   // Purple Light
     audit_logs: 'text-[#F43F5E]',    // Rose
   };
 
   const badgeStyles: Record<string, { bg: string, text: string }> = {
-    dashboard: { bg: 'rgba(26,115,196,0.18)', text: '#173F73' },
-    reports: { bg: 'rgba(245,158,11,0.18)', text: '#F59E0B' },
+    dashboard: { bg: 'rgba(26,115,196,0.18)', text: '#0B1F4D' },
+    reports: { bg: 'rgba(245,158,11,0.18)', text: '#D4AF37' },
     pos: { bg: 'rgba(16,185,129,0.18)', text: '#10B981' },
     online_orders: { bg: 'rgba(16,185,129,0.18)', text: '#10B981' },
-    invoices: { bg: 'rgba(59,130,246,0.18)', text: '#3B82F6' },
-    payments: { bg: 'rgba(245,158,11,0.18)', text: '#F59E0B' },
+    invoices: { bg: 'rgba(59,130,246,0.18)', text: '#2563EB' },
+    payments: { bg: 'rgba(245,158,11,0.18)', text: '#D4AF37' },
     credit: { bg: 'rgba(239,68,68,0.18)', text: '#EF4444' },
-    quotations: { bg: 'rgba(245,158,11,0.18)', text: '#F59E0B' },
-    inventory: { bg: 'rgba(139,92,246,0.18)', text: '#8B5CF6' },
-    purchase_orders: { bg: 'rgba(139,92,246,0.18)', text: '#8B5CF6' },
-    customers: { bg: 'rgba(6,182,212,0.18)', text: '#06B6D4' },
+    quotations: { bg: 'rgba(245,158,11,0.18)', text: '#D4AF37' },
+    inventory: { bg: 'rgba(139,92,246,0.18)', text: '#93B4F5' },
+    purchase_orders: { bg: 'rgba(139,92,246,0.18)', text: '#93B4F5' },
+    customers: { bg: 'rgba(6,182,212,0.18)', text: '#2563EB' },
     expenses: { bg: 'rgba(239,68,68,0.18)', text: '#EF4444' },
-    suppliers: { bg: 'rgba(245,158,11,0.18)', text: '#F59E0B' },
-    staff: { bg: 'rgba(6,182,212,0.18)', text: '#06B6D4' },
-    settings: { bg: 'rgba(107,143,168,0.18)', text: '#6B8FA8' },
-    super_admin: { bg: 'rgba(26,115,196,0.18)', text: '#173F73' },
-    manual: { bg: 'rgba(107,143,168,0.18)', text: '#6B8FA8' },
+    suppliers: { bg: 'rgba(245,158,11,0.18)', text: '#D4AF37' },
+    staff: { bg: 'rgba(6,182,212,0.18)', text: '#2563EB' },
+    settings: { bg: 'rgba(107,143,168,0.18)', text: '#2563EB' },
+    super_admin: { bg: 'rgba(26,115,196,0.18)', text: '#0B1F4D' },
+    manual: { bg: 'rgba(107,143,168,0.18)', text: '#2563EB' },
     feedback: { bg: 'rgba(239,68,68,0.18)', text: '#EF4444' },
     audit_logs: { bg: 'rgba(239,68,68,0.18)', text: '#EF4444' },
   };
@@ -299,7 +299,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
   return (
     <>
       {/* MOBILE TOP navbar header (Visible only on small devices) */}
-      <header className="flex md:hidden items-center justify-between px-4 py-3 bg-gradient-to-br from-[#0B1F3F] via-[#11305C] to-[#173F73] border-b-2 border-[#B8791A]/50 text-white w-full shrink-0 z-40 shadow-sm">
+      <header className="flex md:hidden items-center justify-between px-4 py-3 bg-gradient-to-br from-[#0B1F4D] via-[#0B1F4D] to-[#0B1F4D] border-b-2 border-[#D4AF37]/50 text-white w-full shrink-0 z-40 shadow-sm">
         <div className="flex items-center gap-3">
           <button
             onClick={() => setIsMobileOpen(true)}
@@ -332,7 +332,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
           <Notifications />
           <div 
             onClick={() => handleTabChange('profile')}
-            className="w-8 h-8 rounded-lg bg-[#B8791A] flex items-center justify-center text-white font-black text-xs cursor-pointer shadow-sm hover:bg-amber-600 transition-colors"
+            className="w-8 h-8 rounded-lg bg-[#D4AF37] flex items-center justify-center text-white font-black text-xs cursor-pointer shadow-sm hover:bg-amber-600 transition-colors"
             title="Ver Perfil"
           >
             {profile?.displayName?.[0] || 'U'}
@@ -350,7 +350,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
 
       {/* MASTER SIDEBAR: Pinned on Left on Desktop, slide-over from Left on Mobile */}
       <aside className={cn(
-        "fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-br from-[#0B1F3F] via-[#11305C] to-[#173F73] border-r border-white/10 flex flex-col justify-between transition-transform duration-300 transform md:relative md:translate-x-0 shrink-0 h-screen select-none",
+        "fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-br from-[#0B1F4D] via-[#0B1F4D] to-[#0B1F4D] border-r border-white/10 flex flex-col justify-between transition-transform duration-300 transform md:relative md:translate-x-0 shrink-0 h-screen select-none",
         isMobileOpen ? "translate-x-0 animate-in slide-in-from-left duration-250" : "-translate-x-full md:translate-x-0"
       )}>
         <div className="flex flex-col h-full overflow-hidden">
@@ -417,8 +417,8 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                     className={cn(
                       "group w-[calc(100%-24px)] mx-3 flex items-center justify-between px-3 py-2.5 mb-0.5 rounded-lg text-[13px] font-bold leading-none transition-all duration-150 cursor-pointer tracking-normal normal-case",
                       isActive 
-                        ? "bg-[#B8791A] text-white shadow-md" 
-                        : "text-[#E3F4F2]/90 hover:bg-white/10 hover:text-white"
+                        ? "bg-[#D4AF37] text-white shadow-md" 
+                        : "text-[#EEF2FF]/90 hover:bg-white/10 hover:text-white"
                     )}
                     id={`sidebar-nav-${item.id}`}
                   >
@@ -428,7 +428,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                           size={14} 
                           className={cn(
                             "shrink-0 transition-colors",
-                            isActive ? "text-white" : "text-[#E3F4F2]/80 group-hover:text-white"
+                            isActive ? "text-white" : "text-[#EEF2FF]/80 group-hover:text-white"
                           )}
                         />
                       </div>
@@ -453,8 +453,8 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                       className={cn(
                         "group w-[calc(100%-24px)] mx-3 flex items-center justify-between px-3 py-2.5 mb-0.5 rounded-lg text-[13px] font-bold leading-none transition-all duration-150 cursor-pointer tracking-normal normal-case",
                         isActive 
-                          ? "bg-[#B8791A] text-white shadow-md" 
-                          : "text-[#E3F4F2]/90 hover:bg-white/10 hover:text-white"
+                          ? "bg-[#D4AF37] text-white shadow-md" 
+                          : "text-[#EEF2FF]/90 hover:bg-white/10 hover:text-white"
                       )}
                       id={`sidebar-nav-${item.id}`}
                     >
@@ -464,7 +464,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                             size={14} 
                             className={cn(
                               "shrink-0 transition-colors",
-                              isActive ? "text-white" : "text-[#E3F4F2]/80 group-hover:text-white"
+                              isActive ? "text-white" : "text-[#EEF2FF]/80 group-hover:text-white"
                             )}
                           />
                         </div>
@@ -497,8 +497,8 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                   className={cn(
                     "group w-[calc(100%-24px)] mx-3 flex items-center px-3 py-2.5 mb-0.5 rounded-lg text-[13px] font-bold leading-none transition-all duration-150 cursor-pointer tracking-normal normal-case",
                     isActive 
-                      ? "bg-[#B8791A] text-white shadow-md" 
-                      : "text-[#E3F4F2]/90 hover:bg-white/10 hover:text-white"
+                      ? "bg-[#D4AF37] text-white shadow-md" 
+                      : "text-[#EEF2FF]/90 hover:bg-white/10 hover:text-white"
                   )}
                   id={`sidebar-nav-${item.id}`}
                 >
@@ -508,7 +508,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                         size={14} 
                         className={cn(
                           "shrink-0 transition-colors",
-                          isActive ? "text-white" : "text-[#E3F4F2]/80 group-hover:text-white"
+                          isActive ? "text-white" : "text-[#EEF2FF]/80 group-hover:text-white"
                         )}
                       />
                     </div>
@@ -521,14 +521,14 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
           </nav>
 
           {/* Quick Utility Tools block */}
-          <div className="bg-[#0B1F3F]/30 border-t border-white/10 py-3 px-3">
+          <div className="bg-[#0B1F4D]/30 border-t border-white/10 py-3 px-3">
             
             {/* Action Row for Keyboard Shortcuts, Fullscreen, etc */}
             <div className="flex items-center justify-between gap-1.5 px-1 py-1 mb-2">
               <button
                 id="btn-global-fullscreen-toggle"
                 onClick={toggleFullscreen}
-                className="p-1.5 rounded-xl bg-[#173F73] hover:bg-[#11305C] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
+                className="p-1.5 rounded-xl bg-[#0B1F4D] hover:bg-[#0B1F4D] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
                 title={isFullscreen ? "Sair da Tela Cheia" : "Modo Tela Cheia"}
               >
                 {isFullscreen ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
@@ -537,7 +537,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
               <button
                 id="btn-global-share text-share"
                 onClick={handleShare}
-                className="p-1.5 rounded-xl bg-[#173F73] hover:bg-[#11305C] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
+                className="p-1.5 rounded-xl bg-[#0B1F4D] hover:bg-[#0B1F4D] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
                 title="Partilhar Ligação / URL"
               >
                 <Share size={13} />
@@ -546,7 +546,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
               <button
                 id="btn-global-shortcuts-help"
                 onClick={handleShortcutsHelpClick}
-                className="relative p-1.5 rounded-xl bg-[#173F73] hover:bg-[#11305C] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
+                className="relative p-1.5 rounded-xl bg-[#0B1F4D] hover:bg-[#0B1F4D] text-white transition-all flex items-center justify-center focus:outline-none cursor-pointer border-none h-8 flex-1 animate-none"
                 title="Atalhos do Teclado (Ctrl+H)"
               >
                 <Keyboard size={13} />
@@ -588,7 +588,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                     className={cn(
                       "w-7 h-7 flex items-center justify-center rounded-lg text-xs font-black transition-all outline-none cursor-pointer",
                       isSelected 
-                        ? "bg-[#B8791A] text-white border border-[#B8791A]/30 shadow-xs" 
+                        ? "bg-[#D4AF37] text-white border border-[#D4AF37]/30 shadow-xs" 
                         : "text-blue-100 border border-transparent hover:bg-white/10 hover:text-white"
                     )}
                     title={lang.name}
@@ -606,7 +606,7 @@ export default function Sidebar({ currentTab, setCurrentTab }: SidebarProps) {
                 className="flex items-center gap-2 cursor-pointer hover:opacity-85 select-none min-w-0 flex-1 mr-2"
                 title="Meu Perfil"
               >
-                <div className="w-[26px] h-[26px] rounded-full bg-[#B8791A] text-white font-black text-[10px] flex items-center justify-center shrink-0">
+                <div className="w-[26px] h-[26px] rounded-full bg-[#D4AF37] text-white font-black text-[10px] flex items-center justify-center shrink-0">
                   {profile?.displayName?.[0]?.toUpperCase() || '?'}
                 </div>
                 <div className="flex flex-col leading-none min-w-0">

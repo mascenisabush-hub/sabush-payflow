@@ -764,7 +764,7 @@ export default function CustomerPortal() {
   const langKey = i18n.language || 'pt';
 
   return (
-    <div className="min-h-screen w-full bg-[#1A0F05] bg-gradient-to-br from-[#2a1005] via-[#ea580c]/15 to-[#0F0501] text-slate-100 flex flex-col font-sans relative overflow-x-hidden antialiased">
+    <div className="min-h-screen w-full bg-[#0B1F4D] bg-gradient-to-br from-[#0B1F4D] via-[#D4AF37]/15 to-[#0B1F4D] text-slate-100 flex flex-col font-sans relative overflow-x-hidden antialiased">
       {/* Background visual accents */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-amber-600/5 rounded-full blur-2xl pointer-events-none"></div>
@@ -1378,7 +1378,7 @@ export default function CustomerPortal() {
                     <div className="overflow-x-auto w-full" id="invoices-table-shell">
                       <table className="w-full border-collapse text-left text-xs min-w-[600px]">
                         <thead>
-                          <tr className="border-b border-slate-800 text-[#174FA3] font-bold select-none text-[10px] uppercase">
+                          <tr className="border-b border-slate-800 text-[#2563EB] font-bold select-none text-[10px] uppercase">
                             <th className="py-3 px-4">Recibo / Fatura Nº</th>
                             <th className="py-3 px-4">Data Emissão</th>
                             <th className="py-3 px-4">Vencimento</th>
@@ -1461,7 +1461,7 @@ export default function CustomerPortal() {
                                         
                                         {/* Left Side: Invoice Items */}
                                         <div className="space-y-3">
-                                          <h4 className="font-extrabold text-[#174FA3] uppercase text-[10px] tracking-wider flex items-center gap-2">
+                                          <h4 className="font-extrabold text-[#2563EB] uppercase text-[10px] tracking-wider flex items-center gap-2">
                                             <span>📦 Artigos Discriminados</span>
                                           </h4>
                                           <div className="border border-slate-850 rounded-xl overflow-hidden bg-slate-900/30">
@@ -1592,7 +1592,7 @@ export default function CustomerPortal() {
                     <div className="overflow-x-auto w-full" id="purchases-table-shell">
                       <table className="w-full border-collapse text-left text-xs min-w-[500px]">
                         <thead>
-                          <tr className="border-b border-slate-800 text-[#174FA3] font-bold select-none text-[10px] uppercase">
+                          <tr className="border-b border-slate-800 text-[#2563EB] font-bold select-none text-[10px] uppercase">
                             <th className="py-3 px-4">Artigo / Descrição</th>
                             <th className="py-3 px-4 text-center">Quantidade</th>
                             <th className="py-3 px-4 text-right">Preço Unitário</th>
@@ -1611,7 +1611,7 @@ export default function CustomerPortal() {
                                 <td className="py-3.5 px-4 text-right font-black text-slate-100">
                                   {formatCurrencyValue((item.price || item.finalUnitPrice || 0) * (item.quantity || 1), currencySymbol)}
                                 </td>
-                                <td className="py-3.5 px-4 text-center text-[#174FA3] font-black">{inv.invoiceNumber}</td>
+                                <td className="py-3.5 px-4 text-center text-[#2563EB] font-black">{inv.invoiceNumber}</td>
                                 <td className="py-3.5 px-4 text-center text-slate-400">{inv.date ? new Date(inv.date).toLocaleDateString() : 'N/A'}</td>
                               </tr>
                             ))
@@ -1837,7 +1837,7 @@ export default function CustomerPortal() {
                             type="button"
                             onClick={handleSubmitSelfQuotation}
                             disabled={isSubmitting}
-                            className="w-full py-3 bg-[#174FA3] hover:bg-blue-600 disabled:bg-slate-800 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer text-center"
+                            className="w-full py-3 bg-[#2563EB] hover:bg-blue-600 disabled:bg-slate-800 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer text-center"
                           >
                             {isSubmitting ? 'A enviar pedido...' : 'Submeter Pedido de Faturação'}
                           </button>
@@ -1969,7 +1969,7 @@ export default function CustomerPortal() {
                     </p>
 
                     <div className="p-4 bg-slate-900/40 border border-slate-800 rounded-2xl text-[11px] text-slate-400 space-y-2">
-                      <span className="font-bold text-[#174FA3] uppercase tracking-wider block text-[10px]">Políticas do Portal</span>
+                      <span className="font-bold text-[#2563EB] uppercase tracking-wider block text-[10px]">Políticas do Portal</span>
                       <p>• O portal funciona estritamente em formato <span className="text-slate-200 font-bold">Apenas Leitura (Read-Only)</span>.</p>
                       <p>• O cliente não pode alterar saldos ou retificar faturas emitidas.</p>
                       <p>• Para qualquer dúvida sobre valores em aberto, entre em contacto direto através dos canais autorizados ao lado.</p>
@@ -1983,7 +1983,7 @@ export default function CustomerPortal() {
                       <div className="space-y-3">
                         {businessData?.address && (
                           <div className="flex items-center gap-3 text-xs text-slate-300">
-                            <MapPin className="w-4 h-4 text-[#174FA3]" />
+                            <MapPin className="w-4 h-4 text-[#2563EB]" />
                             <div>
                               <span className="text-[10px] text-slate-500 block uppercase font-bold">Endereço Físico</span>
                               <span>{businessData.address}</span>

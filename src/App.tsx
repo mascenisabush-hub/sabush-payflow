@@ -310,7 +310,7 @@ function ProtectedApp() {
   }, [user, profile?.businessId]);
 
   useEffect(() => {
-    const brandColor = businessData?.brandColor || '#178F82';
+    const brandColor = businessData?.brandColor || '#2563EB';
     const tints = getBrandTints(brandColor);
     const root = document.documentElement;
     root.style.setProperty('--brand-color', tints.primary);
@@ -904,7 +904,7 @@ function ProtectedApp() {
   if (isCustomerPortalRoute) {
     return (
       <Suspense fallback={<AppLoadingScreen message="A carregar o portal do cliente..." />}>
-        <div className="w-screen min-h-screen bg-[#1A0F05] overflow-x-hidden relative">
+        <div className="w-screen min-h-screen bg-[#0B1F4D] overflow-x-hidden relative">
           <CustomerPortal />
         </div>
       </Suspense>
@@ -920,13 +920,13 @@ function ProtectedApp() {
 
   if (!user) {
     return (
-      <div className="w-full min-h-screen bg-[#071120] flex items-center justify-center p-0 md:p-6 lg:p-8 overflow-hidden select-none font-sans">
+      <div className="w-full min-h-screen bg-[#0B1F4D] flex items-center justify-center p-0 md:p-6 lg:p-8 overflow-hidden select-none font-sans">
         <div 
-          className="w-full max-w-[1280px] min-h-[100vh] md:min-h-[640px] md:h-[85vh] flex flex-col md:flex-row bg-[#0A1C38] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-800/60"
+          className="w-full max-w-[1280px] min-h-[100vh] md:min-h-[640px] md:h-[85vh] flex flex-col md:flex-row bg-[#0B1F4D] md:rounded-3xl shadow-2xl overflow-hidden relative border border-slate-800/60"
         >
           {/* Left Panel: ~45% width */}
           <div 
-            className="w-full md:w-[45%] p-8 md:p-12 lg:p-14 flex flex-col justify-between shrink-0 relative min-h-[480px] md:min-h-0 bg-[#0A1C38] overflow-hidden"
+            className="w-full md:w-[45%] p-8 md:p-12 lg:p-14 flex flex-col justify-between shrink-0 relative min-h-[480px] md:min-h-0 bg-[#0B1F4D] overflow-hidden"
           >
             {/* Soft depth wash - clean, no texture noise */}
             <div 
@@ -935,15 +935,15 @@ function ProtectedApp() {
             />
 
             {/* Golden ambient glows - two soft points for depth, no muddy texture */}
-            <div className="absolute top-[10%] -left-16 w-[340px] h-[340px] rounded-full filter blur-[130px] pointer-events-none opacity-[0.16] bg-[#F2C46B]" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[260px] h-[260px] rounded-full filter blur-[110px] pointer-events-none opacity-[0.08] bg-[#F2C46B]" />
+            <div className="absolute top-[10%] -left-16 w-[340px] h-[340px] rounded-full filter blur-[130px] pointer-events-none opacity-[0.16] bg-[#E9CC85]" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[260px] h-[260px] rounded-full filter blur-[110px] pointer-events-none opacity-[0.08] bg-[#E9CC85]" />
             
             {/* Content wrapper */}
             <div className="relative z-10 flex flex-col h-full justify-between gap-8 md:gap-10">
               {/* Top Section: Logo row */}
               <div className="flex items-center gap-4">
                 <div className="relative shrink-0">
-                  <div className="absolute inset-0 rounded-full bg-[#F2C46B] blur-[18px] opacity-30 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-full bg-[#E9CC85] blur-[18px] opacity-30 pointer-events-none" />
                   {!logoFailed ? (
                     <img 
                       src={sabushLogo || "/sabush-logo.png"} 
@@ -955,7 +955,7 @@ function ProtectedApp() {
                     />
                   ) : (
                     <div 
-                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0A1C38] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#F2C46B] to-[#B8791A] shadow-lg"
+                      className="relative w-[60px] h-[60px] flex items-center justify-center text-[#0B1F4D] text-[26px] font-black select-none shrink-0 rounded-full font-display bg-gradient-to-br from-[#E9CC85] to-[#D4AF37] shadow-lg"
                     >
                       S
                     </div>
@@ -969,13 +969,13 @@ function ProtectedApp() {
                     SABUSH
                   </span>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-r from-transparent to-[#F2C46B]" />
+                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-r from-transparent to-[#E9CC85]" />
                     <span 
-                      className="font-display font-extrabold text-[13px] tracking-[0.5em] bg-gradient-to-r from-[#FFF2D6] via-[#F2C46B] to-[#B8791A] bg-clip-text text-transparent"
+                      className="font-display font-extrabold text-[13px] tracking-[0.5em] bg-gradient-to-r from-[#E9CC85] via-[#E9CC85] to-[#D4AF37] bg-clip-text text-transparent"
                     >
                       TECH
                     </span>
-                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-l from-transparent to-[#B8791A]" />
+                    <span className="h-[2px] w-5 rounded-full bg-gradient-to-l from-transparent to-[#D4AF37]" />
                   </div>
                 </div>
               </div>
@@ -984,14 +984,14 @@ function ProtectedApp() {
               <div className="flex-grow flex flex-col justify-center py-4">
                 {/* Thin gold horizontal divider bar */}
                 <div 
-                  className="w-[40px] h-[3px] rounded-full mb-5 bg-gradient-to-r from-[#F2C46B] to-[#B8791A]"
+                  className="w-[40px] h-[3px] rounded-full mb-5 bg-gradient-to-r from-[#E9CC85] to-[#D4AF37]"
                 />
 
                 {/* Sabush System ERP Heading */}
                 <h2 className="text-white text-2xl md:text-3xl font-black font-display tracking-tight leading-none mb-1">
-                  Sabush <span className="text-[#F2C46B]">System</span> ERP
+                  Sabush <span className="text-[#E9CC85]">System</span> ERP
                 </h2>
-                <p className="text-[#F2C46B] text-[10px] uppercase font-bold tracking-widest mb-6 font-display">
+                <p className="text-[#E9CC85] text-[10px] uppercase font-bold tracking-widest mb-6 font-display">
                   THE MODERN ERP FOR AFRICAN SMES
                 </p>
 
@@ -999,7 +999,7 @@ function ProtectedApp() {
                 <div className="space-y-1 mb-4">
                   <h3 className="text-white text-4xl lg:text-5xl font-extrabold tracking-tight font-display">Gerencie.</h3>
                   <h3 className="text-white text-4xl lg:text-5xl font-extrabold tracking-tight font-display">Automatize.</h3>
-                  <h3 className="text-[#F2C46B] text-4xl lg:text-5xl font-extrabold tracking-tight font-display">Cresça.</h3>
+                  <h3 className="text-[#E9CC85] text-4xl lg:text-5xl font-extrabold tracking-tight font-display">Cresça.</h3>
                 </div>
 
                 {/* Supporting text */}
@@ -1019,9 +1019,9 @@ function ProtectedApp() {
                     return (
                       <li key={index} className="flex items-center gap-3.5">
                         <div 
-                          className="w-9 h-9 rounded-full border-2 border-[#F2C46B]/40 bg-[#0A1C38]/60 flex items-center justify-center shrink-0 shadow-inner"
+                          className="w-9 h-9 rounded-full border-2 border-[#E9CC85]/40 bg-[#0B1F4D]/60 flex items-center justify-center shrink-0 shadow-inner"
                         >
-                          <IconComponent size={16} className="text-[#F2C46B] stroke-[2.2]" />
+                          <IconComponent size={16} className="text-[#E9CC85] stroke-[2.2]" />
                         </div>
                         <span className="text-slate-100 text-sm font-semibold font-body leading-tight">
                           {item.text}
@@ -1043,14 +1043,14 @@ function ProtectedApp() {
               <svg className="w-full h-full" viewBox="0 0 1000 60" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="gold-grad-horiz" x1="0" y1="0" x2="1" y2="0">
-                    <stop offset="0%" stopColor="#F2C46B" />
-                    <stop offset="100%" stopColor="#B8791A" />
+                    <stop offset="0%" stopColor="#E9CC85" />
+                    <stop offset="100%" stopColor="#D4AF37" />
                   </linearGradient>
                 </defs>
-                <path d="M 0,0 L 0,30 C 250,55 750,5 1000,30 L 1000,0 Z" fill="#0A1C38" />
+                <path d="M 0,0 L 0,30 C 250,55 750,5 1000,30 L 1000,0 Z" fill="#0B1F4D" />
                 <path d="M -10,20 C 240,45 740,-5 1010,20 L 1010,40 C 740,15 240,65 -10,40 Z" fill="black" opacity="0.25" />
                 <path d="M 0,22 C 250,47 750,-3 1000,22 L 1000,38 C 750,13 250,63 0,38 Z" fill="url(#gold-grad-horiz)" />
-                <path d="M 0,22 C 250,47 750,-3 1000,22 L 1000,25 C 750,0 250,50 0,25 Z" fill="#FFF2D6" opacity="0.6" />
+                <path d="M 0,22 C 250,47 750,-3 1000,22 L 1000,25 C 750,0 250,50 0,25 Z" fill="#E9CC85" opacity="0.6" />
               </svg>
             </div>
           </div>
@@ -1060,26 +1060,26 @@ function ProtectedApp() {
             <svg className="w-full h-full" viewBox="0 0 120 1000" preserveAspectRatio="none">
               <defs>
                 <linearGradient id="gold-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#F2C46B" />
-                  <stop offset="40%" stopColor="#E5B255" />
-                  <stop offset="70%" stopColor="#D9A441" />
-                  <stop offset="100%" stopColor="#B8791A" />
+                  <stop offset="0%" stopColor="#E9CC85" />
+                  <stop offset="40%" stopColor="#E9CC85" />
+                  <stop offset="70%" stopColor="#D4AF37" />
+                  <stop offset="100%" stopColor="#D4AF37" />
                 </linearGradient>
                 <linearGradient id="gold-grad-dark" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stopColor="#B8791A" />
-                  <stop offset="50%" stopColor="#8B6914" />
-                  <stop offset="100%" stopColor="#6B4E0F" />
+                  <stop offset="0%" stopColor="#D4AF37" />
+                  <stop offset="50%" stopColor="#B8952E" />
+                  <stop offset="100%" stopColor="#D4AF37" />
                 </linearGradient>
                 <linearGradient id="gold-grad-light" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#FFF2D6" />
-                  <stop offset="100%" stopColor="#F2C46B" />
+                  <stop offset="0%" stopColor="#E9CC85" />
+                  <stop offset="100%" stopColor="#E9CC85" />
                 </linearGradient>
               </defs>
 
               {/* Navy extension mask (matching Left Panel Background) */}
               <path 
                 d="M 0,0 L 60,0 C 110,250 10,750 60,1000 L 0,1000 Z" 
-                fill="#0A1C38" 
+                fill="#0B1F4D" 
               />
 
               {/* Behind-shadow for 3D depth */}
@@ -1113,7 +1113,7 @@ function ProtectedApp() {
               <path 
                 d="M 60,0 C 110,250 10,750 60,1000" 
                 fill="none" 
-                stroke="#FFF2D6" 
+                stroke="#E9CC85" 
                 strokeWidth="1.5" 
                 opacity="0.5"
               />
@@ -1126,7 +1126,7 @@ function ProtectedApp() {
           >
             {/* Abstract Gold Dotted Africa Map decorative accent */}
             <div className="absolute top-4 right-4 w-[240px] h-[240px] pointer-events-none opacity-[0.14] select-none z-0">
-              <svg viewBox="0 0 200 200" className="w-full h-full text-[#D9A441]">
+              <svg viewBox="0 0 200 200" className="w-full h-full text-[#D4AF37]">
                 <path 
                   d="M 100,30 
                      C 120,25 140,35 150,55 
@@ -1151,8 +1151,8 @@ function ProtectedApp() {
                   strokeDasharray="3,3" 
                   opacity="0.6"
                 />
-                <circle cx="145" cy="110" r="5" fill="#B8791A" className="animate-ping" />
-                <circle cx="145" cy="110" r="4" fill="#B8791A" />
+                <circle cx="145" cy="110" r="5" fill="#D4AF37" className="animate-ping" />
+                <circle cx="145" cy="110" r="4" fill="#D4AF37" />
               </svg>
             </div>
 
@@ -1160,7 +1160,7 @@ function ProtectedApp() {
             <div className="w-full max-w-[400px] py-4 relative z-10">
               {/* Heading */}
               <h3 
-                className="text-2xl md:text-3xl font-extrabold text-[#0A1C38] font-display text-left tracking-tight"
+                className="text-2xl md:text-3xl font-extrabold text-[#0B1F4D] font-display text-left tracking-tight"
               >
                 {isRegistering ? "Criar conta" : "Bem-vindo de volta"}
               </h3>
@@ -1198,7 +1198,7 @@ function ProtectedApp() {
               <form onSubmit={handleEmailAuth} className="space-y-4">
                 {/* Email field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A1C38] font-display">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0B1F4D] font-display">
                     E-mail
                   </label>
                   <div className="relative">
@@ -1214,14 +1214,14 @@ function ProtectedApp() {
                       style={{ 
                         borderRadius: '10px',
                       }}
-                      className="w-full pl-11 pr-4 border border-[#F2C46B] focus:border-[#B8791A] focus:outline-none focus:ring-4 focus:ring-[#F2C46B]/15 h-[46px] text-sm font-medium font-body placeholder-slate-400 text-slate-800 transition-all bg-white"
+                      className="w-full pl-11 pr-4 border border-[#E9CC85] focus:border-[#D4AF37] focus:outline-none focus:ring-4 focus:ring-[#E9CC85]/15 h-[46px] text-sm font-medium font-body placeholder-slate-400 text-slate-800 transition-all bg-white"
                     />
                   </div>
                 </div>
 
                 {/* Password field */}
                 <div className="space-y-1.5 text-left">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0A1C38] font-display">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#0B1F4D] font-display">
                     Palavra-passe
                   </label>
                   <div className="relative">
@@ -1237,12 +1237,12 @@ function ProtectedApp() {
                       style={{ 
                         borderRadius: '10px',
                       }}
-                      className="w-full pl-11 pr-11 border border-[#F2C46B] focus:border-[#B8791A] focus:outline-none focus:ring-4 focus:ring-[#F2C46B]/15 h-[46px] text-sm font-medium font-body placeholder-slate-400 text-slate-800 transition-all bg-white"
+                      className="w-full pl-11 pr-11 border border-[#E9CC85] focus:border-[#D4AF37] focus:outline-none focus:ring-4 focus:ring-[#E9CC85]/15 h-[46px] text-sm font-medium font-body placeholder-slate-400 text-slate-800 transition-all bg-white"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0A1C38] p-1 focus:outline-none bg-transparent border-0 cursor-pointer flex items-center justify-center transition-colors"
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#0B1F4D] p-1 focus:outline-none bg-transparent border-0 cursor-pointer flex items-center justify-center transition-colors"
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
@@ -1255,7 +1255,7 @@ function ProtectedApp() {
                     <button
                       type="button"
                       onClick={handleForgotPassword}
-                      className="text-xs font-bold hover:underline font-display cursor-pointer bg-transparent border-0 outline-none transition-colors text-[#B8791A]"
+                      className="text-xs font-bold hover:underline font-display cursor-pointer bg-transparent border-0 outline-none transition-colors text-[#D4AF37]"
                     >
                       Esqueceu a senha?
                     </button>
@@ -1266,10 +1266,10 @@ function ProtectedApp() {
                 <button
                   type="submit"
                   disabled={isAuthenticating}
-                  className="w-full h-[46px] rounded-[10px] bg-[#0A1C38] hover:bg-[#123F3D] active:scale-[0.985] flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider text-[#F2C46B] transition-all cursor-pointer font-display border-0 shadow-md"
+                  className="w-full h-[46px] rounded-[10px] bg-[#0B1F4D] hover:bg-[#0B1F4D] active:scale-[0.985] flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider text-[#E9CC85] transition-all cursor-pointer font-display border-0 shadow-md"
                 >
                   {isAuthenticating && loginMethod === 'email' ? (
-                    <Loader2 className="w-5 h-5 animate-spin text-[#F2C46B]" />
+                    <Loader2 className="w-5 h-5 animate-spin text-[#E9CC85]" />
                   ) : (
                     <div className="flex items-center justify-center gap-2">
                       <span>{isRegistering ? "Criar Conta" : "Iniciar Sessão"}</span>
@@ -1303,9 +1303,9 @@ function ProtectedApp() {
                   <Loader2 className="w-5 h-5 animate-spin text-slate-500 shrink-0" />
                 ) : (
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#2563EB" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                    <path fill="#D4AF37" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
                   </svg>
                 )}
@@ -1323,7 +1323,7 @@ function ProtectedApp() {
                         setIsRegistering(false);
                         setAuthError(null);
                       }}
-                      className="font-extrabold hover:underline bg-transparent border-0 p-0 outline-none cursor-pointer text-xs font-display text-[#B8791A]"
+                      className="font-extrabold hover:underline bg-transparent border-0 p-0 outline-none cursor-pointer text-xs font-display text-[#D4AF37]"
                     >
                       Iniciar sessão
                     </button>
@@ -1337,7 +1337,7 @@ function ProtectedApp() {
                         setIsRegistering(true);
                         setAuthError(null);
                       }}
-                      className="font-extrabold hover:underline bg-transparent border-0 p-0 outline-none cursor-pointer text-xs font-display text-[#B8791A]"
+                      className="font-extrabold hover:underline bg-transparent border-0 p-0 outline-none cursor-pointer text-xs font-display text-[#D4AF37]"
                     >
                       Criar conta
                     </button>
@@ -1352,7 +1352,7 @@ function ProtectedApp() {
                   href="https://sabushtech.com" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-extrabold no-underline hover:underline transition-all text-[#B8791A]"
+                  className="font-extrabold no-underline hover:underline transition-all text-[#D4AF37]"
                 >
                   Sabush Tech
                 </a>
@@ -1380,7 +1380,7 @@ function ProtectedApp() {
               <div 
                 style={{
                   background: 'rgba(15, 23, 42, 0.65)',
-                  border: '12px solid #1e293b',
+                  border: '12px solid #111111',
                   borderRadius: '24px',
                   backdropFilter: 'blur(12px)',
                   WebkitBackdropFilter: 'blur(12px)',
@@ -1392,7 +1392,7 @@ function ProtectedApp() {
                 <div className="flex items-center justify-between px-4 py-2 bg-slate-950/50 border-b border-white/5 shrink-0 select-none">
                   <div className="flex items-center gap-1.5">
                     <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] opacity-90"></span>
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] opacity-90"></span>
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] opacity-90"></span>
                     <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] opacity-90"></span>
                   </div>
                   <span className="text-[9px] text-white/35 font-bold uppercase tracking-widest font-mono">sabush-system-desktop</span>
@@ -1436,8 +1436,8 @@ function ProtectedApp() {
             {/* Features Bullet List - responsive grid for mobile/tablet layout, flex col for desktop */}
             <div className="grid grid-cols-2 gap-x-3 gap-y-2 lg:flex lg:flex-col lg:space-y-4 max-w-md pt-2 shrink-0 left-features-list">
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
-                  <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#2563EB] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                  <svg className="w-5 h-5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                   </svg>
                 </div>
@@ -1448,8 +1448,8 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
-                  <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#2563EB] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                  <svg className="w-5 h-5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </div>
@@ -1460,8 +1460,8 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
-                  <svg className="w-5 h-5 text-[#174FA3]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#2563EB] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                  <svg className="w-5 h-5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
@@ -1472,8 +1472,8 @@ function ProtectedApp() {
               </div>
 
               <div className="flex items-center gap-4 group">
-                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#174FA3] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
-                  <svg className="w-5 h-5 text-[#1b73e8]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                <div className="w-12 h-12 bg-white hover:scale-105 transition-all text-[#2563EB] rounded-full flex items-center justify-center shadow-md shadow-blue-500/5 shrink-0">
+                  <svg className="w-5 h-5 text-[#2563EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2" />
                   </svg>
                 </div>
@@ -1530,7 +1530,7 @@ function ProtectedApp() {
                     </div>
 
                     {/* Main Work Area */}
-                    <div className="flex-1 p-3 flex flex-col space-y-2.5 bg-[#FAF9F5] overflow-hidden">
+                    <div className="flex-1 p-3 flex flex-col space-y-2.5 bg-[#F8F9FA] overflow-hidden">
                       {/* Dashboard Micro Header */}
                       <div className="flex items-center justify-between border-b border-slate-200/50 pb-1.5">
                         <div className="space-y-0.5">
@@ -1567,18 +1567,18 @@ function ProtectedApp() {
                           <svg className="w-full h-[85%] absolute inset-0" viewBox="0 0 100 30" preserveAspectRatio="none">
                             <defs>
                               <linearGradient id="laptopAreaGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#174FA3" stopOpacity="0.25" />
-                                <stop offset="100%" stopColor="#174FA3" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="#2563EB" stopOpacity="0.25" />
+                                <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
                               </linearGradient>
                             </defs>
                             <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5 L100,30 L0,30 Z" fill="url(#laptopAreaGrad)"></path>
-                            <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5" fill="none" stroke="#174FA3" strokeWidth="2.5" strokeLinecap="round"></path>
+                            <path d="M0,25 C15,12 25,28 42,14 C58,2 72,21 85,8 C90,4 95,12 100,5" fill="none" stroke="#2563EB" strokeWidth="2.5" strokeLinecap="round"></path>
                             
-                            <circle cx="42" cy="14" r="2.5" fill="#174FA3" className="animate-ping" style={{ transformOrigin: '42px 14px' }}></circle>
-                            <circle cx="42" cy="14" r="1.5" fill="#ffffff" stroke="#174FA3" strokeWidth="1.5"></circle>
+                            <circle cx="42" cy="14" r="2.5" fill="#2563EB" className="animate-ping" style={{ transformOrigin: '42px 14px' }}></circle>
+                            <circle cx="42" cy="14" r="1.5" fill="#ffffff" stroke="#2563EB" strokeWidth="1.5"></circle>
 
-                            <circle cx="85" cy="8" r="2.5" fill="#174FA3" className="animate-ping" style={{ transformOrigin: '85px 8px' }}></circle>
-                            <circle cx="85" cy="8" r="1.5" fill="#ffffff" stroke="#174FA3" strokeWidth="1.5"></circle>
+                            <circle cx="85" cy="8" r="2.5" fill="#2563EB" className="animate-ping" style={{ transformOrigin: '85px 8px' }}></circle>
+                            <circle cx="85" cy="8" r="1.5" fill="#ffffff" stroke="#2563EB" strokeWidth="1.5"></circle>
                           </svg>
                         </div>
                       </div>
@@ -1604,7 +1604,7 @@ function ProtectedApp() {
             <div 
               style={{
                 background: '#FFFFFF',
-                border: '1px solid #E2E8F0',
+                border: '1px solid #E5E7EB',
                 borderRadius: '16px'
               }}
               className="w-full max-w-lg p-5 sm:p-7 md:p-9 shadow-[0_32px_64px_-16px_rgba(13,75,133,0.12),_0_16px_32px_-8px_rgba(0,0,0,0.06)] flex flex-col gap-4 compact-layout-card min-h-0 h-full lg:h-auto overflow-y-auto no-scrollbar"
@@ -1627,8 +1627,8 @@ function ProtectedApp() {
                   }}
                   className="compact-logo"
                 />
-                <h3 className="text-[#B8791A] font-black text-2xl sm:text-3xl tracking-tight font-sans compact-title">
-                  Sabush System <span className="text-[#B8791A]">ERP</span><span className="text-[#B8791A] font-black">•</span>
+                <h3 className="text-[#D4AF37] font-black text-2xl sm:text-3xl tracking-tight font-sans compact-title">
+                  Sabush System <span className="text-[#D4AF37]">ERP</span><span className="text-[#D4AF37] font-black">•</span>
                 </h3>
                 <p className="text-[9.5px] text-slate-500 font-extrabold uppercase tracking-wider compact-subtitle">The Modern ERP for African SMEs</p>
               </div>
@@ -1641,16 +1641,16 @@ function ProtectedApp() {
                   loginWithGoogle();
                 }}
                 disabled={isAuthenticating}
-                style={{ backgroundColor: '#FFFFFF', borderColor: '#E2E8F0' }}
+                style={{ backgroundColor: '#FFFFFF', borderColor: '#E5E7EB' }}
                 className="w-full flex items-center justify-center gap-3 hover:bg-slate-50 border active:scale-[0.985] text-slate-700 py-2.5 px-4 rounded-xl transition-all font-bold text-sm cursor-pointer compact-button shrink-0 shadow-sm"
               >
                 {isAuthenticating && loginMethod === 'google' ? (
                   <Loader2 className="w-5 h-5 animate-spin text-slate-500 font-sans" />
                 ) : (
                   <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
-                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#2563EB" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                     <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                    <path fill="#D4AF37" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
                     <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
                   </svg>
                 )}
@@ -1662,8 +1662,8 @@ function ProtectedApp() {
                 href={typeof window !== 'undefined' ? window.location.href : '#'}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#B8791A' }}
-                className="text-center text-[11px] hover:text-[#8B6914] font-bold shrink-0 mt-1 select-none underline"
+                style={{ color: '#D4AF37' }}
+                className="text-center text-[11px] hover:text-[#B8952E] font-bold shrink-0 mt-1 select-none underline"
               >
                 Problemas ao entrar? Clique aqui para abrir em nova aba 🌐
               </a>
@@ -1681,19 +1681,19 @@ function ProtectedApp() {
               <div className="space-y-1.5 lg:space-y-2.5 shrink-0">
                 <div
                   style={{
-                    background: '#FFF7ED',
-                    color: '#B8791A',
+                    background: '#FFFFFF',
+                    color: '#D4AF37',
                     border: '1px solid rgba(234, 88, 12, 0.1)'
                   }}
                   className="w-full py-2.5 px-3.5 rounded-xl flex items-center justify-center gap-2 mb-0.5 font-bold text-xs sm:text-sm compact-button"
                 >
-                  <Mail size={14} className="text-[#B8791A]" />
+                  <Mail size={14} className="text-[#D4AF37]" />
                   <span>Entrar com E-mail & Senha</span>
                 </div>
 
                 {/* Sub-tabs to switch securely between Sign In and Sign Up */}
                 <div 
-                  style={{ background: '#F8FAFC', padding: '3px' }}
+                  style={{ background: '#F8F9FA', padding: '3px' }}
                   className="grid grid-cols-2 rounded-xl border border-slate-100"
                 >
                   <button
@@ -1704,11 +1704,11 @@ function ProtectedApp() {
                     }}
                     className={`py-1.5 text-[10.5px] font-black rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 select-none ${
                       !isRegistering
-                        ? 'bg-[#B8791A] text-white shadow-sm'
-                        : 'bg-transparent text-slate-500 hover:text-[#B8791A]'
+                        ? 'bg-[#D4AF37] text-white shadow-sm'
+                        : 'bg-transparent text-slate-500 hover:text-[#D4AF37]'
                     }`}
                   >
-                    <svg className={`w-3 h-3 shrink-0 ${!isRegistering ? 'text-white' : 'text-[#B8791A]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className={`w-3 h-3 shrink-0 ${!isRegistering ? 'text-white' : 'text-[#D4AF37]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                     </svg>
                     <span>Iniciar Sessão</span>
@@ -1721,11 +1721,11 @@ function ProtectedApp() {
                     }}
                     className={`py-1.5 text-[10.5px] font-black rounded-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 select-none ${
                       isRegistering
-                        ? 'bg-[#B8791A] text-white shadow-sm'
-                        : 'bg-transparent text-slate-500 hover:text-[#B8791A]'
+                        ? 'bg-[#D4AF37] text-white shadow-sm'
+                        : 'bg-transparent text-slate-500 hover:text-[#D4AF37]'
                     }`}
                   >
-                    <svg className={`w-3 h-3 shrink-0 ${isRegistering ? 'text-white' : 'text-[#B8791A]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <svg className={`w-3 h-3 shrink-0 ${isRegistering ? 'text-white' : 'text-[#D4AF37]'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                     </svg>
                     <span>Criar Conta</span>
@@ -1805,20 +1805,20 @@ function ProtectedApp() {
                     placeholder="seuemail@exemplo.com"
                     style={{
                       background: '#FFFFFF',
-                      border: '1px solid #CBD5E1',
-                      color: '#1E293B',
+                      border: '1px solid #E5E7EB',
+                      color: '#111111',
                       borderRadius: '8px'
                     }}
                     onFocus={(e) => {
                       e.target.style.outline = 'none';
-                      e.target.style.borderColor = '#B8791A';
+                      e.target.style.borderColor = '#D4AF37';
                       e.target.style.boxShadow = '0 0 0 2.5px rgba(234, 88, 12, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = '#CBD5E1';
+                      e.target.style.borderColor = '#E5E7EB';
                       e.target.style.boxShadow = 'none';
                     }}
-                    className="w-full p-2.5 pl-10 outline-none transition-all text-xs sm:text-sm font-semibold placeholder-slate-400 compact-input text-[#1E293B]"
+                    className="w-full p-2.5 pl-10 outline-none transition-all text-xs sm:text-sm font-semibold placeholder-slate-400 compact-input text-[#111111]"
                   />
                 </div>
 
@@ -1833,20 +1833,20 @@ function ProtectedApp() {
                     placeholder="••••••••••••••••"
                     style={{
                       background: '#FFFFFF',
-                      border: '1px solid #CBD5E1',
-                      color: '#1E293B',
+                      border: '1px solid #E5E7EB',
+                      color: '#111111',
                       borderRadius: '8px'
                     }}
                     onFocus={(e) => {
                       e.target.style.outline = 'none';
-                      e.target.style.borderColor = '#B8791A';
+                      e.target.style.borderColor = '#D4AF37';
                       e.target.style.boxShadow = '0 0 0 2.5px rgba(234, 88, 12, 0.2)';
                     }}
                     onBlur={(e) => {
-                      e.target.style.borderColor = '#CBD5E1';
+                      e.target.style.borderColor = '#E5E7EB';
                       e.target.style.boxShadow = 'none';
                     }}
-                    className="w-full p-2.5 pl-10 pr-10 outline-none transition-all text-xs sm:text-sm font-semibold placeholder-slate-400 font-sans compact-input text-[#1E293B]"
+                    className="w-full p-2.5 pl-10 pr-10 outline-none transition-all text-xs sm:text-sm font-semibold placeholder-slate-400 font-sans compact-input text-[#111111]"
                   />
                   <button
                     type="button"
@@ -1865,14 +1865,14 @@ function ProtectedApp() {
                     <input
                       type="checkbox"
                       defaultChecked
-                      className="w-3.5 h-3.5 text-[#B8791A] border-slate-300 rounded focus:ring-transparent bg-white select-none checkbox-blue"
+                      className="w-3.5 h-3.5 text-[#D4AF37] border-slate-300 rounded focus:ring-transparent bg-white select-none checkbox-blue"
                     />
                     <span>Lembrar-me</span>
                   </label>
                   <button
                     type="button"
                     onClick={handleForgotPassword}
-                    className="font-extrabold text-[#B8791A] hover:text-[#8B6914] cursor-pointer underline select-none"
+                    className="font-extrabold text-[#D4AF37] hover:text-[#B8952E] cursor-pointer underline select-none"
                   >
                     Esqueceu a senha?
                   </button>
@@ -1882,8 +1882,8 @@ function ProtectedApp() {
                 <button
                   type="submit"
                   disabled={isAuthenticating}
-                  style={{ backgroundColor: '#B8791A', color: '#FFFFFF' }}
-                  className="w-full py-2.5 rounded-xl font-extrabold shadow-lg shadow-[#B8791A]/15 transition-all flex items-center justify-center gap-2 active:scale-[0.98] hover:bg-[#6B4E0F] cursor-pointer compact-button text-white"
+                  style={{ backgroundColor: '#D4AF37', color: '#FFFFFF' }}
+                  className="w-full py-2.5 rounded-xl font-extrabold shadow-lg shadow-[#D4AF37]/15 transition-all flex items-center justify-center gap-2 active:scale-[0.98] hover:bg-[#D4AF37] cursor-pointer compact-button text-white"
                 >
                   {isAuthenticating && loginMethod === 'email' ? (
                     <Loader2 className="w-4 h-4 animate-spin text-white font-sans" />
@@ -1971,7 +1971,7 @@ function ProtectedApp() {
                       <button
                         type="button"
                         onClick={() => clearAuthLogs()}
-                        className="text-[9px] font-black text-slate-400 hover:text-white bg-[#0D1F3D] px-2 py-0.5 rounded border border-slate-800 tracking-wider transition-colors cursor-pointer shrink-0"
+                        className="text-[9px] font-black text-slate-400 hover:text-white bg-[#0B1F4D] px-2 py-0.5 rounded border border-slate-800 tracking-wider transition-colors cursor-pointer shrink-0"
                       >
                         Limpar Logs
                       </button>
@@ -1990,7 +1990,7 @@ function ProtectedApp() {
                           if (log.type === 'error') badgeColor = 'text-rose-400 bg-rose-500/10 border-rose-500/20';
 
                           return (
-                            <div key={log.id} className="p-1 rounded bg-[#061225] border border-slate-900/60 mb-1 last:mb-0">
+                            <div key={log.id} className="p-1 rounded bg-[#0B1F4D] border border-slate-900/60 mb-1 last:mb-0">
                               <div className="flex items-center justify-between gap-1">
                                 <span className="text-[9px] text-slate-500">{log.timestamp}</span>
                                 <span className={`px-1 rounded text-[8px] font-bold tracking-wider border uppercase shrink-0 ${badgeColor}`}>
@@ -2020,7 +2020,7 @@ function ProtectedApp() {
               </div>
 
               {/* Disclaimer */}
-              <p className="text-center text-[10px] text-[#FAECE7] font-semibold leading-relaxed mt-1">
+              <p className="text-center text-[10px] text-[#FFFFFF] font-semibold leading-relaxed mt-1">
                 Ao iniciar sessão, você aceita expressamente os nossos{" "}
                 <button 
                   type="button" 
@@ -2059,7 +2059,7 @@ function ProtectedApp() {
   // Active Session Prompt for users who are already logged in but haven't confirmed
   if (user && !sessionConfirmed) {
     return (
-      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0A051D] via-[#0F1B47] to-[#04020D] p-6 selection:bg-[#4F46E5] selection:text-white">
+      <div className="h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0B1F4D] via-[#0B1F4D] to-[#0B1F4D] p-6 selection:bg-[#2563EB] selection:text-white">
         <div className="w-full max-w-md bg-white/95 p-8 md:p-10 rounded-[32px] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] border border-white/20 flex flex-col items-center gap-6">
           <img 
             src="/sabush-logo.svg" 
@@ -2206,20 +2206,20 @@ function ProtectedApp() {
     };
 
     return (
-      <div className="h-screen w-screen flex items-center justify-center bg-[#140F0D] font-sans p-4 relative overflow-hidden select-none">
+      <div className="h-screen w-screen flex items-center justify-center bg-[#0B1F4D] font-sans p-4 relative overflow-hidden select-none">
         {/* Abstract design nodes in the background */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#B8791A]/10 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-[100px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />
         
-        <div className="w-full max-w-md bg-[#1D1510] border border-[#3A2F26] rounded-[40px] p-8 text-center space-y-6 shadow-2xl z-10 transition-all">
+        <div className="w-full max-w-md bg-[#111111] border border-[#D4AF37] rounded-[40px] p-8 text-center space-y-6 shadow-2xl z-10 transition-all">
           <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/20 rounded-2xl flex items-center justify-center text-amber-500 mx-auto animate-pulse">
             <Lock size={32} />
           </div>
           
           <div className="space-y-1.5">
             <span className="text-[10px] uppercase font-black text-amber-400 tracking-widest font-mono">Verificação de Segurança</span>
-            <h2 className="text-[#FDFAF7] text-xl font-black font-sans leading-tight">Autenticação de Dois Fatores</h2>
-            <p className="text-xs text-[#C4B2A6] font-medium leading-relaxed max-w-xs mx-auto">
+            <h2 className="text-[#FFFFFF] text-xl font-black font-sans leading-tight">Autenticação de Dois Fatores</h2>
+            <p className="text-xs text-[#E9CC85] font-medium leading-relaxed max-w-xs mx-auto">
               Insira o código de verificação enviado para o telefone/WhatsApp do proprietário associado a esta conta corporativa.
             </p>
           </div>
@@ -2232,7 +2232,7 @@ function ProtectedApp() {
                 value={twoFactorCodeInput}
                 onChange={e => setTwoFactorCodeInput(e.target.value.replace(/\D/g, ''))}
                 placeholder="000 000"
-                className="w-full bg-[#140F0D] border border-[#3A2F26] rounded-2xl p-4 font-mono text-center tracking-[0.5em] text-2xl font-black text-amber-400 focus:outline-none focus:border-amber-400/50 outline-none"
+                className="w-full bg-[#0B1F4D] border border-[#D4AF37] rounded-2xl p-4 font-mono text-center tracking-[0.5em] text-2xl font-black text-amber-400 focus:outline-none focus:border-amber-400/50 outline-none"
               />
             </div>
 
@@ -2244,12 +2244,12 @@ function ProtectedApp() {
             </button>
           </form>
 
-          <div className="pt-4 border-t border-[#3a2f26]/40 flex flex-col items-center gap-2">
-            <p className="text-[10px] text-[#8B735F] font-bold leading-relaxed">
+          <div className="pt-4 border-t border-[#D4AF37]/40 flex flex-col items-center gap-2">
+            <p className="text-[10px] text-[#6B7280] font-bold leading-relaxed">
               Não recebeu o código ou está em ambiente de sandbox?
             </p>
             {/* Fallback secure text only shown for testing convenience so users don't get locked out in local sessions */}
-            <div className="bg-[#140F0D]/60 border border-[#3A2F26]/30 rounded-xl px-4 py-2 font-mono text-[10px] text-amber-400/80 font-bold flex items-center gap-1.5">
+            <div className="bg-[#0B1F4D]/60 border border-[#D4AF37]/30 rounded-xl px-4 py-2 font-mono text-[10px] text-amber-400/80 font-bold flex items-center gap-1.5">
               <span>💡 Modo Desenvolvedor: Senha OTP =</span>
               <span className="text-white select-all">{twoFactorCodeSent || "Gerando..."}</span>
             </div>
@@ -2257,7 +2257,7 @@ function ProtectedApp() {
             <button 
               onClick={() => logout()}
               type="button"
-              className="text-[#8B735F] hover:text-[#FDFAF7] text-[10px] font-black uppercase tracking-wider underline mt-2"
+              className="text-[#6B7280] hover:text-[#FFFFFF] text-[10px] font-black uppercase tracking-wider underline mt-2"
             >
               Terminar Sessão (Logout)
             </button>
@@ -2268,7 +2268,7 @@ function ProtectedApp() {
   }
 
   return (
-    <div className="flex bg-[#FAFAFA] h-screen overflow-hidden flex-col md:flex-row">
+    <div className="flex bg-[#FFFFFF] h-screen overflow-hidden flex-col md:flex-row">
       {user && runTour && (
         <WelcomeSplash lang={activeLang} onFinish={handleWelcomeSplashFinish} />
       )}

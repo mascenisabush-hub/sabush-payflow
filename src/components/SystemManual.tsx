@@ -99,12 +99,12 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
   switch (sectionId) {
     case 'inicio-rapido':
       return (
-        <div className="relative w-full rounded-2xl bg-[#0C2242] border border-blue-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-blue-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly strategic colors: Corporate Blue & Warm Orange Theme */}
           <div className="flex items-center justify-between border-b border-blue-500/10 pb-2 mb-4">
             <div className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#EA5455]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFC436]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#E9CC85]" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#28C76F]" />
               <span className="text-[10px] font-mono font-bold text-blue-200/80 ml-2">sabush.co.mz/erp/portal</span>
             </div>
@@ -113,7 +113,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
           <div className="max-w-[280px] mx-auto bg-slate-950/90 rounded-2xl border border-blue-500/15 p-4 shadow-xl space-y-3.5 relative">
             <div className="text-center">
-              <div className="w-8 h-8 rounded-full bg-[#B8791A] text-white flex items-center justify-center mx-auto text-sm font-black border border-[#B8791A]/50">S</div>
+              <div className="w-8 h-8 rounded-full bg-[#D4AF37] text-white flex items-center justify-center mx-auto text-sm font-black border border-[#D4AF37]/50">S</div>
               <h4 className="text-xs font-black text-white mt-1.5">Sabush ERP Login</h4>
               <p className="text-[9px] text-slate-400 mt-0.5">Introduza as credenciais seguras</p>
             </div>
@@ -121,10 +121,10 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700">admin@empresa.co.mz</div>
               <div className="bg-white border border-slate-200 rounded-lg p-2 text-[9px] text-slate-700 flex justify-between">
                 <span>••••••••••••</span>
-                <span className="text-[8px] text-[#0A1C38] font-bold">Ver</span>
+                <span className="text-[8px] text-[#0B1F4D] font-bold">Ver</span>
               </div>
             </div>
-            <button className="w-full py-1.5 bg-[#0A1C38] text-white rounded-lg text-[9px] font-black hover:bg-[#0A1C38]/90">ENTRAR</button>
+            <button className="w-full py-1.5 bg-[#0B1F4D] text-white rounded-lg text-[9px] font-black hover:bg-[#0B1F4D]/90">ENTRAR</button>
             <div className="flex items-center justify-center gap-1 border-t border-slate-800 pt-2 pb-0.5 text-[8px] text-slate-400">
               <span className="px-2 py-1 bg-slate-900 border border-slate-800 rounded flex items-center gap-1 hover:bg-slate-850 w-full justify-center cursor-pointer">
                 <span className="text-[#EA4335] font-bold">G</span> Google Workspace
@@ -133,14 +133,14 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           {/* Arrows pointing details */}
-          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#0A1C38] text-white bg-[#0A1C38]" />
-          <AnnotationArrow startX={82} startY={60} endX={195} endY={182} label="Acesso por E-mail Validado" accentColor="border-[#B8791A] text-white bg-[#B8791A]" />
+          <AnnotationArrow startX={15} startY={35} endX={105} endY={120} label="Autenticação Segura Online" accentColor="border-[#0B1F4D] text-white bg-[#0B1F4D]" />
+          <AnnotationArrow startX={82} startY={60} endX={195} endY={182} label="Acesso por E-mail Validado" accentColor="border-[#D4AF37] text-white bg-[#D4AF37]" />
         </div>
       );
 
     case 'sistema-pos':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091515] border border-emerald-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left flex flex-col md:flex-row gap-4">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-emerald-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left flex flex-col md:flex-row gap-4">
           {/* Eye-friendly: Emerald & Seafoam POS Theme */}
           <div className="flex-1 space-y-2">
             <h4 className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">🏪 Catálogo Frente de Loja</h4>
@@ -188,7 +188,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <button className="w-full py-1 bg-emerald-600 text-white font-black text-[9px] rounded-lg shadow uppercase hover:bg-emerald-500 tracking-wide">PAGAR COM M-PESA</button>
               <div className="flex items-center gap-1">
                 <span className="text-[8px] text-slate-400">Fatura p/ WhatsApp:</span>
-                <input type="text" readOnly value="+258 84 123 4567" className="bg-[#0C2624] text-[8px] font-bold text-emerald-300 border border-emerald-500/10 rounded px-1 py-0.5 max-w-[90px]" />
+                <input type="text" readOnly value="+258 84 123 4567" className="bg-[#0B1F4D] text-[8px] font-bold text-emerald-300 border border-emerald-500/10 rounded px-1 py-0.5 max-w-[90px]" />
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'inventario':
       return (
-        <div className="relative w-full rounded-2xl bg-[#09151B] border border-sky-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-sky-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly: Cyan & Ice Blue Logistics Theme */}
           <div className="flex items-center justify-between border-b border-sky-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-sky-400 uppercase tracking-widest flex items-center gap-1">📦 Painel Auxiliar de Stock</h4>
@@ -243,17 +243,17 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'clientes':
       return (
-        <div className="relative w-full rounded-2xl bg-[#08121C] border border-[#3E92B8]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-[#2563EB]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Deep Oceanic Teal Theme */}
-          <div className="flex items-center justify-between border-b border-[#3E92B8]/10 pb-2 mb-3">
-            <h4 className="text-[10px] font-black text-[#5BC0EB] uppercase tracking-widest flex items-center gap-1">👥 Ficha CRM de Conta Corrente</h4>
-            <span className="px-2 py-0.5 rounded bg-[#3E92B8]/20 text-[#5BC0EB] text-[8px] font-bold">SILVER CLASS</span>
+          <div className="flex items-center justify-between border-b border-[#2563EB]/10 pb-2 mb-3">
+            <h4 className="text-[10px] font-black text-[#93B4F5] uppercase tracking-widest flex items-center gap-1">👥 Ficha CRM de Conta Corrente</h4>
+            <span className="px-2 py-0.5 rounded bg-[#2563EB]/20 text-[#93B4F5] text-[8px] font-bold">SILVER CLASS</span>
           </div>
 
-          <div className="max-w-[420px] mx-auto bg-slate-950 border border-[#3E92B8]/15 rounded-2xl p-4 shadow-xl space-y-4">
+          <div className="max-w-[420px] mx-auto bg-slate-950 border border-[#2563EB]/15 rounded-2xl p-4 shadow-xl space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-full bg-[#3E92B8]/15 border border-[#3E92B8]/30 text-[#5BC0EB] flex items-center justify-center font-black">MS</div>
+                <div className="w-10 h-10 rounded-full bg-[#2563EB]/15 border border-[#2563EB]/30 text-[#93B4F5] flex items-center justify-center font-black">MS</div>
                 <div>
                   <h4 className="text-xs font-black text-white">Masceni Sabush</h4>
                   <p className="text-[8px] text-slate-400 font-mono">NUIT: 247854291 • Maputo</p>
@@ -266,13 +266,13 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
 
             <div className="grid grid-cols-2 gap-2 text-[9px] text-left pt-1">
-              <div className="p-2 rounded-lg bg-[#3E92B8]/5 border border-[#3E92B8]/10">
+              <div className="p-2 rounded-lg bg-[#2563EB]/5 border border-[#2563EB]/10">
                 <p className="text-slate-400">Saldo por Liquidar:</p>
                 <p className="text-xs font-black text-rose-455 font-mono">1,450.00 MT</p>
               </div>
               <div className="p-2 rounded-lg bg-slate-900 border border-slate-800">
                 <p className="text-slate-400">Ações de Resgate:</p>
-                <button className="mt-1 w-full text-center py-1 bg-[#3E92B8] hover:bg-[#207AA3] text-white text-[8px] rounded font-bold transition-all">LIGAR WHATSAPP</button>
+                <button className="mt-1 w-full text-center py-1 bg-[#2563EB] hover:bg-[#2563EB] text-white text-[8px] rounded font-bold transition-all">LIGAR WHATSAPP</button>
               </div>
             </div>
           </div>
@@ -284,14 +284,14 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'faturas':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091511] border border-emerald-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-emerald-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
           {/* Eye-friendly: Clean Ivory and Emerald Ink layout (Document Feel) */}
           <div className="flex items-center justify-between border-b border-emerald-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1">📄 Motor de Emissão Documental</h4>
             <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 text-[8px] font-bold uppercase tracking-wider">A4 PDF Impresso</span>
           </div>
 
-          <div className="max-w-[320px] mx-auto bg-[#FDFEFC] text-slate-900 rounded-lg p-5 shadow-inner border border-emerald-500/5 text-[9px] relative font-serif">
+          <div className="max-w-[320px] mx-auto bg-[#FFFFFF] text-slate-900 rounded-lg p-5 shadow-inner border border-emerald-500/5 text-[9px] relative font-serif">
             {/* Stamp Logo */}
             <div className="absolute right-4 top-4 border-2 border-emerald-600 border-dashed text-emerald-600 px-2 py-1 transform rotate-12 text-[7px] font-black tracking-widest uppercase">
               SABUSH VERIFIED
@@ -340,7 +340,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'registar-pagamento':
       return (
-        <div className="relative w-full rounded-2xl bg-[#141208] border border-yellow-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-yellow-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly: Financial Amber Gold */}
           <div className="flex items-center justify-between border-b border-yellow-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-yellow-400 uppercase tracking-widest flex items-center gap-1">💸 Liquidação de Dívidas / Amortização</h4>
@@ -354,9 +354,9 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
             <div className="space-y-1">
               <label className="text-slate-400 text-[8px] uppercase font-bold">Introduzir Amortização:</label>
-              <input type="text" readOnly value="1,000.00" className="w-full bg-[#0C2624] font-mono border border-yellow-500/20 text-yellow-300 p-2 rounded-lg text-right font-black" />
+              <input type="text" readOnly value="1,000.00" className="w-full bg-[#0B1F4D] font-mono border border-yellow-500/20 text-yellow-300 p-2 rounded-lg text-right font-black" />
             </div>
-            <div className="flex items-center justify-between text-[8px] text-slate-400 font-bold bg-[#1C1808] p-1.5 rounded-md border border-yellow-500/10">
+            <div className="flex items-center justify-between text-[8px] text-slate-400 font-bold bg-[#0B1F4D] p-1.5 rounded-md border border-yellow-500/10">
               <span>Tipo de Registo:</span>
               <span className="text-yellow-400">AMORTIZAÇÃO PARCIAL</span>
             </div>
@@ -370,7 +370,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'gestao-dividas':
       return (
-        <div className="relative w-full rounded-2xl bg-[#14080F] border border-rose-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-rose-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Crimson Red & Ruby Warning theme */}
           <div className="flex items-center justify-between border-b border-rose-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-rose-400 uppercase tracking-widest flex items-center gap-1">💳 Painel Integrado de Inadimplência</h4>
@@ -378,7 +378,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="bg-slate-950 rounded-xl p-3 border border-rose-500/10 text-[9px] space-y-2 max-w-[420px] mx-auto">
-            <div className="flex justify-between items-center bg-[#15090F] p-2.5 rounded-lg border border-rose-500/20">
+            <div className="flex justify-between items-center bg-[#0B1F4D] p-2.5 rounded-lg border border-rose-500/20">
               <div className="space-y-0.5">
                 <p className="font-black text-white">João Maputo • NUIT 101018</p>
                 <p className="text-[7px] text-rose-300 font-bold tracking-wider uppercase font-mono">Dívida há 45 Dias</p>
@@ -400,7 +400,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'cotacoes':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091115] border border-cyan-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-cyan-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly: Steel Blue Quote sheet */}
           <div className="flex items-center justify-between border-b border-cyan-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-widest flex items-center gap-1">📋 Orçamentos e Cotações Proforma</h4>
@@ -431,7 +431,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'encomendas-online':
       return (
-        <div className="relative w-full rounded-2xl bg-[#110915] border border-purple-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-purple-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Royal Purple Web Orders Theme */}
           <div className="flex items-center justify-between border-b border-purple-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-purple-400 uppercase tracking-widest flex items-center gap-1">🛒 Pedidos Entrada Loja Digital</h4>
@@ -439,7 +439,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 rounded-xl p-3 border border-purple-500/15 text-[9px] space-y-2.5">
-            <div className="flex justify-between items-center bg-[#110915]/80 p-2.5 rounded-lg border border-purple-500/20">
+            <div className="flex justify-between items-center bg-[#0B1F4D]/80 p-2.5 rounded-lg border border-purple-500/20">
               <div className="space-y-0.5">
                 <span className="text-[7.5px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold font-mono">ENCOMENDA #W-1044</span>
                 <p className="font-black text-white mt-1">Cliente: Mercado Sabush • Maputo Delivery</p>
@@ -462,7 +462,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'despesas':
       return (
-        <div className="relative w-full rounded-2xl bg-[#150909] border border-rose-400/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-rose-400/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Coral Peach Expense log */}
           <div className="flex items-center justify-between border-b border-rose-400/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-rose-300 uppercase tracking-widest flex items-center gap-1">💸 Livro de Saídas Financeiras</h4>
@@ -475,7 +475,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
                 <p className="text-slate-400 text-[7px] uppercase font-bold">Água & Luz</p>
                 <p className="font-black text-rose-300 mt-1">4,200 MT</p>
               </div>
-              <div className="p-2 rounded bg-[#1C0909] border border-rose-400/15">
+              <div className="p-2 rounded bg-[#0B1F4D] border border-rose-400/15">
                 <p className="text-slate-400 text-[7px] uppercase font-bold">Rendas</p>
                 <p className="font-black text-rose-300 mt-1">25,000 MT</p>
               </div>
@@ -497,7 +497,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'fornecedores':
       return (
-        <div className="relative w-full rounded-2xl bg-[#0F1115] border border-slate-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-slate-500/25 p-4 overflow-hidden min-h-[290px] select-none text-left">
           {/* Eye-friendly: Slate Gray Logistics */}
           <div className="flex items-center justify-between border-b border-slate-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">🏭 Diretório Geral de Parceiros Distribuição</h4>
@@ -505,7 +505,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-slate-500/15 rounded-xl p-3 text-[9px] space-y-2">
-            <div className="flex justify-between items-center bg-[#15171B] p-2.5 rounded-lg border border-slate-500/20">
+            <div className="flex justify-between items-center bg-[#0B1F4D] p-2.5 rounded-lg border border-slate-500/20">
               <div className="space-y-0.5">
                 <p className="font-black text-white">Moçambique Distribuidora Limitada</p>
                 <p className="text-[7.5px] text-slate-400 font-mono">NUIT: 400921102 • Maputo Armazéns</p>
@@ -524,7 +524,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'ordens-compra':
       return (
-        <div className="relative w-full rounded-2xl bg-[#140E0A] border border-orange-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-orange-500/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Bronze Copper Theme */}
           <div className="flex items-center justify-between border-b border-orange-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-orange-400 uppercase tracking-widest flex items-center gap-1">🛍️ Abastecimento de Armazém (Procurement)</h4>
@@ -549,7 +549,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'reports':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091512] border border-[#2EA44F]/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-[#2EA44F]/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
           {/* Eye-friendly: Vivid Sage and Emerald Analytics */}
           <div className="flex items-center justify-between border-b border-[#2EA44F]/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-[#2EA44F] uppercase tracking-widest flex items-center gap-1">📊 Consolidação Analítica de Auditoria</h4>
@@ -575,7 +575,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'equipa':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091515] border border-teal-500/25 p-4 overflow-hidden min-h-[305px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-teal-500/25 p-4 overflow-hidden min-h-[305px] select-none text-left">
           {/* Eye-friendly: Deep Teal Security */}
           <div className="flex items-center justify-between border-b border-teal-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-teal-400 uppercase tracking-widest flex items-center gap-1">👨‍👩‍👧 Perfis, Roles e Restrições de Operador</h4>
@@ -583,12 +583,12 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-teal-500/15 rounded-xl p-3.5 space-y-3 text-[9px]">
-            <div className="flex justify-between items-center bg-[#091515] p-2 rounded border border-teal-500/20">
+            <div className="flex justify-between items-center bg-[#0B1F4D] p-2 rounded border border-teal-500/20">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-450 animate-pulse" />
                 <p className="font-black text-white">Sara Langa • Caixa Balcão</p>
               </div>
-              <span className="px-2 py-0.5 rounded bg-[#0C2624] border border-slate-800 text-[7px] text-teal-305 font-bold uppercase">Acesso Bloqueado a Preços</span>
+              <span className="px-2 py-0.5 rounded bg-[#0B1F4D] border border-slate-800 text-[7px] text-teal-305 font-bold uppercase">Acesso Bloqueado a Preços</span>
             </div>
             <div className="p-2 border border-slate-800 bg-slate-900 rounded font-mono text-[8px] text-slate-400 leading-normal">
               🔓 PIN De Gestor Exigido para Estornar Artigos No POS.
@@ -602,20 +602,20 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'configuracoes':
       return (
-        <div className="relative w-full rounded-2xl bg-[#081119] border border-[#2483D0]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-[#2563EB]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Electric Carbon Settings */}
-          <div className="flex items-center justify-between border-b border-[#2483D0]/10 pb-1.5 mb-3">
-            <h4 className="text-[10px] font-black text-[#2483D0] uppercase tracking-widest flex items-center gap-1">⚙️ Definições de Envio WhatsApp e Perfil</h4>
-            <span className="px-2 py-0.5 rounded bg-[#2483D0]/15 text-[#2483D0] text-[8px] font-bold">API PANEL</span>
+          <div className="flex items-center justify-between border-b border-[#2563EB]/10 pb-1.5 mb-3">
+            <h4 className="text-[10px] font-black text-[#2563EB] uppercase tracking-widest flex items-center gap-1">⚙️ Definições de Envio WhatsApp e Perfil</h4>
+            <span className="px-2 py-0.5 rounded bg-[#2563EB]/15 text-[#2563EB] text-[8px] font-bold">API PANEL</span>
           </div>
 
-          <div className="max-w-[340px] mx-auto bg-slate-950 border border-[#2483D0]/15 rounded-xl p-4 shadow-xl space-y-3 text-[9px] text-white">
+          <div className="max-w-[340px] mx-auto bg-slate-950 border border-[#2563EB]/15 rounded-xl p-4 shadow-xl space-y-3 text-[9px] text-white">
             <div className="space-y-1">
               <label className="text-slate-400 text-[8px] uppercase font-bold">Token de Comunicação WhatsApp da Meta:</label>
-              <input type="text" readOnly value="EAAG678aZBd90BAKlz8O6R..." className="w-full bg-[#0C2624] font-mono border border-[#2483D0]/20 text-sky-400 p-2 rounded-lg" />
+              <input type="text" readOnly value="EAAG678aZBd90BAKlz8O6R..." className="w-full bg-[#0B1F4D] font-mono border border-[#2563EB]/20 text-sky-400 p-2 rounded-lg" />
             </div>
             <div className="flex gap-2">
-              <button className="flex-1 py-1.5 bg-[#2483D0] hover:bg-[#1C6BAA] text-slate-950 font-black rounded text-[8.5px] uppercase">Testar Envio</button>
+              <button className="flex-1 py-1.5 bg-[#2563EB] hover:bg-[#2563EB] text-slate-950 font-black rounded text-[8.5px] uppercase">Testar Envio</button>
               <button className="flex-1 py-1.5 bg-slate-900 hover:bg-slate-850 text-white font-bold border border-slate-800 rounded text-[8.5px] uppercase">Criar Backup ZIP</button>
             </div>
           </div>
@@ -627,14 +627,14 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'resolucao-problemas':
       return (
-        <div className="relative w-full rounded-2xl bg-[#140812] border border-[#DE40B0]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-[#D4AF37]/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Fuchsia Self-Healing check */}
-          <div className="flex items-center justify-between border-b border-[#DE40B0]/10 pb-1.5 mb-3">
-            <h4 className="text-[10px] font-black text-[#DE40B0] uppercase tracking-widest flex items-center gap-1">❓ Auto-Diagnóstico de Ligação Interna</h4>
-            <span className="px-2 py-0.5 rounded bg-[#DE40B0]/15 text-[#DE40B0] text-[8px] font-bold uppercase tracking-wider">SUPPORT BOT</span>
+          <div className="flex items-center justify-between border-b border-[#D4AF37]/10 pb-1.5 mb-3">
+            <h4 className="text-[10px] font-black text-[#D4AF37] uppercase tracking-widest flex items-center gap-1">❓ Auto-Diagnóstico de Ligação Interna</h4>
+            <span className="px-2 py-0.5 rounded bg-[#D4AF37]/15 text-[#D4AF37] text-[8px] font-bold uppercase tracking-wider">SUPPORT BOT</span>
           </div>
 
-          <div className="max-w-[420px] mx-auto bg-slate-950 rounded-xl p-3 border border-[#DE40B0]/15 text-[9px] space-y-2">
+          <div className="max-w-[420px] mx-auto bg-slate-950 rounded-xl p-3 border border-[#D4AF37]/15 text-[9px] space-y-2">
             <div className="grid grid-cols-3 gap-2 font-mono text-center text-white">
               <div className="p-2 rounded bg-slate-900 border border-slate-800 flex flex-col justify-between h-14">
                 <span className="text-slate-400 text-[6.5px]">FIRESTORE</span>
@@ -646,10 +646,10 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               </div>
               <div className="p-2 rounded bg-slate-900 border border-slate-800 flex flex-col justify-between h-14">
                 <span className="text-slate-400 text-[6.5px]">AUTHENTICATOR</span>
-                <span className="text-[8.5px] text-[#DE40B0] font-black">VALID ●</span>
+                <span className="text-[8.5px] text-[#D4AF37] font-black">VALID ●</span>
               </div>
             </div>
-            <button className="w-full text-center py-1.5 bg-[#DE40B0]/10 hover:bg-[#DE40B0]/20 text-[#DE40B0] rounded border border-[#DE40B0]/30 font-bold uppercase text-[8px]">RESTAURAR SESSÃO DE CONEXÃO</button>
+            <button className="w-full text-center py-1.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-[#D4AF37] rounded border border-[#D4AF37]/30 font-bold uppercase text-[8px]">RESTAURAR SESSÃO DE CONEXÃO</button>
           </div>
 
           <AnnotationArrow startX={25} startY={28} endX={140} endY={98} label="Diagnóstico de Rede Cloud" accentColor="border-pink-500 text-pink-300 bg-pink-950/95" />
@@ -659,7 +659,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'boas-praticas':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091512] border border-emerald-400/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-emerald-400/25 p-4 overflow-hidden min-h-[300px] select-none text-left">
           {/* Eye-friendly: Mint Audit layout */}
           <div className="flex items-center justify-between border-b border-emerald-400/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1">💡 Rotina de Auditoria de Gaveta Diária</h4>
@@ -688,7 +688,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'portal-cliente':
       return (
-        <div className="relative w-full rounded-2xl bg-[#0b1622] border border-amber-500/25 p-4 overflow-hidden min-h-[460px] select-none text-left flex flex-col lg:flex-row gap-4">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-amber-500/25 p-4 overflow-hidden min-h-[460px] select-none text-left flex flex-col lg:flex-row gap-4">
           {/* Eye-friendly: Cyber Azure Gold & Deep Space Theme */}
           
           {/* left column: Portal do Cliente view */}
@@ -795,7 +795,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'unidades-medida':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091515] border border-cyan-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-cyan-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
           {/* Eye-friendly: Cyan & Ivory Logistics layout */}
           <div className="flex items-center justify-between border-b border-cyan-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-cyan-400 uppercase tracking-widest flex items-center gap-1">📐 Unidades Triplas & Conversão Híbrida</h4>
@@ -803,7 +803,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-cyan-500/15 rounded-xl p-4 shadow-xl space-y-4">
-            <div className="flex justify-between items-center bg-[#0d1e21] p-3 rounded-lg border border-cyan-500/15 text-[9px]">
+            <div className="flex justify-between items-center bg-[#0B1F4D] p-3 rounded-lg border border-cyan-500/15 text-[9px]">
               <div>
                 <p className="text-slate-400 text-[7px] uppercase font-bold tracking-widest">Produto Selecionado</p>
                 <p className="text-xs font-black text-white mt-1 font-sans">Cerveja Laurentina Preta (6x Pack/Cx)</p>
@@ -843,7 +843,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
     case 'termos-grupo':
       return (
-        <div className="relative w-full rounded-2xl bg-[#091515] border border-orange-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
+        <div className="relative w-full rounded-2xl bg-[#0B1F4D] border border-orange-500/25 p-4 overflow-hidden min-h-[310px] select-none text-left">
           {/* Eye-friendly: Obsidian Corporate Gold */}
           <div className="flex items-center justify-between border-b border-orange-500/10 pb-1.5 mb-4">
             <h4 className="text-[10px] font-black text-orange-400 uppercase tracking-widest flex items-center gap-1">🏢 Sinergias e Marcas do Grupo Sabush Ecosystem</h4>
@@ -860,7 +860,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
 
             <div className="grid grid-cols-3 gap-2.5 text-center text-white font-heavy pt-3">
-              <div className="p-2 rounded bg-[#091515] border border-emerald-500/20 shadow flex flex-col justify-between h-18">
+              <div className="p-2 rounded bg-[#0B1F4D] border border-emerald-500/20 shadow flex flex-col justify-between h-18">
                 <span className="text-[7.5px] text-emerald-400 font-bold uppercase tracking-wider font-mono">Plataforma 1</span>
                 <span className="text-[9px] text-white">Mercado Sabush</span>
                 <span className="text-[6.5px] text-slate-400">Marketplace Digital</span>
@@ -870,7 +870,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
                 <span className="text-[9px] text-white">Sabush System ERP</span>
                 <span className="text-[6.5px] text-slate-405">Gestão de PMEs</span>
               </div>
-              <div className="p-2 rounded bg-[#110915] border-purple-500/20 shadow flex flex-col justify-between h-18">
+              <div className="p-2 rounded bg-[#0B1F4D] border-purple-500/20 shadow flex flex-col justify-between h-18">
                 <span className="text-[7.5px] text-purple-400 font-bold uppercase tracking-wider font-mono">Ensino Regional</span>
                 <span className="text-[9px] text-white">Sabush English</span>
                 <span className="text-[6.5px] text-slate-400">Português f/ Inglês</span>
@@ -1685,84 +1685,84 @@ export default function SystemManual() {
   // Eye-friendly, stunning background color theme setups
   const themeStyles = {
     slate: {
-      outer: 'bg-[#0E132A] text-[#F1F5F9]', // A softer, beautiful Slate-900 canvas
-      progressBar: 'bg-[#0C2624] border-[#16253B]',
+      outer: 'bg-[#0B1F4D] text-[#F8F9FA]', // A softer, beautiful Slate-900 canvas
+      progressBar: 'bg-[#0B1F4D] border-[#0B1F4D]',
       progressBarLeftText: 'text-white',
       progressBarSubText: 'text-slate-400',
-      progressBg: 'bg-[#1B2349]',
-      controlBar: 'bg-[#0A0E1F]/95 border-[#16253B]',
-      searchInputBg: 'bg-[#0C2624] border-[#16253B] text-white',
-      sidebarBg: 'bg-[#0A0D1D] border-[#16253B]',
-      sidebarHeaderBg: 'bg-[#080B16] border-[#16253B]',
-      tabButtonActive: 'bg-[#121835] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
-      tabButtonInactive: 'bg-transparent border-transparent text-slate-300 hover:bg-[#11162C]/50 hover:text-white',
+      progressBg: 'bg-[#0B1F4D]',
+      controlBar: 'bg-[#0B1F4D]/95 border-[#0B1F4D]',
+      searchInputBg: 'bg-[#0B1F4D] border-[#0B1F4D] text-white',
+      sidebarBg: 'bg-[#0B1F4D] border-[#0B1F4D]',
+      sidebarHeaderBg: 'bg-[#0B1F4D] border-[#0B1F4D]',
+      tabButtonActive: 'bg-[#0B1F4D] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
+      tabButtonInactive: 'bg-transparent border-transparent text-slate-300 hover:bg-[#0B1F4D]/50 hover:text-white',
       tabTextTitleActive: 'text-white',
       tabTextTitleInactive: 'text-slate-400',
-      mainContentArea: 'bg-[#080B16]',
-      headerBlock: 'bg-gradient-to-br from-[#0C2624] to-[#0A0D1D] border-[#16253B] shadow-xl',
+      mainContentArea: 'bg-[#0B1F4D]',
+      headerBlock: 'bg-gradient-to-br from-[#0B1F4D] to-[#0B1F4D] border-[#0B1F4D] shadow-xl',
       headerTitle: 'text-white',
       headerDesc: 'text-slate-300',
       headerSummary: 'text-slate-400',
-      stepBlock: 'bg-[#0E1325]/50 border-[#16253B] hover:bg-[#0E132D] hover:border-[#202E5C]',
+      stepBlock: 'bg-[#0B1F4D]/50 border-[#0B1F4D] hover:bg-[#0B1F4D] hover:border-[#0B1F4D]',
       stepTitle: 'text-white',
       stepDesc: 'text-slate-400',
       calloutTip: 'bg-sky-500/5 border border-sky-500/20 text-sky-300',
       calloutWarning: 'bg-amber-500/5 border border-amber-500/20 text-amber-300',
       calloutAlert: 'bg-rose-500/5 border border-rose-500/20 text-rose-300',
-      buttonSecondary: 'bg-[#0C2624] border-[#16253B] hover:border-slate-400 hover:text-white hover:bg-[#1D2748] text-slate-300',
+      buttonSecondary: 'bg-[#0B1F4D] border-[#0B1F4D] hover:border-slate-400 hover:text-white hover:bg-[#0B1F4D] text-slate-300',
       readButtonSelected: 'bg-emerald-500/10 border-emerald-500/35 text-emerald-400 hover:bg-emerald-500/20',
       subHeaderTitle: 'text-slate-400'
     },
     grey: {
-      outer: 'bg-[#1F2228] text-[#F1F5F9]', // A modern, pure eye-friendly warm Grey canvas
-      progressBar: 'bg-[#2A2E37] border-[#393E4A]',
+      outer: 'bg-[#0B1F4D] text-[#F8F9FA]', // A modern, pure eye-friendly warm Grey canvas
+      progressBar: 'bg-[#111111] border-[#111111]',
       progressBarLeftText: 'text-white',
-      progressBarSubText: 'text-[#94A3B8]',
-      progressBg: 'bg-[#3D4452]',
-      controlBar: 'bg-[#1A1D22]/95 border-[#393E4A]',
-      searchInputBg: 'bg-[#2A2E37] border-[#393E4A] text-white',
-      sidebarBg: 'bg-[#1A1D22] border-[#393E4A]',
-      sidebarHeaderBg: 'bg-[#15171C] border-[#393E4A]',
-      tabButtonActive: 'bg-[#2A2E37] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
-      tabButtonInactive: 'bg-transparent border-transparent text-[#94A3B8] hover:bg-[#2A2E37]/50 hover:text-white',
+      progressBarSubText: 'text-[#9CA3AF]',
+      progressBg: 'bg-[#0B1F4D]',
+      controlBar: 'bg-[#0B1F4D]/95 border-[#111111]',
+      searchInputBg: 'bg-[#111111] border-[#111111] text-white',
+      sidebarBg: 'bg-[#0B1F4D] border-[#111111]',
+      sidebarHeaderBg: 'bg-[#0B1F4D] border-[#111111]',
+      tabButtonActive: 'bg-[#111111] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
+      tabButtonInactive: 'bg-transparent border-transparent text-[#9CA3AF] hover:bg-[#111111]/50 hover:text-white',
       tabTextTitleActive: 'text-white',
-      tabTextTitleInactive: 'text-[#94A3B8]',
-      mainContentArea: 'bg-[#15171C]',
-      headerBlock: 'bg-gradient-to-br from-[#2A2E37] to-[#15171C] border-[#393E4A] shadow-xl',
+      tabTextTitleInactive: 'text-[#9CA3AF]',
+      mainContentArea: 'bg-[#0B1F4D]',
+      headerBlock: 'bg-gradient-to-br from-[#111111] to-[#0B1F4D] border-[#111111] shadow-xl',
       headerTitle: 'text-white',
       headerDesc: 'text-slate-300',
       headerSummary: 'text-slate-400',
-      stepBlock: 'bg-[#2A2E37]/50 border-[#393E4A] hover:bg-[#2A2E37] hover:border-[#4F5768]',
+      stepBlock: 'bg-[#111111]/50 border-[#111111] hover:bg-[#111111] hover:border-[#2563EB]',
       stepTitle: 'text-white',
-      stepDesc: 'text-[#CBD5E1]',
+      stepDesc: 'text-[#E5E7EB]',
       calloutTip: 'bg-sky-500/10 border border-sky-500/25 text-sky-300',
       calloutWarning: 'bg-amber-500/10 border border-amber-500/25 text-amber-300',
       calloutAlert: 'bg-rose-500/10 border border-rose-500/25 text-rose-300',
-      buttonSecondary: 'bg-[#2A2E37] border-[#393E4A] hover:border-slate-300 hover:text-white hover:bg-[#393E4A] text-[#CBD5E1]',
+      buttonSecondary: 'bg-[#111111] border-[#111111] hover:border-slate-300 hover:text-white hover:bg-[#111111] text-[#E5E7EB]',
       readButtonSelected: 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/25',
-      subHeaderTitle: 'text-[#E2E8F0]'
+      subHeaderTitle: 'text-[#E5E7EB]'
     },
     ivory: {
-      outer: 'bg-[#F1F5F9] text-[#1E293B]', // Crisp eye-friendly light/slate theme
-      progressBar: 'bg-white border-[#E2E8F0] shadow-sm',
-      progressBarLeftText: 'text-[#0F172A]',
+      outer: 'bg-[#F8F9FA] text-[#111111]', // Crisp eye-friendly light/slate theme
+      progressBar: 'bg-white border-[#E5E7EB] shadow-sm',
+      progressBarLeftText: 'text-[#111111]',
       progressBarSubText: 'text-slate-500',
       progressBg: 'bg-slate-200',
-      controlBar: 'bg-[#F8FAFC]/95 border-[#E2E8F0]',
+      controlBar: 'bg-[#F8F9FA]/95 border-[#E5E7EB]',
       searchInputBg: 'bg-white border-slate-300 text-slate-800 placeholder-slate-400 hover:border-slate-400',
-      sidebarBg: 'bg-[#F8FAFC] border-[#E2E8F0]',
-      sidebarHeaderBg: 'bg-[#F1F5F9] border-[#E2E8F0]',
+      sidebarBg: 'bg-[#F8F9FA] border-[#E5E7EB]',
+      sidebarHeaderBg: 'bg-[#F8F9FA] border-[#E5E7EB]',
       tabButtonActive: 'bg-white border-sky-400 text-sky-950 shadow-md shadow-sky-500/5',
       tabButtonInactive: 'bg-transparent border-transparent text-slate-600 hover:bg-slate-200/50 hover:text-slate-900',
       tabTextTitleActive: 'text-slate-950',
       tabTextTitleInactive: 'text-slate-700',
-      mainContentArea: 'bg-[#FAFBFD]',
-      headerBlock: 'bg-gradient-to-br from-[#F1F5F9] to-white border-slate-200 shadow-md shadow-slate-100',
-      headerTitle: 'text-[#0F172A]',
+      mainContentArea: 'bg-[#FFFFFF]',
+      headerBlock: 'bg-gradient-to-br from-[#F8F9FA] to-white border-slate-200 shadow-md shadow-slate-100',
+      headerTitle: 'text-[#111111]',
       headerDesc: 'text-slate-700',
       headerSummary: 'text-slate-500',
-      stepBlock: 'bg-white border-slate-200 hover:bg-[#F1F5F9] hover:border-slate-300',
-      stepTitle: 'text-[#0F172A]',
+      stepBlock: 'bg-white border-slate-200 hover:bg-[#F8F9FA] hover:border-slate-300',
+      stepTitle: 'text-[#111111]',
       stepDesc: 'text-slate-600',
       calloutTip: 'bg-sky-50/70 border border-sky-200 text-sky-900',
       calloutWarning: 'bg-amber-50/70 border border-amber-200 text-amber-900',
@@ -1772,33 +1772,33 @@ export default function SystemManual() {
       subHeaderTitle: 'text-slate-500'
     },
     sepia: {
-      outer: 'bg-[#F4EFE0] text-[#2D241E]', // Warm paper sepia layout
-      progressBar: 'bg-[#EAE1D1] border-[#C3B29D]',
-      progressBarLeftText: 'text-[#1E150F]',
-      progressBarSubText: 'text-[#6B5A4E]',
-      progressBg: 'bg-[#DFCDB4]',
-      controlBar: 'bg-[#F1EAD9]/95 border-[#C3B29D]',
-      searchInputBg: 'bg-white border-[#CDBBA5] text-[#2D241E] placeholder-[#8C7A67] hover:border-[#8C7A67]',
-      sidebarBg: 'bg-[#F1EAD9] border-[#C3B29D]',
-      sidebarHeaderBg: 'bg-[#EAE1D1] border-[#C3B29D]',
-      tabButtonActive: 'bg-[#FAF6EE] border-[#8C7A67]/50 text-[#1E150F] shadow-sm',
-      tabButtonInactive: 'bg-transparent border-transparent text-[#615243] hover:bg-[#EAE2D2] hover:text-[#1E150F]',
-      tabTextTitleActive: 'text-[#1E150F]',
-      tabTextTitleInactive: 'text-[#3D3025]',
-      mainContentArea: 'bg-[#FAF6EE]',
-      headerBlock: 'bg-gradient-to-br from-[#F5EEDC] to-white border-[#D5C6AF] shadow-md',
-      headerTitle: 'text-[#1E150F]',
-      headerDesc: 'text-[#3D3025]',
-      headerSummary: 'text-[#6B5A4E]',
-      stepBlock: 'bg-white border-[#E8DDCD] hover:bg-[#FAF5E6] hover:border-[#D5C6AF]',
-      stepTitle: 'text-[#1E150F]',
-      stepDesc: 'text-[#4A3B30]',
-      calloutTip: 'bg-[#F1F9FF] border border-[#B6DFFF] text-[#004B8F]',
-      calloutWarning: 'bg-[#FFF9E6] border border-[#FFE896] text-[#7A5B00]',
-      calloutAlert: 'bg-[#FFF0F2] border border-[#FFCCD4] text-[#9A0025]',
-      buttonSecondary: 'bg-[#EAE1D1] border-[#C3B29D] hover:border-[#8C7A67] hover:text-[#1E150F] hover:bg-white text-[#2D241E]',
+      outer: 'bg-[#E9CC85] text-[#0B1F4D]', // Warm paper sepia layout
+      progressBar: 'bg-[#E9CC85] border-[#E5E7EB]',
+      progressBarLeftText: 'text-[#111111]',
+      progressBarSubText: 'text-[#6B7280]',
+      progressBg: 'bg-[#E9CC85]',
+      controlBar: 'bg-[#E9CC85]/95 border-[#E5E7EB]',
+      searchInputBg: 'bg-white border-[#E9CC85] text-[#0B1F4D] placeholder-[#D4AF37] hover:border-[#D4AF37]',
+      sidebarBg: 'bg-[#E9CC85] border-[#E5E7EB]',
+      sidebarHeaderBg: 'bg-[#E9CC85] border-[#E5E7EB]',
+      tabButtonActive: 'bg-[#FFFFFF] border-[#D4AF37]/50 text-[#111111] shadow-sm',
+      tabButtonInactive: 'bg-transparent border-transparent text-[#D4AF37] hover:bg-[#E9CC85] hover:text-[#111111]',
+      tabTextTitleActive: 'text-[#111111]',
+      tabTextTitleInactive: 'text-[#D4AF37]',
+      mainContentArea: 'bg-[#FFFFFF]',
+      headerBlock: 'bg-gradient-to-br from-[#E9CC85] to-white border-[#E5E7EB] shadow-md',
+      headerTitle: 'text-[#111111]',
+      headerDesc: 'text-[#D4AF37]',
+      headerSummary: 'text-[#6B7280]',
+      stepBlock: 'bg-white border-[#E9CC85] hover:bg-[#FFFFFF] hover:border-[#E5E7EB]',
+      stepTitle: 'text-[#111111]',
+      stepDesc: 'text-[#D4AF37]',
+      calloutTip: 'bg-[#FFFFFF] border border-[#93B4F5] text-[#0B1F4D]',
+      calloutWarning: 'bg-[#FFFFFF] border border-[#E9CC85] text-[#D4AF37]',
+      calloutAlert: 'bg-[#FFFFFF] border border-[#FFCCD4] text-[#9A0025]',
+      buttonSecondary: 'bg-[#E9CC85] border-[#E5E7EB] hover:border-[#D4AF37] hover:text-[#111111] hover:bg-white text-[#0B1F4D]',
       readButtonSelected: 'bg-[#E6F4EA] border-[#A8E2B2] text-[#137333] hover:bg-[#D5EED8]',
-      subHeaderTitle: 'text-[#6B5A4E]'
+      subHeaderTitle: 'text-[#6B7280]'
     }
   };
 
@@ -1821,22 +1821,22 @@ export default function SystemManual() {
         </div>
 
         {/* Real Live counts summary as banner data */}
-        <div className={`hidden lg:flex items-center gap-4 text-[10px] font-mono font-bold ${theme === 'slate' ? 'bg-[#1B2349]/45 border-[#202B59]/60' : theme === 'grey' ? 'bg-[#2A2E37]/50 border-[#393E4A]' : theme === 'ivory' ? 'bg-slate-100 border-slate-250' : 'bg-[#EAE1D1]/60 border-[#C3B29D]'} border px-3 py-1 rounded-xl`}>
+        <div className={`hidden lg:flex items-center gap-4 text-[10px] font-mono font-bold ${theme === 'slate' ? 'bg-[#0B1F4D]/45 border-[#0B1F4D]/60' : theme === 'grey' ? 'bg-[#111111]/50 border-[#111111]' : theme === 'ivory' ? 'bg-slate-100 border-slate-250' : 'bg-[#E9CC85]/60 border-[#E5E7EB]'} border px-3 py-1 rounded-xl`}>
           <div className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'}`}>Total Produtos:</span>
+            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Total Produtos:</span>
             <span className="text-emerald-500 font-black">{dbStats.products}</span>
           </div>
-          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#202B59]/60' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#C3B29D]'} pl-3`}>
-            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'}`}>Clientes CRM:</span>
+          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]'} pl-3`}>
+            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Clientes CRM:</span>
             <span className="text-sky-400 font-black">{dbStats.customers}</span>
           </div>
-          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#202B59]/60' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#C3B29D]'} pl-3`}>
-            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'}`}>Filiais Activas:</span>
+          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]'} pl-3`}>
+            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Filiais Activas:</span>
             <span className="text-violet-500 font-black">{dbStats.branches}</span>
           </div>
-          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#202B59]/60' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#C3B29D]'} pl-3`}>
-            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'}`}>Backups de Dados:</span>
+          <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]'} pl-3`}>
+            <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Backups de Dados:</span>
             <span className="text-purple-500 font-black">{dbStats.backups}</span>
           </div>
         </div>
@@ -1846,7 +1846,7 @@ export default function SystemManual() {
             <div className={`text-[10px] ${styles.progressBarSubText} font-black uppercase tracking-wider`}>Leitura Completa</div>
             <div className="text-xs font-black text-sky-400 mt-0.5">{readPercentage}% ({readCount}/{totalSections})</div>
           </div>
-          <div className={`w-24 sm:w-32 ${styles.progressBg} h-2.5 rounded-full overflow-hidden border ${theme === 'slate' ? 'border-[#202B59]/60' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-300' : 'border-[#C3B29D]'} shadow-inner`}>
+          <div className={`w-24 sm:w-32 ${styles.progressBg} h-2.5 rounded-full overflow-hidden border ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-300' : 'border-[#E5E7EB]'} shadow-inner`}>
             <div 
               className="bg-gradient-to-r from-sky-500 to-emerald-400 h-full rounded-full transition-all duration-500"
               style={{ width: `${readPercentage}%` }}
@@ -1897,7 +1897,7 @@ export default function SystemManual() {
           )}
 
           {/* Aesthetic Theme Switcher Group */}
-          <div className={`flex items-center gap-0.5 ${theme === 'slate' ? 'bg-[#0C2624] border-[#16253B]' : theme === 'grey' ? 'bg-[#2A2E37] border-[#393E4A]' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#EAE1D1] border-[#C3B29D]'} border p-1 rounded-xl shrink-0`}>
+          <div className={`flex items-center gap-0.5 ${theme === 'slate' ? 'bg-[#0B1F4D] border-[#0B1F4D]' : theme === 'grey' ? 'bg-[#111111] border-[#111111]' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#E9CC85] border-[#E5E7EB]'} border p-1 rounded-xl shrink-0`}>
             <button 
               onClick={() => changeTheme('slate')}
               className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${theme === 'slate' ? 'bg-sky-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'}`}
@@ -1921,7 +1921,7 @@ export default function SystemManual() {
             </button>
             <button 
               onClick={() => changeTheme('sepia')}
-              className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${theme === 'sepia' ? 'bg-[#FAF6EE] text-[#1E150F] border border-[#D5C6AF]/50 shadow' : 'text-slate-400 hover:text-[#1E150F]'}`}
+              className={`px-2.5 py-1 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer ${theme === 'sepia' ? 'bg-[#FFFFFF] text-[#111111] border border-[#E5E7EB]/50 shadow' : 'text-slate-400 hover:text-[#111111]'}`}
               title="Tema Livro/Sepia Especial de Leitura"
             >
               🪵 Sepia
@@ -1947,8 +1947,8 @@ export default function SystemManual() {
                   className="fixed inset-0 z-40 bg-transparent" 
                   onClick={() => setIsDownloadOpen(false)}
                 />
-                <div className={`absolute right-0 mt-2 w-72 ${theme === 'slate' ? 'bg-[#0E132A] border-[#1E274D]' : theme === 'grey' ? 'bg-[#252A34] border-[#393E4A]' : theme === 'ivory' ? 'bg-white border-slate-250 shadow-slate-200' : 'bg-[#FAF6EE] border-[#D5C6AF]'} border rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left`}>
-                  <div className={`px-3.5 py-2 border-b ${theme === 'slate' ? 'border-[#1E274D]' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-100' : 'border-[#D5C6AF]/40'} mb-1.5`}>
+                <div className={`absolute right-0 mt-2 w-72 ${theme === 'slate' ? 'bg-[#0B1F4D] border-[#0B1F4D]' : theme === 'grey' ? 'bg-[#0B1F4D] border-[#111111]' : theme === 'ivory' ? 'bg-white border-slate-250 shadow-slate-200' : 'bg-[#FFFFFF] border-[#E5E7EB]'} border rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left`}>
+                  <div className={`px-3.5 py-2 border-b ${theme === 'slate' ? 'border-[#0B1F4D]' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-100' : 'border-[#E5E7EB]/40'} mb-1.5`}>
                     <p className={`text-[9px] font-black ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : 'text-slate-500'} uppercase tracking-widest leading-none`}>Formatos Disponíveis</p>
                     <p className="text-[10px] m-0 mt-1">Descarregue o guia para ler offline:</p>
                   </div>
@@ -1958,7 +1958,7 @@ export default function SystemManual() {
                       triggerDownloadPDF();
                       setIsDownloadOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs ${theme === 'slate' ? 'hover:bg-[#1C234C]' : theme === 'grey' ? 'hover:bg-[#323946]' : theme === 'ivory' ? 'hover:bg-[#F1F5F9]' : 'hover:bg-[#F5EEDC]'} transition-all flex items-start gap-2.5 group cursor-pointer`}
+                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs ${theme === 'slate' ? 'hover:bg-[#0B1F4D]' : theme === 'grey' ? 'hover:bg-[#0B1F4D]' : theme === 'ivory' ? 'hover:bg-[#F8F9FA]' : 'hover:bg-[#E9CC85]'} transition-all flex items-start gap-2.5 group cursor-pointer`}
                   >
                     <div className="p-1.5 rounded-lg bg-rose-500/10 text-rose-500 shrink-0">
                       <FileText size={15} />
@@ -1974,7 +1974,7 @@ export default function SystemManual() {
                       triggerDownloadMarkdown();
                       setIsDownloadOpen(false);
                     }}
-                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs ${theme === 'slate' ? 'hover:bg-[#1C234C]' : theme === 'grey' ? 'hover:bg-[#323946]' : theme === 'ivory' ? 'hover:bg-[#F1F5F9]' : 'hover:bg-[#F5EEDC]'} transition-all flex items-start gap-2.5 group cursor-pointer mt-1`}
+                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs ${theme === 'slate' ? 'hover:bg-[#0B1F4D]' : theme === 'grey' ? 'hover:bg-[#0B1F4D]' : theme === 'ivory' ? 'hover:bg-[#F8F9FA]' : 'hover:bg-[#E9CC85]'} transition-all flex items-start gap-2.5 group cursor-pointer mt-1`}
                   >
                     <div className="p-1.5 rounded-lg bg-sky-500/10 text-sky-500 shrink-0">
                       <BookOpen size={15} />
@@ -2009,7 +2009,7 @@ export default function SystemManual() {
         `}>
           
           <div className={`p-4 border-b ${styles.sidebarHeaderBg} flex items-center justify-between shrink-0`}>
-            <h2 className={`text-xs font-black uppercase ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'} tracking-widest flex items-center gap-2`}>
+            <h2 className={`text-xs font-black uppercase ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'} tracking-widest flex items-center gap-2`}>
               <span>📚 Tabela de Conteúdos</span>
             </h2>
             <button 
@@ -2039,14 +2039,14 @@ export default function SystemManual() {
                   `}
                 >
                   <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <span className={`p-2 rounded-xl shrink-0 ${isSelected ? sec.iconBg : theme === 'slate' ? 'bg-slate-800/40' : theme === 'grey' ? 'bg-[#2A2E37]' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#EAE1D2]'} ${sec.iconColor}`}>
+                    <span className={`p-2 rounded-xl shrink-0 ${isSelected ? sec.iconBg : theme === 'slate' ? 'bg-slate-800/40' : theme === 'grey' ? 'bg-[#111111]' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#E9CC85]'} ${sec.iconColor}`}>
                       <IconComp size={16} />
                     </span>
                     <div className="truncate min-w-0 flex-1">
                       <p className={`font-black ${isSelected ? styles.tabTextTitleActive : styles.tabTextTitleInactive}`}>
                         {highlightWord(sec.title.split('. ')[1] || sec.title, searchTerm)}
                       </p>
-                      <p className={`text-[10px] ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'} truncate mt-0.5 font-medium leading-none`}>
+                      <p className={`text-[10px] ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'} truncate mt-0.5 font-medium leading-none`}>
                         {sec.category}
                       </p>
                     </div>
@@ -2059,7 +2059,7 @@ export default function SystemManual() {
                         <Check size={11} className="stroke-[3]" />
                       </span>
                     ) : (
-                      <span className={`w-2.5 h-2.5 rounded-full ${theme === 'slate' ? 'bg-slate-800 border-slate-700' : theme === 'grey' ? 'bg-neutral-800 border-neutral-700' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#EAE2D2] border-[#C3B29D]'} border`} title="Não Lido" />
+                      <span className={`w-2.5 h-2.5 rounded-full ${theme === 'slate' ? 'bg-slate-800 border-slate-700' : theme === 'grey' ? 'bg-neutral-800 border-neutral-700' : theme === 'ivory' ? 'bg-slate-200 border-slate-300' : 'bg-[#E9CC85] border-[#E5E7EB]'} border`} title="Não Lido" />
                     )}
                     <ChevronRight size={13} className={`text-slate-500 transition-transform ${isSelected ? 'transform translate-x-0.5' : ''}`} />
                   </div>
@@ -2143,24 +2143,24 @@ export default function SystemManual() {
                       </>
                     ) : (
                       <>
-                        <span className={`w-4 h-4 border-2 ${theme === 'slate' || theme === 'grey' ? 'border-slate-500' : theme === 'ivory' ? 'border-slate-400' : 'border-[#9E8B75]'} rounded`} />
+                        <span className={`w-4 h-4 border-2 ${theme === 'slate' || theme === 'grey' ? 'border-slate-500' : theme === 'ivory' ? 'border-slate-400' : 'border-[#D4AF37]'} rounded`} />
                         <span>Marcar Lido</span>
                       </>
                     )}
                   </button>
                 </div>
  
-                <div className={`h-px ${theme === 'slate' ? 'bg-[#16253B]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'}`} />
+                <div className={`h-px ${theme === 'slate' ? 'bg-[#0B1F4D]/70' : theme === 'grey' ? 'bg-[#111111]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#E5E7EB]/40'}`} />
  
-                <p className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-300' : theme === 'ivory' ? 'text-slate-700' : 'text-[#4A3E34]'} text-xs sm:text-sm leading-relaxed font-semibold`}>
+                <p className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-300' : theme === 'ivory' ? 'text-slate-700' : 'text-[#D4AF37]'} text-xs sm:text-sm leading-relaxed font-semibold`}>
                   {highlightWord(activeSection.description, searchTerm)}
                 </p>
  
-                <p className={`text-[10px] ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'} font-bold font-mono`}>
+                <p className={`text-[10px] ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'} font-bold font-mono`}>
                   ✏️ {activeSection.summary}
                 </p>
  
-                <div className={`h-px ${theme === 'slate' ? 'bg-[#16253B]/70' : theme === 'grey' ? 'bg-[#393E4A]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#D5C6AF]/40'} my-3`} />
+                <div className={`h-px ${theme === 'slate' ? 'bg-[#0B1F4D]/70' : theme === 'grey' ? 'bg-[#111111]/70' : theme === 'ivory' ? 'bg-slate-200' : 'bg-[#E5E7EB]/40'} my-3`} />
  
                 {/* Interactive Feature Mockup Canvas — only shown for sections
                     that have a bespoke visual; others skip straight to steps. */}
@@ -2217,7 +2217,7 @@ export default function SystemManual() {
 
             {/* STEP-BY-STEP NUMERICAL INSTRUCTIONS */}
             <div className="space-y-4">
-              <h3 className={`text-xs font-black uppercase ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B5A4E]'} tracking-widest text-left`}>
+              <h3 className={`text-xs font-black uppercase ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'} tracking-widest text-left`}>
                 ⚙️ Manual Operacional Passo a Passo
               </h3>
 
@@ -2258,7 +2258,7 @@ export default function SystemManual() {
             </div>
 
             {/* Back to Top & Pagination helpers */}
-            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t ${theme === 'slate' ? 'border-[#16253B]' : theme === 'grey' ? 'border-[#393E4A]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#D5C6AF]/35'} select-none`}>
+            <div className={`flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t ${theme === 'slate' ? 'border-[#0B1F4D]' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]/35'} select-none`}>
               <div className="text-[10px] font-mono text-slate-500">
                 SABUSH MANUAL DE UTILIZADOR • LICENÇA OFICIAL
               </div>
@@ -2312,7 +2312,7 @@ export default function SystemManual() {
       <style>{`
         @media print {
           body, select-text, .print\\:text-black {
-            color: #000000 !important;
+            color: #0B1F4D !important;
             background: #ffffff !important;
           }
           .print\\:hidden, header, footer, aside, nav, button, input {

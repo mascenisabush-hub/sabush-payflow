@@ -115,7 +115,7 @@ const CartQuantityInput: React.FC<CartQuantityInputProps> = ({ item, updateCartQ
       onBlur={handleCommit}
       onKeyDown={handleKeyDown}
       onFocus={handleFocus}
-      className="w-[44px] h-[24px] text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#B8791A] focus:ring-1 focus:ring-[#B8791A]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      className="w-[44px] h-[24px] text-center text-[10.5px] p-0 font-mono font-bold border border-blue-200 rounded-md bg-blue-50/50 outline-none focus:bg-white focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37]/20 text-blue-900 transition-all cursor-text [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
     />
   );
 };
@@ -173,7 +173,7 @@ const CartItemRow = React.memo<CartItemRowProps>(({
         className="col-span-2 text-right hover:bg-blue-50 p-1 rounded transition-all cursor-pointer group flex flex-col items-end border-none bg-transparent"
         title="Substituir Preço Unitário (Teclado Rápido)"
       >
-        <span className="font-mono text-[10.5px] text-blue-900 group-hover:text-[#B8791A] font-extrabold">
+        <span className="font-mono text-[10.5px] text-blue-900 group-hover:text-[#D4AF37] font-extrabold">
           {(prices.finalUnitPrice).toLocaleString()}
         </span>
         {(item.overridePrice !== undefined || (item.manualDiscountValue && item.manualDiscountValue > 0)) && (
@@ -385,9 +385,9 @@ export default function POS() {
     const total = Object.entries(denoms).reduce((sum, [val, qty]) => sum + (Number(val) * (Number(qty) || 0)), 0);
 
     return (
-      <div className="bg-[#FAF7F2] border border-[#E9E1D2] rounded-2xl p-4 space-y-3 font-sans mt-3">
-        <div className="flex justify-between items-center pb-2 border-b border-[#E9E1D2]">
-          <span className="text-[10px] font-black text-[#1D1510] uppercase tracking-wider flex items-center gap-1">
+      <div className="bg-[#F8F9FA] border border-[#F8F9FA] rounded-2xl p-4 space-y-3 font-sans mt-3">
+        <div className="flex justify-between items-center pb-2 border-b border-[#F8F9FA]">
+          <span className="text-[10px] font-black text-[#111111] uppercase tracking-wider flex items-center gap-1">
             💵 Calculadora de Notas & Moedas
           </span>
           <button
@@ -397,7 +397,7 @@ export default function POS() {
               Object.keys(cleared).forEach(k => cleared[k] = 0);
               setDenoms(cleared);
             }}
-            className="text-[10px] text-[#8B735F] hover:text-rose-500 font-bold transition-all cursor-pointer"
+            className="text-[10px] text-[#6B7280] hover:text-rose-500 font-bold transition-all cursor-pointer"
           >
             Limpar
           </button>
@@ -408,7 +408,7 @@ export default function POS() {
             const qty = denoms[String(val)] || 0;
             return (
               <div key={val} className="flex items-center justify-between gap-1 border-b border-slate-100 pb-1 font-mono text-[11px]">
-                <span className="font-bold text-[#8B735F] shrink-0 min-w-[50px]">{val} MT:</span>
+                <span className="font-bold text-[#6B7280] shrink-0 min-w-[50px]">{val} MT:</span>
                 <div className="flex items-center gap-1 justify-end w-full">
                   <input
                     type="number"
@@ -419,9 +419,9 @@ export default function POS() {
                       setDenoms(prev => ({ ...prev, [String(val)]: newQty }));
                     }}
                     placeholder="0"
-                    className="w-10 text-center py-0.5 bg-white border border-[#E9E1D2] rounded font-bold text-xs focus:outline-none text-[#1D1510]"
+                    className="w-10 text-center py-0.5 bg-white border border-[#F8F9FA] rounded font-bold text-xs focus:outline-none text-[#111111]"
                   />
-                  <span className="text-[9px] text-[#8B735F] font-bold w-[35px] text-right">
+                  <span className="text-[9px] text-[#6B7280] font-bold w-[35px] text-right">
                     {(qty * val).toFixed(0)}
                   </span>
                 </div>
@@ -430,15 +430,15 @@ export default function POS() {
           })}
         </div>
 
-        <div className="flex items-center justify-between pt-1.5 border-t border-[#E9E1D2]">
-          <div className="text-[10px] font-bold text-[#8B735F]">Total Calculado:</div>
-          <div className="text-xs font-black text-[#B8791A] font-mono">{total.toFixed(1)} MT</div>
+        <div className="flex items-center justify-between pt-1.5 border-t border-[#F8F9FA]">
+          <div className="text-[10px] font-bold text-[#6B7280]">Total Calculado:</div>
+          <div className="text-xs font-black text-[#D4AF37] font-mono">{total.toFixed(1)} MT</div>
         </div>
 
         <button
           type="button"
           onClick={() => onApply(total)}
-          className="w-full py-1.5 bg-[#1D1510] text-[#FCFAF6] rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
+          className="w-full py-1.5 bg-[#111111] text-[#FFFFFF] rounded-lg text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer"
         >
           Confirmar e Aplicar Contagem
         </button>
@@ -2210,7 +2210,7 @@ export default function POS() {
                   Modo de Venda: ${sale.paymentMethod === 'cash' ? 'DINHEIRO' : (sale.paymentMethod || 'DINHEIRO').toUpperCase()}
                 </div>
               ` : `
-                <div style="margin-top: 8px; background: #fffbeb; border: 1px dashed #f59e0b; border-radius: 4px; padding: 6px; font-size: 11px; color: #78350f;">
+                <div style="margin-top: 8px; background: #FFFFFF; border: 1px dashed #D4AF37; border-radius: 4px; padding: 6px; font-size: 11px; color: #D4AF37;">
                   <div style="display: flex; justify-content: space-between;">
                     <span>Saldo anterior:</span>
                     <span>${(sale.previousOutstandingBalance || 0).toFixed(2)} MT</span>
@@ -2219,7 +2219,7 @@ export default function POS() {
                     <span>Fiado desta venda:</span>
                     <span>+${(sale.creditOutstandingAmount || 0).toFixed(2)} MT</span>
                   </div>
-                  <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px dashed #f59e0b; margin-top: 4px; padding-top: 4px; font-size: 11.5px; color: #78350f;">
+                  <div style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px dashed #D4AF37; margin-top: 4px; padding-top: 4px; font-size: 11.5px; color: #D4AF37;">
                     <span>Novo saldo devedor:</span>
                     <span>${((sale.previousOutstandingBalance || 0) + (sale.creditOutstandingAmount || 0)).toFixed(2)} MT</span>
                   </div>
@@ -3455,21 +3455,21 @@ export default function POS() {
   if (!currentShift) {
     return (
       <div className="flex flex-col items-center justify-center p-6 bg-slate-50 min-h-[500px] h-[calc(100vh-140px)] w-full mx-auto md:p-8">
-        <div className="w-full max-w-md bg-white border border-[#E9E1D2] p-8 rounded-[40px] shadow-xl flex flex-col items-center">
+        <div className="w-full max-w-md bg-white border border-[#F8F9FA] p-8 rounded-[40px] shadow-xl flex flex-col items-center">
           <div className="p-4 bg-amber-50 text-amber-600 rounded-full mb-4">
             <Lock size={32} className="stroke-[2]" />
           </div>
-          <h2 className="text-xl font-black text-[#1D1510] mb-1 font-sans text-center">Abertura de Turno e Caixa</h2>
-          <p className="text-xs text-[#8B735F] text-center mb-6 font-sans leading-relaxed font-semibold">
+          <h2 className="text-xl font-black text-[#111111] mb-1 font-sans text-center">Abertura de Turno e Caixa</h2>
+          <p className="text-xs text-[#6B7280] text-center mb-6 font-sans leading-relaxed font-semibold">
             Declare o fundo de maneio inicial e selecione o terminal para abrir a gaveta e iniciar o registo de vendas.
           </p>
 
           <div className="w-full space-y-4 mb-6">
             {/* Terminal Selector */}
             <div className="text-left">
-              <label className="block text-[10px] font-black text-[#8B735F] uppercase tracking-wider mb-2 font-sans">Selecione o Terminal / Balcão</label>
+              <label className="block text-[10px] font-black text-[#6B7280] uppercase tracking-wider mb-2 font-sans">Selecione o Terminal / Balcão</label>
               <select
-                className="w-full px-4 py-2.5 bg-slate-50 border border-[#E9E1D2] rounded-xl text-xs font-bold text-[#1D1510] outline-none"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-[#F8F9FA] rounded-xl text-xs font-bold text-[#111111] outline-none"
                 value={selectedTerminal}
                 onChange={e => setSelectedTerminal(e.target.value)}
               >
@@ -3484,11 +3484,11 @@ export default function POS() {
             {/* Float Cash Input */}
             <div className="text-left">
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-[10px] font-black text-[#8B735F] uppercase tracking-wider font-sans">Fundo de Maneio Inicial (Float)</label>
+                <label className="block text-[10px] font-black text-[#6B7280] uppercase tracking-wider font-sans">Fundo de Maneio Inicial (Float)</label>
                 <button
                   type="button"
                   onClick={() => setIsOpeningCalculatorOpen(!isOpeningCalculatorOpen)}
-                  className="text-[9px] text-[#B8791A] font-black uppercase tracking-wider hover:underline cursor-pointer"
+                  className="text-[9px] text-[#D4AF37] font-black uppercase tracking-wider hover:underline cursor-pointer"
                 >
                   {isOpeningCalculatorOpen ? "Fechar Calculadora ✖" : "Contar Notas/Moedas 🪙"}
                 </button>
@@ -3499,7 +3499,7 @@ export default function POS() {
                 <input 
                   type="number" 
                   placeholder="Ex: 500.0" 
-                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#E9E1D2] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#B8791A] transition-all text-[#1D1510]"
+                  className="w-full pl-14 pr-4 py-3 bg-slate-50 border border-[#F8F9FA] rounded-2xl text-sm font-bold font-mono outline-none focus:border-[#D4AF37] transition-all text-[#111111]"
                   value={openingFloat}
                   onChange={e => setOpeningFloat(e.target.value)}
                 />
@@ -3523,7 +3523,7 @@ export default function POS() {
 
           <button
             onClick={handleOpenShift}
-            className="w-full py-4 bg-[#1D1510] hover:bg-[#34261E] text-[#FCFAF6] font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition-all cursor-pointer active:scale-98"
+            className="w-full py-4 bg-[#111111] hover:bg-[#D4AF37] text-[#FFFFFF] font-black text-xs uppercase tracking-widest rounded-2xl shadow-md transition-all cursor-pointer active:scale-98"
           >
             Abrir Caixa & Iniciar Vendas
           </button>
@@ -3533,18 +3533,18 @@ export default function POS() {
   }
 
   return (
-    <div className="flex flex-col w-full h-full bg-[#F4F8FA] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
+    <div className="flex flex-col w-full h-full bg-[#FFFFFF] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
       
       {/* Quick Sale Keyboard Status & Buffer Bar */}
-      <div className="bg-blue-900 border border-[#B8791A]/50 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
+      <div className="bg-blue-900 border border-[#D4AF37]/50 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
         <div className="flex items-center gap-2">
-          <span className="bg-[#B8791A] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
+          <span className="bg-[#D4AF37] text-[#4A1B0C] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
             <span className="shrink-0">⚡</span> QUICK
           </span>
           {inputBuffer ? (
             <div className="flex items-center gap-2">
               <span className="text-blue-300 font-medium">Comando:</span>
-              <span className="font-mono bg-[#4A1B0C] text-[#FAECE7] px-2 py-0.5 rounded text-xs font-black border border-[#B8791A]/30 select-all tracking-wider">
+              <span className="font-mono bg-[#4A1B0C] text-[#FFFFFF] px-2 py-0.5 rounded text-xs font-black border border-[#D4AF37]/30 select-all tracking-wider">
                 {inputBuffer}
               </span>
               <span className="text-[10px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
@@ -3567,7 +3567,7 @@ export default function POS() {
         <button
           type="button"
           onClick={() => setIsCheatSheetOpen(true)}
-          className="flex items-center gap-1 px-2 py-0.5 bg-[#4A1B0C] hover:bg-[#5C2310] text-[#FAECE7] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#B8791A]/20 cursor-pointer h-6"
+          className="flex items-center gap-1 px-2 py-0.5 bg-[#4A1B0C] hover:bg-[#D4AF37] text-[#FFFFFF] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#D4AF37]/20 cursor-pointer h-6"
         >
           <span>⌨️ Atalhos [?]</span>
         </button>
@@ -3586,7 +3586,7 @@ export default function POS() {
               onChange={e => setSearchTerm(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
-              className="w-full h-6 pl-3 pr-7 bg-white border border-blue-200 rounded-md text-blue-900 placeholder-blue-400 text-[11px] outline-none focus:border-[#B8791A]/50 transition-all font-sans"
+              className="w-full h-6 pl-3 pr-7 bg-white border border-blue-200 rounded-md text-blue-900 placeholder-blue-400 text-[11px] outline-none focus:border-[#D4AF37]/50 transition-all font-sans"
             />
             {searchTerm && (
               <button
@@ -3671,23 +3671,23 @@ export default function POS() {
             className={cn(
               "h-6 px-2 rounded-md flex items-center gap-1 transition-all cursor-pointer relative shrink-0",
               isCameraActive 
-                ? "bg-[#0C2242] text-[#E3F4F2]" 
-                : "bg-[#0C2242] text-[#E3F4F2] hover:opacity-90"
+                ? "bg-[#0B1F4D] text-[#EEF2FF]" 
+                : "bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90"
             )}
             title="Sincronizar Câmara"
           >
-            <Camera size={11} className="text-[#E3F4F2]" />
-            <span className="text-[10px] font-bold text-[#E3F4F2] hidden md:inline">Câmara Scanner</span>
+            <Camera size={11} className="text-[#EEF2FF]" />
+            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">Câmara Scanner</span>
             <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-emerald-400"></span>
           </button>
 
           {/* Hardware visual active icon (〄) */}
           <div 
-            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] rounded-md flex items-center gap-1 pointer-events-none shrink-0"
+            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] rounded-md flex items-center gap-1 pointer-events-none shrink-0"
             title="Modo USB escuta automática ativo"
           >
             <span className="text-[10px] text-amber-300">〄</span>
-            <span className="text-[10px] font-bold text-[#E3F4F2] hidden md:inline">USB Ouvinte</span>
+            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">USB Ouvinte</span>
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
           </div>
 
@@ -3695,21 +3695,21 @@ export default function POS() {
           <button
             type="button"
             onClick={() => setIsCatalogOpen(true)}
-            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] hover:opacity-90 rounded-md flex items-center gap-1 transition-all cursor-pointer shrink-0"
+            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90 rounded-md flex items-center gap-1 transition-all cursor-pointer shrink-0"
           >
-            <Package size={11} className="text-[#E3F4F2]" />
-            <span className="text-[10px] font-bold text-[#E3F4F2] hidden md:inline">📦 Catálogo</span>
+            <Package size={11} className="text-[#EEF2FF]" />
+            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">📦 Catálogo</span>
           </button>
 
           {/* Sync Status Component */}
           <div className="flex items-center gap-1.5 shrink-0">
             {isSyncing ? (
-              <div className="h-6 px-2 bg-[#0C2242] border border-[#E3F4F2]/15 text-[#E3F4F2]/85 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
+              <div className="h-6 px-2 bg-[#0B1F4D] border border-[#EEF2FF]/15 text-[#EEF2FF]/85 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
                 <RefreshCw size={10} className="animate-spin text-amber-300" />
                 <span className="hidden md:inline">A sincronizar...</span>
               </div>
             ) : !isOnline ? (
-              <div className="h-6 px-2 bg-[#2d0f1a] border border-rose-500/35 text-rose-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider relative">
+              <div className="h-6 px-2 bg-[#0B1F4D] border border-rose-500/35 text-rose-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider relative">
                 <div className="w-1 h-1 rounded-full bg-rose-500 animate-pulse" />
                 <span>Offline</span>
                 {pendingSales.filter(s => s.status === 'pending').length > 0 && (
@@ -3722,14 +3722,14 @@ export default function POS() {
               <button
                 type="button"
                 onClick={syncPendingSales}
-                className="h-6 px-2 bg-[#2a1b0c] border border-amber-500/35 text-amber-300 hover:bg-[#3d2712] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider relative"
+                className="h-6 px-2 bg-[#0B1F4D] border border-amber-500/35 text-amber-300 hover:bg-[#0B1F4D] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider relative"
                 title="Sincronizar Vendas Pendentes"
               >
                 <RefreshCw size={10} className="text-amber-400 animate-pulse" />
                 <span>{pendingSales.filter(s => s.status === 'pending').length} Pendentes</span>
               </button>
             ) : (
-              <div className="h-6 px-2 bg-[#0c241b] border border-emerald-500/35 text-emerald-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
+              <div className="h-6 px-2 bg-[#0B1F4D] border border-emerald-500/35 text-emerald-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
                 <div className="w-1 h-1 rounded-full bg-emerald-500" />
                 <span>Online</span>
               </div>
@@ -3740,7 +3740,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(true)}
-                className="h-6 px-2 bg-[#331c0d] border border-amber-500/60 text-amber-200 hover:bg-[#4d2a13] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider animate-pulse"
+                className="h-6 px-2 bg-[#0B1F4D] border border-amber-500/60 text-amber-200 hover:bg-[#D4AF37] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider animate-pulse"
                 title="Verificar vendas que falharam devido a conflito de stock ou outros erros"
               >
                 <span className="text-amber-400 font-bold">⚠️</span>
@@ -3758,7 +3758,7 @@ export default function POS() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="bg-[#0C2242] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
+            className="bg-[#0B1F4D] border border-blue-900/50 rounded-lg p-3 flex flex-col items-center relative overflow-hidden text-white shrink-0"
           >
             <button 
               onClick={() => setIsCameraActive(false)}
@@ -3770,7 +3770,7 @@ export default function POS() {
             <h3 className="text-[10px] font-black uppercase tracking-widest text-orange-400 mb-2">Leitor de Câmara Integrado</h3>
 
             {/* Viewfinder elements layout */}
-            <div className="relative w-72 h-36 bg-[#02182E] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center">
+            <div className="relative w-72 h-36 bg-[#0B1F4D] rounded-lg border border-white/10 overflow-hidden flex items-center justify-center">
               <video id="scanner-preview" className="w-full h-full object-cover" playsInline />
               
               {/* Orange viewfinder corner brackets */}
@@ -3796,7 +3796,7 @@ export default function POS() {
                 <select
                   value={selectedCameraId}
                   onChange={(e) => setSelectedCameraId(e.target.value)}
-                  className="bg-[#0B3A60] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#E3F4F2] focus:border-orange-500 h-6"
+                  className="bg-[#0B1F4D] border border-blue-500/30 py-0.5 px-2 rounded text-[10px] font-medium outline-none text-[#EEF2FF] focus:border-orange-500 h-6"
                 >
                   {cameras.map((d: any, idx) => (
                     <option key={d.deviceId} value={d.deviceId}>Cam {idx + 1}</option>
@@ -3807,7 +3807,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsFlashOn(!isFlashOn)}
-                className="h-6 px-2 bg-[#0B3A60] hover:bg-[#0E4B7C] border border-blue-500/30 text-[#E3F4F2] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer"
+                className="h-6 px-2 bg-[#0B1F4D] hover:bg-[#0B1F4D] border border-blue-500/30 text-[#EEF2FF] rounded text-[9px] font-black flex items-center gap-1 cursor-pointer"
               >
                 <Zap size={10} className={cn(isFlashOn ? "text-amber-400 animate-pulse" : "text-white")} />
                 {isFlashOn ? 'Lanterna On' : 'Lanterna'}
@@ -3824,12 +3824,12 @@ export default function POS() {
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest leading-none shrink-0">CLIENTE:</span>
           {selectedCustomerId === 'Walk-in' ? (
-            <span className="bg-[#0C2242]/10 border border-[#0C2242]/20 text-[#0C2242] font-black text-[10px] px-2 py-0.5 rounded-md uppercase shadow-xs leading-none shrink-0">
+            <span className="bg-[#0B1F4D]/10 border border-[#0B1F4D]/20 text-[#0B1F4D] font-black text-[10px] px-2 py-0.5 rounded-md uppercase shadow-xs leading-none shrink-0">
               WALK-IN
             </span>
           ) : (
-            <div className="flex items-center gap-1 bg-[#B8791A]/10 border border-[#B8791A]/20 px-2 py-0.5 rounded-md shadow-xs leading-none shrink-0 max-w-[180px] min-w-0">
-              <span className="text-[#B8791A] font-extrabold text-[11px] truncate">{selectedCust?.name}</span>
+            <div className="flex items-center gap-1 bg-[#D4AF37]/10 border border-[#D4AF37]/20 px-2 py-0.5 rounded-md shadow-xs leading-none shrink-0 max-w-[180px] min-w-0">
+              <span className="text-[#D4AF37] font-extrabold text-[11px] truncate">{selectedCust?.name}</span>
               {selectedCust?.phone && (
                 <span className="text-[9px] text-blue-600 font-medium hidden sm:inline">({selectedCust?.phone})</span>
               )}
@@ -3843,7 +3843,7 @@ export default function POS() {
                   setSelectedCustomerId('Walk-in');
                   setSaleMode('dinheiro');
                 }}
-                className="text-blue-400 hover:text-[#B8791A] transition-all p-0.5 rounded-full hover:bg-blue-50 shrink-0"
+                className="text-blue-400 hover:text-[#D4AF37] transition-all p-0.5 rounded-full hover:bg-blue-50 shrink-0"
                 title="Desvincular Cliente"
               >
                 <X size={10} />
@@ -3867,7 +3867,7 @@ export default function POS() {
             onClick={() => setIsBrowseCustomersOpen(true)}
             className="h-6 px-2 bg-white hover:bg-blue-50/40 text-blue-700 font-bold text-[10px] uppercase tracking-wider rounded-md transition-all border border-blue-200 flex items-center gap-1 cursor-pointer shrink-0"
           >
-            <Users size={11} className="text-[#0C2242]" />
+            <Users size={11} className="text-[#0B1F4D]" />
             <span className="hidden sm:inline">Lista de Clientes</span>
             <span className="sm:hidden">Lista</span>
           </button>
@@ -3875,7 +3875,7 @@ export default function POS() {
           <button
             type="button"
             onClick={() => setIsQuickCustomerOpen(true)}
-            className="h-6 px-2 bg-[#0C2242] text-[#E3F4F2] hover:opacity-90 font-black text-[10px] uppercase tracking-wider rounded-md transition-all flex items-center gap-0.5 cursor-pointer border-none shrink-0"
+            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90 font-black text-[10px] uppercase tracking-wider rounded-md transition-all flex items-center gap-0.5 cursor-pointer border-none shrink-0"
           >
             <span>➕</span> <span className="hidden sm:inline">Novo Registo</span><span className="sm:hidden">Novo</span>
           </button>
@@ -3894,7 +3894,7 @@ export default function POS() {
                   onClick={() => setSaleMode('dinheiro')}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'dinheiro' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Dinheiro
@@ -3904,7 +3904,7 @@ export default function POS() {
                   onClick={() => setSaleMode('credito')}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'credito' ? "bg-[#B8791A] text-[#FAECE7]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'credito' ? "bg-[#D4AF37] text-[#FFFFFF]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Fiado
@@ -3917,7 +3917,7 @@ export default function POS() {
                   }}
                   className={cn(
                     "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'parcial' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                    saleMode === 'parcial' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
                   )}
                 >
                   Parcial
@@ -3933,7 +3933,7 @@ export default function POS() {
               onClick={() => handleToggleSaleType('retail')}
               className={cn(
                 "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'retail' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                saleType === 'retail' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
               )}
             >
               <span>📦</span> <span className="hidden sm:inline">Retalho</span>
@@ -3943,7 +3943,7 @@ export default function POS() {
               onClick={() => handleToggleSaleType('wholesale')}
               className={cn(
                 "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'wholesale' ? "bg-[#0C2242] text-[#E3F4F2]" : "text-blue-600 hover:text-blue-800"
+                saleType === 'wholesale' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
               )}
             >
               <span>🏭</span> <span className="hidden sm:inline">Grosso</span>
@@ -3956,7 +3956,7 @@ export default function POS() {
       <div className="flex-1 flex flex-col overflow-hidden min-h-0 min-w-0 mt-1">
         
         {/* EXPANDED CART PANEL - Cream themed background. Mobile: tabbed. Desktop (md+): permanent split view. */}
-        <div className="flex-1 bg-[#FAECE7]/20 rounded-3xl border border-blue-200 flex flex-col overflow-hidden shadow-sm font-sans relative">
+        <div className="flex-1 bg-[#FFFFFF]/20 rounded-3xl border border-blue-200 flex flex-col overflow-hidden shadow-sm font-sans relative">
           
 {/* PERSISTENT SUMMARY STRIP (Always visible) */}
           <div className="bg-white px-3 py-1.5 flex items-center justify-between shrink-0 border-b border-blue-200 select-none">
@@ -3990,7 +3990,7 @@ export default function POS() {
             >
               Artigos
               {activeCartTab === 'items' && (
-                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B8791A]" />
+                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D4AF37]" />
               )}
             </button>
             <button
@@ -4010,7 +4010,7 @@ export default function POS() {
             >
               Pagamento
               {activeCartTab === 'payment' && (
-                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#B8791A]" />
+                <motion.div layoutId="cartActiveTabLine" className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#D4AF37]" />
               )}
             </button>
           </div>
@@ -4029,14 +4029,14 @@ export default function POS() {
                     className="flex-1 flex flex-col min-h-0 overflow-hidden"
                   >
 {/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0C2242]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
+                  <div className="px-3 py-1 bg-[#0B1F4D]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
                     <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
                     <div className="flex items-center gap-1">
                       {/* Suspended carts list button */}
                       <button
                         type="button"
                         onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#5C2310] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
+                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
                         title="Ver vendas em espera"
                       >
                         <span>⏳ Em Espera</span>
@@ -4089,7 +4089,7 @@ export default function POS() {
                   <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
                     {cart.length === 0 ? (
                       <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
-                        <ShoppingCart size={32} className="text-[#B8791A] mb-2 opacity-80" />
+                        <ShoppingCart size={32} className="text-[#D4AF37] mb-2 opacity-80" />
                         <span className="text-xs font-black tracking-widest text-blue-700 uppercase">CARRINHO VAZIO</span>
                         <span className="text-[10px] text-blue-600 mt-1 max-w-[220px] text-center leading-normal font-medium">
                           Pesquise um produto no campo de pesquisa superior para começar a compor a venda.
@@ -4120,7 +4120,7 @@ export default function POS() {
                       <button
                         type="button"
                         onClick={() => setActiveCartTab('payment')}
-                        className="w-full py-1.5 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
+                        className="w-full py-1.5 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none shadow-sm"
                       >
                         <span>Prosseguir para Pagamento</span>
                         <span>➡️</span>
@@ -4256,7 +4256,7 @@ export default function POS() {
 
                           <div className="flex justify-between items-center text-[10px] font-mono bg-blue-100/30 border border-blue-200 p-1.5 rounded-lg text-blue-800 leading-none">
                             <div>Pago (Entrada): <span className="font-extrabold text-blue-950">{(Number(partialAmountPaid) || 0).toLocaleString()} MT</span></div>
-                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#B8791A]">{creditFired.toLocaleString()} MT</div></div>
+                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#D4AF37]">{creditFired.toLocaleString()} MT</div></div>
                           </div>
                         </div>
                       )}
@@ -4358,7 +4358,7 @@ export default function POS() {
                               className={cn(
                                 "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
                                 isSelected 
-                                  ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
                                   : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                               )}
                             >
@@ -4374,7 +4374,7 @@ export default function POS() {
                           className={cn(
                             "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
                             paymentMethod === 'card'
-                              ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
                               : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                           )}
                         >
@@ -4390,7 +4390,7 @@ export default function POS() {
                     <button
                       onClick={checkOutTransaction}
                       disabled={isProcessing || cart.length === 0}
-                      className="w-full py-2 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
                     >
                       {isProcessing ? (
                         <Loader2 size={13} className="animate-spin text-white" />
@@ -4411,14 +4411,14 @@ export default function POS() {
           <div className="hidden md:flex flex-1 min-h-0 overflow-hidden">
             <div className="flex-[1.6] flex flex-col min-h-0 overflow-hidden border-r border-blue-200/60">
 {/* Cart Actions Sub-Header (Suspender, Limpar) */}
-                  <div className="px-3 py-1 bg-[#0C2242]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
+                  <div className="px-3 py-1 bg-[#0B1F4D]/10 border-b border-blue-200/50 flex items-center justify-between shrink-0">
                     <span className="text-[10px] font-black text-blue-950 uppercase tracking-wider">Gestão do Carrinho</span>
                     <div className="flex items-center gap-1">
                       {/* Suspended carts list button */}
                       <button
                         type="button"
                         onClick={() => setIsSuspendedModalOpen(true)}
-                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#5C2310] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
+                        className="relative px-2 py-1 bg-[#4A1B0C] hover:bg-[#D4AF37] text-white rounded-lg text-[9px] font-bold uppercase tracking-wider flex items-center gap-1 transition-all border border-transparent cursor-pointer"
                         title="Ver vendas em espera"
                       >
                         <span>⏳ Em Espera</span>
@@ -4471,7 +4471,7 @@ export default function POS() {
                   <div className="flex-1 overflow-y-auto p-0 min-h-0 cart-scrollbar bg-white divide-y divide-blue-100/40">
                     {cart.length === 0 ? (
                       <div className="flex flex-col items-center justify-center h-full text-blue-400 p-4">
-                        <ShoppingCart size={32} className="text-[#B8791A] mb-2 opacity-80" />
+                        <ShoppingCart size={32} className="text-[#D4AF37] mb-2 opacity-80" />
                         <span className="text-xs font-black tracking-widest text-blue-700 uppercase">CARRINHO VAZIO</span>
                         <span className="text-[10px] text-blue-600 mt-1 max-w-[220px] text-center leading-normal font-medium">
                           Pesquise um produto no campo de pesquisa superior para começar a compor a venda.
@@ -4606,7 +4606,7 @@ export default function POS() {
 
                           <div className="flex justify-between items-center text-[10px] font-mono bg-blue-100/30 border border-blue-200 p-1.5 rounded-lg text-blue-800 leading-none">
                             <div>Pago (Entrada): <span className="font-extrabold text-blue-950">{(Number(partialAmountPaid) || 0).toLocaleString()} MT</span></div>
-                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#B8791A]">{creditFired.toLocaleString()} MT</div></div>
+                            <div>Fiado Pendente: <div className="inline-block font-extrabold text-[#D4AF37]">{creditFired.toLocaleString()} MT</div></div>
                           </div>
                         </div>
                       )}
@@ -4708,7 +4708,7 @@ export default function POS() {
                               className={cn(
                                 "py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-start gap-1.5 cursor-pointer border bg-white",
                                 isSelected 
-                                  ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                                  ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
                                   : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                               )}
                             >
@@ -4724,7 +4724,7 @@ export default function POS() {
                           className={cn(
                             "col-span-2 py-1.5 px-2 rounded-lg text-[9px] font-bold uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer border bg-white mt-0.5",
                             paymentMethod === 'card'
-                              ? "border-[#B8791A] text-[#B8791A] font-black shadow-xs bg-orange-50/25" 
+                              ? "border-[#D4AF37] text-[#D4AF37] font-black shadow-xs bg-orange-50/25" 
                               : "border-blue-200 text-blue-700 hover:border-blue-300 hover:bg-blue-50/40"
                           )}
                         >
@@ -4740,7 +4740,7 @@ export default function POS() {
                     <button
                       onClick={checkOutTransaction}
                       disabled={isProcessing || cart.length === 0}
-                      className="w-full py-2 bg-[#B8791A] hover:bg-[#E8500A] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
+                      className="w-full py-2 bg-[#D4AF37] hover:bg-[#D4AF37] text-white rounded-xl text-xs font-black uppercase tracking-widest active:scale-98 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-35 disabled:pointer-events-none h-10 border-none shadow-sm"
                     >
                       {isProcessing ? (
                         <Loader2 size={13} className="animate-spin text-white" />
@@ -4838,7 +4838,7 @@ export default function POS() {
                         <button
                           type="button"
                           onClick={() => setIsClosingCalculatorOpen(!isClosingCalculatorOpen)}
-                          className="text-[9px] text-[#B8791A] font-black uppercase tracking-wider hover:underline"
+                          className="text-[9px] text-[#D4AF37] font-black uppercase tracking-wider hover:underline"
                         >
                           {isClosingCalculatorOpen ? "Fechar Calculadora ✖" : "Contar Notas 🪙"}
                         </button>
@@ -5150,10 +5150,10 @@ export default function POS() {
 
       {/* POS Section 10: Selected Customer History Tooltip/Overlay */}
       {isHistoryOpen && selectedCust && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/70 backdrop-blur-xs overflow-y-auto">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#0B1F4D]/70 backdrop-blur-xs overflow-y-auto">
           <div className="bg-white w-full max-w-sm max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200">
             <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2">
-              <h3 className="text-xs font-black uppercase tracking-widest text-[#0C2242]">Ficha e Histórico do Cliente</h3>
+              <h3 className="text-xs font-black uppercase tracking-widest text-[#0B1F4D]">Ficha e Histórico do Cliente</h3>
               <button onClick={() => setIsHistoryOpen(false)} className="text-blue-400 hover:text-blue-900">
                 <X size={16} />
               </button>
@@ -5197,7 +5197,7 @@ export default function POS() {
       )}
               {/* POS Product Catalog / Browse Modal (📦 Trigger) */}
       {isCatalogOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/70 backdrop-blur-xs select-none">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#0B1F4D]/70 backdrop-blur-xs select-none">
           <div className="bg-white w-full max-w-4xl h-[85vh] rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200 flex flex-col">
             <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2 flex-shrink-0">
               <div className="flex items-center gap-2">
@@ -5273,7 +5273,7 @@ export default function POS() {
 
       {/* POS Post-Sale Success & Printable receipt popups matching Section 9 */}
       {completedSale && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#02182E]/80 backdrop-blur-md overflow-y-auto select-none">
+        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#0B1F4D]/80 backdrop-blur-md overflow-y-auto select-none">
           <div className="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl border border-blue-100 my-8 flex flex-col max-h-[90vh]">
             
             <div className="bg-emerald-600 text-white p-6 text-center shrink-0">
@@ -5409,7 +5409,7 @@ export default function POS() {
                   autoFocus
                   required
                   placeholder={`Ex: Cliente #${suspendedCarts.length + 1}`}
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-[20px] text-sm font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                   value={suspenseCartLabel}
                   onChange={e => setSuspenseCartLabel(e.target.value)}
                 />
@@ -5639,7 +5639,7 @@ export default function POS() {
               </div>
               <div className="flex justify-between pt-1 border-t border-slate-850 text-sm">
                 <span className="text-slate-450 font-medium">Valor Total:</span>
-                <span className="font-mono font-black text-[#B8791A]">
+                <span className="font-mono font-black text-[#D4AF37]">
                   {(getCartItemPricing(voidItem).total).toLocaleString()} MT
                 </span>
               </div>
@@ -5668,7 +5668,7 @@ export default function POS() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Código de Motivo</label>
                 <select 
-                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
+                  className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                   value={voidReason}
                   onChange={(e) => setVoidReason(e.target.value)}
                 >
@@ -5686,7 +5686,7 @@ export default function POS() {
                     type="text"
                     required
                     placeholder="Ex: Embalagem danificada pelo cliente"
-                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                    className="w-full px-4 py-3 bg-slate-950/60 border border-slate-850 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                     value={customVoidReason}
                     onChange={(e) => setCustomVoidReason(e.target.value)}
                   />
@@ -5761,7 +5761,7 @@ export default function POS() {
                       <input 
                         type="text"
                         placeholder="ID Fatura, Cliente..."
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                         value={searchInvoiceTerm}
                         onChange={(e) => setSearchInvoiceTerm(e.target.value)}
                         onKeyDown={(e) => {
@@ -5820,7 +5820,7 @@ export default function POS() {
                           className={cn(
                             "p-3.5 rounded-xl text-left border cursor-pointer transition-all flex flex-col space-y-1.5",
                             isActive 
-                              ? "bg-[#B8791A]/10 border-[#B8791A] shadow-sm" 
+                              ? "bg-[#D4AF37]/10 border-[#D4AF37] shadow-sm" 
                               : "bg-slate-900/60 border-slate-850 hover:border-slate-800"
                           )}
                         >
@@ -5910,7 +5910,7 @@ export default function POS() {
                           <div className="space-y-1.5 text-left">
                             <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Artigo Referente (opcional)</label>
                             <select
-                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer"
+                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
                               value={adjustmentItemKey}
                               onChange={(e) => setAdjustmentItemKey(e.target.value)}
                             >
@@ -5933,7 +5933,7 @@ export default function POS() {
                               min="0"
                               step="0.01"
                               placeholder="0.00"
-                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm font-mono font-black text-amber-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm font-mono font-black text-amber-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                               value={adjustmentAmount}
                               onChange={(e) => setAdjustmentAmount(e.target.value)}
                             />
@@ -5946,7 +5946,7 @@ export default function POS() {
                                 type="text"
                                 required
                                 placeholder="Ex: erro de preço, artigo cobrado a mais..."
-                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                                 value={adjustmentReason}
                                 onChange={(e) => setAdjustmentReason(e.target.value)}
                               />
@@ -5955,7 +5955,7 @@ export default function POS() {
                             <div className="space-y-1.5 text-left">
                               <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
                               <select
-                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer"
+                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
                                 value={refundMethod}
                                 onChange={(e) => setRefundMethod(e.target.value)}
                               >
@@ -6094,7 +6094,7 @@ export default function POS() {
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Motivo da Devolução</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                           value={returnReason}
                           onChange={(e) => setReturnReason(e.target.value)}
                         >
@@ -6109,7 +6109,7 @@ export default function POS() {
                       <div className="space-y-1.5">
                         <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#B8791A] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                           value={refundMethod}
                           onChange={(e) => setRefundMethod(e.target.value)}
                         >
@@ -6129,7 +6129,7 @@ export default function POS() {
                             type="text"
                             required
                             placeholder="Descreva detalhadamente o motivo da devolução..."
-                            className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#B8791A] outline-none"
+                            className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                             value={customReturnReason}
                             onChange={(e) => setCustomReturnReason(e.target.value)}
                           />
@@ -6434,7 +6434,7 @@ export default function POS() {
 
       {/* GLOBAL CART DISCOUNT MODAL */}
       {isCartDiscountModalOpen && (
-        <div className="fixed inset-0 z-100 bg-[#02182E]/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-100 bg-[#0B1F4D]/80 backdrop-blur-sm flex items-center justify-center p-4">
           <div className="bg-white border border-blue-200 rounded-[32px] max-w-md w-full p-6 sm:p-8 shadow-2xl flex flex-col space-y-5 relative animate-in fade-in zoom-in-95 duration-200">
             <button 
               type="button"
@@ -6654,7 +6654,7 @@ export default function POS() {
             </button>
 
             <div className="flex items-center gap-3 border-b border-blue-100 pb-4">
-              <div className="p-3 bg-blue-50 text-[#0C2242] rounded-2xl">
+              <div className="p-3 bg-blue-50 text-[#0B1F4D] rounded-2xl">
                 <Calculator size={24} />
               </div>
               <div>
@@ -6728,7 +6728,7 @@ export default function POS() {
               <button
                 type="button"
                 onClick={() => setIsCheatSheetOpen(false)}
-                className="w-full py-3 bg-[#0C2242] text-white font-bold uppercase tracking-widest rounded-2xl text-[10px] hover:bg-[#032240] transition-all cursor-pointer border-none"
+                className="w-full py-3 bg-[#0B1F4D] text-white font-bold uppercase tracking-widest rounded-2xl text-[10px] hover:bg-[#0B1F4D] transition-all cursor-pointer border-none"
               >
                 Fechar Manual [Esc]
               </button>

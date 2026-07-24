@@ -1307,17 +1307,17 @@ Equipa Técnica Sabush System`;
                         <AreaChart data={[10, 15, 8, 20, 25, 21, 35, 42, stats.totalUsers].map((v, i) => ({ v, i }))}>
                           <defs>
                             <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                              <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1}/>
-                              <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                              <stop offset="5%" stopColor="#2563EB" stopOpacity={0.1}/>
+                              <stop offset="95%" stopColor="#2563EB" stopOpacity={0}/>
                             </linearGradient>
                           </defs>
-                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F8F9FA" />
                           <XAxis dataKey="i" hide />
                           <YAxis hide />
                           <Tooltip 
                             contentStyle={{ borderRadius: '20px', border: 'none', boxShadow: '0 10px 30px rgba(0,0,0,0.1)', fontWeight: 'bold' }}
                           />
-                          <Area type="monotone" dataKey="v" stroke="#3b82f6" strokeWidth={4} fillOpacity={1} fill="url(#colorUsers)" />
+                          <Area type="monotone" dataKey="v" stroke="#2563EB" strokeWidth={4} fillOpacity={1} fill="url(#colorUsers)" />
                         </AreaChart>
                       </ResponsiveContainer>
                     </div>
@@ -2717,7 +2717,7 @@ Equipa Técnica Sabush System`;
                   {/* Simulated Content Area based on brandingPreviewMode */}
                   <div className="flex-1 flex items-center justify-center p-6 relative overflow-hidden bg-slate-950 min-h-[300px]">
                     {/* Subtle Grid Background */}
-                    <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
+                    <div className="absolute inset-0 bg-[radial-gradient(#111111_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
                     
                     {brandingPreviewMode === 'login' && (
                       <motion.div 
@@ -2747,7 +2747,7 @@ Equipa Técnica Sabush System`;
                         <h3 className="text-white font-black text-xl tracking-tight leading-none mb-1 uppercase">
                           {platformName}
                         </h3>
-                        <p className="text-[9px] text-[#A8BBBF] font-black uppercase tracking-widest mb-6">{platformSlogan}</p>
+                        <p className="text-[9px] text-[#93B4F5] font-black uppercase tracking-widest mb-6">{platformSlogan}</p>
 
                         {/* Mock Form Elements */}
                         <div className="w-full space-y-3 font-sans">
@@ -2773,7 +2773,7 @@ Equipa Técnica Sabush System`;
                             type="button" 
                             className={cn(
                               "w-full h-11 rounded-xl text-white font-extrabold text-[11px] uppercase tracking-wider shadow-lg transition-colors cursor-default",
-                              primaryColor === 'royal-blue' ? "bg-[#0C2242] shadow-blue-900/20" :
+                              primaryColor === 'royal-blue' ? "bg-[#0B1F4D] shadow-blue-900/20" :
                               primaryColor === 'classic-orange' ? "bg-amber-600 shadow-amber-600/20" :
                               primaryColor === 'forest-green' ? "bg-emerald-600 shadow-emerald-600/20" :
                               "bg-slate-700 shadow-slate-700/20"
@@ -3005,7 +3005,7 @@ Equipa Técnica Sabush System`;
                             className="flex items-center justify-center rounded-xl overflow-hidden mb-2 border border-slate-100 relative w-full" 
                             style={{ 
                               height: '80px', 
-                              backgroundImage: 'conic-gradient(#f8fafc 0.25turn, #cbd5e1 0.25turn 0.5turn, #f8fafc 0.5turn 0.75turn, #cbd5e1 0.75turn)',
+                              backgroundImage: 'conic-gradient(#F8F9FA 0.25turn, #E5E7EB 0.25turn 0.5turn, #F8F9FA 0.5turn 0.75turn, #E5E7EB 0.75turn)',
                               backgroundSize: '12px 12px',
                             }}
                           >
@@ -3166,8 +3166,8 @@ Equipa Técnica Sabush System`;
                             <span className="text-[10px] font-extrabold text-blue-900 font-sans leading-none">Azul Professional</span>
                             <span className="text-[7.5px] text-slate-400 font-bold leading-none mt-1">Azul Escuro dominante, detalhes Amber</span>
                             <div className="flex gap-1 mt-1.5">
-                              <span className="w-4 h-1.5 rounded-sm bg-[#0C2242]" />
-                              <span className="w-4 h-1.5 rounded-sm bg-[#B8791A]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#0B1F4D]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#D4AF37]" />
                             </div>
                           </button>
 
@@ -3185,7 +3185,7 @@ Equipa Técnica Sabush System`;
                             <span className="text-[7.5px] text-slate-400 font-bold leading-none mt-1">Laranja dominante, detalhes Azul</span>
                             <div className="flex gap-1 mt-1.5">
                               <span className="w-4 h-1.5 rounded-sm bg-amber-500" />
-                              <span className="w-4 h-1.5 rounded-sm bg-[#0C2242]" />
+                              <span className="w-4 h-1.5 rounded-sm bg-[#0B1F4D]" />
                             </div>
                           </button>
 

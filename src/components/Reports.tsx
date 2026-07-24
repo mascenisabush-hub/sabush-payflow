@@ -69,26 +69,26 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
   });
 
   return (
-    <div className="bg-white border border-[#E2E8F0] rounded-[40px] p-8 space-y-6 shadow-sm">
+    <div className="bg-white border border-[#E5E7EB] rounded-[40px] p-8 space-y-6 shadow-sm">
       <div>
-        <h3 className="text-xl font-black tracking-tight text-[#0F172A] flex items-center gap-2">
+        <h3 className="text-xl font-black tracking-tight text-[#111111] flex items-center gap-2">
           <span>🛡️ Livro de Registo de Auditoria de Atividades</span>
         </h3>
-        <p className="text-xs text-[#64748B] mt-1 font-semibold">
+        <p className="text-xs text-[#6B7280] mt-1 font-semibold">
           Registo em tempo real das ações administrativas de todos os utilizadores no seu negócio para máxima transparência.
         </p>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#F8FAFC] p-4 rounded-3xl border border-[#E2E8F0]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-[#F8F9FA] p-4 rounded-3xl border border-[#E5E7EB]">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#64748B]" />
+          <Search className="absolute left-3.5 top-3 w-4 h-4 text-[#6B7280]" />
           <input
             type="text"
             value={auditSearch}
             onChange={(e) => setAuditSearch(e.target.value)}
             placeholder="Pesquisar por operador, ação ou descrição..."
-            className="w-full pl-10 pr-4 py-2 bg-white border border-[#E2E8F0] rounded-xl text-xs text-[#0F172A] placeholder-[#64748B]/60 focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-[#E5E7EB] rounded-xl text-xs text-[#111111] placeholder-[#6B7280]/60 focus:outline-none"
           />
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -107,8 +107,8 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
               className={cn(
                 "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer",
                 auditTypeFilter === f.id
-                  ? "bg-[#0F172A] text-white shadow-sm"
-                  : "bg-white text-[#64748B] hover:text-[#0F172A] border border-[#E2E8F0]"
+                  ? "bg-[#111111] text-white shadow-sm"
+                  : "bg-white text-[#6B7280] hover:text-[#111111] border border-[#E5E7EB]"
               )}
             >
               {f.label}
@@ -120,8 +120,8 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
       {/* Timeline */}
       {isLoadingLogs ? (
         <div className="py-20 text-center flex flex-col items-center justify-center gap-3">
-          <Loader2 className="w-8 h-8 text-[#0F172A] animate-spin" />
-          <p className="text-xs text-[#64748B] font-black uppercase tracking-widest">A carregar registos...</p>
+          <Loader2 className="w-8 h-8 text-[#111111] animate-spin" />
+          <p className="text-xs text-[#6B7280] font-black uppercase tracking-widest">A carregar registos...</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -160,9 +160,9 @@ function AuditLogPanel({ profile, activeTab }: { profile: any; activeTab: string
           })}
 
           {filteredLogs.length === 0 && (
-            <div className="py-20 text-center text-slate-400 bg-[#F8FAFC] rounded-3xl border border-[#E2E8F0]">
+            <div className="py-20 text-center text-slate-400 bg-[#F8F9FA] rounded-3xl border border-[#E5E7EB]">
               <History size={42} className="mx-auto mb-3 opacity-20" />
-              <p className="text-xs uppercase font-black tracking-widest text-[#64748B]">Nenhuma atividade registada.</p>
+              <p className="text-xs uppercase font-black tracking-widest text-[#6B7280]">Nenhuma atividade registada.</p>
             </div>
           )}
         </div>
@@ -380,36 +380,36 @@ export default function Reports() {
   }, [filteredProducts]);
 
   const salesMixData = [
-    { name: 'POS Sales', value: stats.posSales, color: '#0F274C' }, // Deep African Green
-    { name: 'Invoices', value: stats.invoiceSales, color: '#B8791A' } // African Sunset Orange
+    { name: 'POS Sales', value: stats.posSales, color: '#0B1F4D' }, // Deep African Green
+    { name: 'Invoices', value: stats.invoiceSales, color: '#D4AF37' } // African Sunset Orange
   ];
 
   const wholesaleRetailMix = [
-    { name: 'Venda a Retalho', value: stats.retailSales, color: '#3b82f6' }, // Blue
+    { name: 'Venda a Retalho', value: stats.retailSales, color: '#2563EB' }, // Blue
     { name: 'Venda por Grosso', value: stats.wholesaleSales, color: '#10b981' } // Emerald/Mint
   ];
 
   return (
     <div className="space-y-8">
       {/* Header with high fidelity title styling */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#F8FAFC] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#F8F9FA] pb-6">
         <div>
-          <h2 className="text-3xl font-black text-[#0F172A] tracking-tight flex items-center gap-2">
+          <h2 className="text-3xl font-black text-[#111111] tracking-tight flex items-center gap-2">
             <span>Business Reports</span>
-            <span className="w-2.5 h-2.5 rounded-full bg-[#B8791A]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37]" />
           </h2>
-          <p className="text-[#64748B] text-sm font-semibold tracking-wide mt-1">Estatísticas, análises financeiras e controlo inteligente de stock.</p>
+          <p className="text-[#6B7280] text-sm font-semibold tracking-wide mt-1">Estatísticas, análises financeiras e controlo inteligente de stock.</p>
         </div>
 
         {/* Africa-inspired polished tab selector */}
-        <div className="flex flex-wrap p-1 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl w-fit gap-1">
+        <div className="flex flex-wrap p-1 bg-[#F8F9FA] border border-[#E5E7EB] rounded-2xl w-fit gap-1">
           <button
             onClick={() => setActiveTab('general')}
             className={cn(
               "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all cursor-pointer",
               activeTab === 'general' 
-                ? "bg-[#0F172A] text-[#FFFFFF] shadow-md" 
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-[#111111] text-[#FFFFFF] shadow-md" 
+                : "text-[#6B7280] hover:text-[#111111]"
             )}
           >
             Insights Gerais
@@ -427,8 +427,8 @@ export default function Reports() {
               (businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico')
                 ? "text-slate-400 cursor-not-allowed"
                 : activeTab === 'inventory' 
-                  ? "bg-[#0F172A] text-[#FFFFFF] shadow-md" 
-                  : "text-[#64748B] hover:text-[#0F172A]"
+                  ? "bg-[#111111] text-[#FFFFFF] shadow-md" 
+                  : "text-[#6B7280] hover:text-[#111111]"
             )}
           >
             {(businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico') && <Lock size={12} className="text-amber-500" />}
@@ -447,8 +447,8 @@ export default function Reports() {
               (businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico')
                 ? "text-slate-400 cursor-not-allowed"
                 : activeTab === 'scheduled' 
-                  ? "bg-[#0F172A] text-[#FFFFFF] shadow-md" 
-                  : "text-[#64748B] hover:text-[#0F172A]"
+                  ? "bg-[#111111] text-[#FFFFFF] shadow-md" 
+                  : "text-[#6B7280] hover:text-[#111111]"
             )}
           >
             {(businessData?.subscription?.plan === 'basico' || businessData?.subscriptionPlan === 'basico') && <Lock size={12} className="text-amber-500" />}
@@ -467,8 +467,8 @@ export default function Reports() {
             className={cn(
               "px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest transition-all cursor-pointer flex items-center gap-1.5",
               activeTab === 'audit' 
-                ? "bg-[#0F172A] text-[#FFFFFF] shadow-md" 
-                : "text-[#64748B] hover:text-[#0F172A]"
+                ? "bg-[#111111] text-[#FFFFFF] shadow-md" 
+                : "text-[#6B7280] hover:text-[#111111]"
             )}
           >
             <History size={12} />
@@ -546,17 +546,17 @@ export default function Reports() {
                     <AreaChart data={revenueData}>
                        <defs>
                           <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                             <stop offset="5%" stopColor="#B8791A" stopOpacity={0.15}/>
-                             <stop offset="95%" stopColor="#B8791A" stopOpacity={0}/>
+                             <stop offset="5%" stopColor="#D4AF37" stopOpacity={0.15}/>
+                             <stop offset="95%" stopColor="#D4AF37" stopOpacity={0}/>
                           </linearGradient>
                        </defs>
-                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                       <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
-                       <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 12}} />
+                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F8F9FA" />
+                       <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6B7280', fontSize: 12}} />
+                       <YAxis axisLine={false} tickLine={false} tick={{fill: '#6B7280', fontSize: 12}} />
                        <Tooltip 
                         contentStyle={{ borderRadius: '24px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }}
                        />
-                       <Area type="monotone" dataKey="revenue" stroke="#B8791A" strokeWidth={4} fillOpacity={1} fill="url(#colorRev)" />
+                       <Area type="monotone" dataKey="revenue" stroke="#D4AF37" strokeWidth={4} fillOpacity={1} fill="url(#colorRev)" />
                     </AreaChart>
                  </ResponsiveContainer>
               </div>
@@ -605,7 +605,7 @@ export default function Reports() {
           <div className="bg-slate-50 border border-slate-100 p-8 rounded-[40px] grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 animate-in fade-in zoom-in-95 duration-300">
             <div className="lg:col-span-2 space-y-6 flex flex-col justify-between">
               <div>
-                <span className="text-[10px] font-black tracking-widest text-[#B8791A] uppercase">Dashboard de Distribuição</span>
+                <span className="text-[10px] font-black tracking-widest text-[#D4AF37] uppercase">Dashboard de Distribuição</span>
                 <h3 className="text-xl font-black text-slate-900 mt-1 flex items-center gap-2">
                   <span>Movimento por Segmentos Financeiros</span>
                   <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
@@ -678,25 +678,25 @@ export default function Reports() {
         <div className="space-y-8 animate-in fade-in duration-300">
           
           {/* Advanced Filter Toolbar */}
-          <div className="bg-white p-6 rounded-[28px] border border-[#E2E8F0] shadow-[0_12px_24px_rgba(42,28,19,0.02)] flex flex-wrap gap-6 items-center justify-between">
+          <div className="bg-white p-6 rounded-[28px] border border-[#E5E7EB] shadow-[0_12px_24px_rgba(42,28,19,0.02)] flex flex-wrap gap-6 items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-[#F8FAFC] text-[#64748B] rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-[#F8F9FA] text-[#6B7280] rounded-xl flex items-center justify-center">
                 <SlidersHorizontal size={18} />
               </div>
               <div>
-                <h3 className="font-bold text-[#0F172A] text-sm">Filtros de Faturação</h3>
-                <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#64748B]">Filtre e analise por categoria ou fornecedor</p>
+                <h3 className="font-bold text-[#111111] text-sm">Filtros de Faturação</h3>
+                <p className="text-[10px] uppercase tracking-wider font-extrabold text-[#6B7280]">Filtre e analise por categoria ou fornecedor</p>
               </div>
             </div>
 
             <div className="flex flex-wrap gap-4 items-center">
               {/* Category selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black text-[#64748B] uppercase tracking-wider">Categoria:</span>
+                <span className="text-xs font-black text-[#6B7280] uppercase tracking-wider">Categoria:</span>
                 <select 
                   value={categoryFilter}
                   onChange={(e) => setCategoryFilter(e.target.value)}
-                  className="bg-[#F8FAFC] border border-[#E2E8F0] font-semibold text-xs text-[#0F172A] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
+                  className="bg-[#F8F9FA] border border-[#E5E7EB] font-semibold text-xs text-[#111111] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#D4AF37] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todas as Categorias</option>
                   {categoriesList.map(cat => (
@@ -707,11 +707,11 @@ export default function Reports() {
 
               {/* Supplier selector */}
               <div className="flex items-center gap-2">
-                <span className="text-xs font-black text-[#64748B] uppercase tracking-wider">Fornecedor:</span>
+                <span className="text-xs font-black text-[#6B7280] uppercase tracking-wider">Fornecedor:</span>
                 <select 
                   value={supplierFilter}
                   onChange={(e) => setSupplierFilter(e.target.value)}
-                  className="bg-[#F8FAFC] border border-[#E2E8F0] font-semibold text-xs text-[#0F172A] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#B8791A] cursor-pointer min-w-[140px]"
+                  className="bg-[#F8F9FA] border border-[#E5E7EB] font-semibold text-xs text-[#111111] px-3.5 py-2.5 rounded-xl outline-none focus:ring-2 focus:ring-[#D4AF37] cursor-pointer min-w-[140px]"
                 >
                   <option value="all">Todos Fornecedores</option>
                   {suppliersList.map(sup => (
@@ -727,7 +727,7 @@ export default function Reports() {
                     setCategoryFilter('all');
                     setSupplierFilter('all');
                   }}
-                  className="text-[10px] font-black uppercase text-[#B8791A] hover:text-[#E11D48] px-2.5 py-2.5 tracking-wider hover:bg-[#F8FAFC] rounded-xl transition-all cursor-pointer"
+                  className="text-[10px] font-black uppercase text-[#D4AF37] hover:text-[#E11D48] px-2.5 py-2.5 tracking-wider hover:bg-[#F8F9FA] rounded-xl transition-all cursor-pointer"
                 >
                   Limpar Filtros
                 </button>
@@ -776,8 +776,8 @@ export default function Reports() {
             <div className="lg:col-span-2 bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm space-y-6">
               <div className="flex items-center justify-between border-b pb-4">
                 <div>
-                  <h3 className="text-lg font-black text-[#0F172A]">Distribuição por Categoria</h3>
-                  <p className="text-[10px] font-extrabold uppercase text-[#64748B] tracking-wider mt-0.5">Visão geral de quantidades e valores</p>
+                  <h3 className="text-lg font-black text-[#111111]">Distribuição por Categoria</h3>
+                  <p className="text-[10px] font-extrabold uppercase text-[#6B7280] tracking-wider mt-0.5">Visão geral de quantidades e valores</p>
                 </div>
               </div>
               
@@ -785,14 +785,14 @@ export default function Reports() {
                 <div className="h-[300px]">
                   <ResponsiveContainer width="100%" height="100%" minWidth={0}>
                     <BarChart data={categoryChartData}>
-                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F8FAFC" />
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11}} />
-                      <YAxis axisLine={false} tickLine={false} tick={{fill: '#64748b', fontSize: 11}} />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#F8F9FA" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6B7280', fontSize: 11}} />
+                      <YAxis axisLine={false} tickLine={false} tick={{fill: '#6B7280', fontSize: 11}} />
                       <Tooltip 
-                        contentStyle={{ borderRadius: '16px', border: '1px solid #E2E8F0', boxShadow: '0 8px 16px rgba(0,0,0,0.04)' }}
+                        contentStyle={{ borderRadius: '16px', border: '1px solid #E5E7EB', boxShadow: '0 8px 16px rgba(0,0,0,0.04)' }}
                         formatter={(value, name) => [typeof value === 'number' ? value.toLocaleString() : value, name === 'value' ? `Valor Total (${currency})` : 'Qtd Total']}
                       />
-                      <Bar dataKey="value" fill="#0F274C" radius={[8, 8, 0, 0]} name="value" />
+                      <Bar dataKey="value" fill="#0B1F4D" radius={[8, 8, 0, 0]} name="value" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -807,7 +807,7 @@ export default function Reports() {
             {/* List of low-stock items requiring replenishment action list */}
             <div className="bg-white p-8 rounded-[40px] border border-slate-100 shadow-sm flex flex-col justify-between space-y-6">
               <div>
-                <h3 className="text-lg font-black text-[#0F172A] mb-1">Avisos Críticos</h3>
+                <h3 className="text-lg font-black text-[#111111] mb-1">Avisos Críticos</h3>
                 <p className="text-[10px] font-bold text-rose-500 uppercase tracking-widest flex items-center gap-1.5">
                   <ShieldAlert size={14} />
                   Reposição Recomendada
@@ -817,10 +817,10 @@ export default function Reports() {
               <div className="flex-1 overflow-y-auto max-h-[240px] pr-2 space-y-3 scrollbar-thin">
                 {inventoryStats.lowStockItemsList.length > 0 ? (
                   inventoryStats.lowStockItemsList.map(p => (
-                    <div key={p.id} className="flex items-center justify-between p-3.5 bg-[#F8FAFC] rounded-2xl border border-rose-100/60 transition-all hover:border-rose-200">
+                    <div key={p.id} className="flex items-center justify-between p-3.5 bg-[#F8F9FA] rounded-2xl border border-rose-100/60 transition-all hover:border-rose-200">
                       <div className="min-w-0 pr-3">
-                        <p className="font-extrabold text-xs text-[#0F172A] truncate">{p.name}</p>
-                        <p className="text-[9px] font-extrabold text-[#64748B] uppercase tracking-wide truncate mt-0.5">
+                        <p className="font-extrabold text-xs text-[#111111] truncate">{p.name}</p>
+                        <p className="text-[9px] font-extrabold text-[#6B7280] uppercase tracking-wide truncate mt-0.5">
                           {p.supplier || 'Sem Fornecedor'}
                         </p>
                       </div>
@@ -853,8 +853,8 @@ export default function Reports() {
           <div className="bg-white rounded-[40px] border border-slate-100 shadow-sm p-8 space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-4 border-b pb-4">
               <div>
-                <h3 className="text-lg font-black text-[#0F172A]">Lista Detalhada de Artigos Correspondentes</h3>
-                <p className="text-[10px] font-extrabold uppercase text-[#64748B] tracking-wider mt-0.5">
+                <h3 className="text-lg font-black text-[#111111]">Lista Detalhada de Artigos Correspondentes</h3>
+                <p className="text-[10px] font-extrabold uppercase text-[#6B7280] tracking-wider mt-0.5">
                   Visualização rápida de preços, unidades e alertas ({filteredProducts.length} itens)
                 </p>
               </div>
@@ -863,7 +863,7 @@ export default function Reports() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-[#F8FAFC] text-[10px] font-black text-[#64748B] uppercase tracking-wider">
+                  <tr className="border-b border-[#F8F9FA] text-[10px] font-black text-[#6B7280] uppercase tracking-wider">
                     <th className="pb-4">Nome do Artigo</th>
                     <th className="pb-4">Fornecedor</th>
                     <th className="pb-4 text-center">Nível de Stock</th>
@@ -871,12 +871,12 @@ export default function Reports() {
                     <th className="pb-4 text-right">Valor em {currency}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#F8FAFC]">
+                <tbody className="divide-y divide-[#F8F9FA]">
                   {filteredProducts.slice(0, 15).map(p => {
                     const isLow = (p.stockLevel || 0) <= (p.lowStockThreshold || 5);
                     return (
                       <tr key={p.id} className="text-xs hover:bg-[#FFFFFF] transition-colors">
-                        <td className="py-4 font-extrabold text-[#0F172A]">{p.name}</td>
+                        <td className="py-4 font-extrabold text-[#111111]">{p.name}</td>
                         <td className="py-4 text-slate-600 font-semibold">{p.supplier || '—'}</td>
                         <td className="py-4 text-center">
                           <span className={cn(
@@ -888,7 +888,7 @@ export default function Reports() {
                           </span>
                         </td>
                         <td className="py-4 text-right font-bold text-slate-700">{formatSystemCurrency(p.price || 0, businessData)}</td>
-                        <td className="py-4 text-right font-black text-[#0F274C]">
+                        <td className="py-4 text-right font-black text-[#0B1F4D]">
                           {formatSystemCurrency((p.stockLevel || 0) * (p.price || 0), businessData)}
                         </td>
                       </tr>
@@ -915,21 +915,21 @@ export default function Reports() {
         </div>
       ) : (
         <div className="space-y-8 animate-in fade-in duration-300">
-          <div className="bg-[#F8FAFC] border border-[#E2E8F0] p-8 rounded-[40px] shadow-sm text-left">
-            <h3 className="text-xl font-black text-[#0F172A] tracking-tight flex items-center gap-2 mb-2 font-sans">
+          <div className="bg-[#F8F9FA] border border-[#E5E7EB] p-8 rounded-[40px] shadow-sm text-left">
+            <h3 className="text-xl font-black text-[#111111] tracking-tight flex items-center gap-2 mb-2 font-sans">
               <span>Configuração de Relatórios Periódicos Automáticos</span>
               <span className="w-1.5 h-1.5 rounded-full bg-orange-600" />
             </h3>
-            <p className="text-[#64748B] text-xs font-semibold leading-relaxed mb-6 font-sans">
+            <p className="text-[#6B7280] text-xs font-semibold leading-relaxed mb-6 font-sans">
               Programe o sistema para autogerar relatórios de faturação e auditoria de stock em PDF ao fim de cada mês comercial.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-[#E2E8F0]/60">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-6 border-b border-[#E5E7EB]/60">
               <div className="space-y-3 p-5 bg-white rounded-3xl border border-slate-100 shadow-sm">
                 <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-sans">Estado da Programação</span>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-extrabold text-[#0F172A] text-sm font-sans">Relatório Mensal PDF</h4>
+                    <h4 className="font-extrabold text-[#111111] text-sm font-sans">Relatório Mensal PDF</h4>
                     <p className="text-[11px] text-slate-405 font-medium leading-none mt-1">Próxima geração: 01 de Julho de 2026</p>
                   </div>
                   <label className="relative inline-flex items-center cursor-pointer select-none">
@@ -949,7 +949,7 @@ export default function Reports() {
               <div className="space-y-3 p-5 bg-white rounded-3xl border border-slate-100 shadow-sm flex flex-col justify-between">
                 <div>
                   <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-sans">Canal de Notificações</span>
-                  <h4 className="font-extrabold text-[#0F172A] text-sm mt-1 font-sans">Envio de Cópia PDF via WhatsApp</h4>
+                  <h4 className="font-extrabold text-[#111111] text-sm mt-1 font-sans">Envio de Cópia PDF via WhatsApp</h4>
                   <p className="text-[11px] text-slate-405 font-medium mt-1">Se ativado, envia o link direto ao proprietário.</p>
                 </div>
                 <div className="text-right">
@@ -960,7 +960,7 @@ export default function Reports() {
 
             {/* List of generated reports */}
             <div className="mt-8">
-              <h4 className="text-sm font-black text-[#0F172A] uppercase tracking-widest mb-4 flex items-center gap-1.5 font-sans">
+              <h4 className="text-sm font-black text-[#111111] uppercase tracking-widest mb-4 flex items-center gap-1.5 font-sans">
                 📋 Relatórios Coletivos Emitidos (Automação)
               </h4>
 
@@ -1008,7 +1008,7 @@ export default function Reports() {
                           outstandingCredit: stats.outstandingCredit || 12000
                         }, compInfo, products);
                       }}
-                      className="bg-[#0F172A] hover:bg-black text-[#FFFFFF] shadow-md px-4 py-2.5 rounded-xl font-bold font-sans text-xs uppercase tracking-wider cursor-pointer active:scale-95 transition-all text-center flex items-center justify-center gap-1.5"
+                      className="bg-[#111111] hover:bg-black text-[#FFFFFF] shadow-md px-4 py-2.5 rounded-xl font-bold font-sans text-xs uppercase tracking-wider cursor-pointer active:scale-95 transition-all text-center flex items-center justify-center gap-1.5"
                     >
                       🖨️ Descarregar PDF
                     </button>
@@ -1019,7 +1019,7 @@ export default function Reports() {
             
             <div className="mt-8 bg-amber-50/50 p-4 rounded-3xl border border-amber-200/50 text-amber-850 text-xs font-sans font-semibold text-left flex items-start gap-2 max-w-xl">
               <span className="text-sm">💡</span>
-              <p className="leading-relaxed text-[#64748B]">
+              <p className="leading-relaxed text-[#6B7280]">
                 <b>Dica de Produtividade:</b> As gerações automáticas de relatórios são disparadas no primeiro dia útil de cada mês útil. O proprietário recebe o arquivo em anexo diretamente na conta de WhatsApp informada nas configurações.
               </p>
             </div>
@@ -1055,17 +1055,17 @@ function StatCard({ label, value, trend, color, icon: Icon }: any) {
   return (
     <div className="p-8 bg-white rounded-[40px] border border-slate-100 shadow-sm relative overflow-hidden group hover:scale-[1.02] transition-all duration-500">
       <div className={cn("absolute top-0 right-0 p-8 opacity-5 group-hover:scale-110 transition-transform duration-500", 
-        color === 'blue' ? 'text-blue-600' : color === 'emerald' ? 'text-[#0F274C]' : color === 'rose' ? 'text-rose-600' : 'text-amber-600'
+        color === 'blue' ? 'text-blue-600' : color === 'emerald' ? 'text-[#0B1F4D]' : color === 'rose' ? 'text-rose-600' : 'text-amber-600'
       )}>
          <Icon size={80} strokeWidth={3} />
       </div>
       <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{label}</p>
-      <h4 className="text-2xl font-black text-[#0F172A] leading-tight mb-2">{value}</h4>
+      <h4 className="text-2xl font-black text-[#111111] leading-tight mb-2">{value}</h4>
       <div className="flex items-center gap-2">
         <span className={cn(
           "px-2.5 py-1 rounded-lg text-[10px] font-black capitalize tracking-wide",
           color === 'blue' ? 'bg-blue-50 text-blue-600' :
-          color === 'emerald' ? 'bg-emerald-50 text-[#0F274C]' :
+          color === 'emerald' ? 'bg-emerald-50 text-[#0B1F4D]' :
           color === 'rose' ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600'
         )}>
           {trend}

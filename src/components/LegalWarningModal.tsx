@@ -79,7 +79,7 @@ export default function LegalWarningModal({
 
         {/* Title & Subtitle */}
         <div className="text-center">
-          <h2 className="text-[18px] font-semibold tracking-wide uppercase" style={{ color: '#EF9F27' }}>
+          <h2 className="text-[18px] font-semibold tracking-wide uppercase" style={{ color: '#D4AF37' }}>
             ⚠️ AVISO LEGAL IMPORTANTE
           </h2>
           <p className="text-[12px] text-white/50 mt-1">
@@ -108,11 +108,11 @@ export default function LegalWarningModal({
             <ul className="space-y-2 list-none pl-0">
               <li className="relative pl-5">
                 <span className="absolute left-0">•</span>
-                Empresas com volume de negócios ABAIXO de <span className="font-semibold" style={{ color: '#EF9F27' }}>2.500.000 MZN</span>/ano podem utilizar este sistema livremente para gestão interna.
+                Empresas com volume de negócios ABAIXO de <span className="font-semibold" style={{ color: '#D4AF37' }}>2.500.000 MZN</span>/ano podem utilizar este sistema livremente para gestão interna.
               </li>
               <li className="relative pl-5">
                 <span className="absolute left-0">•</span>
-                Empresas com volume de negócios ACIMA de <span className="font-semibold" style={{ color: '#EF9F27' }}>2.500.000 MZN</span>/ano são legalmente obrigadas a utilizar software certificado pela AT para emissão de documentos fiscais oficiais.
+                Empresas com volume de negócios ACIMA de <span className="font-semibold" style={{ color: '#D4AF37' }}>2.500.000 MZN</span>/ano são legalmente obrigadas a utilizar software certificado pela AT para emissão de documentos fiscais oficiais.
               </li>
             </ul>
           </div>
