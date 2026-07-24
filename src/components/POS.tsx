@@ -5726,7 +5726,7 @@ export default function POS() {
       {/* 2. PROCESS RETURN & REFUND SCREEN MODAL */}
       {isReturnModalOpen && (
         <div className="fixed inset-0 z-100 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-[32px] max-w-5xl w-full h-[90vh] p-6 sm:p-8 shadow-2xl flex flex-col space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white border border-slate-200 rounded-[32px] max-w-5xl w-full h-[90vh] p-6 sm:p-8 shadow-2xl flex flex-col space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
             <button 
               type="button"
@@ -5739,34 +5739,34 @@ export default function POS() {
                 setAdjustmentAmount('');
                 setAdjustmentReason('');
               }}
-              className="absolute top-4 right-4 text-slate-400 hover:text-white p-2 hover:bg-slate-800 rounded-xl transition-all"
+              className="absolute top-4 right-4 text-slate-400 hover:text-[#0B1F4D] p-2 hover:bg-slate-100 rounded-xl transition-all"
             >
               <X size={20} />
             </button>
 
             <div className="space-y-1.5 text-left shrink-0">
-              <h3 className="text-xl font-black text-white flex items-center gap-2">
-                <span className="text-2xl text-amber-500">🔄</span> Devoluções e Ajustes de Preço
+              <h3 className="text-xl font-black text-[#0B1F4D] flex items-center gap-2">
+                <span className="text-2xl text-[#D4AF37]">🔄</span> Devoluções e Ajustes de Preço
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500">
                 Selecione uma venda concluída para devolver artigos ao stock, ou aplicar um ajuste de preço sem alterar o stock.
-                <span className="text-amber-400 font-semibold ml-1">🔒 Requer PIN do Gerente.</span>
+                <span className="text-[#B8952E] font-semibold ml-1">🔒 Requer PIN do Gerente.</span>
               </p>
             </div>
 
             {/* Split Panel Body */}
             <div className="flex-1 flex flex-col md:flex-row gap-6 min-h-0 overflow-hidden">
               {/* Left Side: Invoice Finder (40%) */}
-              <div className="flex-1 md:flex-[0.4] bg-slate-950/40 border border-slate-800 rounded-2xl p-4 flex flex-col space-y-4 min-h-0">
+              <div className="flex-1 md:flex-[0.4] bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col space-y-4 min-h-0">
                 <div className="space-y-1.5 text-left shrink-0">
-                  <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Pesquisar Fatura</label>
+                  <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Pesquisar Fatura</label>
                   <div className="flex gap-2">
                     <div className="relative flex-1">
-                      <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                      <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-blue-500" />
                       <input 
                         type="text"
                         placeholder="ID Fatura, Cliente..."
-                        className="w-full pl-9 pr-3 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                        className="w-full pl-9 pr-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-blue-950 placeholder-slate-400 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                         value={searchInvoiceTerm}
                         onChange={(e) => setSearchInvoiceTerm(e.target.value)}
                         onKeyDown={(e) => {
@@ -5777,7 +5777,7 @@ export default function POS() {
                     <button
                       type="button"
                       onClick={handleSearchInvoice}
-                      className="px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded-xl text-xs font-bold transition-all cursor-pointer"
+                      className="px-4 bg-white hover:bg-blue-50 text-blue-700 border border-blue-200 rounded-xl text-xs font-bold transition-all cursor-pointer"
                     >
                       Pesquisar
                     </button>
@@ -5786,7 +5786,7 @@ export default function POS() {
 
                 {/* List Container */}
                 <div className="flex-1 overflow-y-auto space-y-2 pr-1 select-none min-h-0">
-                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-500 text-left mb-1 shrink-0">
+                  <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-1 shrink-0">
                     {searchInvoiceTerm ? 'Resultados da Pesquisa' : 'Vendas Recentes'}
                   </div>
 
@@ -5826,23 +5826,23 @@ export default function POS() {
                             "p-3.5 rounded-xl text-left border cursor-pointer transition-all flex flex-col space-y-1.5",
                             isActive 
                               ? "bg-[#D4AF37]/10 border-[#D4AF37] shadow-sm" 
-                              : "bg-slate-900/60 border-slate-800 hover:border-slate-800"
+                              : "bg-white border-slate-200 hover:border-blue-200"
                           )}
                         >
                           <div className="flex justify-between items-center">
-                            <span className="font-mono font-black text-xs text-slate-200">#{inv.id.slice(-8).toUpperCase()}</span>
-                            <span className="font-mono text-xs font-extrabold text-amber-500">{(inv.total || 0).toLocaleString()} MT</span>
+                            <span className="font-mono font-black text-xs text-blue-950">#{inv.id.slice(-8).toUpperCase()}</span>
+                            <span className="font-mono text-xs font-extrabold text-[#B8952E]">{(inv.total || 0).toLocaleString()} MT</span>
                           </div>
                           
-                          <div className="flex justify-between text-[10px] text-slate-500 font-medium">
+                          <div className="flex justify-between text-[10px] text-slate-400 font-medium">
                             <span className="truncate max-w-[120px]">
                               {inv.customerName || inv.customerId || 'Cliente Geral'}
                             </span>
                             <span>{new Date(inv.date).toLocaleDateString()}</span>
                           </div>
 
-                          <div className="flex justify-between items-center pt-1 border-t border-slate-800/60 text-[9px]">
-                            <span className="bg-slate-800/80 text-slate-300 px-1.5 py-0.5 rounded-md font-mono">
+                          <div className="flex justify-between items-center pt-1 border-t border-slate-200 text-[9px]">
+                            <span className="bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded-md font-mono">
                               {itemsCount} {itemsCount === 1 ? 'item' : 'itens'}
                             </span>
                             <span className="font-bold text-slate-400 uppercase tracking-widest">{inv.paymentMethod}</span>
@@ -5855,22 +5855,22 @@ export default function POS() {
               </div>
 
               {/* Right Side: Return Calculator (60%) */}
-              <div className="flex-1 md:flex-[0.6] bg-slate-950/20 border border-slate-800 rounded-2xl p-4 flex flex-col min-h-0">
+              <div className="flex-1 md:flex-[0.6] bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col min-h-0">
                 {selectedInvoice ? (
                   <div className="flex-1 flex flex-col min-h-0">
                     {/* Invoice Meta Summary */}
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-slate-950/60 border border-slate-800 p-3.5 rounded-xl text-left text-xs mb-4 shrink-0">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 bg-white border border-slate-200 p-3.5 rounded-xl text-left text-xs mb-4 shrink-0">
                       <div>
                         <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider block leading-none">ID Venda</span>
-                        <span className="font-mono font-bold text-slate-200 block mt-1">#{selectedInvoice.id.toUpperCase()}</span>
+                        <span className="font-mono font-bold text-blue-950 block mt-1">#{selectedInvoice.id.toUpperCase()}</span>
                       </div>
                       <div>
                         <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider block leading-none">Cliente</span>
-                        <span className="font-semibold text-slate-200 block mt-1 truncate">{selectedInvoice.customerName || selectedInvoice.customerId || "Cliente Geral"}</span>
+                        <span className="font-semibold text-blue-950 block mt-1 truncate">{selectedInvoice.customerName || selectedInvoice.customerId || "Cliente Geral"}</span>
                       </div>
                       <div>
                         <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider block leading-none">Pago Original</span>
-                        <span className="font-mono font-bold text-emerald-500 block mt-1">{(selectedInvoice.total || 0).toLocaleString()} MT</span>
+                        <span className="font-mono font-bold text-emerald-600 block mt-1">{(selectedInvoice.total || 0).toLocaleString()} MT</span>
                       </div>
                     </div>
 
@@ -5882,8 +5882,8 @@ export default function POS() {
                         className={cn(
                           "flex-1 py-2.5 rounded-xl text-[10.5px] font-black uppercase tracking-wider transition-all cursor-pointer border",
                           returnMode === 'stock'
-                            ? "bg-amber-500 text-slate-950 border-amber-500"
-                            : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700"
+                            ? "bg-[#D4AF37] text-white border-[#D4AF37]"
+                            : "bg-white text-slate-500 border-slate-200 hover:border-blue-200"
                         )}
                       >
                         🔄 Devolução de Stock
@@ -5894,8 +5894,8 @@ export default function POS() {
                         className={cn(
                           "flex-1 py-2.5 rounded-xl text-[10.5px] font-black uppercase tracking-wider transition-all cursor-pointer border",
                           returnMode === 'price_adjustment'
-                            ? "bg-amber-500 text-slate-950 border-amber-500"
-                            : "bg-slate-950/60 text-slate-400 border-slate-800 hover:border-slate-700"
+                            ? "bg-[#D4AF37] text-white border-[#D4AF37]"
+                            : "bg-white text-slate-500 border-slate-200 hover:border-blue-200"
                         )}
                       >
                         💲 Ajuste de Preço
@@ -5904,18 +5904,18 @@ export default function POS() {
 
                     {returnMode === 'price_adjustment' ? (
                       <div className="flex-1 flex flex-col min-h-0">
-                        <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-1 shrink-0">
+                        <div className="text-[10px] font-black uppercase tracking-wider text-slate-500 text-left mb-1 shrink-0">
                           Ajuste de Preço — sem alteração de stock
                         </div>
-                        <p className="text-[10px] text-slate-500 text-left mb-4 shrink-0">
+                        <p className="text-[10px] text-slate-400 text-left mb-4 shrink-0">
                           Use esta opção para corrigir um valor cobrado incorrectamente (ex: erro de preço, cobrança a mais). O cliente mantém o(s) artigo(s) — o stock NÃO é alterado.
                         </p>
 
                         <div className="flex-1 overflow-y-auto space-y-4 pr-1 min-h-0">
                           <div className="space-y-1.5 text-left">
-                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Artigo Referente (opcional)</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Artigo Referente (opcional)</label>
                             <select
-                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
+                              className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-blue-950 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
                               value={adjustmentItemKey}
                               onChange={(e) => setAdjustmentItemKey(e.target.value)}
                             >
@@ -5932,13 +5932,13 @@ export default function POS() {
                           </div>
 
                           <div className="space-y-1.5 text-left">
-                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Valor do Ajuste (MT)</label>
+                            <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Valor do Ajuste (MT)</label>
                             <input
                               type="number"
                               min="0"
                               step="0.01"
                               placeholder="0.00"
-                              className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-sm font-mono font-black text-amber-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                              className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-sm font-mono font-black text-[#B8952E] focus:ring-2 focus:ring-[#D4AF37] outline-none"
                               value={adjustmentAmount}
                               onChange={(e) => setAdjustmentAmount(e.target.value)}
                             />
@@ -5946,21 +5946,21 @@ export default function POS() {
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="space-y-1.5 text-left">
-                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Motivo do Ajuste</label>
+                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Motivo do Ajuste</label>
                               <input
                                 type="text"
                                 required
                                 placeholder="Ex: erro de preço, artigo cobrado a mais..."
-                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                                className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-blue-950 placeholder-slate-400 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                                 value={adjustmentReason}
                                 onChange={(e) => setAdjustmentReason(e.target.value)}
                               />
                             </div>
 
                             <div className="space-y-1.5 text-left">
-                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
+                              <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Método de Reembolso</label>
                               <select
-                                className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
+                                className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-blue-950 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer"
                                 value={refundMethod}
                                 onChange={(e) => setRefundMethod(e.target.value)}
                               >
@@ -5975,10 +5975,10 @@ export default function POS() {
                           </div>
                         </div>
 
-                        <div className="mt-5 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+                        <div className="mt-5 pt-3.5 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
                           <div className="text-left w-full sm:w-auto">
-                            <span className="text-[10px] text-slate-500 uppercase tracking-widest block font-black leading-none">Total a Ajustar</span>
-                            <span className="text-2xl font-mono font-black text-amber-500 block mt-1.5 leading-none">
+                            <span className="text-[10px] text-slate-400 uppercase tracking-widest block font-black leading-none">Total a Ajustar</span>
+                            <span className="text-2xl font-mono font-black text-[#B8952E] block mt-1.5 leading-none">
                               {(Number(adjustmentAmount) || 0).toLocaleString()} MT
                             </span>
                           </div>
@@ -5987,16 +5987,16 @@ export default function POS() {
                             type="button"
                             disabled={isProcessingAdjustment || !(Number(adjustmentAmount) > 0) || !adjustmentReason.trim()}
                             onClick={() => executePriceAdjustment(false)}
-                            className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                            className="w-full sm:w-auto px-6 py-3.5 bg-[#D4AF37] hover:bg-[#B8952E] disabled:bg-slate-200 disabled:text-slate-400 disabled:border-transparent text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
                           >
                             {isProcessingAdjustment ? (
                               <>
-                                <Loader2 size={14} className="animate-spin text-slate-950" />
+                                <Loader2 size={14} className="animate-spin text-white" />
                                 A Processar...
                               </>
                             ) : (
                               <>
-                                <DollarSign size={13} className="text-slate-950" />
+                                <DollarSign size={13} className="text-white" />
                                 Confirmar Ajuste
                               </>
                             )}
@@ -6007,7 +6007,7 @@ export default function POS() {
                     <>
                     {/* Invoice items to return */}
                     <div className="flex-1 overflow-y-auto space-y-3 pr-1 min-h-0">
-                      <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 text-left mb-2 shrink-0">
+                      <div className="text-[10px] font-black uppercase tracking-wider text-slate-500 text-left mb-2 shrink-0">
                         Seleção de Artigos para Devolver
                       </div>
 
@@ -6022,12 +6022,12 @@ export default function POS() {
                             className={cn(
                               "p-3.5 rounded-xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-left transition-all",
                               isSelected 
-                                ? "bg-amber-950/10 border-amber-800/80" 
-                                : "bg-slate-900/40 border-slate-800"
+                                ? "bg-[#D4AF37]/10 border-[#D4AF37]/40" 
+                                : "bg-white border-slate-200"
                             )}
                           >
                             <div className="space-y-1">
-                              <span className="text-xs font-bold text-slate-100 block">{item.name}</span>
+                              <span className="text-xs font-bold text-blue-950 block">{item.name}</span>
                               <div className="flex items-center gap-2 text-[10px] text-slate-400 font-medium">
                                 <span>Un: <strong className="font-mono">{item.selectedUnit || 'un'}</strong></span>
                                 <span>|</span>
@@ -6039,7 +6039,7 @@ export default function POS() {
 
                             {/* Quantity Selector +/- */}
                             <div className="flex items-center gap-3 self-end sm:self-auto shrink-0 select-none">
-                              <div className="flex items-center rounded-lg overflow-hidden bg-slate-950 border border-slate-800 h-8">
+                              <div className="flex items-center rounded-lg overflow-hidden bg-slate-50 border border-slate-200 h-8">
                                 <button 
                                   type="button"
                                   onClick={() => {
@@ -6048,7 +6048,7 @@ export default function POS() {
                                       [itemKey]: Math.max(0, qtyToReturn - 1)
                                     }));
                                   }}
-                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-800 text-slate-400 transition-colors cursor-pointer"
+                                  className="w-8 h-full flex items-center justify-center hover:bg-blue-100 text-blue-600 transition-colors cursor-pointer"
                                 >
                                   <Minus size={12} className="stroke-[2.5]" />
                                 </button>
@@ -6067,7 +6067,7 @@ export default function POS() {
                                       }));
                                     }
                                   }}
-                                  className="w-10 h-full text-center text-xs font-mono font-black border-none bg-transparent outline-none p-0 text-slate-100"
+                                  className="w-10 h-full text-center text-xs font-mono font-black border-none bg-transparent outline-none p-0 text-blue-950"
                                 />
 
                                 <button 
@@ -6078,13 +6078,13 @@ export default function POS() {
                                       [itemKey]: Math.min(item.quantity, qtyToReturn + 1)
                                     }));
                                   }}
-                                  className="w-8 h-full flex items-center justify-center hover:bg-slate-800 text-slate-400 transition-colors cursor-pointer"
+                                  className="w-8 h-full flex items-center justify-center hover:bg-blue-100 text-blue-600 transition-colors cursor-pointer"
                                 >
                                   <Plus size={12} className="stroke-[2.5]" />
                                 </button>
                               </div>
                               
-                              <div className="w-16 text-right font-mono text-xs font-bold text-slate-200">
+                              <div className="w-16 text-right font-mono text-xs font-bold text-blue-950">
                                 {(item.price * qtyToReturn).toLocaleString()} MT
                               </div>
                             </div>
@@ -6094,12 +6094,12 @@ export default function POS() {
                     </div>
 
                     {/* Refund Parameters Section */}
-                    <div className="mt-4 pt-3.5 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left shrink-0">
+                    <div className="mt-4 pt-3.5 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-left shrink-0">
                       {/* Return Reason dropdown */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Motivo da Devolução</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Motivo da Devolução</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-blue-950 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                           value={returnReason}
                           onChange={(e) => setReturnReason(e.target.value)}
                         >
@@ -6112,9 +6112,9 @@ export default function POS() {
 
                       {/* Refund Payment Method dropdown */}
                       <div className="space-y-1.5">
-                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Método de Reembolso</label>
+                        <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Método de Reembolso</label>
                         <select 
-                          className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-bold text-slate-200 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
+                          className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-blue-950 focus:ring-2 focus:ring-[#D4AF37] outline-none cursor-pointer animate-none"
                           value={refundMethod}
                           onChange={(e) => setRefundMethod(e.target.value)}
                         >
@@ -6129,12 +6129,12 @@ export default function POS() {
 
                       {returnReason === 'Other' && (
                         <div className="col-span-1 sm:col-span-2 space-y-1.5 animate-in slide-in-from-top-2 duration-155 text-left">
-                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-400">Especifique o Motivo</label>
+                          <label className="text-[10px] font-black uppercase tracking-wider text-slate-500">Especifique o Motivo</label>
                           <input 
                             type="text"
                             required
                             placeholder="Descreva detalhadamente o motivo da devolução..."
-                            className="w-full px-3 py-2.5 bg-slate-950/60 border border-slate-800 rounded-xl text-xs font-semibold text-slate-100 placeholder-slate-500 focus:ring-2 focus:ring-[#D4AF37] outline-none"
+                            className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-xl text-xs font-semibold text-blue-950 placeholder-slate-400 focus:ring-2 focus:ring-[#D4AF37] outline-none"
                             value={customReturnReason}
                             onChange={(e) => setCustomReturnReason(e.target.value)}
                           />
@@ -6143,10 +6143,10 @@ export default function POS() {
                     </div>
 
                     {/* Grand Refund Amount Summary and Action button */}
-                    <div className="mt-5 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
+                    <div className="mt-5 pt-3.5 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
                       <div className="text-left w-full sm:w-auto">
-                        <span className="text-[10px] text-slate-500 uppercase tracking-widest block font-black leading-none">Total Reembolso</span>
-                        <span className="text-2xl font-mono font-black text-amber-500 block mt-1.5 leading-none">
+                        <span className="text-[10px] text-slate-400 uppercase tracking-widest block font-black leading-none">Total Reembolso</span>
+                        <span className="text-2xl font-mono font-black text-[#B8952E] block mt-1.5 leading-none">
                           {selectedInvoice.items.reduce((acc: number, item: any) => acc + (item.price * (returnQuantities[`${item.id}-${item.selectedUnit}`] || 0)), 0).toLocaleString()} MT
                         </span>
                       </div>
@@ -6155,16 +6155,16 @@ export default function POS() {
                         type="button"
                         disabled={isProcessingReturn || selectedInvoice.items.reduce((acc: number, item: any) => acc + (item.price * (returnQuantities[`${item.id}-${item.selectedUnit}`] || 0)), 0) <= 0}
                         onClick={() => executeRefund(false)}
-                        className="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 disabled:bg-slate-800 disabled:text-slate-600 disabled:border-transparent text-slate-950 rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
+                        className="w-full sm:w-auto px-6 py-3.5 bg-[#D4AF37] hover:bg-[#B8952E] disabled:bg-slate-200 disabled:text-slate-400 disabled:border-transparent text-white rounded-xl font-black text-xs uppercase tracking-wider transition-all cursor-pointer text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-500/10"
                       >
                         {isProcessingReturn ? (
                           <>
-                            <Loader2 size={14} className="animate-spin text-slate-950" />
+                            <Loader2 size={14} className="animate-spin text-white" />
                             A Processar...
                           </>
                         ) : (
                           <>
-                            <RefreshCw size={13} className="text-slate-950" />
+                            <RefreshCw size={13} className="text-white" />
                             Confirmar Devolução
                           </>
                         )}
@@ -6174,10 +6174,10 @@ export default function POS() {
                     )}
                   </div>
                 ) : (
-                  <div className="flex-1 flex flex-col items-center justify-center text-slate-500 p-8 space-y-3 select-none">
+                  <div className="flex-1 flex flex-col items-center justify-center text-slate-400 p-8 space-y-3 select-none">
                     <div className="text-5xl">📄</div>
-                    <p className="text-xs font-black uppercase tracking-widest text-slate-400">Nenhuma Fatura Selecionada</p>
-                    <p className="text-xs text-slate-500 max-w-xs text-center leading-normal">
+                    <p className="text-xs font-black uppercase tracking-widest text-slate-500">Nenhuma Fatura Selecionada</p>
+                    <p className="text-xs text-slate-400 max-w-xs text-center leading-normal">
                       Selecione uma fatura a partir da lista à esquerda ou pesquise pelo identificador único para iniciar a devolução de artigos.
                     </p>
                   </div>
