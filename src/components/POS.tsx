@@ -55,7 +55,10 @@ import {
   DollarSign,
   ArrowLeft,
   RefreshCw,
-  HelpCircle
+  HelpCircle,
+  MoreVertical,
+  ChevronLeft,
+  Edit2
 } from 'lucide-react';
 import { cn, formatDateInTimezone, formatDateTimeInTimezone } from '../lib/utils';
 import { toast } from 'sonner';
@@ -270,6 +273,16 @@ export default function POS() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [activeCartTab, setActiveCartTab] = useState<'items' | 'payment'>('items');
   const [catalogCategory, setCatalogCategory] = useState<string>('all');
+  const [catalogSearchTerm, setCatalogSearchTerm] = useState('');
+  const [catalogSupplierFilter, setCatalogSupplierFilter] = useState('all');
+  const [catalogStockFilter, setCatalogStockFilter] = useState<'all' | 'in_stock' | 'low_stock' | 'out_of_stock'>('all');
+  const [catalogSortBy, setCatalogSortBy] = useState<'name' | 'newest' | 'stock_desc' | 'price_asc'>('name');
+  const [catalogPage, setCatalogPage] = useState(1);
+  const [catalogPageSize, setCatalogPageSize] = useState(20);
+  const [catalogHighlightIndex, setCatalogHighlightIndex] = useState(0);
+  const [catalogRowMenuId, setCatalogRowMenuId] = useState<string | null>(null);
+  const [catalogRefreshing, setCatalogRefreshing] = useState(false);
+  const [viewingCatalogProduct, setViewingCatalogProduct] = useState<any>(null);
   const [selectedCustomerId, setSelectedCustomerId] = useState<string>('Walk-in');
   const [saleType, setSaleType] = useState<'retail' | 'wholesale'>('retail');
   const [paymentMethod, setPaymentMethod] = useState<string>('cash');
@@ -2052,6 +2065,87 @@ export default function POS() {
       p.barcode?.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  // ===================== Premium Product Catalog Modal — derived data =====================
+  const catalogCategories = React.useMemo(() => {
+    return Array.from(new Set(products.map(p => p.category).filter(Boolean))).sort();
+  }, [products]);
+
+  const catalogSuppliers = React.useMemo(() => {
+    return Array.from(new Set(products.map(p => p.supplier).filter(Boolean))).sort();
+  }, [products]);
+
+  const getCatalogStockStatus = (p: any): 'in_stock' | 'low_stock' | 'out_of_stock' => {
+    const stock = Number(p.stockLevel) || 0;
+    const threshold = Number(p.lowStockThreshold) || 5;
+    if (stock <= 0) return 'out_of_stock';
+    if (stock <= threshold) return 'low_stock';
+    return 'in_stock';
+  };
+
+  const catalogSummary = React.useMemo(() => {
+    let costValue = 0, saleValue = 0, units = 0, low = 0;
+    products.forEach(p => {
+      const stock = Number(p.stockLevel) || 0;
+      costValue += stock * (Number(p.costPrice) || 0);
+      saleValue += stock * (Number(p.price) || 0);
+      units += stock;
+      if (getCatalogStockStatus(p) === 'low_stock') low += 1;
+    });
+    return { count: products.length, costValue, saleValue, units, low };
+  }, [products]);
+
+  const catalogFilteredProducts = React.useMemo(() => {
+    const q = catalogSearchTerm.trim().toLowerCase();
+    let list = products.filter(p => {
+      const matchesSearch = !q ||
+        p.name?.toLowerCase().includes(q) ||
+        p.sku?.toLowerCase().includes(q) ||
+        p.barcode?.toLowerCase().includes(q) ||
+        p.category?.toLowerCase().includes(q);
+      const matchesCategory = catalogCategory === 'all' || p.category === catalogCategory;
+      const matchesSupplier = catalogSupplierFilter === 'all' || p.supplier === catalogSupplierFilter;
+      const matchesStock = catalogStockFilter === 'all' || getCatalogStockStatus(p) === catalogStockFilter;
+      return matchesSearch && matchesCategory && matchesSupplier && matchesStock;
+    });
+
+    list = [...list].sort((a, b) => {
+      switch (catalogSortBy) {
+        case 'newest':
+          return (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0);
+        case 'stock_desc':
+          return (Number(b.stockLevel) || 0) - (Number(a.stockLevel) || 0);
+        case 'price_asc':
+          return (Number(a.price) || 0) - (Number(b.price) || 0);
+        case 'name':
+        default:
+          return (a.name || '').localeCompare(b.name || '');
+      }
+    });
+
+    return list;
+  }, [products, catalogSearchTerm, catalogCategory, catalogSupplierFilter, catalogStockFilter, catalogSortBy]);
+
+  const catalogTotalPages = Math.max(1, Math.ceil(catalogFilteredProducts.length / catalogPageSize));
+  const catalogPageClamped = Math.min(catalogPage, catalogTotalPages);
+  const catalogStartIndex = (catalogPageClamped - 1) * catalogPageSize;
+  const catalogPaginatedProducts = catalogFilteredProducts.slice(catalogStartIndex, catalogStartIndex + catalogPageSize);
+
+  const handleCatalogAddProduct = (product: any) => {
+    const limitStock = Number(product.stockLevel || 0);
+    if (limitStock <= 0) {
+      toast.error("Ausente de stock!");
+      return;
+    }
+    addToCart(product);
+    playSuccessBeep();
+    setIsCatalogOpen(false);
+  };
+
+  useEffect(() => {
+    setCatalogPage(1);
+    setCatalogHighlightIndex(0);
+  }, [catalogSearchTerm, catalogCategory, catalogSupplierFilter, catalogStockFilter, catalogSortBy, catalogPageSize]);
 
   // Financial aggregation totals
   const subtotal = cart.reduce((sum, item) => {
@@ -5202,77 +5296,421 @@ export default function POS() {
       )}
               {/* POS Product Catalog / Browse Modal (📦 Trigger) */}
       {isCatalogOpen && (
-        <div className="fixed inset-0 z-100 flex items-center justify-center p-4 bg-[#0B1F4D]/70 backdrop-blur-xs select-none">
-          <div className="bg-white w-full max-w-4xl h-[85vh] rounded-3xl overflow-hidden shadow-2xl p-6 font-sans text-left text-blue-900 animate-in zoom-in-95 duration-200 flex flex-col">
-            <div className="flex justify-between items-center mb-4 border-b border-blue-100 pb-2 flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <Package className="text-blue-600" size={18} />
-                <h3 className="text-sm font-black uppercase tracking-widest text-blue-950">Catálogo de Artigos do ERP</h3>
+        <div 
+          className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-8 bg-[#0B1F4D]/70 backdrop-blur-sm select-none"
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              setCatalogHighlightIndex(i => Math.min(catalogPaginatedProducts.length - 1, i + 1));
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              setCatalogHighlightIndex(i => Math.max(0, i - 1));
+            } else if (e.key === 'Enter') {
+              const item = catalogPaginatedProducts[catalogHighlightIndex];
+              if (item) handleCatalogAddProduct(item);
+            } else if (e.key === 'Escape') {
+              setIsCatalogOpen(false);
+            }
+          }}
+        >
+          <div className="bg-white w-[90vw] h-[85vh] rounded-2xl overflow-hidden shadow-2xl font-sans text-left text-blue-950 animate-in zoom-in-95 duration-200 flex flex-col">
+
+            {/* ============================= HEADER ============================= */}
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 shrink-0">
+              <div>
+                <h3 className="text-base font-black text-[#0B1F4D] flex items-center gap-2">
+                  <Package size={18} className="text-[#D4AF37]" /> Product Catalog
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">Select a product to add to the sale</p>
               </div>
-              <button onClick={() => setIsCatalogOpen(false)} className="text-blue-400 hover:text-blue-900">
-                <X size={18} />
+              <button
+                type="button"
+                onClick={() => setIsCatalogOpen(false)}
+                className="text-slate-400 hover:text-[#0B1F4D] hover:bg-slate-100 p-2 rounded-xl transition-all cursor-pointer"
+              >
+                <X size={20} />
               </button>
             </div>
 
-            {/* Catalog content filters */}
-            <div className="flex items-center gap-2 mb-4 overflow-x-auto pb-1 flex-shrink-0">
-              {['all', ...Array.from(new Set(products.map(p => p.category || 'Outros')))].map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setCatalogCategory(cat)}
-                  className={cn(
-                    "py-1 px-3.5 rounded-full text-[10px] font-bold uppercase shrink-0 transition-colors uppercase tracking-wider",
-                    catalogCategory === cat 
-                      ? "bg-blue-600 text-white" 
-                      : "bg-blue-50 text-blue-700 hover:bg-blue-100/80"
-                  )}
-                >
-                  {cat === 'all' ? 'Todos' : cat}
-                </button>
-              ))}
+            {/* ===================== SEARCH & FILTER TOOLBAR ===================== */}
+            <div className="flex flex-wrap items-center gap-2 px-6 py-3 border-b border-slate-200 shrink-0 bg-slate-50/60">
+              <div className="relative flex-1 min-w-[220px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 pointer-events-none" size={15} />
+                <input
+                  autoFocus
+                  type="text"
+                  placeholder="Search by name, barcode, SKU or category..."
+                  value={catalogSearchTerm}
+                  onChange={(e) => setCatalogSearchTerm(e.target.value)}
+                  className="w-full h-9 pl-9 pr-3 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-blue-950 placeholder-slate-400 outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all"
+                />
+              </div>
+
+              <select
+                value={catalogCategory}
+                onChange={(e) => setCatalogCategory(e.target.value)}
+                className="h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-blue-950 outline-none focus:border-[#D4AF37] cursor-pointer"
+              >
+                <option value="all">All Categories</option>
+                {catalogCategories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+              </select>
+
+              <select
+                value={catalogSupplierFilter}
+                onChange={(e) => setCatalogSupplierFilter(e.target.value)}
+                className="h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-blue-950 outline-none focus:border-[#D4AF37] cursor-pointer"
+              >
+                <option value="all">All Suppliers</option>
+                {catalogSuppliers.map(sup => <option key={sup} value={sup}>{sup}</option>)}
+              </select>
+
+              <select
+                value={catalogStockFilter}
+                onChange={(e) => setCatalogStockFilter(e.target.value as any)}
+                className="h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-blue-950 outline-none focus:border-[#D4AF37] cursor-pointer"
+              >
+                <option value="all">All Stock</option>
+                <option value="in_stock">In Stock</option>
+                <option value="low_stock">Low Stock</option>
+                <option value="out_of_stock">Out of Stock</option>
+              </select>
+
+              <select
+                value={catalogSortBy}
+                onChange={(e) => setCatalogSortBy(e.target.value as any)}
+                className="h-9 px-2.5 bg-white border border-slate-200 rounded-lg text-[11px] font-bold text-blue-950 outline-none focus:border-[#D4AF37] cursor-pointer"
+              >
+                <option value="name">Sort: Name</option>
+                <option value="newest">Sort: Newest</option>
+                <option value="stock_desc">Sort: Highest Stock</option>
+                <option value="price_asc">Sort: Lowest Price</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setCatalogRefreshing(true);
+                  toast.success("Catálogo atualizado (dados em tempo real).");
+                  setTimeout(() => setCatalogRefreshing(false), 500);
+                }}
+                className="h-9 w-9 flex items-center justify-center bg-white border border-slate-200 rounded-lg text-slate-500 hover:text-[#0B1F4D] hover:bg-slate-100 transition-all cursor-pointer shrink-0"
+                title="Atualizar"
+              >
+                <RefreshCw size={14} className={catalogRefreshing ? "animate-spin" : ""} />
+              </button>
             </div>
 
-            {/* Catalog List */}
-            <div className="flex-1 overflow-y-auto divide-y divide-blue-100/70 border border-blue-100/70 rounded-xl">
-              {products
-                .filter(p => catalogCategory === 'all' || p.category === catalogCategory)
-                .map(product => {
-                  const limitStock = Number(product.stockLevel || 0);
-                  const isLow = limitStock <= 5;
+            {/* ========================== SUMMARY CARDS ========================== */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5 px-6 py-3 border-b border-slate-200 shrink-0">
+              <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                  <Package size={14} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block leading-none">Products</span>
+                  <span className="text-sm font-black text-blue-950 block mt-1 leading-none">{catalogSummary.count.toLocaleString()}</span>
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                  <DollarSign size={14} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block leading-none">Inventory Cost</span>
+                  <span className="text-sm font-black text-blue-950 block mt-1 leading-none truncate">{catalogSummary.costValue.toLocaleString()} MT</span>
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+                  <DollarSign size={14} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block leading-none">Inventory Sale Value</span>
+                  <span className="text-sm font-black text-emerald-600 block mt-1 leading-none truncate">{catalogSummary.saleValue.toLocaleString()} MT</span>
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-[#D4AF37]/10 text-[#B8952E] flex items-center justify-center shrink-0">
+                  <ShoppingCart size={14} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block leading-none">Total Units</span>
+                  <span className="text-sm font-black text-blue-950 block mt-1 leading-none">{catalogSummary.units.toLocaleString()}</span>
+                </div>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-2.5 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
+                  <AlertCircle size={14} />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block leading-none">Low Stock</span>
+                  <span className="text-sm font-black text-amber-700 block mt-1 leading-none">{catalogSummary.low.toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ============================ DATA GRID ============================ */}
+            <div className="flex-1 overflow-y-auto min-h-0">
+              <table className="w-full text-left border-collapse">
+                <thead className="sticky top-0 z-10 bg-slate-50 border-b border-slate-200 text-[9.5px] font-black text-slate-500 uppercase tracking-wider select-none">
+                  <tr>
+                    <th className="py-2.5 pl-6 pr-2 w-12"></th>
+                    <th className="py-2.5 px-2 min-w-[200px]">Product</th>
+                    <th className="py-2.5 px-2 w-24">SKU</th>
+                    <th className="py-2.5 px-2 w-28">Category</th>
+                    <th className="py-2.5 px-2 w-24 text-right">Cost Price</th>
+                    <th className="py-2.5 px-2 w-24 text-right">Selling Price</th>
+                    <th className="py-2.5 px-2 w-24 text-right">Stock</th>
+                    <th className="py-2.5 px-2 w-28 text-right">Stock Value</th>
+                    <th className="py-2.5 px-2 w-24 text-center">Status</th>
+                    <th className="py-2.5 pl-2 pr-6 w-20 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    Array.from({ length: 8 }).map((_, i) => (
+                      <tr key={`skeleton-${i}`} className={i % 2 === 1 ? "bg-slate-50/60" : "bg-white"}>
+                        <td className="py-2.5 pl-6 pr-2"><div className="w-8 h-8 rounded-md bg-slate-200 animate-pulse" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-32 rounded bg-slate-200 animate-pulse" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-14 rounded bg-slate-200 animate-pulse" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-16 rounded bg-slate-200 animate-pulse" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-12 rounded bg-slate-200 animate-pulse ml-auto" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-12 rounded bg-slate-200 animate-pulse ml-auto" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-10 rounded bg-slate-200 animate-pulse ml-auto" /></td>
+                        <td className="py-2.5 px-2"><div className="h-3 w-16 rounded bg-slate-200 animate-pulse ml-auto" /></td>
+                        <td className="py-2.5 px-2"><div className="h-4 w-16 rounded-full bg-slate-200 animate-pulse mx-auto" /></td>
+                        <td className="py-2.5 pl-2 pr-6"><div className="h-6 w-12 rounded-md bg-slate-200 animate-pulse mx-auto" /></td>
+                      </tr>
+                    ))
+                  ) : catalogPaginatedProducts.length === 0 ? (
+                    <tr>
+                      <td colSpan={10} className="py-16 text-center">
+                        <Package size={40} className="mx-auto mb-3 text-slate-300" />
+                        <p className="text-sm font-bold text-slate-500">Nenhum produto encontrado</p>
+                        <p className="text-xs text-slate-400 mt-1">Tente ajustar a pesquisa ou os filtros.</p>
+                      </td>
+                    </tr>
+                  ) : (
+                    catalogPaginatedProducts.map((product, idx) => {
+                      const stock = Number(product.stockLevel) || 0;
+                      const costPrice = Number(product.costPrice) || 0;
+                      const sellPrice = Number(product.price) || 0;
+                      const stockValue = stock * costPrice;
+                      const status = getCatalogStockStatus(product);
+                      const isHighlighted = idx === catalogHighlightIndex;
+                      const stockColor =
+                        stock >= 100 ? "text-emerald-600" :
+                        stock >= 20 ? "text-blue-600" :
+                        stock >= 5 ? "text-amber-600" :
+                        "text-rose-600";
+
+                      return (
+                        <tr
+                          key={product.id}
+                          onClick={() => setCatalogHighlightIndex(idx)}
+                          onDoubleClick={() => handleCatalogAddProduct(product)}
+                          className={cn(
+                            "cursor-pointer transition-colors text-[11.5px] border-b border-slate-100",
+                            isHighlighted ? "bg-[#D4AF37]/10" : idx % 2 === 1 ? "bg-slate-50/60 hover:bg-blue-50/50" : "bg-white hover:bg-blue-50/50"
+                          )}
+                        >
+                          <td className="py-2 pl-6 pr-2">
+                            <div className="w-8 h-8 rounded-md bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
+                              {product.imageUrl ? (
+                                <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                              ) : (
+                                <Package size={13} className="text-slate-300" />
+                              )}
+                            </div>
+                          </td>
+                          <td className="py-2 px-2">
+                            <span className="font-bold text-blue-950 block truncate max-w-[220px]">{product.name}</span>
+                          </td>
+                          <td className="py-2 px-2 font-mono text-slate-500 whitespace-nowrap">{product.sku || '—'}</td>
+                          <td className="py-2 px-2 text-slate-500 whitespace-nowrap truncate max-w-[110px]">{product.category || '—'}</td>
+                          <td className="py-2 px-2 text-right font-mono text-slate-600 whitespace-nowrap">{costPrice.toLocaleString()} MT</td>
+                          <td className="py-2 px-2 text-right font-mono font-bold text-emerald-600 whitespace-nowrap">{sellPrice.toLocaleString()} MT</td>
+                          <td className={cn("py-2 px-2 text-right font-mono font-bold whitespace-nowrap", stockColor)}>
+                            {stock.toLocaleString()} <span className="font-semibold text-slate-400">{product.baseUnitLabel || 'un'}</span>
+                          </td>
+                          <td className="py-2 px-2 text-right font-mono text-slate-600 whitespace-nowrap">{stockValue.toLocaleString()} MT</td>
+                          <td className="py-2 px-2 text-center">
+                            <span className={cn(
+                              "inline-block px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wide whitespace-nowrap",
+                              status === 'in_stock' ? "bg-emerald-50 text-emerald-700 border border-emerald-200" :
+                              status === 'low_stock' ? "bg-amber-50 text-amber-700 border border-amber-200" :
+                              "bg-rose-50 text-rose-700 border border-rose-200"
+                            )}>
+                              {status === 'in_stock' ? '🟢 In Stock' : status === 'low_stock' ? '🟡 Low Stock' : '🔴 Out of Stock'}
+                            </span>
+                          </td>
+                          <td className="py-2 pl-2 pr-6 text-center" onClick={(e) => e.stopPropagation()}>
+                            <div className="flex items-center justify-center gap-1">
+                              <button
+                                type="button"
+                                onClick={() => handleCatalogAddProduct(product)}
+                                disabled={stock <= 0}
+                                className="px-2.5 py-1 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-md text-[10px] font-black uppercase tracking-wide transition-all cursor-pointer disabled:cursor-not-allowed flex items-center gap-1"
+                                title="Adicionar à venda"
+                              >
+                                <Plus size={11} /> Add
+                              </button>
+                              <div className="relative">
+                                <button
+                                  type="button"
+                                  onClick={() => setCatalogRowMenuId(catalogRowMenuId === product.id ? null : product.id)}
+                                  className="p-1 text-slate-400 hover:text-[#0B1F4D] hover:bg-slate-100 rounded-md transition-all cursor-pointer"
+                                  title="Mais ações"
+                                >
+                                  <MoreVertical size={13} />
+                                </button>
+                                {catalogRowMenuId === product.id && (
+                                  <div className="absolute z-30 top-full mt-1 right-0 w-44 bg-white border border-slate-200 rounded-lg shadow-lg py-1 text-[11px] font-bold text-slate-700 text-left">
+                                    <button
+                                      type="button"
+                                      onClick={() => { setViewingCatalogProduct(product); setCatalogRowMenuId(null); }}
+                                      className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5"
+                                    >
+                                      <Eye size={12} /> View
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => { toast("Edição de produtos disponível no módulo de Inventário."); setCatalogRowMenuId(null); }}
+                                      className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5"
+                                    >
+                                      <Edit2 size={12} /> Edit
+                                    </button>
+                                    <button
+                                      type="button"
+                                      onClick={() => { toast("Histórico de inventário disponível no módulo de Inventário."); setCatalogRowMenuId(null); }}
+                                      className="w-full text-left px-3 py-1.5 hover:bg-slate-50 cursor-pointer flex items-center gap-1.5"
+                                    >
+                                      <History size={12} /> Inventory History
+                                    </button>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
+
+            {/* ============================ PAGINATION ============================ */}
+            <div className="flex flex-wrap items-center justify-between gap-3 px-6 py-3 border-t border-slate-200 shrink-0 bg-slate-50/60">
+              <span className="text-[11px] font-semibold text-slate-500">
+                {catalogFilteredProducts.length === 0
+                  ? 'Showing 0 of 0'
+                  : `Showing ${catalogStartIndex + 1}–${Math.min(catalogStartIndex + catalogPageSize, catalogFilteredProducts.length)} of ${catalogFilteredProducts.length}`}
+              </span>
+
+              <div className="flex items-center gap-1">
+                <button
+                  type="button"
+                  onClick={() => setCatalogPage(p => Math.max(1, p - 1))}
+                  disabled={catalogPageClamped <= 1}
+                  className="h-7 px-2 flex items-center gap-1 rounded-lg border border-slate-200 bg-white text-slate-600 text-[11px] font-bold hover:bg-blue-50 disabled:opacity-40 disabled:pointer-events-none cursor-pointer transition-all"
+                >
+                  <ChevronLeft size={13} /> Previous
+                </button>
+                {Array.from({ length: catalogTotalPages }).slice(0, 5).map((_, i) => {
+                  const pageNum = i + 1;
                   return (
-                    <div
-                      key={product.id}
-                      onClick={() => {
-                        if (limitStock <= 0) {
-                          toast.error("Ausente de stock!");
-                          return;
-                        }
-                        addToCart(product);
-                        playSuccessBeep();
-                      }}
+                    <button
+                      key={pageNum}
+                      type="button"
+                      onClick={() => setCatalogPage(pageNum)}
                       className={cn(
-                        "flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors",
-                        limitStock <= 0 ? "opacity-50 cursor-not-allowed" : "hover:bg-blue-50/60"
+                        "h-7 w-7 flex items-center justify-center rounded-lg text-[11px] font-bold transition-all cursor-pointer",
+                        catalogPageClamped === pageNum ? "bg-[#0B1F4D] text-white" : "bg-white border border-slate-200 text-slate-600 hover:bg-blue-50"
                       )}
                     >
-                      <div className="flex-1 min-w-0 flex items-baseline gap-2">
-                        <h4 className="text-xs font-black text-blue-950 truncate">{product.name}</h4>
-                        <span className="text-[10px] text-blue-500 font-medium shrink-0">{product.category || 'Normal'}</span>
-                      </div>
-                      <span className={cn(
-                        "text-[9px] font-black uppercase shrink-0 w-[70px] text-right",
-                        isLow && limitStock > 0 ? "text-rose-600 animate-pulse" : "text-blue-400"
-                      )}>
-                        Stock: {limitStock}
-                      </span>
-                      <span className="text-xs font-mono font-black text-blue-800 shrink-0 w-[80px] text-right">
-                        {(product.price || 0).toLocaleString()} MT
-                      </span>
-                    </div>
+                      {pageNum}
+                    </button>
                   );
                 })}
+                {catalogTotalPages > 5 && <span className="text-slate-400 text-xs px-1">…</span>}
+                <button
+                  type="button"
+                  onClick={() => setCatalogPage(p => Math.min(catalogTotalPages, p + 1))}
+                  disabled={catalogPageClamped >= catalogTotalPages}
+                  className="h-7 px-2 flex items-center gap-1 rounded-lg border border-slate-200 bg-white text-slate-600 text-[11px] font-bold hover:bg-blue-50 disabled:opacity-40 disabled:pointer-events-none cursor-pointer transition-all"
+                >
+                  Next <ChevronRight size={13} />
+                </button>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Rows:</span>
+                {[20, 50, 100].map(size => (
+                  <button
+                    key={size}
+                    type="button"
+                    onClick={() => setCatalogPageSize(size)}
+                    className={cn(
+                      "h-7 px-2 rounded-lg text-[11px] font-bold transition-all cursor-pointer",
+                      catalogPageSize === size ? "bg-[#0B1F4D] text-white" : "bg-white border border-slate-200 text-slate-600 hover:bg-blue-50"
+                    )}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
+
+          {/* Lightweight product preview (View action) */}
+          {viewingCatalogProduct && (
+            <div
+              className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-[#0B1F4D]/60 backdrop-blur-sm"
+              onClick={() => setViewingCatalogProduct(null)}
+            >
+              <div
+                className="bg-white w-full max-w-sm rounded-2xl shadow-2xl p-5 text-left animate-in zoom-in-95 duration-150"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-14 h-14 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden flex items-center justify-center shrink-0">
+                    {viewingCatalogProduct.imageUrl ? (
+                      <img src={viewingCatalogProduct.imageUrl} alt={viewingCatalogProduct.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                    ) : (
+                      <Package size={22} className="text-slate-300" />
+                    )}
+                  </div>
+                  <button onClick={() => setViewingCatalogProduct(null)} className="text-slate-400 hover:text-[#0B1F4D] p-1 cursor-pointer">
+                    <X size={16} />
+                  </button>
+                </div>
+                <h4 className="text-sm font-black text-blue-950">{viewingCatalogProduct.name}</h4>
+                <p className="text-[11px] text-slate-400 font-mono mt-0.5">SKU: {viewingCatalogProduct.sku || '—'} · {viewingCatalogProduct.category || 'Sem categoria'}</p>
+                <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
+                  <div className="bg-slate-50 rounded-lg p-2">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase block">Custo</span>
+                    <span className="font-mono font-bold text-blue-950">{(Number(viewingCatalogProduct.costPrice) || 0).toLocaleString()} MT</span>
+                  </div>
+                  <div className="bg-slate-50 rounded-lg p-2">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase block">Venda</span>
+                    <span className="font-mono font-bold text-emerald-600">{(Number(viewingCatalogProduct.price) || 0).toLocaleString()} MT</span>
+                  </div>
+                  <div className="bg-slate-50 rounded-lg p-2 col-span-2">
+                    <span className="text-[9px] font-bold text-slate-400 uppercase block">Stock</span>
+                    <span className="font-mono font-bold text-blue-950">{Number(viewingCatalogProduct.stockLevel) || 0} un</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCatalogAddProduct(viewingCatalogProduct)}
+                  className="w-full mt-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center gap-1.5"
+                >
+                  <Plus size={13} /> Add to Sale
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
 
