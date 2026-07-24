@@ -54,7 +54,8 @@ import {
   FileText,
   DollarSign,
   ArrowLeft,
-  RefreshCw
+  RefreshCw,
+  HelpCircle
 } from 'lucide-react';
 import { cn, formatDateInTimezone, formatDateTimeInTimezone } from '../lib/utils';
 import { toast } from 'sonner';
@@ -3535,72 +3536,42 @@ export default function POS() {
   return (
     <div className="flex flex-col w-full h-full bg-[#FFFFFF] pos-root p-3 select-none overflow-hidden font-sans gap-1.5">
       
-      {/* Quick Sale Keyboard Status & Buffer Bar */}
-      <div className="bg-blue-900 border border-[#D4AF37]/50 text-white py-1 px-3.5 rounded-lg flex items-center justify-between gap-3 text-[11px] shadow-sm shrink-0 h-8">
-        <div className="flex items-center gap-2">
-          <span className="bg-[#D4AF37] text-[#0B1F4D] px-1.5 py-0.5 rounded text-[9px] font-black uppercase tracking-wider animate-pulse flex items-center gap-1 shrink-0">
-            <span className="shrink-0">⚡</span> QUICK
-          </span>
-          {inputBuffer ? (
-            <div className="flex items-center gap-2">
-              <span className="text-blue-300 font-medium">Comando:</span>
-              <span className="font-mono bg-[#0B1F4D] text-[#FFFFFF] px-2 py-0.5 rounded text-xs font-black border border-[#D4AF37]/30 select-all tracking-wider">
-                {inputBuffer}
-              </span>
-              <span className="text-[10px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
-                [Enter: confirmar • Esc: limpar]
-              </span>
-            </div>
-          ) : lastActionMessage ? (
-            <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
-              <span className="text-blue-300 font-medium">Última ação:</span>
-              <span className="bg-emerald-950/40 px-2 py-0.5 rounded text-[10.5px]">
-                {lastActionMessage}
-              </span>
-            </div>
-          ) : (
-            <span className="text-blue-300 text-[10.5px] font-medium hidden md:inline truncate">
-              Digite SKU ou QTD (Ex: <code className="text-blue-200 bg-[#0B1F4D]/40 px-1 py-0.5 rounded font-mono">3x</code>). Pressione <strong className="text-amber-400 font-black font-mono">?</strong> para ajuda.
-            </span>
-          )}
-        </div>
-        <button
-          type="button"
-          onClick={() => setIsCheatSheetOpen(true)}
-          className="flex items-center gap-1 px-2 py-0.5 bg-[#0B1F4D] hover:bg-[#D4AF37] text-[#FFFFFF] rounded text-[9px] font-black uppercase tracking-wider transition-all border border-[#D4AF37]/20 cursor-pointer h-6"
-        >
-          <span>⌨️ Atalhos [?]</span>
-        </button>
-      </div>
+      {/* ============================================================ */}
+      {/* POS HEADER — compact 3-row enterprise toolbar                */}
+      {/* Row 1: Search / Scanner / Quick Mode / Help / Shift           */}
+      {/* Row 2: Customer toolbar                                      */}
+      {/* Row 3: Operational status badges                             */}
+      {/* ============================================================ */}
+      <div className="flex flex-col gap-1.5 shrink-0">
 
-      {/* SECTION 1: TOP BAR — SEARCH + SCANNER ICONS (COMPACT ROW 1) */}
-      <div className="bg-white border border-blue-200 px-2 py-1 shrink-0 rounded-lg text-blue-900 select-none flex flex-row items-center gap-2 h-8">
-        <div className="relative flex-1 flex items-center gap-2 h-full min-w-[110px]">
-          {/* Main search field */}
-          <div className="relative flex-1 h-full">
-            <input 
+        {/* ROW 1 — Search is the focal point */}
+        <div className="flex items-center gap-2 h-9">
+          {/* Main search field (~68% width) */}
+          <div className="relative h-full min-w-0" style={{ flex: '1 1 68%' }}>
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-500 pointer-events-none" size={15} />
+            <input
               ref={searchInputRef}
               type="text"
-              placeholder="Pesquisar produto (Nome, SKU, Código de Barras)..."
+              placeholder="Pesquisar por nome, código de barras ou SKU..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
               onFocus={() => setIsSearchFocused(true)}
               onBlur={() => setTimeout(() => setIsSearchFocused(false), 250)}
-              className="w-full h-6 pl-3 pr-7 bg-white border border-blue-200 rounded-md text-blue-900 placeholder-blue-400 text-[11px] outline-none focus:border-[#D4AF37]/50 transition-all font-sans"
+              className="w-full h-9 pl-9 pr-8 bg-white border border-slate-200 rounded-lg text-blue-900 placeholder-slate-400 text-[12.5px] outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/15 transition-all font-sans"
             />
             {searchTerm && (
               <button
                 type="button"
                 onClick={() => setSearchTerm('')}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-blue-400 hover:text-blue-600"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
               >
-                <X size={12} />
+                <X size={13} />
               </button>
             )}
 
             {/* Auto Dropdown listing matching search as types */}
             {isSearchFocused && filteredSearchProducts.length > 0 && (
-              <div className="absolute left-0 right-0 top-7 bg-white text-blue-900 border border-blue-200 rounded-lg shadow-2xl z-50 max-h-[300px] overflow-y-auto overflow-x-hidden font-sans">
+              <div className="absolute left-0 right-0 top-10 bg-white text-blue-900 border border-slate-200 rounded-lg shadow-2xl z-50 max-h-[300px] overflow-y-auto overflow-x-hidden font-sans">
                 {filteredSearchProducts.map(p => (
                   <div 
                     key={p.id}
@@ -3623,11 +3594,49 @@ export default function POS() {
               </div>
             )}
           </div>
-        </div>
 
-        {/* Action Widgets Icons */}
-        <div className="flex items-center gap-1.5 shrink-0 h-full max-w-[55%] sm:max-w-none overflow-x-auto no-scrollbar">
-          {/* Shift Indicator Button */}
+          {/* Scanner — prominent primary action */}
+          <button
+            type="button"
+            onClick={() => setIsCameraActive(!isCameraActive)}
+            className={cn(
+              "h-9 px-3 rounded-lg flex items-center gap-1.5 shrink-0 transition-all cursor-pointer relative font-sans",
+              isCameraActive ? "bg-[#D4AF37] text-white" : "bg-[#0B1F4D] text-white hover:opacity-90"
+            )}
+            title="Câmara Scanner"
+          >
+            <Camera size={15} />
+            <span className="hidden lg:inline text-[11px] font-bold">Scanner</span>
+            <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-emerald-400" title="Modo USB escuta automática ativo" />
+          </button>
+
+          {/* Quick Mode toggle — buffer/keyboard scan status */}
+          <button
+            type="button"
+            onClick={() => setIsCheatSheetOpen(true)}
+            className={cn(
+              "h-9 px-2.5 rounded-lg flex items-center gap-1.5 shrink-0 transition-all cursor-pointer border font-sans",
+              inputBuffer ? "bg-[#D4AF37]/10 border-[#D4AF37]/40 text-[#B8952E]" : "bg-white border-slate-200 text-slate-500 hover:bg-slate-50"
+            )}
+            title="Modo Rápido (digite SKU/QTD, Enter para confirmar)"
+          >
+            <Zap size={14} className={inputBuffer ? "text-[#D4AF37]" : ""} />
+            <span className="hidden xl:inline text-[10px] font-black uppercase tracking-wider">
+              {inputBuffer ? inputBuffer : 'Quick'}
+            </span>
+          </button>
+
+          {/* Help — icon button */}
+          <button
+            type="button"
+            onClick={() => setIsCheatSheetOpen(true)}
+            className="h-9 w-9 rounded-lg border border-slate-200 text-slate-500 hover:text-[#0B1F4D] hover:bg-slate-50 flex items-center justify-center shrink-0 transition-all cursor-pointer"
+            title="Ajuda / Atalhos de Teclado (?)"
+          >
+            <HelpCircle size={15} />
+          </button>
+
+          {/* Shift status — compact badge */}
           <button
             type="button"
             onClick={() => {
@@ -3635,123 +3644,226 @@ export default function POS() {
               setIsClosingShiftForm(false);
             }}
             className={cn(
-              "h-6 px-2 rounded-md flex items-center gap-1 transition-all cursor-pointer relative font-sans text-[10px] font-black uppercase tracking-wider shrink-0",
-              currentShift 
-                ? "bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100/80" 
-                : "bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100/80"
+              "h-9 px-2.5 rounded-lg flex items-center gap-1.5 transition-all cursor-pointer shrink-0 font-sans text-[10px] font-black uppercase tracking-wider",
+              currentShift ? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100/70" : "bg-rose-50 text-rose-700 hover:bg-rose-100/70"
             )}
             title="Estado do Turno de Caixa"
           >
             <div className={cn("w-1.5 h-1.5 rounded-full", currentShift ? "bg-emerald-500 animate-pulse" : "bg-rose-500")} />
             <span className="hidden md:inline">
-              {currentShift 
-                ? `Turno Aberto (${new Date(currentShift.openedAt).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})})` 
-                : "Turno Fechado"}
-            </span>
-            <span className="md:hidden">
-              {currentShift ? "Aberto" : "Fechado"}
+              {currentShift
+                ? new Date(currentShift.openedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                : "Fechado"}
             </span>
           </button>
+        </div>
 
-          {/* Returns & Refunds button (🔄) */}
-          <button 
-            type="button"
-            onClick={() => setIsReturnModalOpen(true)}
-            className="h-6 px-2 bg-rose-950/20 text-rose-400 hover:bg-rose-950/35 border border-rose-900/30 rounded-md flex items-center gap-1 transition-all cursor-pointer font-bold text-[10px] shrink-0"
-            title="Processar devolução de uma venda efetuada"
-          >
-            <RefreshCw size={11} />
-            <span className="hidden md:inline">Devoluções</span>
-          </button>
-
-          {/* Camera lens selector (📷) */}
-          <button 
-            type="button"
-            onClick={() => setIsCameraActive(!isCameraActive)}
-            className={cn(
-              "h-6 px-2 rounded-md flex items-center gap-1 transition-all cursor-pointer relative shrink-0",
-              isCameraActive 
-                ? "bg-[#0B1F4D] text-[#EEF2FF]" 
-                : "bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90"
+        {/* Quick Sale feedback strip — only visible while actively typing or right after an action */}
+        {(inputBuffer || lastActionMessage) && (
+          <div className="flex items-center gap-2 px-3 h-6 rounded-md bg-[#0B1F4D] text-white text-[10.5px] shrink-0 font-sans">
+            {inputBuffer ? (
+              <>
+                <span className="text-blue-300 font-medium">Comando:</span>
+                <span className="font-mono bg-white/10 text-white px-2 py-0.5 rounded text-[11px] font-black select-all tracking-wider">
+                  {inputBuffer}
+                </span>
+                <span className="text-[9.5px] text-blue-300 font-bold uppercase tracking-wide hidden sm:inline">
+                  [Enter: confirmar • Esc: limpar]
+                </span>
+              </>
+            ) : (
+              <div className="flex items-center gap-1.5 text-emerald-400 font-bold">
+                <span className="text-blue-300 font-medium">Última ação:</span>
+                <span>{lastActionMessage}</span>
+              </div>
             )}
-            title="Sincronizar Câmara"
-          >
-            <Camera size={11} className="text-[#EEF2FF]" />
-            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">Câmara Scanner</span>
-            <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-emerald-400"></span>
-          </button>
+          </div>
+        )}
 
-          {/* Hardware visual active icon (〄) */}
-          <div 
-            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] rounded-md flex items-center gap-1 pointer-events-none shrink-0"
-            title="Modo USB escuta automática ativo"
-          >
-            <span className="text-[10px] text-amber-300">〄</span>
-            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">USB Ouvinte</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+        {/* ROW 2 — Customer toolbar */}
+        <div className="flex items-center justify-between gap-2 h-9">
+          <div className="flex items-center gap-1.5 flex-1 min-w-0">
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest shrink-0 hidden sm:inline">Cliente</span>
+
+            <button
+              type="button"
+              onClick={() => setIsBrowseCustomersOpen(true)}
+              className="h-9 px-2.5 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/40 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-bold text-[#0B1F4D] shrink-0 min-w-0 max-w-[220px] font-sans"
+            >
+              {selectedCustomerId === 'Walk-in' ? (
+                <span className="uppercase tracking-wide">Walk-in</span>
+              ) : (
+                <>
+                  <span className="truncate">{selectedCust?.name}</span>
+                  {selectedCust?.phone && (
+                    <span className="text-[10px] text-blue-500 font-medium hidden sm:inline shrink-0">({selectedCust?.phone})</span>
+                  )}
+                </>
+              )}
+              <ChevronDown size={12} className="text-slate-400 shrink-0" />
+            </button>
+
+            {selectedCustomerId !== 'Walk-in' && selectedCust?.outstandingBalance > 0 && (
+              <span className="bg-amber-50 text-amber-800 border border-amber-200 font-black text-[9px] uppercase px-1.5 py-1 rounded-md shrink-0 hidden sm:inline">
+                Dívida: {selectedCust.outstandingBalance.toLocaleString()} MT
+              </span>
+            )}
+
+            {selectedCustomerId !== 'Walk-in' && (
+              <button
+                onClick={() => {
+                  setSelectedCustomerId('Walk-in');
+                  setSaleMode('dinheiro');
+                }}
+                className="text-slate-400 hover:text-rose-600 transition-all p-1 rounded-full hover:bg-rose-50 shrink-0 cursor-pointer"
+                title="Desvincular Cliente"
+              >
+                <X size={12} />
+              </button>
+            )}
+
+            {selectedCustomerId !== 'Walk-in' && selectedCust && (
+              <button
+                type="button"
+                onClick={() => setIsHistoryOpen(true)}
+                className="h-9 px-2 rounded-lg font-bold text-[10px] flex items-center gap-1 text-blue-600 hover:bg-blue-50 transition-colors cursor-pointer shrink-0 font-sans"
+              >
+                <History size={13} />
+                <span className="hidden md:inline">Histórico</span>
+              </button>
+            )}
+
+            {/* Sale Mode (Dinheiro / Fiado / Parcial) */}
+            {selectedCustomerId !== 'Walk-in' && (
+              <div className="flex items-center bg-slate-50 p-0.5 rounded-lg border border-slate-200 h-9 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setSaleMode('dinheiro')}
+                  className={cn(
+                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
+                    saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                  )}
+                >
+                  Dinheiro
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSaleMode('credito')}
+                  className={cn(
+                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
+                    saleMode === 'credito' ? "bg-[#D4AF37] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                  )}
+                >
+                  Fiado
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSaleMode('parcial');
+                    setPartialAmountPaid('');
+                  }}
+                  className={cn(
+                    "px-2 h-full rounded-md text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
+                    saleMode === 'parcial' ? "bg-[#0B1F4D] text-white" : "text-slate-500 hover:text-[#0B1F4D]"
+                  )}
+                >
+                  Parcial
+                </button>
+              </div>
+            )}
           </div>
 
-          {/* Categorized Product catalogs overlay modal trigger button (📦) */}
+          <button
+            type="button"
+            onClick={() => setIsQuickCustomerOpen(true)}
+            className="h-9 px-3 rounded-lg bg-[#D4AF37] hover:bg-[#B8952E] text-white font-black text-[11px] uppercase tracking-wider transition-all flex items-center gap-1 cursor-pointer shrink-0 font-sans border-none"
+          >
+            <Plus size={13} /> <span className="hidden sm:inline">Novo Cliente</span><span className="sm:hidden">Novo</span>
+          </button>
+        </div>
+
+        {/* ROW 3 — operational status badges (compact, hidden when not relevant) */}
+        <div className="flex items-center gap-1.5 h-6 overflow-x-auto no-scrollbar shrink-0">
+          {/* Connectivity */}
+          {isSyncing ? (
+            <span className="h-6 px-2 bg-blue-50 text-blue-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
+              <RefreshCw size={9} className="animate-spin" /> A sincronizar
+            </span>
+          ) : !isOnline ? (
+            <span className="h-6 px-2 bg-rose-50 text-rose-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 relative">
+              🔴 Offline
+              {pendingSales.filter(s => s.status === 'pending').length > 0 && (
+                <span className="bg-rose-600 text-white font-extrabold px-1 rounded-full text-[8px]">
+                  {pendingSales.filter(s => s.status === 'pending').length}
+                </span>
+              )}
+            </span>
+          ) : pendingSales.filter(s => s.status === 'pending').length > 0 ? (
+            <button
+              type="button"
+              onClick={syncPendingSales}
+              className="h-6 px-2 bg-amber-50 hover:bg-amber-100/80 text-amber-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
+              title="Sincronizar Vendas Pendentes"
+            >
+              <RefreshCw size={9} /> {pendingSales.filter(s => s.status === 'pending').length} Pendentes
+            </button>
+          ) : (
+            <span className="h-6 px-2 bg-emerald-50 text-emerald-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
+              🟢 Online
+            </span>
+          )}
+
+          {/* Shift open (only when open, closed state already shown prominently in Row 1) */}
+          {currentShift && (
+            <span className="h-6 px-2 bg-emerald-50 text-emerald-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0">
+              🟢 Turno Aberto
+            </span>
+          )}
+
+          {/* Catalog */}
           <button
             type="button"
             onClick={() => setIsCatalogOpen(true)}
-            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90 rounded-md flex items-center gap-1 transition-all cursor-pointer shrink-0"
+            className="h-6 px-2 bg-blue-50 hover:bg-blue-100/80 text-blue-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
           >
-            <Package size={11} className="text-[#EEF2FF]" />
-            <span className="text-[10px] font-bold text-[#EEF2FF] hidden md:inline">📦 Catálogo</span>
+            🔵 Catálogo
           </button>
 
-          {/* Sync Status Component */}
-          <div className="flex items-center gap-1.5 shrink-0">
-            {isSyncing ? (
-              <div className="h-6 px-2 bg-[#0B1F4D] border border-[#EEF2FF]/15 text-[#EEF2FF]/85 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
-                <RefreshCw size={10} className="animate-spin text-amber-300" />
-                <span className="hidden md:inline">A sincronizar...</span>
-              </div>
-            ) : !isOnline ? (
-              <div className="h-6 px-2 bg-[#0B1F4D] border border-rose-500/35 text-rose-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider relative">
-                <div className="w-1 h-1 rounded-full bg-rose-500 animate-pulse" />
-                <span>Offline</span>
-                {pendingSales.filter(s => s.status === 'pending').length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-rose-600 text-white font-extrabold px-1 py-0.2 rounded-full text-[8px] animate-bounce">
-                    {pendingSales.filter(s => s.status === 'pending').length}
-                  </span>
-                )}
-              </div>
-            ) : pendingSales.filter(s => s.status === 'pending').length > 0 ? (
-              <button
-                type="button"
-                onClick={syncPendingSales}
-                className="h-6 px-2 bg-[#0B1F4D] border border-amber-500/35 text-amber-300 hover:bg-[#0B1F4D] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider relative"
-                title="Sincronizar Vendas Pendentes"
-              >
-                <RefreshCw size={10} className="text-amber-400 animate-pulse" />
-                <span>{pendingSales.filter(s => s.status === 'pending').length} Pendentes</span>
-              </button>
-            ) : (
-              <div className="h-6 px-2 bg-[#0B1F4D] border border-emerald-500/35 text-emerald-300 rounded-md flex items-center gap-1 font-sans text-[10px] font-bold uppercase tracking-wider">
-                <div className="w-1 h-1 rounded-full bg-emerald-500" />
-                <span>Online</span>
-              </div>
-            )}
+          {/* Sale channel — Retalho / Grosso */}
+          <button
+            type="button"
+            onClick={() => handleToggleSaleType(saleType === 'retail' ? 'wholesale' : 'retail')}
+            className="h-6 px-2 bg-amber-50 hover:bg-amber-100/80 text-amber-800 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
+            title="Alternar entre Retalho e Grosso"
+          >
+            {saleType === 'retail' ? '🟡 Retalho' : '🟡 Grosso'}
+          </button>
 
-            {/* Needs Review / Failed Stock Conflicts Section */}
-            {pendingSales.filter(s => s.status === 'failed').length > 0 && (
-              <button
-                type="button"
-                onClick={() => setIsReviewModalOpen(true)}
-                className="h-6 px-2 bg-[#0B1F4D] border border-amber-500/60 text-amber-200 hover:bg-[#D4AF37] rounded-md flex items-center gap-1 transition-all cursor-pointer font-sans text-[10px] font-bold uppercase tracking-wider animate-pulse"
-                title="Verificar vendas que falharam devido a conflito de stock ou outros erros"
-              >
-                <span className="text-amber-400 font-bold">⚠️</span>
-                <span>Rever ({pendingSales.filter(s => s.status === 'failed').length})</span>
-              </button>
-            )}
-          </div>
+          {/* Returns & Refunds */}
+          <button
+            type="button"
+            onClick={() => setIsReturnModalOpen(true)}
+            className="h-6 px-2 bg-rose-50 hover:bg-rose-100/80 text-rose-700 rounded-full flex items-center gap-1 text-[9.5px] font-bold uppercase tracking-wide shrink-0 cursor-pointer transition-all"
+            title="Processar devolução de uma venda efetuada"
+          >
+            🔴 Devoluções
+          </button>
+
+          {/* Failed sales needing review */}
+          {pendingSales.filter(s => s.status === 'failed').length > 0 && (
+            <button
+              type="button"
+              onClick={() => setIsReviewModalOpen(true)}
+              className="h-6 px-2 bg-amber-100 hover:bg-amber-200/80 text-amber-800 rounded-full flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wide shrink-0 cursor-pointer transition-all animate-pulse"
+              title="Verificar vendas que falharam devido a conflito de stock ou outros erros"
+            >
+              ⚠️ Rever ({pendingSales.filter(s => s.status === 'failed').length})
+            </button>
+          )}
         </div>
       </div>
 
-      {/* SECTION 2: CAMERA SCANNER PANEL */}
+      {/* CAMERA SCANNER PANEL */}
       <AnimatePresence>
         {isCameraActive && (
           <motion.div 
@@ -3816,141 +3928,6 @@ export default function POS() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* SECTION 2: CLIENT & SALE MODE BAR (COMPACT ROW 2) */}
-      <div 
-        className="px-2 py-1 bg-white border border-blue-200 rounded-lg flex flex-row items-center justify-between gap-3 text-blue-900 select-none shrink-0 h-8"
-      >
-        <div className="flex items-center gap-2 flex-1 min-w-0">
-          <span className="text-[9px] font-black text-blue-400 uppercase tracking-widest leading-none shrink-0">CLIENTE:</span>
-          {selectedCustomerId === 'Walk-in' ? (
-            <span className="bg-[#0B1F4D]/10 border border-[#0B1F4D]/20 text-[#0B1F4D] font-black text-[10px] px-2 py-0.5 rounded-md uppercase shadow-xs leading-none shrink-0">
-              WALK-IN
-            </span>
-          ) : (
-            <div className="flex items-center gap-1 bg-[#D4AF37]/10 border border-[#D4AF37]/20 px-2 py-0.5 rounded-md shadow-xs leading-none shrink-0 max-w-[180px] min-w-0">
-              <span className="text-[#D4AF37] font-extrabold text-[11px] truncate">{selectedCust?.name}</span>
-              {selectedCust?.phone && (
-                <span className="text-[9px] text-blue-600 font-medium hidden sm:inline">({selectedCust?.phone})</span>
-              )}
-              {selectedCust?.outstandingBalance > 0 && (
-                <span className="bg-amber-500 text-slate-950 font-black text-[8px] uppercase px-1 py-0.5 rounded ml-1 animate-pulse leading-none shrink-0">
-                  Dívida: {selectedCust.outstandingBalance.toLocaleString()} MT
-                </span>
-              )}
-              <button 
-                onClick={() => {
-                  setSelectedCustomerId('Walk-in');
-                  setSaleMode('dinheiro');
-                }}
-                className="text-blue-400 hover:text-[#D4AF37] transition-all p-0.5 rounded-full hover:bg-blue-50 shrink-0"
-                title="Desvincular Cliente"
-              >
-                <X size={10} />
-              </button>
-            </div>
-          )}
-
-          {selectedCustomerId !== 'Walk-in' && selectedCust && (
-            <button
-              type="button"
-              onClick={() => setIsHistoryOpen(true)}
-              className="h-6 px-1.5 bg-blue-50 hover:bg-blue-100/80 rounded-md font-bold text-[10px] flex items-center gap-1 text-blue-700 transition-colors border border-blue-200 cursor-pointer shrink-0"
-            >
-              <History size={11} />
-              <span className="hidden sm:inline">Histórico</span>
-            </button>
-          )}
-
-          <button
-            type="button"
-            onClick={() => setIsBrowseCustomersOpen(true)}
-            className="h-6 px-2 bg-white hover:bg-blue-50/40 text-blue-700 font-bold text-[10px] uppercase tracking-wider rounded-md transition-all border border-blue-200 flex items-center gap-1 cursor-pointer shrink-0"
-          >
-            <Users size={11} className="text-[#0B1F4D]" />
-            <span className="hidden sm:inline">Lista de Clientes</span>
-            <span className="sm:hidden">Lista</span>
-          </button>
-          
-          <button
-            type="button"
-            onClick={() => setIsQuickCustomerOpen(true)}
-            className="h-6 px-2 bg-[#0B1F4D] text-[#EEF2FF] hover:opacity-90 font-black text-[10px] uppercase tracking-wider rounded-md transition-all flex items-center gap-0.5 cursor-pointer border-none shrink-0"
-          >
-            <span>➕</span> <span className="hidden sm:inline">Novo Registo</span><span className="sm:hidden">Novo</span>
-          </button>
-        </div>
-
-        {/* Right Side: Sale Mode (if eligible) & Retalho/Grosso Channel Toggle */}
-        <div className="flex items-center gap-2 shrink-0">
-          {/* Sale Mode (Dinheiro / Fiado / Parcial) */}
-          <div className="shrink-0">
-            {selectedCustomerId === 'Walk-in' ? (
-              <span className="text-[10px] text-blue-400 font-bold hidden lg:inline">🔒 Fiado indisponível para Walk-in</span>
-            ) : (
-              <div className="flex items-center bg-blue-100/50 p-0.5 rounded-md border border-blue-200 h-6">
-                <button
-                  type="button"
-                  onClick={() => setSaleMode('dinheiro')}
-                  className={cn(
-                    "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'dinheiro' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
-                  )}
-                >
-                  Dinheiro
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSaleMode('credito')}
-                  className={cn(
-                    "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'credito' ? "bg-[#D4AF37] text-[#FFFFFF]" : "text-blue-600 hover:text-blue-800"
-                  )}
-                >
-                  Fiado
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSaleMode('parcial');
-                    setPartialAmountPaid('');
-                  }}
-                  className={cn(
-                    "px-1.5 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center justify-center",
-                    saleMode === 'parcial' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
-                  )}
-                >
-                  Parcial
-                </button>
-              </div>
-            )}
-          </div>
-
-          {/* Channel Selector */}
-          <div className="flex items-center bg-blue-100/50 p-0.5 rounded-md border border-blue-200 h-6 shrink-0">
-            <button
-              type="button"
-              onClick={() => handleToggleSaleType('retail')}
-              className={cn(
-                "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'retail' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
-              )}
-            >
-              <span>📦</span> <span className="hidden sm:inline">Retalho</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleToggleSaleType('wholesale')}
-              className={cn(
-                "px-2 py-0 h-full rounded text-[9px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 justify-center",
-                saleType === 'wholesale' ? "bg-[#0B1F4D] text-[#EEF2FF]" : "text-blue-600 hover:text-blue-800"
-              )}
-            >
-              <span>🏭</span> <span className="hidden sm:inline">Grosso</span>
-            </button>
-          </div>
-        </div>
-      </div>
 
 {/* MAIN CONTENT AREA: EXPANDED CART PANEL (Takes full width) */}
       <div className="flex-1 flex flex-col overflow-hidden min-h-0 min-w-0 mt-1">
