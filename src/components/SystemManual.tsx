@@ -27,8 +27,8 @@ interface ManualBox {
 interface ManualSection {
   id: string;
   icon: React.ComponentType<any>;
-  iconColor: string; // Tailwind text color e.g. 'text-violet-400'
-  iconBg: string; // Tailwind background e.g. 'bg-violet-500/10'
+  iconColor: string; // Tailwind text color e.g. 'text-blue-500'
+  iconBg: string; // Tailwind background e.g. 'bg-blue-500/10'
   title: string;
   category: string;
   summary: string;
@@ -126,7 +126,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
             <button className="w-full py-1.5 bg-[#0B1F4D] text-white rounded-lg text-[9px] font-black hover:bg-[#0B1F4D]/90">ENTRAR</button>
             <div className="flex items-center justify-center gap-1 border-t border-slate-800 pt-2 pb-0.5 text-[8px] text-slate-400">
-              <span className="px-2 py-1 bg-slate-900 border border-slate-800 rounded flex items-center gap-1 hover:bg-slate-850 w-full justify-center cursor-pointer">
+              <span className="px-2 py-1 bg-slate-900 border border-slate-800 rounded flex items-center gap-1 hover:bg-slate-800 w-full justify-center cursor-pointer">
                 <span className="text-[#EA4335] font-bold">G</span> Google Workspace
               </span>
             </div>
@@ -148,7 +148,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="bg-slate-950/90 border border-emerald-500/10 rounded-xl p-2 flex flex-col justify-between h-20 hover:border-emerald-500/30">
                 <div>
                   <p className="text-[9px] font-black text-white truncate">Arroz Nacional 5kg</p>
-                  <p className="text-[7px] text-slate-450 mt-0.5">FAMÍLIA ALIMENTAR</p>
+                  <p className="text-[7px] text-slate-400 mt-0.5">FAMÍLIA ALIMENTAR</p>
                 </div>
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-[9px] font-black text-emerald-400">350.00 MT</span>
@@ -158,7 +158,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="bg-slate-950/90 border border-emerald-500/10 rounded-xl p-2 flex flex-col justify-between h-20 hover:border-emerald-500/30">
                 <div>
                   <p className="text-[9px] font-black text-white truncate">Óleo Alimentar 1L</p>
-                  <p className="text-[7px] text-slate-450 mt-0.5">FAMÍLIA ALIMENTAR</p>
+                  <p className="text-[7px] text-slate-400 mt-0.5">FAMÍLIA ALIMENTAR</p>
                 </div>
                 <div className="flex items-center justify-between mt-1">
                   <span className="text-[9px] font-black text-emerald-400">120.00 MT</span>
@@ -221,14 +221,14 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <tbody className="divide-y divide-sky-500/5 text-white">
                 <tr>
                   <td className="p-2 font-black">Cimento Nacional 50Kg</td>
-                  <td className="p-2 font-mono text-sky-305">CIM-50-NAC</td>
+                  <td className="p-2 font-mono text-sky-300">CIM-50-NAC</td>
                   <td className="p-2 text-sky-300 font-mono">120 Sacas</td>
                   <td className="p-2 text-slate-400">10 Sacas</td>
                 </tr>
                 <tr className="bg-rose-500/5">
                   <td className="p-2 font-black text-rose-300">Açúcar Branco 1Kg</td>
                   <td className="p-2 font-mono text-slate-400">ACU-BR-1K</td>
-                  <td className="p-2 text-rose-450 font-mono font-bold animate-pulse">2 Pacotes ⚠️</td>
+                  <td className="p-2 text-rose-400 font-mono font-bold animate-pulse">2 Pacotes ⚠️</td>
                   <td className="p-2 text-sky-300 font-mono">15 Pacotes</td>
                 </tr>
               </tbody>
@@ -268,11 +268,11 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             <div className="grid grid-cols-2 gap-2 text-[9px] text-left pt-1">
               <div className="p-2 rounded-lg bg-[#2563EB]/5 border border-[#2563EB]/10">
                 <p className="text-slate-400">Saldo por Liquidar:</p>
-                <p className="text-xs font-black text-rose-455 font-mono">1,450.00 MT</p>
+                <p className="text-xs font-black text-rose-400 font-mono">1,450.00 MT</p>
               </div>
               <div className="p-2 rounded-lg bg-slate-900 border border-slate-800">
                 <p className="text-slate-400">Ações de Resgate:</p>
-                <button className="mt-1 w-full text-center py-1 bg-[#2563EB] hover:bg-[#2563EB] text-white text-[8px] rounded font-bold transition-all">LIGAR WHATSAPP</button>
+                <button className="mt-1 w-full text-center py-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[8px] rounded font-bold transition-all">LIGAR WHATSAPP</button>
               </div>
             </div>
           </div>
@@ -310,7 +310,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
 
             <table className="w-full text-left font-sans text-[7px] mt-2 border-t border-slate-200">
               <thead>
-                <tr className="border-b border-slate-200 text-slate-550">
+                <tr className="border-b border-slate-200 text-slate-500">
                   <th className="py-1">ARTIGO</th>
                   <th className="py-1 text-right">QTD</th>
                   <th className="py-1 text-right">PREÇO</th>
@@ -411,7 +411,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             <div className="flex items-center justify-between border-b border-slate-800 pb-2">
               <div>
                 <p className="font-black text-white">Cotação Nº QT-992</p>
-                <p className="text-[7px] text-slate-450 mt-0.5">Validade: 7 Dias úteis</p>
+                <p className="text-[7px] text-slate-400 mt-0.5">Validade: 7 Dias úteis</p>
               </div>
               <div className="px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-slate-400 text-[8px] font-mono">Sem Impacto de Stock</div>
             </div>
@@ -443,7 +443,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="space-y-0.5">
                 <span className="text-[7.5px] bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold font-mono">ENCOMENDA #W-1044</span>
                 <p className="font-black text-white mt-1">Cliente: Mercado Sabush • Maputo Delivery</p>
-                <p className="text-[7px] text-slate-455 font-mono">Liquidado por e-Mola Integrado</p>
+                <p className="text-[7px] text-slate-400 font-mono">Liquidado por e-Mola Integrado</p>
               </div>
               <div className="text-right space-y-1.5">
                 <p className="font-mono font-black text-purple-300 text-xs">3,500 MT</p>
@@ -466,7 +466,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           {/* Eye-friendly: Coral Peach Expense log */}
           <div className="flex items-center justify-between border-b border-rose-400/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-rose-300 uppercase tracking-widest flex items-center gap-1">💸 Livro de Saídas Financeiras</h4>
-            <span className="px-2 py-0.5 rounded bg-rose-450/15 text-rose-350 text-[8px] font-bold">DESPESA ATIVA</span>
+            <span className="px-2 py-0.5 rounded bg-rose-400/15 text-rose-300 text-[8px] font-bold">DESPESA ATIVA</span>
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-rose-400/15 rounded-xl p-3.5 space-y-3 text-[9px]">
@@ -490,8 +490,8 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             </div>
           </div>
 
-          <AnnotationArrow startX={18} startY={30} endX={180} endY={100} label="Separação por Categoria de Custo" accentColor="border-rose-450 text-rose-300 bg-rose-950/95" />
-          <AnnotationArrow startX={82} startY={60} endX={320} endY={142} label="Comprovativo Anexado Auditável" accentColor="border-rose-450 text-rose-300 bg-rose-950/95" />
+          <AnnotationArrow startX={18} startY={30} endX={180} endY={100} label="Separação por Categoria de Custo" accentColor="border-rose-400 text-rose-300 bg-rose-950/95" />
+          <AnnotationArrow startX={82} startY={60} endX={320} endY={142} label="Comprovativo Anexado Auditável" accentColor="border-rose-400 text-rose-300 bg-rose-950/95" />
         </div>
       );
 
@@ -501,7 +501,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           {/* Eye-friendly: Slate Gray Logistics */}
           <div className="flex items-center justify-between border-b border-slate-500/10 pb-1.5 mb-3">
             <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-1">🏭 Diretório Geral de Parceiros Distribuição</h4>
-            <span className="px-2 py-0.5 rounded bg-slate-500/15 text-slate-350 text-[8px] font-bold uppercase tracking-wider font-mono">B2B SUPPLIERS</span>
+            <span className="px-2 py-0.5 rounded bg-slate-500/15 text-slate-300 text-[8px] font-bold uppercase tracking-wider font-mono">B2B SUPPLIERS</span>
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-slate-500/15 rounded-xl p-3 text-[9px] space-y-2">
@@ -585,18 +585,18 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-teal-500/15 rounded-xl p-3.5 space-y-3 text-[9px]">
             <div className="flex justify-between items-center bg-[#0B1F4D] p-2 rounded border border-teal-500/20">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-450 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <p className="font-black text-white">Sara Langa • Caixa Balcão</p>
               </div>
-              <span className="px-2 py-0.5 rounded bg-[#0B1F4D] border border-slate-800 text-[7px] text-teal-305 font-bold uppercase">Acesso Bloqueado a Preços</span>
+              <span className="px-2 py-0.5 rounded bg-[#0B1F4D] border border-slate-800 text-[7px] text-teal-300 font-bold uppercase">Acesso Bloqueado a Preços</span>
             </div>
             <div className="p-2 border border-slate-800 bg-slate-900 rounded font-mono text-[8px] text-slate-400 leading-normal">
               🔓 PIN De Gestor Exigido para Estornar Artigos No POS.
             </div>
           </div>
 
-          <AnnotationArrow startX={25} startY={28} endX={145} endY={92} label="Nível Funcional Restrito" accentColor="border-teal-500 text-teal-305 bg-teal-950/95" />
-          <AnnotationArrow startX={82} startY={55} endX={310} endY={125} label="PIN Verificação Estorno local" accentColor="border-teal-500 text-teal-305 bg-teal-950/95" />
+          <AnnotationArrow startX={25} startY={28} endX={145} endY={92} label="Nível Funcional Restrito" accentColor="border-teal-500 text-teal-300 bg-teal-950/95" />
+          <AnnotationArrow startX={82} startY={55} endX={310} endY={125} label="PIN Verificação Estorno local" accentColor="border-teal-500 text-teal-300 bg-teal-950/95" />
         </div>
       );
 
@@ -615,8 +615,8 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <input type="text" readOnly value="EAAG678aZBd90BAKlz8O6R..." className="w-full bg-[#0B1F4D] font-mono border border-[#2563EB]/20 text-sky-400 p-2 rounded-lg" />
             </div>
             <div className="flex gap-2">
-              <button className="flex-1 py-1.5 bg-[#2563EB] hover:bg-[#2563EB] text-slate-950 font-black rounded text-[8.5px] uppercase">Testar Envio</button>
-              <button className="flex-1 py-1.5 bg-slate-900 hover:bg-slate-850 text-white font-bold border border-slate-800 rounded text-[8.5px] uppercase">Criar Backup ZIP</button>
+              <button className="flex-1 py-1.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-slate-950 font-black rounded text-[8.5px] uppercase">Testar Envio</button>
+              <button className="flex-1 py-1.5 bg-slate-900 hover:bg-slate-800 text-white font-bold border border-slate-800 rounded text-[8.5px] uppercase">Criar Backup ZIP</button>
             </div>
           </div>
 
@@ -638,11 +638,11 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             <div className="grid grid-cols-3 gap-2 font-mono text-center text-white">
               <div className="p-2 rounded bg-slate-900 border border-slate-800 flex flex-col justify-between h-14">
                 <span className="text-slate-400 text-[6.5px]">FIRESTORE</span>
-                <span className="text-[8.5px] text-emerald-450 font-black">ONLINE ●</span>
+                <span className="text-[8.5px] text-emerald-400 font-black">ONLINE ●</span>
               </div>
               <div className="p-2 rounded bg-slate-900 border border-slate-800 flex flex-col justify-between h-14">
                 <span className="text-slate-400 text-[6.5px]">LOCAL CACHE</span>
-                <span className="text-[8.5px] text-emerald-450 font-black">STABLE ●</span>
+                <span className="text-[8.5px] text-emerald-400 font-black">STABLE ●</span>
               </div>
               <div className="p-2 rounded bg-slate-900 border border-slate-800 flex flex-col justify-between h-14">
                 <span className="text-slate-400 text-[6.5px]">AUTHENTICATOR</span>
@@ -652,8 +652,8 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             <button className="w-full text-center py-1.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 text-[#D4AF37] rounded border border-[#D4AF37]/30 font-bold uppercase text-[8px]">RESTAURAR SESSÃO DE CONEXÃO</button>
           </div>
 
-          <AnnotationArrow startX={25} startY={28} endX={140} endY={98} label="Diagnóstico de Rede Cloud" accentColor="border-pink-500 text-pink-300 bg-pink-950/95" />
-          <AnnotationArrow startX={82} startY={60} endX={215} endY={152} label="Auto-Correção Chaves de Acesso" accentColor="border-pink-500 text-pink-300 bg-pink-950/95" />
+          <AnnotationArrow startX={25} startY={28} endX={140} endY={98} label="Diagnóstico de Rede Cloud" accentColor="border-rose-500 text-rose-300 bg-rose-950/95" />
+          <AnnotationArrow startX={82} startY={60} endX={215} endY={152} label="Auto-Correção Chaves de Acesso" accentColor="border-rose-500 text-rose-300 bg-rose-950/95" />
         </div>
       );
 
@@ -667,7 +667,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
           </div>
 
           <div className="max-w-[420px] mx-auto bg-slate-950 border border-emerald-400/15 rounded-xl p-3.5 space-y-3.5 text-[9px] text-slate-300">
-            <span className="text-[7.5px] font-black text-emerald-305 tracking-widest uppercase">CONFERÊNCIA DE FECHO</span>
+            <span className="text-[7.5px] font-black text-emerald-300 tracking-widest uppercase">CONFERÊNCIA DE FECHO</span>
             <div className="space-y-1.5">
               <div className="flex justify-between items-center text-white border-b border-slate-800 pb-1">
                 <span>Total Dinheiro Registado al Balcão:</span>
@@ -675,7 +675,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               </div>
               <div className="flex justify-between items-center font-mono">
                 <span>Contagem Física Declarada:</span>
-                <span className="text-emerald-305 font-heavy">14,250.00 MT ✓ MATCH</span>
+                <span className="text-emerald-300 font-heavy">14,250.00 MT ✓ MATCH</span>
               </div>
             </div>
             <p className="text-[7.5px] text-slate-500 leading-normal italic text-center">Reconciliação e-Mola / M-Pesa fechada automaticamente pelo servidor do Grupo Sabush.</p>
@@ -708,11 +708,11 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
                 
                 <div className="grid grid-cols-2 gap-1.5 text-[8px]">
                   <div>
-                    <label className="text-slate-450 font-bold block mb-0.5">Valor Pago (MZN)</label>
+                    <label className="text-slate-400 font-bold block mb-0.5">Valor Pago (MZN)</label>
                     <input type="text" readOnly value="1,000.00" className="w-full bg-slate-950 border border-amber-500/20 text-amber-300 px-1.5 py-1 rounded text-[8px] font-mono font-bold" />
                   </div>
                   <div>
-                    <label className="text-slate-450 font-bold block mb-0.5">Ref. Transação (M-Pesa/Banco)</label>
+                    <label className="text-slate-400 font-bold block mb-0.5">Ref. Transação (M-Pesa/Banco)</label>
                     <input type="text" readOnly value="MPW90823719" className="w-full bg-slate-950 border border-white/10 text-slate-200 px-1.5 py-1 rounded text-[8px] font-mono" />
                   </div>
                 </div>
@@ -721,7 +721,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
                 <div className="border border-dashed border-amber-500/30 bg-amber-500/5 rounded-lg p-3 text-center cursor-pointer hover:border-amber-500/50 transition-colors">
                   <div className="w-6 h-6 rounded-full bg-amber-500/10 text-amber-400 flex items-center justify-center mx-auto text-xs mb-1">📸</div>
                   <p className="text-[7.5px] font-black text-slate-200 font-mono">comprovativo_mpesa.png</p>
-                  <p className="text-[6.5px] text-slate-450 mt-0.5">Resolução: 1340x820px • 135 KB ✓ Comprimido</p>
+                  <p className="text-[6.5px] text-slate-400 mt-0.5">Resolução: 1340x820px • 135 KB ✓ Comprimido</p>
                 </div>
 
                 <button className="w-full py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 text-[8px] font-black rounded-lg tracking-wide transition-colors">SUBMETER COMPROVATIVO AUTOMÁTICO</button>
@@ -731,7 +731,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
             <div className="space-y-1.5 border-t border-white/5 pt-2">
               <p className="text-[7px] text-slate-400 font-extrabold uppercase font-mono tracking-wider">Histórico Recente e Estado</p>
               <div className="flex justify-between items-center bg-amber-500/10 p-1.5 rounded-lg border border-amber-500/20 text-[7.5px]">
-                <span className="font-bold text-slate-350">Adiantamento Fatura #0488</span>
+                <span className="font-bold text-slate-300">Adiantamento Fatura #0488</span>
                 <span className="bg-amber-500/20 text-amber-300 font-bold px-1.5 py-0.5 rounded-full text-[6.5px] font-mono animate-pulse">PENDENTE NO GESTOR</span>
               </div>
             </div>
@@ -743,7 +743,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="flex items-center justify-between border-b border-white/5 pb-2 mb-2">
                 <div>
                   <h5 className="text-[10px] font-black text-blue-400 uppercase tracking-wider">Backoffice de Auditoria</h5>
-                  <p className="text-[7px] text-slate-450">Painel do Administrador • Caixa Balcão</p>
+                  <p className="text-[7px] text-slate-400">Painel do Administrador • Caixa Balcão</p>
                 </div>
                 <span className="px-1.5 py-0.5 bg-blue-500/10 text-blue-300 text-[6.5px] rounded-md font-bold uppercase tracking-wider">1 Comprovativo p/ Validar</span>
               </div>
@@ -781,14 +781,14 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               </div>
             </div>
 
-            <div className="p-2 border border-blue-500/10 bg-blue-950/20 rounded text-[7px] text-slate-350 leading-normal">
+            <div className="p-2 border border-blue-500/10 bg-blue-950/20 rounded text-[7px] text-slate-300 leading-normal">
               💡 <strong>Lançamento Inteligente:</strong> Ao clicar em <strong>Validar</strong>, o Sabush ERP adiciona o crédito, abate o saldo da fatura, emite o recibo digital original e notifica o cliente automaticamente. Nada de processos manuais lentos!
             </div>
           </div>
 
           {/* Detailed floating indicators */}
           <AnnotationArrow startX={18} startY={35} endX={110} endY={150} label="Introdução de Dados e Anexo" accentColor="border-amber-400 text-amber-300 bg-amber-950/95" />
-          <AnnotationArrow startX={52} startY={45} endX={255} endY={120} label="Verificação no Backoffice com 1 Clique" accentColor="border-blue-400 text-blue-350 bg-blue-950/95" />
+          <AnnotationArrow startX={52} startY={45} endX={255} endY={120} label="Verificação no Backoffice com 1 Clique" accentColor="border-blue-400 text-blue-300 bg-blue-950/95" />
           <AnnotationArrow startX={82} startY={72} endX={355} endY={380} label="Lançamento Contabilístico Automático" accentColor="border-emerald-500 text-emerald-300 bg-emerald-950/95" />
         </div>
       );
@@ -817,17 +817,17 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="p-2 rounded bg-slate-900 border border-slate-800">
                 <p className="text-slate-400 text-[7px] font-bold">CAIXA (Cx)</p>
                 <p className="font-bold text-white mt-1 font-sans">1 Caixa</p>
-                <p className="text-[7px] text-emerald-450 mt-0.5 font-bold font-mono">= 24 Unidades</p>
+                <p className="text-[7px] text-emerald-400 mt-0.5 font-bold font-mono">= 24 Unidades</p>
               </div>
               <div className="p-2 rounded bg-slate-900 border border-slate-800">
                 <p className="text-slate-400 text-[7px] font-bold">EMBALAGEM (Emb)</p>
                 <p className="font-bold text-white mt-1 font-sans">1 Pack</p>
-                <p className="text-[7px] text-emerald-450 mt-0.5 font-bold font-mono">= 6 Unidades</p>
+                <p className="text-[7px] text-emerald-400 mt-0.5 font-bold font-mono">= 6 Unidades</p>
               </div>
               <div className="p-2 rounded bg-slate-900 border border-slate-800 bg-cyan-950/20 border-cyan-800/30">
                 <p className="text-cyan-400 text-[7px] font-bold">UNIDADE (Un)</p>
                 <p className="font-bold text-cyan-300 mt-1 font-sans">Unidade Base</p>
-                <p className="text-[7px] text-cyan-450 mt-0.5 font-bold font-mono">= 1 Unidade</p>
+                <p className="text-[7px] text-cyan-400 mt-0.5 font-bold font-mono">= 1 Unidade</p>
               </div>
             </div>
 
@@ -856,7 +856,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="inline-block px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-500 text-slate-950 font-black text-[10px] rounded-lg tracking-wider border border-orange-400">
                 SABUSH GROUP (Grupo Sabush)
               </div>
-              <p className="text-[7.5px] text-slate-405 mt-1 font-mono uppercase">Holding Master • Maputo, Moçambique</p>
+              <p className="text-[7.5px] text-slate-400 mt-1 font-mono uppercase">Holding Master • Maputo, Moçambique</p>
             </div>
 
             <div className="grid grid-cols-3 gap-2.5 text-center text-white font-heavy pt-3">
@@ -868,7 +868,7 @@ function FeatureMockup({ sectionId }: { sectionId: string }) {
               <div className="p-2 rounded bg-slate-900 border border-amber-500/20 shadow flex flex-col justify-between h-18">
                 <span className="text-[7.5px] text-amber-400 font-bold uppercase tracking-wider font-mono">ERP Oficial</span>
                 <span className="text-[9px] text-white">Sabush System ERP</span>
-                <span className="text-[6.5px] text-slate-405">Gestão de PMEs</span>
+                <span className="text-[6.5px] text-slate-400">Gestão de PMEs</span>
               </div>
               <div className="p-2 rounded bg-[#0B1F4D] border-purple-500/20 shadow flex flex-col justify-between h-18">
                 <span className="text-[7.5px] text-purple-400 font-bold uppercase tracking-wider font-mono">Ensino Regional</span>
@@ -938,7 +938,7 @@ export default function SystemManual() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [theme, setTheme] = useState<'slate' | 'grey' | 'ivory' | 'sepia'>(
-    () => (localStorage.getItem('sabush_manual_theme') as 'slate' | 'grey' | 'ivory' | 'sepia') || 'grey'
+    () => (localStorage.getItem('sabush_manual_theme') as 'slate' | 'grey' | 'ivory' | 'sepia') || 'ivory'
   );
 
   const changeTheme = (newTheme: 'slate' | 'grey' | 'ivory' | 'sepia') => {
@@ -954,8 +954,8 @@ export default function SystemManual() {
     {
       id: 'inicio-rapido',
       icon: Play,
-      iconColor: 'text-violet-400',
-      iconBg: 'bg-violet-500/10',
+      iconColor: 'text-blue-500',
+      iconBg: 'bg-blue-500/10',
       title: '1. 🚀 Início Rápido (Quick Start)',
       category: 'Geral',
       summary: 'Visão geral do ecossistema Sabush System ERP, login seguro, criação de contas e setup inicial.',
@@ -1260,8 +1260,8 @@ export default function SystemManual() {
     {
       id: 'resolucao-problemas',
       icon: HelpCircle,
-      iconColor: 'text-pink-400',
-      iconBg: 'bg-pink-500/10',
+      iconColor: 'text-rose-400',
+      iconBg: 'bg-rose-500/10',
       title: '16. ❓ Resolução de Problemas',
       category: 'Suporte',
       summary: 'Perguntas frequentes, erros comuns de login, falhas de disparo de SMS/WhatsApp e canais oficiais de suporte.',
@@ -1367,8 +1367,8 @@ export default function SystemManual() {
     {
       id: 'truques-segredos',
       icon: Sparkles,
-      iconColor: 'text-violet-400',
-      iconBg: 'bg-violet-500/10',
+      iconColor: 'text-blue-500',
+      iconBg: 'bg-blue-500/10',
       title: '21. ⚡ Segredos e Truques de Alta Produtividade',
       category: 'Avançado',
       summary: 'Atalhos globais, fusão de contas em duplicado, WhatsApp sem custos, compressão autónoma de fotos e sincronização offline-first.',
@@ -1465,8 +1465,8 @@ export default function SystemManual() {
     {
       id: 'painel-ia-mercado',
       icon: Brain,
-      iconColor: 'text-violet-400',
-      iconBg: 'bg-violet-500/10',
+      iconColor: 'text-blue-500',
+      iconBg: 'bg-blue-500/10',
       title: '26. 🧠 Painel de Inteligência Artificial, Câmbio e Gráficos',
       category: 'Análise',
       summary: 'Relatório estratégico gerado por IA, câmbio paralelo e oficial de moedas regionais, e temas visuais personalizáveis para os gráficos do Dashboard.',
@@ -1714,36 +1714,36 @@ export default function SystemManual() {
       subHeaderTitle: 'text-slate-400'
     },
     grey: {
-      outer: 'bg-[#0B1F4D] text-[#F8F9FA]', // A modern, pure eye-friendly warm Grey canvas
-      progressBar: 'bg-[#111111] border-[#111111]',
-      progressBarLeftText: 'text-white',
-      progressBarSubText: 'text-[#9CA3AF]',
-      progressBg: 'bg-[#0B1F4D]',
-      controlBar: 'bg-[#0B1F4D]/95 border-[#111111]',
-      searchInputBg: 'bg-[#111111] border-[#111111] text-white',
-      sidebarBg: 'bg-[#0B1F4D] border-[#111111]',
-      sidebarHeaderBg: 'bg-[#0B1F4D] border-[#111111]',
-      tabButtonActive: 'bg-[#111111] border-sky-500/50 text-white shadow-lg shadow-sky-500/5',
-      tabButtonInactive: 'bg-transparent border-transparent text-[#9CA3AF] hover:bg-[#111111]/50 hover:text-white',
-      tabTextTitleActive: 'text-white',
-      tabTextTitleInactive: 'text-[#9CA3AF]',
-      mainContentArea: 'bg-[#0B1F4D]',
-      headerBlock: 'bg-gradient-to-br from-[#111111] to-[#0B1F4D] border-[#111111] shadow-xl',
-      headerTitle: 'text-white',
-      headerDesc: 'text-slate-300',
-      headerSummary: 'text-slate-400',
-      stepBlock: 'bg-[#111111]/50 border-[#111111] hover:bg-[#111111] hover:border-[#2563EB]',
-      stepTitle: 'text-white',
-      stepDesc: 'text-[#E5E7EB]',
-      calloutTip: 'bg-sky-500/10 border border-sky-500/25 text-sky-300',
-      calloutWarning: 'bg-amber-500/10 border border-amber-500/25 text-amber-300',
-      calloutAlert: 'bg-rose-500/10 border border-rose-500/25 text-rose-300',
-      buttonSecondary: 'bg-[#111111] border-[#111111] hover:border-slate-300 hover:text-white hover:bg-[#111111] text-[#E5E7EB]',
-      readButtonSelected: 'bg-emerald-500/15 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/25',
-      subHeaderTitle: 'text-[#E5E7EB]'
+      outer: 'bg-[#F1F2F4] text-[#111111]', // A modern, eye-friendly light Grey canvas
+      progressBar: 'bg-white border-[#E5E7EB] shadow-sm',
+      progressBarLeftText: 'text-[#111111]',
+      progressBarSubText: 'text-slate-500',
+      progressBg: 'bg-slate-300',
+      controlBar: 'bg-[#F1F2F4]/95 border-[#E5E7EB]',
+      searchInputBg: 'bg-white border-slate-300 text-slate-800 placeholder-slate-400 hover:border-slate-400',
+      sidebarBg: 'bg-[#F1F2F4] border-[#E5E7EB]',
+      sidebarHeaderBg: 'bg-[#F1F2F4] border-[#E5E7EB]',
+      tabButtonActive: 'bg-white border-[#D4AF37] text-[#0B1F4D] shadow-md shadow-amber-500/10',
+      tabButtonInactive: 'bg-transparent border-transparent text-slate-600 hover:bg-slate-200/70 hover:text-slate-900',
+      tabTextTitleActive: 'text-slate-950',
+      tabTextTitleInactive: 'text-slate-700',
+      mainContentArea: 'bg-white',
+      headerBlock: 'bg-gradient-to-br from-[#F1F2F4] to-white border-slate-200 shadow-md shadow-slate-100',
+      headerTitle: 'text-[#111111]',
+      headerDesc: 'text-slate-700',
+      headerSummary: 'text-slate-500',
+      stepBlock: 'bg-white border-slate-200 hover:bg-[#F8F9FA] hover:border-[#D4AF37]/40',
+      stepTitle: 'text-[#111111]',
+      stepDesc: 'text-slate-600',
+      calloutTip: 'bg-blue-50/70 border border-blue-200 text-blue-900',
+      calloutWarning: 'bg-amber-50/70 border border-amber-200 text-amber-900',
+      calloutAlert: 'bg-rose-50/70 border border-rose-200 text-rose-900',
+      buttonSecondary: 'bg-white border-slate-200 hover:border-[#2563EB] hover:text-[#0B1F4D] hover:bg-blue-50 text-slate-700',
+      readButtonSelected: 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100/80',
+      subHeaderTitle: 'text-slate-500'
     },
     ivory: {
-      outer: 'bg-[#F8F9FA] text-[#111111]', // Crisp eye-friendly light/slate theme
+      outer: 'bg-[#F8F9FA] text-[#111111]', // Crisp white brand theme: black text, gold accent, blue secondary
       progressBar: 'bg-white border-[#E5E7EB] shadow-sm',
       progressBarLeftText: 'text-[#111111]',
       progressBarSubText: 'text-slate-500',
@@ -1752,7 +1752,7 @@ export default function SystemManual() {
       searchInputBg: 'bg-white border-slate-300 text-slate-800 placeholder-slate-400 hover:border-slate-400',
       sidebarBg: 'bg-[#F8F9FA] border-[#E5E7EB]',
       sidebarHeaderBg: 'bg-[#F8F9FA] border-[#E5E7EB]',
-      tabButtonActive: 'bg-white border-sky-400 text-sky-950 shadow-md shadow-sky-500/5',
+      tabButtonActive: 'bg-white border-[#D4AF37] text-[#0B1F4D] shadow-md shadow-amber-500/10',
       tabButtonInactive: 'bg-transparent border-transparent text-slate-600 hover:bg-slate-200/50 hover:text-slate-900',
       tabTextTitleActive: 'text-slate-950',
       tabTextTitleInactive: 'text-slate-700',
@@ -1761,13 +1761,13 @@ export default function SystemManual() {
       headerTitle: 'text-[#111111]',
       headerDesc: 'text-slate-700',
       headerSummary: 'text-slate-500',
-      stepBlock: 'bg-white border-slate-200 hover:bg-[#F8F9FA] hover:border-slate-300',
+      stepBlock: 'bg-white border-slate-200 hover:bg-[#F8F9FA] hover:border-[#D4AF37]/40',
       stepTitle: 'text-[#111111]',
       stepDesc: 'text-slate-600',
-      calloutTip: 'bg-sky-50/70 border border-sky-200 text-sky-900',
+      calloutTip: 'bg-blue-50/70 border border-blue-200 text-blue-900',
       calloutWarning: 'bg-amber-50/70 border border-amber-200 text-amber-900',
       calloutAlert: 'bg-rose-50/70 border border-rose-200 text-rose-900',
-      buttonSecondary: 'bg-white border-slate-200 hover:border-slate-400 hover:text-slate-950 hover:bg-slate-50 text-slate-700',
+      buttonSecondary: 'bg-white border-slate-200 hover:border-[#2563EB] hover:text-[#0B1F4D] hover:bg-blue-50 text-slate-700',
       readButtonSelected: 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100/80',
       subHeaderTitle: 'text-slate-500'
     },
@@ -1821,7 +1821,7 @@ export default function SystemManual() {
         </div>
 
         {/* Real Live counts summary as banner data */}
-        <div className={`hidden lg:flex items-center gap-4 text-[10px] font-mono font-bold ${theme === 'slate' ? 'bg-[#0B1F4D]/45 border-[#0B1F4D]/60' : theme === 'grey' ? 'bg-[#111111]/50 border-[#111111]' : theme === 'ivory' ? 'bg-slate-100 border-slate-250' : 'bg-[#E9CC85]/60 border-[#E5E7EB]'} border px-3 py-1 rounded-xl`}>
+        <div className={`hidden lg:flex items-center gap-4 text-[10px] font-mono font-bold ${theme === 'slate' ? 'bg-[#0B1F4D]/45 border-[#0B1F4D]/60' : theme === 'grey' ? 'bg-[#111111]/50 border-[#111111]' : theme === 'ivory' ? 'bg-slate-100 border-slate-200' : 'bg-[#E9CC85]/60 border-[#E5E7EB]'} border px-3 py-1 rounded-xl`}>
           <div className="flex items-center gap-1">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
             <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Total Produtos:</span>
@@ -1833,7 +1833,7 @@ export default function SystemManual() {
           </div>
           <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]'} pl-3`}>
             <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Filiais Activas:</span>
-            <span className="text-violet-500 font-black">{dbStats.branches}</span>
+            <span className="text-blue-600 font-black">{dbStats.branches}</span>
           </div>
           <div className={`flex items-center gap-1 border-l ${theme === 'slate' ? 'border-[#0B1F4D]/60' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-200' : 'border-[#E5E7EB]'} pl-3`}>
             <span className={`${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : theme === 'ivory' ? 'text-slate-500' : 'text-[#6B7280]'}`}>Backups de Dados:</span>
@@ -1932,7 +1932,7 @@ export default function SystemManual() {
           <div className="relative">
             <button 
               onClick={() => setIsDownloadOpen(!isDownloadOpen)}
-              className="px-4 py-2 bg-sky-650 hover:bg-sky-600 border border-sky-500/30 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shadow-md"
+              className="px-4 py-2 bg-[#D4AF37] hover:bg-[#B8952E] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all cursor-pointer flex items-center gap-1.5 active:scale-95 shadow-md"
               title="Descarregar Manual de Utilizador"
             >
               <Download size={14} />
@@ -1947,8 +1947,8 @@ export default function SystemManual() {
                   className="fixed inset-0 z-40 bg-transparent" 
                   onClick={() => setIsDownloadOpen(false)}
                 />
-                <div className={`absolute right-0 mt-2 w-72 ${theme === 'slate' ? 'bg-[#0B1F4D] border-[#0B1F4D]' : theme === 'grey' ? 'bg-[#0B1F4D] border-[#111111]' : theme === 'ivory' ? 'bg-white border-slate-250 shadow-slate-200' : 'bg-[#FFFFFF] border-[#E5E7EB]'} border rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left`}>
-                  <div className={`px-3.5 py-2 border-b ${theme === 'slate' ? 'border-[#0B1F4D]' : theme === 'grey' ? 'border-[#111111]' : theme === 'ivory' ? 'border-slate-100' : 'border-[#E5E7EB]/40'} mb-1.5`}>
+                <div className={`absolute right-0 mt-2 w-72 ${theme === 'slate' ? 'bg-[#0B1F4D] border-[#0B1F4D]' : theme === 'grey' ? 'bg-white border-slate-200 shadow-slate-200' : theme === 'ivory' ? 'bg-white border-slate-200 shadow-slate-200' : 'bg-[#FFFFFF] border-[#E5E7EB]'} border rounded-2xl shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 text-left`}>
+                  <div className={`px-3.5 py-2 border-b ${theme === 'slate' ? 'border-[#0B1F4D]' : theme === 'grey' ? 'border-slate-100' : theme === 'ivory' ? 'border-slate-100' : 'border-[#E5E7EB]/40'} mb-1.5`}>
                     <p className={`text-[9px] font-black ${theme === 'slate' || theme === 'grey' ? 'text-slate-400' : 'text-slate-500'} uppercase tracking-widest leading-none`}>Formatos Disponíveis</p>
                     <p className="text-[10px] m-0 mt-1">Descarregue o guia para ler offline:</p>
                   </div>
@@ -2116,7 +2116,7 @@ export default function SystemManual() {
                       {React.createElement(activeSection.icon, { size: 32, className: "stroke-[1.5]" })}
                     </span>
                     <div>
-                      <span className="px-2.5 py-1 bg-sky-500/10 border border-sky-550/20 text-sky-500 text-[9px] font-black uppercase rounded-lg tracking-widest font-mono">
+                      <span className="px-2.5 py-1 bg-sky-500/10 border border-sky-500/20 text-sky-500 text-[9px] font-black uppercase rounded-lg tracking-widest font-mono">
                         {activeSection.category}
                       </span>
                       <h2 className={`text-lg sm:text-xl font-black ${styles.subHeaderTitle} tracking-tight mt-1 ml-0.5 max-w-full`}>
@@ -2131,7 +2131,7 @@ export default function SystemManual() {
                     className={`
                       px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider flex items-center gap-2 transition-all cursor-pointer select-none active:scale-95 border
                       ${readSections[activeSection.id]
-                        ? 'bg-emerald-500/10 border-emerald-500/35 text-emerald-450 hover:bg-emerald-500/20'
+                        ? 'bg-emerald-500/10 border-emerald-500/35 text-emerald-400 hover:bg-emerald-500/20'
                         : `${styles.buttonSecondary} focus:ring-2 focus:ring-sky-500`
                       }
                     `}
